@@ -1,0 +1,454 @@
+/* ══════════════════════════════════════════════════════
+   Font Effects — WOW Typography Animations
+   ══════════════════════════════════════════════════════ */
+
+/* ─── E: GLITCH CYBERPUNK ─── */
+@keyframes glitch-anim {
+  0%, 100% { clip-path: inset(0 0 0 0); transform: translate(0); }
+  5% { clip-path: inset(20% 0 60% 0); transform: translate(-4px, 2px); }
+  10% { clip-path: inset(50% 0 10% 0); transform: translate(4px, -1px); }
+  15% { clip-path: inset(0 0 0 0); transform: translate(0); }
+  40% { clip-path: inset(70% 0 5% 0); transform: translate(-3px, 1px); }
+  45% { clip-path: inset(10% 0 70% 0); transform: translate(2px, -2px); }
+  50% { clip-path: inset(0 0 0 0); transform: translate(0); }
+  75% { clip-path: inset(40% 0 30% 0); transform: translate(5px, 0); }
+  80% { clip-path: inset(0 0 0 0); transform: translate(0); }
+}
+
+@keyframes glitch-anim-2 {
+  0%, 100% { clip-path: inset(0 0 0 0); transform: translate(0); }
+  8% { clip-path: inset(60% 0 10% 0); transform: translate(3px, -2px); }
+  13% { clip-path: inset(10% 0 50% 0); transform: translate(-5px, 1px); }
+  18% { clip-path: inset(0 0 0 0); transform: translate(0); }
+  55% { clip-path: inset(30% 0 40% 0); transform: translate(4px, 2px); }
+  60% { clip-path: inset(0 0 0 0); transform: translate(0); }
+  85% { clip-path: inset(80% 0 2% 0); transform: translate(-3px, 0); }
+  90% { clip-path: inset(0 0 0 0); transform: translate(0); }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+.fx-glitch {
+  position: relative;
+}
+.fx-glitch::before,
+.fx-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.fx-glitch::before {
+  color: #ff00ff;
+  animation: glitch-anim 3s infinite linear;
+  mix-blend-mode: screen;
+  opacity: 0.7;
+}
+.fx-glitch::after {
+  color: #00ffff;
+  animation: glitch-anim-2 3s infinite linear;
+  mix-blend-mode: screen;
+  opacity: 0.7;
+}
+.fx-glitch-scanline {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.fx-glitch-scanline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(transparent, rgba(255,255,255,0.08), transparent);
+  animation: scanline 2.5s linear infinite;
+}
+
+/* ─── F: CHROME / METALLIC ─── */
+@keyframes chrome-sweep {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+.fx-chrome {
+  background: linear-gradient(
+    90deg,
+    #666 0%, #999 10%, #fff 20%, #bbb 30%, #888 40%,
+    #ddd 50%, #fff 55%, #aaa 60%, #777 70%, #ccc 80%, #eee 90%, #888 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: chrome-sweep 4s linear infinite;
+  filter: drop-shadow(0 2px 4px rgba(255,255,255,0.15)) drop-shadow(0 0 20px rgba(200,200,220,0.1));
+}
+
+.fx-chrome-reflection {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, transparent 45%, rgba(255,255,255,0.04) 55%, transparent 100%);
+  pointer-events: none;
+  mask-image: linear-gradient(to bottom, white 50%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, white 50%, transparent 100%);
+}
+
+/* ─── G: NEON GLOW ─── */
+@keyframes neon-flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    text-shadow:
+      0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff,
+      0 0 42px var(--neon-color, #06b6d4), 0 0 82px var(--neon-color, #06b6d4),
+      0 0 92px var(--neon-color, #06b6d4), 0 0 102px var(--neon-color, #06b6d4),
+      0 0 151px var(--neon-color, #06b6d4);
+    opacity: 1;
+  }
+  20%, 24%, 55% {
+    text-shadow: 0 0 4px #fff, 0 0 7px #fff;
+    opacity: 0.85;
+  }
+}
+
+@keyframes neon-breathe {
+  0%, 100% { filter: brightness(1) blur(0px); }
+  50% { filter: brightness(1.15) blur(0.3px); }
+}
+
+.fx-neon {
+  color: #fff;
+  animation: neon-flicker 4s infinite, neon-breathe 3s ease-in-out infinite;
+}
+
+.fx-neon-tube {
+  position: absolute;
+  inset: -20px;
+  border-radius: 20px;
+  background: radial-gradient(ellipse at center, var(--neon-color, #06b6d4)08 0%, transparent 70%);
+  filter: blur(20px);
+  pointer-events: none;
+  animation: neon-breathe 3s ease-in-out infinite;
+}
+
+/* ─── H: HOLOGRAPHIC / IRIDESCENT ─── */
+@keyframes holo-shift {
+  0% { background-position: 0% 50%; filter: hue-rotate(0deg); }
+  25% { background-position: 50% 100%; }
+  50% { background-position: 100% 50%; filter: hue-rotate(25deg); }
+  75% { background-position: 50% 0%; }
+  100% { background-position: 0% 50%; filter: hue-rotate(0deg); }
+}
+
+.fx-holo {
+  background: linear-gradient(
+    135deg, #ff6ec7 0%, #7873f5 16%, #4adede 32%, #6ef7a7 48%, #f7e76e 64%, #ff9a56 80%, #ff6ec7 100%
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: holo-shift 6s ease infinite;
+  filter: drop-shadow(0 0 8px rgba(120,115,245,0.3)) drop-shadow(0 0 25px rgba(74,222,222,0.15));
+}
+
+.fx-holo-overlay {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(115deg, transparent 0px, rgba(255,255,255,0.03) 2px, transparent 4px);
+  pointer-events: none;
+}
+
+/* ─── I: ANIMATED OUTLINE TRACE ─── */
+@keyframes trace-draw {
+  0% { stroke-dashoffset: 2000; }
+  40% { stroke-dashoffset: 0; }
+  60% { stroke-dashoffset: 0; fill: transparent; }
+  80% { fill: rgba(6,182,212,0.8); }
+  100% { stroke-dashoffset: 0; fill: rgba(6,182,212,0.8); }
+}
+
+@keyframes trace-glow {
+  0%, 100% { filter: drop-shadow(0 0 3px rgba(6,182,212,0.4)); }
+  50% { filter: drop-shadow(0 0 12px rgba(6,182,212,0.7)) drop-shadow(0 0 25px rgba(139,92,246,0.3)); }
+}
+
+.fx-trace-svg text {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  stroke: #06b6d4;
+  stroke-width: 1.5;
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  fill: transparent;
+  animation: trace-draw 4s ease forwards, trace-glow 3s ease-in-out 2s infinite;
+}
+
+.fx-trace-svg .trace-sub {
+  font-weight: 500;
+  font-size: 0.28em;
+  stroke: #a78bfa;
+  stroke-width: 0.8;
+  fill: transparent;
+  animation: trace-draw 4s ease 0.5s forwards, trace-glow 3s ease-in-out 2.5s infinite;
+}
+
+/* ─── J: LIQUID GRADIENT ─── */
+@keyframes liquid-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes liquid-morph {
+  0%, 100% { filter: blur(0px) brightness(1.1); }
+  25% { filter: blur(0.3px) brightness(1.2); }
+  50% { filter: blur(0px) brightness(1.05); }
+  75% { filter: blur(0.2px) brightness(1.15); }
+}
+
+.fx-liquid {
+  background: linear-gradient(270deg, #06b6d4, #8b5cf6, #ec4899, #f59e0b, #06b6d4, #8b5cf6);
+  background-size: 400% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: liquid-flow 5s ease infinite, liquid-morph 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 15px rgba(139,92,246,0.25));
+}
+
+.fx-liquid-blob {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(139,92,246,0.15), transparent 70%);
+  filter: blur(40px);
+  animation: liquid-flow 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+
+/* ══════════════════════════════════════════════════════
+   COMBO EFFECTS (K–R)
+   ══════════════════════════════════════════════════════ */
+
+/* ─── K: CHROME + SERIF (handled inline) ─── */
+
+/* ─── L: HOLO + SYNE (handled inline) ─── */
+
+/* ─── M: LIQUID TRACE — SVG draws then fills with flowing gradient ─── */
+@keyframes trace-liquid-draw {
+  0% { stroke-dashoffset: 2000; fill: transparent; }
+  40% { stroke-dashoffset: 0; fill: transparent; }
+  60% { stroke-dashoffset: 0; fill: url(#liquidGrad); }
+  100% { stroke-dashoffset: 0; fill: url(#liquidGrad); }
+}
+@keyframes trace-liquid-gradient {
+  0% { stop-color: #06b6d4; }
+  33% { stop-color: #8b5cf6; }
+  66% { stop-color: #ec4899; }
+  100% { stop-color: #06b6d4; }
+}
+.fx-trace-liquid text {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  stroke: #06b6d4;
+  stroke-width: 1.5;
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  fill: transparent;
+  animation: trace-liquid-draw 5s ease forwards;
+}
+.fx-trace-liquid .trace-sub {
+  font-weight: 500;
+  font-size: 0.28em;
+  stroke: #a78bfa;
+  stroke-width: 0.8;
+  animation: trace-liquid-draw 5s ease 0.4s forwards;
+}
+
+/* ─── N: CORRUPTED CHROME — glitch + metallic ─── */
+@keyframes corrupt-chrome-sweep {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+@keyframes corrupt-jitter {
+  0%, 90%, 100% { transform: translate(0, 0) skewX(0deg); }
+  92% { transform: translate(-3px, 1px) skewX(-2deg); }
+  94% { transform: translate(2px, -1px) skewX(1deg); }
+  96% { transform: translate(-1px, 2px) skewX(-1deg); }
+  98% { transform: translate(3px, 0px) skewX(2deg); }
+}
+.fx-corrupt-chrome {
+  background: linear-gradient(
+    90deg, #555 0%, #999 8%, #fff 15%, #888 25%,
+    #ccc 35%, #fff 45%, #aaa 55%, #666 65%,
+    #ddd 75%, #fff 85%, #999 95%, #666 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: corrupt-chrome-sweep 3s linear infinite, corrupt-jitter 4s steps(1) infinite;
+  filter: drop-shadow(0 0 6px rgba(255,255,255,0.15));
+}
+.fx-corrupt-chrome::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent 40%, rgba(255,0,100,0.15) 45%, transparent 50%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: corrupt-chrome-sweep 2s linear infinite reverse;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+/* ─── O: ELEGANT HOLOGRAM — calligraphic + holographic ─── */
+@keyframes elegant-holo {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.fx-elegant-holo {
+  background: linear-gradient(
+    135deg,
+    #e0c3fc 0%, #8ec5fc 25%, #f5d0fe 50%,
+    #c4e0f9 75%, #e0c3fc 100%
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: elegant-holo 8s ease infinite;
+  filter: drop-shadow(0 0 12px rgba(224,195,252,0.2)) drop-shadow(0 0 30px rgba(142,197,252,0.1));
+}
+
+/* ─── P: FLUID FUTURE — Unbounded + flowing ─── */
+@keyframes fluid-wave {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes fluid-wobble {
+  0%, 100% { filter: blur(0px) brightness(1.1); transform: scaleY(1); }
+  25% { filter: blur(0.2px) brightness(1.2); transform: scaleY(1.01); }
+  75% { filter: blur(0.1px) brightness(1.15); transform: scaleY(0.99); }
+}
+.fx-fluid {
+  background: linear-gradient(
+    90deg,
+    #06b6d4, #3b82f6, #8b5cf6, #a855f7,
+    #ec4899, #8b5cf6, #3b82f6, #06b6d4
+  );
+  background-size: 500% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: fluid-wave 8s ease infinite, fluid-wobble 4s ease-in-out infinite;
+}
+
+/* ─── Q: FROSTED GLASS ─── */
+@keyframes frost-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.fx-frosted-wrap {
+  position: relative;
+  padding: 1.5rem 3rem;
+  border-radius: 1rem;
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.06);
+  overflow: hidden;
+}
+.fx-frosted-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255,255,255,0.04) 45%,
+    rgba(255,255,255,0.08) 50%,
+    rgba(255,255,255,0.04) 55%,
+    transparent 60%
+  );
+  background-size: 200% 100%;
+  animation: frost-shimmer 6s linear infinite;
+  pointer-events: none;
+}
+.fx-frosted-text {
+  color: rgba(255,255,255,0.85);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 0 20px rgba(6,182,212,0.15);
+}
+
+/* ─── R: ELECTRIC PLASMA ─── */
+@keyframes plasma-glow {
+  0%, 100% {
+    text-shadow:
+      0 0 5px #06b6d4,
+      0 0 15px #06b6d4,
+      0 0 30px #8b5cf6,
+      0 0 60px #8b5cf6;
+    filter: brightness(1.1);
+  }
+  25% {
+    text-shadow:
+      0 0 8px #a855f7,
+      0 0 20px #a855f7,
+      0 0 40px #06b6d4,
+      0 0 80px #06b6d4;
+    filter: brightness(1.3);
+  }
+  50% {
+    text-shadow:
+      0 0 3px #06b6d4,
+      0 0 10px #ec4899,
+      0 0 25px #8b5cf6,
+      0 0 50px #06b6d4;
+    filter: brightness(1);
+  }
+  75% {
+    text-shadow:
+      0 0 10px #8b5cf6,
+      0 0 25px #06b6d4,
+      0 0 45px #a855f7,
+      0 0 70px #ec4899;
+    filter: brightness(1.2);
+  }
+}
+@keyframes plasma-crackle {
+  0%, 85%, 100% { opacity: 0; }
+  86% { opacity: 0.6; transform: scaleX(1.05); }
+  88% { opacity: 0; }
+  92% { opacity: 0.4; transform: scaleX(0.98); }
+  94% { opacity: 0; }
+}
+.fx-plasma {
+  color: #fff;
+  animation: plasma-glow 4s ease-in-out infinite;
+}
+.fx-plasma-arc {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #06b6d4, #8b5cf6, transparent);
+  filter: blur(1px);
+  animation: plasma-crackle 3s steps(1) infinite;
+  pointer-events: none;
+}
+.fx-plasma-arc:nth-child(2) { animation-delay: 1.5s; top: 30%; }
+.fx-plasma-arc:nth-child(3) { animation-delay: 0.8s; top: 70%; }

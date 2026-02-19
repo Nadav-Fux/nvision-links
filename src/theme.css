@@ -1,0 +1,30 @@
+@theme {
+	/* Colors - Dark futuristic theme */
+	--color-primary: #06b6d4;
+	--color-primary-foreground: #0a0a0f;
+
+	--color-secondary: #8b5cf6;
+	--color-secondary-foreground: var(--color-white);
+
+	--color-destructive: var(--color-red-500);
+	--color-destructive-foreground: var(--color-white);
+
+	--color-muted: rgba(255, 255, 255, 0.06);
+	--color-muted-foreground: rgba(255, 255, 255, 0.5);
+
+	--color-accent: #a855f7;
+	--color-accent-foreground: var(--color-white);
+
+	--color-border: rgba(255, 255, 255, 0.1);
+	--color-input: rgba(255, 255, 255, 0.08);
+	--color-ring: #06b6d4;
+
+	/* Radius */
+	--radius-sm: 0.5rem;
+	--radius-md: 0.75rem;
+	--radius-lg: 1rem;
+	--radius-xl: 1.5rem;
+
+	/* Fonts */
+	--font-sans: 'Heebo', 'Inter', system-ui, sans-serif;
+}
