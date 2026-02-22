@@ -7,9 +7,13 @@ export const MediaIcon = ({ size = 24 }: { size?: number }) => (
     xmlns="http://www.w3.org/2000/svg"
     className="inline-block"
   >
-    {/* Canvas frame */}
+    {/* Canvas / frame */}
     <rect
-      x="3" y="3" width="18" height="18" rx="2.5"
+      x="3"
+      y="3"
+      width="18"
+      height="18"
+      rx="2.5"
       stroke="#a78bfa"
       strokeWidth="1.3"
       fill="#a78bfa"
