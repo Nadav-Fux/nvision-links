@@ -4,10 +4,25 @@ import { supabase } from '@/integrations/supabase/client';
 import { getIcon } from '@/lib/iconMap';
 import type { Tables } from '@/integrations/supabase/helpers';
 import type { LinkItem } from '@/data/links';
+import { CommunityIcon } from '@/components/icons/CommunityIcon';
+import { CodeIcon } from '@/components/icons/CodeIcon';
+import { BrainIcon } from '@/components/icons/BrainIcon';
+import { MediaIcon } from '@/components/icons/MediaIcon';
 
 type SectionRow = Tables<'sections'>;
 type LinkRow = Tables<'links'>;
 type ConfigRow = Tables<'site_config'>;
+
+// Map section ID to SVG icon component
+function getSectionIcon(sectionId: string, fallbackEmoji: string): ReactNode {
+  const iconMap: Record<string, ReactNode> = {
+    'community': <CommunityIcon size={22} />,
+    'vibe-coding': <CodeIcon size={22} />,
+    'models-infra': <BrainIcon size={22} />,
+    'media': <MediaIcon size={22} />,
+  };
+  return iconMap[sectionId] ?? fallbackEmoji;
+}
 
 export interface SectionWithLinks {
   id: string;
@@ -73,7 +88,7 @@ export function usePublicData(): PublicData {
       const sectionData: SectionWithLinks[] = (sectionsRes.data || []).map((s: SectionRow) => ({
         id: s.id,
         title: s.title,
-        emoji: s.emoji,
+        emoji: getSectionIcon(s.id, s.emoji),
         sort_order: s.sort_order,
         links: (linksRes.data || [])
           .filter((l: LinkRow) => l.section_id === s.id)
