@@ -9,14 +9,18 @@ export const CodeIcon = ({ size = 24 }: { size?: number }) => (
   >
     {/* Screen */}
     <rect
-      x="2" y="3" width="20" height="14" rx="2"
+      x="2"
+      y="3"
+      width="20"
+      height="14"
+      rx="2"
       stroke="#a78bfa"
       strokeWidth="1.5"
       fill="#a78bfa"
       fillOpacity="0.08"
     />
 
-    {/* Code bracket left */}
+    {/* Code bracket left < */}
     <path
       d="M8 8L5.5 10.5L8 13"
       stroke="#06b6d4"
@@ -27,7 +31,7 @@ export const CodeIcon = ({ size = 24 }: { size?: number }) => (
       <animate attributeName="opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite" />
     </path>
 
-    {/* Code bracket right */}
+    {/* Code bracket right > */}
     <path
       d="M16 8L18.5 10.5L16 13"
       stroke="#ec4899"
@@ -38,9 +42,12 @@ export const CodeIcon = ({ size = 24 }: { size?: number }) => (
       <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite" />
     </path>
 
-    {/* Slash */}
+    {/* Slash / */}
     <line
-      x1="13" y1="7" x2="11" y2="14"
+      x1="13"
+      y1="7"
+      x2="11"
+      y2="14"
       stroke="#fbbf24"
       strokeWidth="1.3"
       strokeLinecap="round"
