@@ -8,6 +8,7 @@ import { CommunityIcon } from '@/components/icons/CommunityIcon';
 import { CodeIcon } from '@/components/icons/CodeIcon';
 import { BrainIcon } from '@/components/icons/BrainIcon';
 import { MediaIcon } from '@/components/icons/MediaIcon';
+import { Globe } from 'lucide-react';
 
 type SectionRow = Tables<'sections'>;
 type LinkRow = Tables<'links'>;
@@ -20,6 +21,8 @@ function getSectionIcon(sectionId: string, fallbackEmoji: string): ReactNode {
     'vibe-coding': <CodeIcon size={22} />,
     'models-infra': <BrainIcon size={22} />,
     'media': <MediaIcon size={22} />,
+    'about': <Globe size={22} className="text-cyan-400" />,
+    'על-האתר': <Globe size={22} className="text-cyan-400" />,
   };
   return iconMap[sectionId] ?? fallbackEmoji;
 }
