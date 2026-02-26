@@ -7,7 +7,7 @@ const Accessibility = () => {
     <div data-ev-id="ev_930273da99" dir="rtl" className="min-h-screen" style={{ background: 'linear-gradient(160deg, #0a0a14 0%, #0d0d1a 30%, #0f0a1a 60%, #0a0f14 100%)' }}>
       <PageMeta
         title="&#x05D4;&#x05E6;&#x05D4;&#x05E8;&#x05EA; &#x05E0;&#x05D2;&#x05D9;&#x05E9;&#x05D5;&#x05EA; | nVision Digital AI"
-        description="&#x05D4;&#x05E6;&#x05D4;&#x05E8;&#x05EA; &#x05D4;&#x05E0;&#x05D2;&#x05D9;&#x05E9;&#x05D5;&#x05EA; &#x05E9;&#x05DC; nVision Digital AI. &#x05D4;&#x05D0;&#x05EA;&#x05E8; &#x05E2;&#x05D5;&#x05DE;&#x05D3; &#x05D1;&#x05EA;&#x05E7;&#x05DF; &#x05D9;&#x05E9;&#x05E8;&#x05D0;&#x05DC;&#x05D9; &#x05EA;&quot;&#x05D9; 5568 &#x05D5;-WCAG 2.0 AA."
+        description="&#x05D4;&#x05E6;&#x05D4;&#x05E8;&#x05EA; &#x05D4;&#x05E0;&#x05D2;&#x05D9;&#x05E9;&#x05D5;&#x05EA; &#x05E9;&#x05DC; nVision Digital AI. &#x05D4;&#x05D0;&#x05EA;&#x05E8; &#x05E2;&#x05D5;&#x05DE;&#x05D3; &#x05D1;&#x05EA;&#x05E7;&#x05DF; &#x05D9;&#x05E9;&#x05E8;&#x05D0;&#x05DC;&#x05D9; &#x05EA;&quot;&#x05D9; 5568 &#x05D5;-WCAG 2.1 AA."
       />
       {/* Skip Navigation */}
       <a data-ev-id="ev_957f896809"
@@ -31,7 +31,7 @@ const Accessibility = () => {
 
         <main data-ev-id="ev_f381669107" id="a11y-content" tabIndex={-1} className="outline-none">
           <h1 data-ev-id="ev_0253f856b8" className="text-2xl sm:text-3xl font-bold text-white mb-2">הצהרת נגישות</h1>
-          <p data-ev-id="ev_0d4efc63c4" className="text-white/50 text-sm mb-8">עודכן לאחרונה: {new Date().toLocaleDateString('he-IL')}</p>
+          <p data-ev-id="ev_0d4efc63c4" className="text-white/50 text-sm mb-8">עודכן לאחרונה: 26 בפברואר 2026</p>
 
           {/* Intro */}
           <section data-ev-id="ev_0f8badbb36" className="mb-8">
@@ -42,7 +42,7 @@ const Accessibility = () => {
               </p>
               <p data-ev-id="ev_c29f2fb735" className="text-white/70 leading-relaxed mt-3">
                 האתר עומד בדרישות <strong data-ev-id="ev_0d4f747996" className="text-white/90">תקן ישראלי ת"י 5568</strong>, המבוסס על הנחיות
-                הנגישות לתוכן אינטרנט <strong data-ev-id="ev_13ebde83e9" className="text-white/90">WCAG 2.0 ברמת AA</strong>, בהתאם
+                הנגישות לתוכן אינטרנט <strong data-ev-id="ev_13ebde83e9" className="text-white/90">WCAG 2.1 ברמת AA</strong>, בהתאם
                 לחוק שוויון זכויות לאנשים עם מוגבלות, התשנ"ח-1998 ותקנותיו.
               </p>
             </div>
@@ -61,7 +61,7 @@ const Accessibility = () => {
               'היררכיית כותרות תקינה (h1–h2) למבנה הדף, המאפשרת ניווט מהיר עם קורא מסך.',
               'סמנטיקת HTML תקנית עם Landmarks: header, main, nav, footer — לניווט מהיר.',
               'תכונות ARIA מתאימות: role, aria-label, aria-checked, aria-expanded, aria-live, aria-hidden לאלמנטים דקורטיביים ואינטראקטיביים.',
-              'ניגודיות צבעים מספקת בין טקסט לרקע בהתאם לדרישות WCAG 2.0 AA (יחס 4.5:1 לטקסט רגיל, 3:1 לטקסט גדול).',
+              'ניגודיות צבעים מספקת בין טקסט לרקע בהתאם לדרישות WCAG 2.1 AA (יחס 4.5:1 לטקסט רגיל, 3:1 לטקסט גדול).',
               'תמיכה ב-prefers-reduced-motion: אנימציות מושבתות אוטומטית עבור משתמשים שהגדירו העדפה לצמצום תנועה.',
               'כל הקישורים החיצוניים מסומנים בבירור ונפתחים בחלון חדש עם ציון מתאים.',
               'תמיכה בשינוי גודל טקסט עד 200% ללא שבירת עיצוב.',
@@ -105,7 +105,7 @@ const Accessibility = () => {
             <div data-ev-id="ev_0defdd148b" className="bg-white/[0.04] border border-white/[0.08] rounded-xl p-6">
               <ul data-ev-id="ev_bc779b85e4" className="space-y-2 text-white/70 text-sm">
                 <li data-ev-id="ev_976a309794">• ניווט מלא במקלדת ללא עכבר</li>
-                <li data-ev-id="ev_b8afdb8bfb">• בדיקת ניגודיות צבעים לפי דרישות WCAG 2.0 AA</li>
+                <li data-ev-id="ev_b8afdb8bfb">• בדיקת ניגודיות צבעים לפי דרישות WCAG 2.1 AA</li>
                 <li data-ev-id="ev_cde537f61a">• תאימות לקוראי מסך (NVDA, VoiceOver)</li>
                 <li data-ev-id="ev_0a74896142">• בדיקת סדר פוקוס וקריאות כותרות</li>
                 <li data-ev-id="ev_e5f18a0443">• בדיקת הגדלת טקסט עד 200%</li>
@@ -132,6 +132,7 @@ const Accessibility = () => {
 
                     accessibility@nvision.me
                   </a>
+                  <span className="text-white/70"> — רכז/ת נגישות: נדב פוקס</span>
                 </div>
                 <div data-ev-id="ev_7248615be1" className="flex items-center gap-3 text-white/80 text-sm">
                   <MessageCircle className="w-4 h-4 text-green-400" aria-hidden="true" />
@@ -154,7 +155,7 @@ const Accessibility = () => {
           <section data-ev-id="ev_3d38961562" aria-labelledby="standard-heading">
             <h2 data-ev-id="ev_cdb2f293e3" id="standard-heading" className="text-lg font-semibold text-white mb-4">תקנים ורגולציה</h2>
             <div data-ev-id="ev_621559fb17" className="bg-white/[0.04] border border-white/[0.08] rounded-xl p-6 text-white/65 text-sm leading-relaxed space-y-2">
-              <p data-ev-id="ev_d53ef0fbf2">• <strong data-ev-id="ev_094402a053" className="text-white/80">תקן ישראלי ת"י 5568</strong> — נגישות אתרי אינטרנט, המבוסס על WCAG 2.0</p>
+              <p data-ev-id="ev_d53ef0fbf2">• <strong data-ev-id="ev_094402a053" className="text-white/80">תקן ישראלי ת"י 5568</strong> — נגישות אתרי אינטרנט, המבוסס על WCAG 2.1</p>
               <p data-ev-id="ev_ea2fec0a0a">• <strong data-ev-id="ev_3340061978" className="text-white/80">רמת עמידה: AA</strong> — הרמה הנדרשת בחוק לכל אתר המספק שירות או מידע לציבור בישראל</p>
               <p data-ev-id="ev_e3203547fc">• <strong data-ev-id="ev_6cadad6c15" className="text-white/80">חוק שוויון זכויות לאנשים עם מוגבלות</strong>, התשנ"ח-1998, ותקנות הנגישות לשירותי אינטרנט, התשע"ג-2013</p>
             </div>
