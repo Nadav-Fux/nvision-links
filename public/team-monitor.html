@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Agent Team Monitor | nVision</title>
+<style>
+  :root {
+    --bg: #0a0a14;
+    --bg-card: #12121f;
+    --bg-card-hover: #1a1a2e;
+    --border: #2a2a3e;
+    --text: #e0e0f0;
+    --text-dim: rgba(255,255,255,0.45);
+    --accent-cyan: #00e5ff;
+    --accent-green: #00e676;
+    --accent-yellow: #ffd600;
+    --accent-magenta: #e040fb;
+    --accent-red: #ff5252;
+    --accent-blue: #448aff;
+    --accent-orange: #ff9100;
+    --glow-cyan: 0 0 20px rgba(0,229,255,0.3);
+    --glow-green: 0 0 20px rgba(0,230,118,0.3);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Heebo', 'Inter', system-ui, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Animated grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 24px;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding: 32px 0 24px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 32px;
+  }
+
+  .header h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-magenta));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+  }
+
+  .header .subtitle {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+  }
+
+  .header .stats {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 16px;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-value {
+    font-size: 2rem;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* Coordination Map */
+  .coord-section {
+    margin-bottom: 32px;
+  }
+
+  .section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .coord-map {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .coord-map svg {
+    width: 100%;
+    max-width: 900px;
+    height: 200px;
+  }
+
+  .agent-node {
+    cursor: default;
+    transition: all 0.3s ease;
+  }
+
+  .agent-node:hover {
+    filter: brightness(1.3);
+  }
+
+  /* Swimlane Timeline */
+  .timeline-section {
+    margin-bottom: 32px;
+  }
+
+  .swimlanes {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .swimlane {
+    display: flex;
+    align-items: stretch;
+    border-bottom: 1px solid var(--border);
+    min-height: 64px;
+  }
+
+  .swimlane:last-child { border-bottom: none; }
+
+  .swimlane-label {
+    width: 160px;
+    min-width: 160px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    background: rgba(255,255,255,0.02);
+    border-left: 1px solid var(--border);
+  }
+
+  .swimlane-label .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .swimlane-track {
+    flex: 1;
+    padding: 12px 16px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .task-block {
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    cursor: default;
+  }
+
+  .task-block.active {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  .task-block .pulse {
+    position: absolute;
+    left: 8px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: white;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+
+  .task-block.done .pulse { display: none; }
+  .task-block.done::after {
+    content: '✓';
+    margin-right: 8px;
+    font-size: 0.9rem;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.5); }
+  }
+
+  /* Message Flow */
+  .messages-section {
+    margin-bottom: 32px;
+  }
+
+  .message-list {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 16px;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+
+  .message {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    margin-bottom: 4px;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.4s ease;
+    font-size: 0.85rem;
+  }
+
+  .message.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .message:hover {
+    background: rgba(255,255,255,0.03);
+  }
+
+  .msg-time {
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    min-width: 50px;
+    font-variant-numeric: tabular-nums;
+    padding-top: 2px;
+  }
+
+  .msg-sender {
+    font-weight: 700;
+    min-width: 120px;
+    font-size: 0.8rem;
+  }
+
+  .msg-arrow {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+  }
+
+  .msg-content {
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  .msg-content .highlight {
+    background: rgba(0,229,255,0.15);
+    padding: 1px 6px;
+    border-radius: 4px;
+  }
+
+  /* Progress Bar */
+  .progress-section {
+    margin-bottom: 32px;
+  }
+
+  .progress-bar-container {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+  }
+
+  .progress-track {
+    width: 100%;
+    height: 24px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .progress-fill {
+    height: 100%;
+    border-radius: 12px;
+    background: linear-gradient(90deg, var(--accent-cyan), var(--accent-green));
+    transition: width 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    width: 0%;
+  }
+
+  .progress-fill::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    animation: shimmer 2s infinite;
+  }
+
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  .progress-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+    font-size: 0.8rem;
+  }
+
+  /* Playback Controls */
+  .controls {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .controls button {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 10px 24px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+
+  .controls button:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--accent-cyan);
+    box-shadow: var(--glow-cyan);
+  }
+
+  .controls button.active {
+    background: var(--accent-cyan);
+    color: var(--bg);
+    border-color: var(--accent-cyan);
+  }
+
+  .speed-label {
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .header .stats { flex-wrap: wrap; gap: 16px; }
+    .swimlane-label { width: 100px; min-width: 100px; font-size: 0.75rem; }
+    .controls { flex-wrap: wrap; }
+  }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+  <!-- Header -->
+  <div class="header">
+    <h1>Agent Team Monitor</h1>
+    <div class="subtitle">nvision-links Full Audit — Replay Timeline</div>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-value" style="color: var(--accent-cyan);" id="agent-count">5</div>
+        <div class="stat-label">Agents</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" style="color: var(--accent-yellow);" id="task-count">0</div>
+        <div class="stat-label">Tasks</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" style="color: var(--accent-green);" id="done-count">0</div>
+        <div class="stat-label">Completed</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" style="color: var(--text-dim);" id="elapsed">0:00</div>
+        <div class="stat-label">Elapsed</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls">
+    <button id="btn-play" class="active" onclick="play()">▶ Play</button>
+    <button id="btn-pause" onclick="pause()">⏸ Pause</button>
+    <button id="btn-reset" onclick="reset()">↻ Reset</button>
+    <button onclick="setSpeed(0.5)">0.5x</button>
+    <button id="btn-1x" class="active" onclick="setSpeed(1)">1x</button>
+    <button onclick="setSpeed(2)">2x</button>
+    <button onclick="setSpeed(5)">5x</button>
+    <span class="speed-label" id="speed-label">Speed: 1x</span>
+  </div>
+
+  <!-- Progress -->
+  <div class="progress-section">
+    <div class="progress-bar-container">
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+      <div class="progress-labels">
+        <span style="color: var(--text-dim);" id="progress-text">Starting...</span>
+        <span style="color: var(--accent-green);" id="progress-pct">0%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Coordination Map -->
+  <div class="coord-section">
+    <div class="section-title">🔗 Coordination Map</div>
+    <div class="coord-map">
+      <svg viewBox="0 0 900 200" xmlns="http://www.w3.org/2000/svg" id="coord-svg">
+        <!-- Lead node -->
+        <g class="agent-node" id="node-lead">
+          <circle cx="450" cy="40" r="28" fill="#12121f" stroke="#00e5ff" stroke-width="2"/>
+          <text x="450" y="44" text-anchor="middle" fill="#00e5ff" font-size="11" font-weight="700" font-family="Heebo, sans-serif">Team Lead</text>
+        </g>
+
+        <!-- Connection lines (animated) -->
+        <line id="line-0" x1="450" y1="68" x2="90" y2="132" stroke="#2a2a3e" stroke-width="1.5" stroke-dasharray="6,4"/>
+        <line id="line-1" x1="450" y1="68" x2="270" y2="132" stroke="#2a2a3e" stroke-width="1.5" stroke-dasharray="6,4"/>
+        <line id="line-2" x1="450" y1="68" x2="450" y2="132" stroke="#2a2a3e" stroke-width="1.5" stroke-dasharray="6,4"/>
+        <line id="line-3" x1="450" y1="68" x2="630" y2="132" stroke="#2a2a3e" stroke-width="1.5" stroke-dasharray="6,4"/>
+        <line id="line-4" x1="450" y1="68" x2="810" y2="132" stroke="#2a2a3e" stroke-width="1.5" stroke-dasharray="6,4"/>
+
+        <!-- Agent nodes -->
+        <g class="agent-node" id="node-0">
+          <circle cx="90" cy="160" r="24" fill="#12121f" stroke="#00e5ff" stroke-width="2" id="circle-0"/>
+          <text x="90" y="164" text-anchor="middle" fill="#00e5ff" font-size="9" font-weight="600" font-family="Heebo, sans-serif">SEO</text>
+        </g>
+        <g class="agent-node" id="node-1">
+          <circle cx="270" cy="160" r="24" fill="#12121f" stroke="#00e676" stroke-width="2" id="circle-1"/>
+          <text x="270" y="164" text-anchor="middle" fill="#00e676" font-size="9" font-weight="600" font-family="Heebo, sans-serif">A11y</text>
+        </g>
+        <g class="agent-node" id="node-2">
+          <circle cx="450" cy="160" r="24" fill="#12121f" stroke="#ffd600" stroke-width="2" id="circle-2"/>
+          <text x="450" y="164" text-anchor="middle" fill="#ffd600" font-size="9" font-weight="600" font-family="Heebo, sans-serif">UI/UX</text>
+        </g>
+        <g class="agent-node" id="node-3">
+          <circle cx="630" cy="160" r="24" fill="#12121f" stroke="#e040fb" stroke-width="2" id="circle-3"/>
+          <text x="630" y="164" text-anchor="middle" fill="#e040fb" font-size="9" font-weight="600" font-family="Heebo, sans-serif">Security</text>
+        </g>
+        <g class="agent-node" id="node-4">
+          <circle cx="810" cy="160" r="24" fill="#12121f" stroke="#ff9100" stroke-width="2" id="circle-4"/>
+          <text x="810" y="164" text-anchor="middle" fill="#ff9100" font-size="9" font-weight="600" font-family="Heebo, sans-serif">Code</text>
+        </g>
+
+        <!-- Message particles (hidden initially) -->
+        <circle id="particle-0" r="4" fill="#00e5ff" opacity="0"/>
+        <circle id="particle-1" r="4" fill="#00e676" opacity="0"/>
+        <circle id="particle-2" r="4" fill="#ffd600" opacity="0"/>
+        <circle id="particle-3" r="4" fill="#e040fb" opacity="0"/>
+        <circle id="particle-4" r="4" fill="#ff9100" opacity="0"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Swimlane Timeline -->
+  <div class="timeline-section">
+    <div class="section-title">📊 Task Timeline</div>
+    <div class="swimlanes" id="swimlanes">
+      <div class="swimlane">
+        <div class="swimlane-label"><div class="dot" style="background: var(--accent-cyan);"></div>SEO Auditor</div>
+        <div class="swimlane-track" id="track-0"></div>
+      </div>
+      <div class="swimlane">
+        <div class="swimlane-label"><div class="dot" style="background: var(--accent-green);"></div>A11y Auditor</div>
+        <div class="swimlane-track" id="track-1"></div>
+      </div>
+      <div class="swimlane">
+        <div class="swimlane-label"><div class="dot" style="background: var(--accent-yellow);"></div>UI/UX Auditor</div>
+        <div class="swimlane-track" id="track-2"></div>
+      </div>
+      <div class="swimlane">
+        <div class="swimlane-label"><div class="dot" style="background: var(--accent-magenta);"></div>Security Auditor</div>
+        <div class="swimlane-track" id="track-3"></div>
+      </div>
+      <div class="swimlane">
+        <div class="swimlane-label"><div class="dot" style="background: var(--accent-orange);"></div>Code Auditor</div>
+        <div class="swimlane-track" id="track-4"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Activity Log -->
+  <div class="messages-section">
+    <div class="section-title">💬 Activity Log</div>
+    <div class="message-list" id="message-list"></div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// AUDIT REPLAY DATA — recorded from actual team execution
+// ============================================================
+const AGENTS = [
+  { id: 0, name: 'seo-auditor',      label: 'SEO Auditor',      color: '#00e5ff', issues: 15 },
+  { id: 1, name: 'a11y-auditor',     label: 'A11y Auditor',     color: '#00e676', issues: 14 },
+  { id: 2, name: 'uiux-auditor',     label: 'UI/UX Auditor',    color: '#ffd600', issues: 22 },
+  { id: 3, name: 'security-auditor', label: 'Security Auditor', color: '#e040fb', issues: 15 },
+  { id: 4, name: 'code-auditor',     label: 'Code Auditor',     color: '#ff9100', issues: 19 },
+];
+
+// Timeline events (time in seconds from start)
+const EVENTS = [
+  // Phase 1: Team creation & task assignment (0-5s)
+  { t: 0,  type: 'log', msg: 'Team <span style="color:#00e5ff">nvision-audit</span> created', icon: '🚀' },
+  { t: 1,  type: 'log', msg: 'Created 5 audit tasks', icon: '📋' },
+  { t: 2,  type: 'spawn', agent: 0, msg: 'Spawned <span style="color:#00e5ff">seo-auditor</span>' },
+  { t: 2.2, type: 'spawn', agent: 1, msg: 'Spawned <span style="color:#00e676">a11y-auditor</span>' },
+  { t: 2.4, type: 'spawn', agent: 2, msg: 'Spawned <span style="color:#ffd600">uiux-auditor</span>' },
+  { t: 2.6, type: 'spawn', agent: 3, msg: 'Spawned <span style="color:#e040fb">security-auditor</span>' },
+  { t: 2.8, type: 'spawn', agent: 4, msg: 'Spawned <span style="color:#ff9100">code-auditor</span>' },
+  { t: 3,  type: 'log', msg: 'All 5 agents running in parallel', icon: '⚡' },
+
+  // Phase 2: Agents reading files (5-30s)
+  { t: 5,  type: 'task_start', agent: 0, task: 'Reading index.html, PageMeta.tsx...' },
+  { t: 5,  type: 'task_start', agent: 1, task: 'Reading AccessibilityToolbar.tsx...' },
+  { t: 5,  type: 'task_start', agent: 2, task: 'Reading App.tsx, ViewContainer.tsx...' },
+  { t: 5,  type: 'task_start', agent: 3, task: 'Reading adminApi.ts, Privacy.tsx...' },
+  { t: 5,  type: 'task_start', agent: 4, task: 'Searching for package.json...' },
+
+  { t: 12, type: 'work', agent: 0, msg: 'Found missing robots.txt, sitemap.xml' },
+  { t: 14, type: 'work', agent: 4, msg: 'CRITICAL: package.json missing from repo!' },
+  { t: 16, type: 'work', agent: 1, msg: 'Checking WCAG compliance levels...' },
+  { t: 18, type: 'work', agent: 3, msg: 'Found password hash used as auth token' },
+  { t: 20, type: 'work', agent: 2, msg: 'Found 39 wrapper divs in ViewContainer' },
+  { t: 22, type: 'work', agent: 0, msg: 'Checking JSON-LD structured data...' },
+  { t: 24, type: 'work', agent: 1, msg: 'Found WCAG 2.0 reference (should be 2.1)' },
+  { t: 26, type: 'work', agent: 4, msg: 'Found duplicate usePublicData files' },
+  { t: 28, type: 'work', agent: 2, msg: 'TextLogoMorph rAF never pauses!' },
+  { t: 30, type: 'work', agent: 3, msg: 'Rate limiter per-isolate, not global' },
+
+  // Phase 3: Reports coming in (40-70s)
+  { t: 45, type: 'task_start', agent: 0, task: 'Compiling SEO report (15 issues)...' },
+  { t: 50, type: 'task_start', agent: 3, task: 'Compiling security report (15 issues)...' },
+
+  { t: 55, type: 'report', agent: 0, msg: '<span style="color:#00e5ff">seo-auditor</span> sent report: <span class="highlight">15 issues</span> (6 HIGH)', issues: 15 },
+  { t: 55, type: 'message', from: 0, to: 'lead', msg: 'SEO audit complete' },
+
+  { t: 62, type: 'report', agent: 3, msg: '<span style="color:#e040fb">security-auditor</span> sent report: <span class="highlight">15 issues</span> (3 HIGH)', issues: 15 },
+  { t: 62, type: 'message', from: 3, to: 'lead', msg: 'Security audit complete' },
+
+  { t: 68, type: 'task_start', agent: 1, task: 'Compiling a11y report (14 issues)...' },
+
+  { t: 75, type: 'report', agent: 1, msg: '<span style="color:#00e676">a11y-auditor</span> sent report: <span class="highlight">14 issues</span> (3 CRITICAL)', issues: 14 },
+  { t: 75, type: 'message', from: 1, to: 'lead', msg: 'Accessibility audit complete' },
+
+  { t: 80, type: 'task_start', agent: 2, task: 'Compiling UI/UX report (22 issues)...' },
+
+  { t: 90, type: 'report', agent: 2, msg: '<span style="color:#ffd600">uiux-auditor</span> sent report: <span class="highlight">22 issues</span> (3 CRITICAL)', issues: 22 },
+  { t: 90, type: 'message', from: 2, to: 'lead', msg: 'UI/UX audit complete' },
+
+  { t: 95, type: 'task_start', agent: 4, task: 'Compiling code quality report (19 issues)...' },
+
+  { t: 105, type: 'report', agent: 4, msg: '<span style="color:#ff9100">code-auditor</span> sent report: <span class="highlight">19 issues</span> (2 CRITICAL)', issues: 19 },
+  { t: 105, type: 'message', from: 4, to: 'lead', msg: 'Code audit complete' },
+
+  // Phase 4: Shutdown
+  { t: 110, type: 'log', msg: 'All 5 audits complete — compiling final report', icon: '📊' },
+  { t: 115, type: 'shutdown', agent: 0 },
+  { t: 115.5, type: 'shutdown', agent: 1 },
+  { t: 116, type: 'shutdown', agent: 2 },
+  { t: 116.5, type: 'shutdown', agent: 3 },
+  { t: 117, type: 'shutdown', agent: 4 },
+  { t: 118, type: 'log', msg: 'Team shutdown complete. <strong>85 total issues found.</strong>', icon: '✅' },
+];
+
+const TOTAL_TIME = 120; // seconds
+
+// ============================================================
+// PLAYBACK ENGINE
+// ============================================================
+let currentTime = 0;
+let speed = 1;
+let playing = true;
+let eventIndex = 0;
+let lastFrame = 0;
+let completedAgents = new Set();
+let taskBlocks = {};
+
+function play() {
+  playing = true;
+  document.getElementById('btn-play').classList.add('active');
+  document.getElementById('btn-pause').classList.remove('active');
+  lastFrame = performance.now();
+  requestAnimationFrame(tick);
+}
+
+function pause() {
+  playing = false;
+  document.getElementById('btn-play').classList.remove('active');
+  document.getElementById('btn-pause').classList.add('active');
+}
+
+function reset() {
+  currentTime = 0;
+  eventIndex = 0;
+  completedAgents = new Set();
+  taskBlocks = {};
+  document.getElementById('message-list').innerHTML = '';
+  for (let i = 0; i < 5; i++) {
+    document.getElementById(`track-${i}`).innerHTML = '';
+    document.getElementById(`circle-${i}`).setAttribute('stroke-width', '2');
+    document.getElementById(`circle-${i}`).style.filter = '';
+    document.getElementById(`line-${i}`).setAttribute('stroke', '#2a2a3e');
+  }
+  updateProgress(0);
+  updateCounters(0, 0);
+  play();
+}
+
+function setSpeed(s) {
+  speed = s;
+  document.getElementById('speed-label').textContent = `Speed: ${s}x`;
+  document.querySelectorAll('.controls button').forEach(b => {
+    if (b.textContent.trim() === `${s}x`) b.classList.add('active');
+    else if (['0.5x','1x','2x','5x'].includes(b.textContent.trim())) b.classList.remove('active');
+  });
+}
+
+function tick(now) {
+  if (!playing) return;
+
+  const dt = (now - lastFrame) / 1000 * speed;
+  lastFrame = now;
+  currentTime += dt;
+
+  // Process events
+  while (eventIndex < EVENTS.length && EVENTS[eventIndex].t <= currentTime) {
+    processEvent(EVENTS[eventIndex]);
+    eventIndex++;
+  }
+
+  // Update elapsed
+  const mins = Math.floor(currentTime / 60);
+  const secs = Math.floor(currentTime % 60);
+  document.getElementById('elapsed').textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+
+  // Update progress
+  updateProgress(currentTime / TOTAL_TIME);
+
+  // Animate active lines
+  animateLines();
+
+  if (currentTime < TOTAL_TIME) {
+    requestAnimationFrame(tick);
+  } else {
+    pause();
+  }
+}
+
+function processEvent(ev) {
+  switch (ev.type) {
+    case 'spawn':
+      activateAgent(ev.agent);
+      addMessage('🤖', `<span style="color:${AGENTS[ev.agent].color}">${AGENTS[ev.agent].label}</span>`, 'Spawned and starting work');
+      break;
+
+    case 'task_start':
+      addTaskBlock(ev.agent, ev.task, false);
+      break;
+
+    case 'work':
+      addMessage('🔍', `<span style="color:${AGENTS[ev.agent].color}">${AGENTS[ev.agent].label}</span>`, ev.msg);
+      break;
+
+    case 'report':
+      completeAgent(ev.agent);
+      addMessage('📨', `<span style="color:${AGENTS[ev.agent].color}">${AGENTS[ev.agent].label}</span>`, `Report sent: ${ev.issues} issues found`);
+      // Complete task blocks
+      const track = document.getElementById(`track-${ev.agent}`);
+      track.querySelectorAll('.task-block').forEach(b => b.classList.add('done'));
+      // Add final report block
+      addTaskBlock(ev.agent, `✓ ${ev.issues} issues`, true);
+      break;
+
+    case 'message':
+      animateParticle(ev.from);
+      break;
+
+    case 'shutdown':
+      shutdownAgent(ev.agent);
+      addMessage('🔴', `<span style="color:${AGENTS[ev.agent].color}">${AGENTS[ev.agent].label}</span>`, 'Shutdown');
+      break;
+
+    case 'log':
+      addMessage(ev.icon || '💬', '<span style="color: var(--accent-cyan)">System</span>', ev.msg);
+      break;
+  }
+
+  // Update counters
+  const done = completedAgents.size;
+  updateCounters(5, done);
+}
+
+function activateAgent(id) {
+  const circle = document.getElementById(`circle-${id}`);
+  const line = document.getElementById(`line-${id}`);
+  circle.setAttribute('stroke-width', '3');
+  circle.style.filter = `drop-shadow(0 0 8px ${AGENTS[id].color})`;
+  line.setAttribute('stroke', AGENTS[id].color);
+  line.style.opacity = '0.6';
+}
+
+function completeAgent(id) {
+  completedAgents.add(id);
+  const circle = document.getElementById(`circle-${id}`);
+  circle.style.filter = `drop-shadow(0 0 15px ${AGENTS[id].color})`;
+}
+
+function shutdownAgent(id) {
+  const circle = document.getElementById(`circle-${id}`);
+  const line = document.getElementById(`line-${id}`);
+  circle.setAttribute('stroke-width', '1');
+  circle.style.filter = 'opacity(0.4)';
+  line.style.opacity = '0.2';
+}
+
+function addTaskBlock(agentId, label, isDone) {
+  const track = document.getElementById(`track-${agentId}`);
+  const block = document.createElement('div');
+  block.className = 'task-block' + (isDone ? ' done' : '');
+  block.style.background = AGENTS[agentId].color + '22';
+  block.style.border = `1px solid ${AGENTS[agentId].color}55`;
+  block.style.color = AGENTS[agentId].color;
+  if (!isDone) block.innerHTML = `<span class="pulse" style="background:${AGENTS[agentId].color}"></span><span style="margin-right:16px">${label}</span>`;
+  else block.innerHTML = `<span>${label}</span>`;
+  track.appendChild(block);
+  requestAnimationFrame(() => block.classList.add('active'));
+}
+
+function addMessage(icon, sender, content) {
+  const list = document.getElementById('message-list');
+  const mins = Math.floor(currentTime / 60);
+  const secs = Math.floor(currentTime % 60);
+  const time = `${mins}:${secs.toString().padStart(2, '0')}`;
+
+  const msg = document.createElement('div');
+  msg.className = 'message';
+  msg.innerHTML = `
+    <span class="msg-time">${time}</span>
+    <span class="msg-sender">${icon} ${sender}</span>
+    <span class="msg-content">${content}</span>
+  `;
+  list.appendChild(msg);
+  requestAnimationFrame(() => msg.classList.add('visible'));
+  list.scrollTop = list.scrollHeight;
+}
+
+function animateParticle(agentId) {
+  const particle = document.getElementById(`particle-${agentId}`);
+  const line = document.getElementById(`line-${agentId}`);
+  const x2 = parseFloat(line.getAttribute('x2'));
+  const y2 = parseFloat(line.getAttribute('y2'));
+  const x1 = parseFloat(line.getAttribute('x1'));
+  const y1 = parseFloat(line.getAttribute('y1'));
+
+  particle.setAttribute('opacity', '1');
+  particle.setAttribute('cx', x2);
+  particle.setAttribute('cy', y2);
+
+  // Animate particle to lead
+  const duration = 600;
+  const start = performance.now();
+  function step(now) {
+    const p = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - p, 3); // easeOutCubic
+    particle.setAttribute('cx', x2 + (x1 - x2) * ease);
+    particle.setAttribute('cy', y2 + (y1 - y2) * ease);
+    if (p < 1) requestAnimationFrame(step);
+    else particle.setAttribute('opacity', '0');
+  }
+  requestAnimationFrame(step);
+}
+
+function animateLines() {
+  for (let i = 0; i < 5; i++) {
+    const line = document.getElementById(`line-${i}`);
+    if (completedAgents.has(i)) continue;
+    const offset = (performance.now() / 50) % 20;
+    line.setAttribute('stroke-dashoffset', offset);
+  }
+}
+
+function updateProgress(pct) {
+  pct = Math.min(pct, 1);
+  document.getElementById('progress-fill').style.width = `${pct * 100}%`;
+  document.getElementById('progress-pct').textContent = `${Math.round(pct * 100)}%`;
+
+  if (pct < 0.05) document.getElementById('progress-text').textContent = 'Starting team...';
+  else if (pct < 0.4) document.getElementById('progress-text').textContent = 'Agents reading codebase...';
+  else if (pct < 0.8) document.getElementById('progress-text').textContent = 'Compiling audit reports...';
+  else if (pct < 0.95) document.getElementById('progress-text').textContent = 'Shutting down agents...';
+  else document.getElementById('progress-text').textContent = 'Audit complete!';
+}
+
+function updateCounters(tasks, done) {
+  document.getElementById('task-count').textContent = tasks;
+  document.getElementById('done-count').textContent = done;
+}
+
+// Start on load
+window.addEventListener('load', () => {
+  lastFrame = performance.now();
+  requestAnimationFrame(tick);
+});
+</script>
+</body>
+</html>
