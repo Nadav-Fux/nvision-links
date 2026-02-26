@@ -127,7 +127,7 @@ export const PhoneView = ({ sections, visible }: PhoneViewProps) => {
             {activeApp ?
             <>
                 <div data-ev-id="ev_9327be32c5" className="w-2.5 h-2.5 rounded-full animate-pulse" style={{ background: activeApp.color }} />
-                <span data-ev-id="ev_5a93b02768" className="text-[10px] text-white/40 truncate max-w-[80px]">{activeApp.title}</span>
+                <span data-ev-id="ev_5a93b02768" className="text-[10px] text-white/60 truncate max-w-[80px]">{activeApp.title}</span>
               </> :
 
             <>
@@ -139,7 +139,7 @@ export const PhoneView = ({ sections, visible }: PhoneViewProps) => {
         </div>
 
         {/* Status Bar */}
-        <div data-ev-id="ev_c10d6d0464" className="flex items-center justify-between px-8 py-1 text-[11px] text-white/50 font-medium" dir="ltr">
+        <div data-ev-id="ev_c10d6d0464" className="flex items-center justify-between px-8 py-1 text-[11px] text-white/60 font-medium" dir="ltr">
           <span data-ev-id="ev_41c535323e" className="font-semibold text-white/70">{timeStr}</span>
           <div data-ev-id="ev_e806434621" className="flex items-center gap-1">
             <Signal className="w-3.5 h-3.5" />
@@ -162,7 +162,7 @@ export const PhoneView = ({ sections, visible }: PhoneViewProps) => {
             <div data-ev-id="ev_2c7f58fd1b" className="px-6 pt-2 mb-4">
               {show() &&
               <div data-ev-id="ev_6f58ad2765" className="animate-in fade-in duration-300">
-                  <div data-ev-id="ev_9bb748d634" className="text-white/25 text-[11px] font-medium">{dateStr}</div>
+                  <div data-ev-id="ev_9bb748d634" className="text-white/60 text-[11px] font-medium">{dateStr}</div>
                 </div>
               }
             </div>
@@ -183,9 +183,9 @@ export const PhoneView = ({ sections, visible }: PhoneViewProps) => {
                   </div>
                   <div data-ev-id="ev_2abba68dea" className="flex-1">
                     <div data-ev-id="ev_92a4349dc1" className="text-white/70 text-[12px] font-semibold">{currentSection?.title}</div>
-                    <div data-ev-id="ev_8295ace7aa" className="text-white/30 text-[10px]">{currentLinks.length} קישורים זמינים</div>
+                    <div data-ev-id="ev_8295ace7aa" className="text-white/60 text-[10px]">{currentLinks.length} קישורים זמינים</div>
                   </div>
-                  <div data-ev-id="ev_27f36e51d4" className="text-white/15 text-xl">›</div>
+                  <div data-ev-id="ev_27f36e51d4" className="text-white/60 text-xl">›</div>
                 </div>
               </div>
             }
@@ -194,8 +194,8 @@ export const PhoneView = ({ sections, visible }: PhoneViewProps) => {
             {show() &&
             <div data-ev-id="ev_c1bb16ad27" className="px-5 mb-3 animate-in fade-in duration-300">
                 <div data-ev-id="ev_1767285b0a" className="flex items-center gap-2 px-4 py-2.5 rounded-2xl" style={{ background: 'rgba(255,255,255,0.06)' }}>
-                  <Search className="w-4 h-4 text-white/20" />
-                  <span data-ev-id="ev_7dd10a1d79" className="text-white/20 text-[12px]">חיפוש</span>
+                  <Search className="w-4 h-4 text-white/60" />
+                  <span data-ev-id="ev_7dd10a1d79" className="text-white/60 text-[12px]">חיפוש</span>
                 </div>
               </div>
             }
@@ -210,7 +210,7 @@ export const PhoneView = ({ sections, visible }: PhoneViewProps) => {
                   key={section.id}
                   onClick={() => setActivePage(sIdx)}
                   className={`flex-1 flex items-center justify-center gap-1 py-2 rounded-xl text-[11px] font-medium transition-all duration-300 whitespace-nowrap min-w-0 ${
-                  isActive ? 'text-white/90' : 'text-white/25 hover:text-white/40'}`
+                  isActive ? 'text-white/90' : 'text-white/60 hover:text-white/70'}`
                   }
                   style={{
                     background: isActive ? `${color}18` : 'transparent'
@@ -353,7 +353,7 @@ const AppIcon = ({ link, sectionColor, onTap, delay
           isHovered={hovered || pressed} />
       </div>
 
-      <span data-ev-id="ev_d541a85417" className="text-[10px] text-white/45 truncate w-[64px] text-center leading-tight group-hover:text-white/70 transition-colors font-medium">
+      <span data-ev-id="ev_d541a85417" className="text-[10px] text-white/60 truncate w-[64px] text-center leading-tight group-hover:text-white/70 transition-colors font-medium">
         {link.title}
       </span>
     </button>);
@@ -391,7 +391,7 @@ const AppDetailScreen = ({ link, onBack, anim
         </div>
         <div data-ev-id="ev_542cc9254f" className="flex-1 min-w-0">
           <h3 data-ev-id="ev_6fc43fe15c" className="text-white/90 text-lg font-bold leading-tight">{link.title}</h3>
-          <p data-ev-id="ev_96ff9c444f" className="text-white/35 text-[12px] mt-0.5 leading-snug">{link.subtitle}</p>
+          <p data-ev-id="ev_96ff9c444f" className="text-white/60 text-[12px] mt-0.5 leading-snug">{link.subtitle}</p>
           {/* Open button inline */}
           <a data-ev-id="ev_739a09e8fa"
           href={link.url}
@@ -418,25 +418,25 @@ const AppDetailScreen = ({ link, onBack, anim
             <span data-ev-id="ev_51f74ba8af" key={s} className="text-[9px]" style={{ color: s <= 4 ? '#facc15' : 'rgba(255,255,255,0.12)' }}>★</span>
             )}
           </div>
-          <span data-ev-id="ev_abb8519ef6" className="text-[9px] text-white/20 mt-0.5">4.8 • 128 דירוגים</span>
+          <span data-ev-id="ev_abb8519ef6" className="text-[9px] text-white/60 mt-0.5">4.8 • 128 דירוגים</span>
         </div>
         <div data-ev-id="ev_72d2b4629b" className="w-px h-6 bg-white/[0.06]" />
         <div data-ev-id="ev_0db186218e" className="flex flex-col items-center">
-          <Globe className="w-4 h-4 text-white/30" />
-          <span data-ev-id="ev_0f22bf3552" className="text-[9px] text-white/20 mt-0.5">אינטרנט</span>
+          <Globe className="w-4 h-4 text-white/60" />
+          <span data-ev-id="ev_0f22bf3552" className="text-[9px] text-white/60 mt-0.5">אינטרנט</span>
         </div>
         <div data-ev-id="ev_099c7b9fb9" className="w-px h-6 bg-white/[0.06]" />
         <div data-ev-id="ev_e23a4e3828" className="flex flex-col items-center">
-          <Clock className="w-4 h-4 text-white/30" />
-          <span data-ev-id="ev_ec78c1a8ae" className="text-[9px] text-white/20 mt-0.5">מומלץ</span>
+          <Clock className="w-4 h-4 text-white/60" />
+          <span data-ev-id="ev_ec78c1a8ae" className="text-[9px] text-white/60 mt-0.5">מומלץ</span>
         </div>
       </div>
 
       {/* Description */}
       <div data-ev-id="ev_ab3009cce9" className="mb-4">
-        <h4 data-ev-id="ev_946f34841a" className="text-white/50 text-[11px] font-semibold mb-2 tracking-wide">תיאור</h4>
+        <h4 data-ev-id="ev_946f34841a" className="text-white/60 text-[11px] font-semibold mb-2 tracking-wide">תיאור</h4>
         <div data-ev-id="ev_ca1e048914" className="bg-white/[0.02] border border-white/[0.05] rounded-2xl p-4">
-          <p data-ev-id="ev_0b21c92c6a" className="text-white/45 text-[12.5px] leading-relaxed">{link.description}</p>
+          <p data-ev-id="ev_0b21c92c6a" className="text-white/60 text-[12.5px] leading-relaxed">{link.description}</p>
         </div>
       </div>
 
@@ -447,7 +447,7 @@ const AppDetailScreen = ({ link, onBack, anim
         style={{ backgroundColor: `${link.color}12`, color: `${link.color}aa` }}>
           AI מומלץ
         </span>
-        <span data-ev-id="ev_686af91c96" className="text-[10px] px-3 py-1.5 rounded-full bg-white/[0.04] text-white/25 font-medium">
+        <span data-ev-id="ev_686af91c96" className="text-[10px] px-3 py-1.5 rounded-full bg-white/[0.04] text-white/60 font-medium">
           nVision ★
         </span>
       </div>
@@ -462,7 +462,7 @@ const AppDetailScreen = ({ link, onBack, anim
           background: `linear-gradient(180deg, ${link.color}06, ${link.color}02)`,
           border: `1px solid ${link.color}0a`
         }}>
-            <span data-ev-id="ev_73757fbd9b" className="text-[9px] text-white/8">תצוגה {i}</span>
+            <span data-ev-id="ev_73757fbd9b" className="text-[9px] text-white/60">תצוגה {i}</span>
           </div>
         )}
       </div>

@@ -66,13 +66,13 @@ export const MissionControlView = ({
               <span data-ev-id="ev_ebcfd1bc56" className="text-green-400/70 text-[11px] font-mono font-bold">ONLINE</span>
             </div>
             <div data-ev-id="ev_58adb162ee" className="hidden sm:block h-3 w-px bg-white/[0.08]" />
-            <span data-ev-id="ev_896e2a4398" className="hidden sm:block text-white/20 text-[10px] font-mono">nVISION COMMAND CENTER</span>
+            <span data-ev-id="ev_896e2a4398" className="hidden sm:block text-white/60 text-[10px] font-mono">nVISION COMMAND CENTER</span>
           </div>
           <div data-ev-id="ev_c627ca7da2" className="flex items-center gap-3">
             <span data-ev-id="ev_f600f3222a" className="text-cyan-400/50 text-[11px] font-mono">{timeStr} UTC</span>
             <div data-ev-id="ev_e86caeff6e" className="flex items-center gap-1">
               <Signal className="w-3 h-3 text-green-400/50" />
-              <span data-ev-id="ev_2e808b8828" className="text-[9px] text-white/20 font-mono">UPLINK</span>
+              <span data-ev-id="ev_2e808b8828" className="text-[9px] text-white/60 font-mono">UPLINK</span>
             </div>
           </div>
         </div>
@@ -128,7 +128,7 @@ export const MissionControlView = ({
 
         {/* Bottom bar */}
         {show() &&
-        <div data-ev-id="ev_3c9be94b9c" className="flex items-center justify-between px-4 sm:px-6 py-2.5 border-t border-white/[0.04] bg-white/[0.01] text-[9px] font-mono text-white/15 animate-in fade-in duration-500">
+        <div data-ev-id="ev_3c9be94b9c" className="flex items-center justify-between px-4 sm:px-6 py-2.5 border-t border-white/[0.04] bg-white/[0.01] text-[9px] font-mono text-white/60 animate-in fade-in duration-500">
             <span data-ev-id="ev_a4366c5886">SYS.STATUS: ALL NOMINAL</span>
             <div data-ev-id="ev_29178b8ffe" className="flex items-center gap-3">
               <span data-ev-id="ev_595b4a3999" className="flex items-center gap-1">
@@ -189,11 +189,11 @@ const StatMini = ({
 
 }: {label: string;value: number | string;unit: string;color: string;}) =>
 <div data-ev-id="ev_0b5cbecf6f" className="flex flex-col items-center py-2.5 px-2">
-    <span data-ev-id="ev_4e0ee934b9" className="text-[8px] font-mono text-white/20 tracking-wider mb-1">{label}</span>
+    <span data-ev-id="ev_4e0ee934b9" className="text-[8px] font-mono text-white/60 tracking-wider mb-1">{label}</span>
     <span data-ev-id="ev_ce8d479cbc" className="text-[14px] font-mono font-bold" style={{ color }}>
       {value}
     </span>
-    <span data-ev-id="ev_928f384059" className="text-[8px] font-mono text-white/15">{unit}</span>
+    <span data-ev-id="ev_928f384059" className="text-[8px] font-mono text-white/60">{unit}</span>
   </div>;
 
 
@@ -279,7 +279,7 @@ const MonitorPanel = ({
               animation: 'pulse 2s ease-in-out infinite'
             }} />
 
-            <span data-ev-id="ev_a8f83a72d7" className="text-[9px] font-mono text-white/25 tracking-wide">
+            <span data-ev-id="ev_a8f83a72d7" className="text-[9px] font-mono text-white/60 tracking-wide">
               SYS.{String(index + 1).padStart(2, '0')}
             </span>
           </div>
@@ -315,7 +315,7 @@ const MonitorPanel = ({
               </div>
               <div data-ev-id="ev_47c65f81a3" className="min-w-0">
                 <h3 data-ev-id="ev_51a1b0bfa6" className="text-white/85 text-[12.5px] font-semibold truncate">{link.title}</h3>
-                <p data-ev-id="ev_81582f6f08" className="text-white/25 text-xs truncate">{link.subtitle}</p>
+                <p data-ev-id="ev_81582f6f08" className="text-white/60 text-xs truncate">{link.subtitle}</p>
               </div>
             </div>
 
@@ -393,7 +393,7 @@ const MonitorPanel = ({
 /* ═════ Metric badge ═════ */
 const Metric = ({ label, value, color }: {label: string;value: string;color: string;}) =>
 <div data-ev-id="ev_ae802c588d" className="flex flex-col">
-    <span data-ev-id="ev_e3d74707bc" className="text-[7px] font-mono text-white/15 tracking-wider">{label}</span>
+    <span data-ev-id="ev_e3d74707bc" className="text-[7px] font-mono text-white/60 tracking-wider">{label}</span>
     <span data-ev-id="ev_940711dd7e" className="text-[11px] font-mono font-bold" style={{ color: `${color}bb` }}>
       {value}
     </span>

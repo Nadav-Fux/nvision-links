@@ -53,7 +53,7 @@ const AnimationPreview = () => {
       <div data-ev-id="ev_0e0c063813" className="sticky top-0 z-50 backdrop-blur-xl border-b border-white/5 bg-black/40">
         <div data-ev-id="ev_27a8d0c9b8" className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <div data-ev-id="ev_e059d7c47c" className="flex items-center gap-3">
-            <Link to="/" className="flex items-center gap-2 text-white/40 hover:text-white/70 transition-colors text-sm">
+            <Link to="/" className="flex items-center gap-2 text-white/60 hover:text-white/70 transition-colors text-sm">
               <ArrowRight className="w-4 h-4" />חזרה
             </Link>
             <div data-ev-id="ev_66c444d3d4" className="w-px h-5 bg-white/10" />
@@ -66,7 +66,7 @@ const AnimationPreview = () => {
             <Link to="/font-preview" className="px-2.5 py-1 text-[11px] text-cyan-400/60 hover:text-cyan-300 border border-cyan-500/10 hover:border-cyan-500/25 rounded-md transition-colors">🎨 טיפוגרפיה</Link>
             <Link to="/entrance-preview" className="px-2.5 py-1 text-[11px] text-emerald-400/60 hover:text-emerald-300 border border-emerald-500/10 hover:border-emerald-500/25 rounded-md transition-colors">🚀 אנימציות כניסה</Link>
             <div data-ev-id="ev_f8c018b868" className="w-px h-4 bg-white/10 mx-1" />
-            <span data-ev-id="ev_38762c3d9c" className="text-white/30 text-xs">{scenes.length} סצנות · 13 מעברים</span>
+            <span data-ev-id="ev_38762c3d9c" className="text-white/60 text-xs">{scenes.length} סצנות · 13 מעברים</span>
           </div>
         </div>
       </div>
@@ -85,7 +85,7 @@ const AnimationPreview = () => {
           className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
           tab === key ?
           'bg-purple-500/15 text-purple-300 border border-purple-500/30' :
-          'text-white/30 hover:text-white/60 border border-transparent hover:border-white/10'}`
+          'text-white/60 hover:text-white/60 border border-transparent hover:border-white/10'}`
           }>
 
               {label}
@@ -99,7 +99,7 @@ const AnimationPreview = () => {
         {/* ═══ SCENES TAB ═══ */}
         {tab === 'scenes' &&
         <div data-ev-id="ev_fe77768338">
-            <p data-ev-id="ev_1a7d66bf34" className="text-white/40 text-center text-sm mb-8">כל סצנה רצה חי עם אינטראקציית עכבר — הזז את העכבר מעל הקנבס</p>
+            <p data-ev-id="ev_1a7d66bf34" className="text-white/60 text-center text-sm mb-8">כל סצנה רצה חי עם אינטראקציית עכבר — הזז את העכבר מעל הקנבס</p>
             <div data-ev-id="ev_79fd7672f8" className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
               {scenes.map((scene, i) => {
               const isSelected = selectedScene === i;
@@ -132,7 +132,7 @@ const AnimationPreview = () => {
                         <span data-ev-id="ev_4670c6537c" className="text-white/80 text-sm font-semibold">{scene.name}</span>
                       </div>
                       <div data-ev-id="ev_478276ac09" className="flex items-center justify-center gap-1">
-                        <span data-ev-id="ev_fccf551d53" className="text-[10px] px-1.5 py-0.5 rounded bg-white/[0.04] text-white/30 border border-white/[0.04]">
+                        <span data-ev-id="ev_fccf551d53" className="text-[10px] px-1.5 py-0.5 rounded bg-white/[0.04] text-white/60 border border-white/[0.04]">
                           {scene.transition}
                         </span>
                       </div>
@@ -155,7 +155,7 @@ const AnimationPreview = () => {
         {/* ═══ TRANSITIONS TAB ═══ */}
         {tab === 'transitions' &&
         <div data-ev-id="ev_d622ad5391">
-            <p data-ev-id="ev_4fc23f8719" className="text-white/40 text-center text-sm mb-8">כל מעבר מראה איך חלקיקי הטקסט מתפזרים ומתאספים מחדש</p>
+            <p data-ev-id="ev_4fc23f8719" className="text-white/60 text-center text-sm mb-8">כל מעבר מראה איך חלקיקי הטקסט מתפזרים ומתאספים מחדש</p>
             <div data-ev-id="ev_2e21d95a72" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {TRANSITION_TYPES.map((t) => {
               const isSelected = selectedTransition === t.type;
@@ -178,18 +178,18 @@ const AnimationPreview = () => {
                     <div data-ev-id="ev_baa2849dcc" className="flex items-center gap-2 mb-2">
                       <div data-ev-id="ev_283f8272a9" className="w-3 h-3 rounded-full" style={{ background: t.color, boxShadow: `0 0 10px ${t.color}40` }} />
                       <span data-ev-id="ev_434f151181" className="text-white/90 font-bold text-base">{t.label}</span>
-                      <span data-ev-id="ev_4b447faa98" className="text-white/30 text-sm">— {t.labelHe}</span>
+                      <span data-ev-id="ev_4b447faa98" className="text-white/60 text-sm">— {t.labelHe}</span>
                       {isSelected && <Check className="w-4 h-4 text-purple-400" />}
                     </div>
 
-                    <p data-ev-id="ev_c5f39f7cca" className="text-white/35 text-sm mb-3">{t.description}</p>
+                    <p data-ev-id="ev_c5f39f7cca" className="text-white/60 text-sm mb-3">{t.description}</p>
 
                     {/* Used by */}
                     <div data-ev-id="ev_540651d5fd" className="w-full">
-                      <p data-ev-id="ev_c4a9d2ff60" className="text-white/20 text-[10px] tracking-widest mb-1.5">משמש בסצנות:</p>
+                      <p data-ev-id="ev_c4a9d2ff60" className="text-white/60 text-[10px] tracking-widest mb-1.5">משמש בסצנות:</p>
                       <div data-ev-id="ev_d4c9c499fd" className="flex flex-wrap gap-1 justify-center">
                         {usedBy.map((name) =>
-                      <span data-ev-id="ev_8db7206a52" key={name} className="px-1.5 py-0.5 rounded text-[10px] bg-white/[0.04] text-white/25 border border-white/[0.04]">
+                      <span data-ev-id="ev_8db7206a52" key={name} className="px-1.5 py-0.5 rounded text-[10px] bg-white/[0.04] text-white/60 border border-white/[0.04]">
                             {SCENE_ICONS[name] || ''} {name}
                           </span>
                       )}
@@ -205,7 +205,7 @@ const AnimationPreview = () => {
         {/* ═══ FULL SCENE TAB ═══ */}
         {tab === 'full' &&
         <div data-ev-id="ev_2705c0a1ea">
-            <p data-ev-id="ev_30d45a7658" className="text-white/40 text-center text-sm mb-6">לחץ על סצנה לראות אותה בגדול מלא עם אינטראקציית עכבר</p>
+            <p data-ev-id="ev_30d45a7658" className="text-white/60 text-center text-sm mb-6">לחץ על סצנה לראות אותה בגדול מלא עם אינטראקציית עכבר</p>
 
             {/* Scene selector pills */}
             <div data-ev-id="ev_056e8c0cba" className="flex flex-wrap items-center justify-center gap-2 mb-8">
@@ -216,7 +216,7 @@ const AnimationPreview = () => {
             className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
             fullScreenIdx === i ?
             'bg-purple-500/20 text-purple-300 border border-purple-500/30' :
-            'text-white/30 hover:text-white/60 border border-white/[0.06] hover:border-white/15'}`
+            'text-white/60 hover:text-white/60 border border-white/[0.06] hover:border-white/15'}`
             }>
 
                   {SCENE_ICONS[s.name] || ''} {s.name}
@@ -239,7 +239,7 @@ const AnimationPreview = () => {
                     <span data-ev-id="ev_0d9aa793db" className="text-xl">{SCENE_ICONS[scenes[fullScreenIdx].name] || '🎬'}</span>
                     {scenes[fullScreenIdx].name}
                   </p>
-                  <p data-ev-id="ev_5dfa873191" className="text-white/30 text-sm mt-1">
+                  <p data-ev-id="ev_5dfa873191" className="text-white/60 text-sm mt-1">
                     מעבר: <span data-ev-id="ev_54810fe058" className="text-purple-300/60 font-medium">{scenes[fullScreenIdx].transition}</span>
                   </p>
                 </div>
@@ -248,8 +248,8 @@ const AnimationPreview = () => {
 
             {fullScreenIdx === null &&
           <div data-ev-id="ev_7dc0054e3b" className="text-center py-20">
-                <Eye className="w-12 h-12 text-white/10 mx-auto mb-4" />
-                <p data-ev-id="ev_26b2128881" className="text-white/25 text-sm">בחר סצנה מלמעלה לצפייה גדולה</p>
+                <Eye className="w-12 h-12 text-white/60 mx-auto mb-4" />
+                <p data-ev-id="ev_26b2128881" className="text-white/60 text-sm">בחר סצנה מלמעלה לצפייה גדולה</p>
               </div>
           }
           </div>
@@ -260,15 +260,15 @@ const AnimationPreview = () => {
           <div data-ev-id="ev_b8e220e0e4" className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
             <div data-ev-id="ev_a6f228b6ba">
               <p data-ev-id="ev_69e8302d2a" className="text-3xl font-bold text-cyan-400 mb-1">{scenes.length}</p>
-              <p data-ev-id="ev_e12b33557b" className="text-white/30 text-sm">סצנות אנימציה</p>
+              <p data-ev-id="ev_e12b33557b" className="text-white/60 text-sm">סצנות אנימציה</p>
             </div>
             <div data-ev-id="ev_e79ff0a63d">
               <p data-ev-id="ev_d35cfd6e93" className="text-3xl font-bold text-purple-400 mb-1">13</p>
-              <p data-ev-id="ev_938de4599e" className="text-white/30 text-sm">סוגי מעברים</p>
+              <p data-ev-id="ev_938de4599e" className="text-white/60 text-sm">סוגי מעברים</p>
             </div>
             <div data-ev-id="ev_75e49f6d4f">
               <p data-ev-id="ev_2e7dd98994" className="text-3xl font-bold text-amber-400 mb-1">10.4s</p>
-              <p data-ev-id="ev_a571e8d444" className="text-white/30 text-sm">מחזור אחד</p>
+              <p data-ev-id="ev_a571e8d444" className="text-white/60 text-sm">מחזור אחד</p>
             </div>
           </div>
         </div>

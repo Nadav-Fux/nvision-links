@@ -95,9 +95,9 @@ export const SiteConfigEditor = ({ config, onSaved }: SiteConfigEditorProps) => 
         </div>
         <div data-ev-id="ev_13c554ee8f" className="flex-1 min-w-0">
           <div data-ev-id="ev_0d73787145" className="text-white/80 text-sm font-medium truncate">{config?.site_title || 'nVision Digital AI'}</div>
-          <div data-ev-id="ev_0d38aa0c66" className="text-white/30 text-xs truncate mt-0.5">לחץ לערוך כותרת, תיאור, טקסט פתיחה והודעת שקיפות</div>
+          <div data-ev-id="ev_0d38aa0c66" className="text-white/60 text-xs truncate mt-0.5">לחץ לערוך כותרת, תיאור, טקסט פתיחה והודעת שקיפות</div>
         </div>
-        <span data-ev-id="ev_c539f8e01e" className="text-white/15 text-xs group-hover:text-white/30 transition-colors">ערוך</span>
+        <span data-ev-id="ev_c539f8e01e" className="text-white/60 text-xs group-hover:text-white/70 transition-colors">ערוך</span>
       </button>);
 
   }
@@ -111,7 +111,7 @@ export const SiteConfigEditor = ({ config, onSaved }: SiteConfigEditorProps) => 
         </div>
         <button data-ev-id="ev_bcc20395ec"
         onClick={() => setOpen(false)}
-        className="text-white/30 hover:text-white/60 text-xs transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
+        className="text-white/60 hover:text-white/60 text-xs transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
 
           סגור
         </button>
@@ -126,7 +126,7 @@ export const SiteConfigEditor = ({ config, onSaved }: SiteConfigEditorProps) => 
         className={`flex items-center gap-1.5 px-3 py-1.5 rounded-t-lg text-xs font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
         activeTab === tab.id ?
         'bg-primary/10 text-primary border-b-2 border-primary' :
-        'text-white/40 hover:text-white/60'}`
+        'text-white/60 hover:text-white/60'}`
         }>
 
             <tab.icon className="w-3 h-3" aria-hidden="true" />
@@ -139,7 +139,7 @@ export const SiteConfigEditor = ({ config, onSaved }: SiteConfigEditorProps) => 
       {activeTab === 'general' &&
       <div data-ev-id="ev_53e0129e85" className="space-y-3">
           <div data-ev-id="ev_5b0742afc7">
-            <label data-ev-id="ev_dcfe78ba72" htmlFor="config-title" className="text-white/50 text-xs mb-1 block">כותרת האתר</label>
+            <label data-ev-id="ev_dcfe78ba72" htmlFor="config-title" className="text-white/60 text-xs mb-1 block">כותרת האתר</label>
             <input data-ev-id="ev_9791d0df69"
           id="config-title"
           value={title}
@@ -149,7 +149,7 @@ export const SiteConfigEditor = ({ config, onSaved }: SiteConfigEditorProps) => 
 
           </div>
           <div data-ev-id="ev_87c2efc7a8">
-            <label data-ev-id="ev_58cb052400" htmlFor="config-desc" className="text-white/50 text-xs mb-1 block">תיאור האתר</label>
+            <label data-ev-id="ev_58cb052400" htmlFor="config-desc" className="text-white/60 text-xs mb-1 block">תיאור האתר</label>
             <textarea data-ev-id="ev_ee41f9ee41"
           id="config-desc"
           value={description}
@@ -165,12 +165,12 @@ export const SiteConfigEditor = ({ config, onSaved }: SiteConfigEditorProps) => 
       {/* Welcome Text Tab */}
       {activeTab === 'welcome' &&
       <div data-ev-id="ev_1fe03cc31d" className="space-y-3">
-          <div data-ev-id="ev_e9b04578a8" className="flex items-center gap-2 text-white/40 text-xs">
+          <div data-ev-id="ev_e9b04578a8" className="flex items-center gap-2 text-white/60 text-xs">
             <MessageSquareText className="w-3.5 h-3.5" aria-hidden="true" />
             <span data-ev-id="ev_5d8c26f96c">הטקסט שמופיע מתחת הלוגו בעמוד הראשי</span>
           </div>
           <div data-ev-id="ev_2811eabd8b">
-            <label data-ev-id="ev_e06059823c" htmlFor="config-welcome" className="text-white/50 text-xs mb-1 block">טקסט פתיחה ראשי</label>
+            <label data-ev-id="ev_e06059823c" htmlFor="config-welcome" className="text-white/60 text-xs mb-1 block">טקסט פתיחה ראשי</label>
             <textarea data-ev-id="ev_b3ffa74f5a"
           id="config-welcome"
           value={welcomeText}
@@ -181,7 +181,7 @@ export const SiteConfigEditor = ({ config, onSaved }: SiteConfigEditorProps) => 
 
           </div>
           <div data-ev-id="ev_7bcfb57cbb">
-            <label data-ev-id="ev_5270f69c5c" htmlFor="config-welcome-sub" className="text-white/50 text-xs mb-1 block">טקסט משני (קטן יותר)</label>
+            <label data-ev-id="ev_5270f69c5c" htmlFor="config-welcome-sub" className="text-white/60 text-xs mb-1 block">טקסט משני (קטן יותר)</label>
             <textarea data-ev-id="ev_2a00b9576d"
           id="config-welcome-sub"
           value={welcomeSubtext}
@@ -192,7 +192,7 @@ export const SiteConfigEditor = ({ config, onSaved }: SiteConfigEditorProps) => 
 
           </div>
           <div data-ev-id="ev_9afe8c524c">
-            <label data-ev-id="ev_a8b1d5e96a" htmlFor="config-tagline" className="text-white/50 text-xs mb-1 block">שורת סיסמה (מתחת למשפט פתיחה)</label>
+            <label data-ev-id="ev_a8b1d5e96a" htmlFor="config-tagline" className="text-white/60 text-xs mb-1 block">שורת סיסמה (מתחת למשפט פתיחה)</label>
             <input data-ev-id="ev_4c0b61e265"
           id="config-tagline"
           value={tagline}
@@ -203,13 +203,13 @@ export const SiteConfigEditor = ({ config, onSaved }: SiteConfigEditorProps) => 
           </div>
           {/* Preview */}
           <div data-ev-id="ev_fc1f4c1ed7" className="border border-white/[0.06] rounded-xl p-4 bg-white/[0.02]">
-            <div data-ev-id="ev_1ec9c0dadf" className="text-white/25 text-[10px] font-medium mb-2">תצוגה מקדימה</div>
+            <div data-ev-id="ev_1ec9c0dadf" className="text-white/60 text-[10px] font-medium mb-2">תצוגה מקדימה</div>
             <p data-ev-id="ev_706782d59b" className="text-white/80 text-sm leading-relaxed">{welcomeText || 'טקסט פתיחה ראשי...'}</p>
             {welcomeSubtext &&
-          <p data-ev-id="ev_92505c6eac" className="text-white/55 text-xs leading-relaxed mt-2">{welcomeSubtext}</p>
+          <p data-ev-id="ev_92505c6eac" className="text-white/60 text-xs leading-relaxed mt-2">{welcomeSubtext}</p>
           }
             {tagline &&
-          <p data-ev-id="ev_a61bcc35ce" className="text-white/35 text-xs text-center mt-3">{tagline}</p>
+          <p data-ev-id="ev_a61bcc35ce" className="text-white/60 text-xs text-center mt-3">{tagline}</p>
           }
           </div>
         </div>
@@ -218,12 +218,12 @@ export const SiteConfigEditor = ({ config, onSaved }: SiteConfigEditorProps) => 
       {/* Disclaimer Tab */}
       {activeTab === 'disclaimer' &&
       <div data-ev-id="ev_8f0761ac60" className="space-y-3">
-          <div data-ev-id="ev_315a948625" className="flex items-center gap-2 text-white/40 text-xs">
+          <div data-ev-id="ev_315a948625" className="flex items-center gap-2 text-white/60 text-xs">
             <ShieldCheck className="w-3.5 h-3.5" aria-hidden="true" />
             <span data-ev-id="ev_d10db22f1e">הודעת השקיפות שמופיעה בין הסקציות</span>
           </div>
           <div data-ev-id="ev_21ae48f5ee">
-            <label data-ev-id="ev_f7f73eb525" htmlFor="config-disclaimer" className="text-white/50 text-xs mb-1 block">טקסט הודעת שקיפות</label>
+            <label data-ev-id="ev_f7f73eb525" htmlFor="config-disclaimer" className="text-white/60 text-xs mb-1 block">טקסט הודעת שקיפות</label>
             <textarea data-ev-id="ev_4fe9389759"
           id="config-disclaimer"
           value={disclaimerText}
@@ -235,8 +235,8 @@ export const SiteConfigEditor = ({ config, onSaved }: SiteConfigEditorProps) => 
           </div>
           {/* Preview */}
           <div data-ev-id="ev_323a6008ff" className="border border-amber-500/10 rounded-xl p-4 bg-amber-500/[0.04]">
-            <div data-ev-id="ev_c590ce9ac9" className="text-white/25 text-[10px] font-medium mb-2">תצוגה מקדימה</div>
-            <p data-ev-id="ev_926462dd3a" className="text-white/50 text-sm leading-relaxed">
+            <div data-ev-id="ev_c590ce9ac9" className="text-white/60 text-[10px] font-medium mb-2">תצוגה מקדימה</div>
+            <p data-ev-id="ev_926462dd3a" className="text-white/60 text-sm leading-relaxed">
               <span data-ev-id="ev_c4de1e4b0d" className="text-white/70 font-medium">שקיפות מלאה</span>{' — '}
               {disclaimerText || 'טקסט הודעת שקיפות...'}
             </p>
@@ -261,7 +261,7 @@ export const SiteConfigEditor = ({ config, onSaved }: SiteConfigEditorProps) => 
         <button data-ev-id="ev_37741b8f1e"
         onClick={reset}
         disabled={!hasChanges}
-        className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-white/40 hover:text-white/70 text-sm transition-colors disabled:opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+        className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-white/60 hover:text-white/70 text-sm transition-colors disabled:opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
 
           <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
           איפוס

@@ -41,7 +41,7 @@ const GPUCard = ({ link, sIdx, delay, isActive, onHover
           </div>
           <div data-ev-id="ev_b0af023276" className="flex-1 min-w-0">
             <h3 data-ev-id="ev_521b743750" className="text-[11px] font-bold truncate" style={{ color: color + 'cc' }}>{link.title}</h3>
-            <p data-ev-id="ev_afb477d43e" className="text-[8px] truncate text-white/20">{link.subtitle}</p>
+            <p data-ev-id="ev_afb477d43e" className="text-[8px] truncate text-white/60">{link.subtitle}</p>
           </div>
         </div>
 
@@ -111,7 +111,7 @@ export const GPUClusterView = ({ sections, visible }: Props) => {
         </div>
 
         {/* Footer */}
-        <div data-ev-id="ev_1584cfd620" className="flex items-center justify-between px-5 py-2 border-t text-[9px] font-mono text-white/15" style={{ borderColor: 'rgba(255,255,255,0.03)' }}>
+        <div data-ev-id="ev_1584cfd620" className="flex items-center justify-between px-5 py-2 border-t text-[9px] font-mono text-white/60" style={{ borderColor: 'rgba(255,255,255,0.03)' }}>
           <span data-ev-id="ev_90e8e7302e">RACKS: {sections.length}</span>
           <span data-ev-id="ev_d95c68b9ca">TOTAL VRAM: {totalLinks * 80}GB</span>
           <span data-ev-id="ev_698df43408">DGX MANAGER v4.2</span>

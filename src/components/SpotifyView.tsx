@@ -170,7 +170,7 @@ export const SpotifyView = ({ sections, visible }: SpotifyViewProps) => {
 
             {/* Playlists */}
             <div data-ev-id="ev_da7fe6c06b" className="px-2 pt-2 border-t border-white/[0.06]">
-              <span data-ev-id="ev_08ff2e4c1d" className="px-3 text-white/30 text-[10px] font-bold tracking-wider">פלייליסטים</span>
+              <span data-ev-id="ev_08ff2e4c1d" className="px-3 text-white/60 text-[10px] font-bold tracking-wider">פלייליסטים</span>
               <div data-ev-id="ev_37bd8997e9" className="mt-2 space-y-0.5 max-h-[280px] overflow-y-auto scrollbar-hide">
                 {sections.map((section, sIdx) =>
                 <button data-ev-id="ev_644a9807af"
@@ -179,7 +179,7 @@ export const SpotifyView = ({ sections, visible }: SpotifyViewProps) => {
                 className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-md text-sm transition-colors text-right ${
                 activePlaylist === sIdx ?
                 'bg-white/10 text-white' :
-                'text-white/50 hover:text-white/80'}`
+                'text-white/60 hover:text-white/80'}`
                 }>
 
                     {/* Playlist cover */}
@@ -193,7 +193,7 @@ export const SpotifyView = ({ sections, visible }: SpotifyViewProps) => {
                     </div>
                     <div data-ev-id="ev_4b31c8e4b5" className="flex-1 min-w-0 text-right">
                       <div data-ev-id="ev_2e02422426" className="truncate text-[12px] font-medium">{section.title}</div>
-                      <div data-ev-id="ev_f1927000fd" className="text-white/25 text-[10px]">{section.links.length} שירים</div>
+                      <div data-ev-id="ev_f1927000fd" className="text-white/60 text-[10px]">{section.links.length} שירים</div>
                     </div>
                   </button>
                 )}
@@ -220,9 +220,9 @@ export const SpotifyView = ({ sections, visible }: SpotifyViewProps) => {
                   {activeSection.emoji}
                 </div>
                 <div data-ev-id="ev_0916a4b1b0" className="flex-1 min-w-0">
-                  <span data-ev-id="ev_2e0e536b44" className="text-white/40 text-[10px] font-bold tracking-wider">פלייליסט</span>
+                  <span data-ev-id="ev_2e0e536b44" className="text-white/60 text-[10px] font-bold tracking-wider">פלייליסט</span>
                   <h2 data-ev-id="ev_baf5e46ad0" className="text-white text-xl sm:text-2xl font-extrabold mt-0.5 truncate">{activeSection.title}</h2>
-                  <div data-ev-id="ev_72f9409f98" className="text-white/40 text-xs mt-1">
+                  <div data-ev-id="ev_72f9409f98" className="text-white/60 text-xs mt-1">
                     nVision Music · {activeSection.links.length} שירים
                   </div>
                 </div>
@@ -243,19 +243,19 @@ export const SpotifyView = ({ sections, visible }: SpotifyViewProps) => {
               </button>
               <div data-ev-id="ev_99ef96e7dc" className="flex-1" />
               <div data-ev-id="ev_b2c5d6c2b5" className="relative">
-                <Search className="absolute right-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/30" />
+                <Search className="absolute right-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/60" />
                 <input data-ev-id="ev_d2d434fd46"
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="חפש בפלייליסט..."
-                className="w-40 sm:w-48 bg-white/[0.06] border border-white/[0.08] rounded-full py-1.5 pr-8 pl-3 text-[11px] text-white/70 placeholder:text-white/25 focus:outline-none focus:border-white/20 transition-colors" />
+                className="w-40 sm:w-48 bg-white/[0.06] border border-white/[0.08] rounded-full py-1.5 pr-8 pl-3 text-[11px] text-white/70 placeholder:text-white/60 focus:outline-none focus:border-white/20 transition-colors" />
 
               </div>
             </div>
 
             {/* Track list header */}
-            <div data-ev-id="ev_e9bd3de4d6" className="flex items-center gap-3 px-5 py-1.5 border-b border-white/[0.06] text-[10px] font-mono text-white/25">
+            <div data-ev-id="ev_e9bd3de4d6" className="flex items-center gap-3 px-5 py-1.5 border-b border-white/[0.06] text-[10px] font-mono text-white/60">
               <span data-ev-id="ev_0778840315" className="w-6 text-center">#</span>
               <span data-ev-id="ev_097da5be13" className="flex-1">שם</span>
               <span data-ev-id="ev_76cf9ca189" className="w-20 hidden sm:block text-center">השמעות</span>
@@ -282,7 +282,7 @@ export const SpotifyView = ({ sections, visible }: SpotifyViewProps) => {
                       <Equalizer active={true} /> :
 
                       <span data-ev-id="ev_3a79c7ea73" className={`text-[11px] font-mono group-hover:hidden ${
-                      isNP ? 'text-[#1db954]' : 'text-white/30'}`
+                      isNP ? 'text-[#1db954]' : 'text-white/60'}`
                       }>
                           {lIdx + 1}
                         </span>
@@ -306,7 +306,7 @@ export const SpotifyView = ({ sections, visible }: SpotifyViewProps) => {
                         }>
                           {link.title}
                         </div>
-                        <div data-ev-id="ev_7745b26022" className="text-white/35 text-[10px] truncate">
+                        <div data-ev-id="ev_7745b26022" className="text-white/60 text-[10px] truncate">
                           {link.subtitle}
                         </div>
                       </div>
@@ -316,19 +316,19 @@ export const SpotifyView = ({ sections, visible }: SpotifyViewProps) => {
                     <button data-ev-id="ev_ba5067ca06"
                     onClick={(e) => {e.stopPropagation();toggleLike(link.id);}}
                     className={`flex-shrink-0 transition-colors ${
-                    isLiked ? 'text-[#1db954]' : 'text-transparent group-hover:text-white/25 hover:!text-white/60'}`
+                    isLiked ? 'text-[#1db954]' : 'text-transparent group-hover:text-white/70 hover:!text-white/60'}`
                     }>
 
                       <Heart className={`w-3.5 h-3.5 ${isLiked ? 'fill-[#1db954]' : ''}`} />
                     </button>
 
                     {/* Plays */}
-                    <span data-ev-id="ev_dc001e7d50" className="w-20 text-[10px] text-white/25 font-mono text-center hidden sm:block">
+                    <span data-ev-id="ev_dc001e7d50" className="w-20 text-[10px] text-white/60 font-mono text-center hidden sm:block">
                       {fakePlays(link.id)}
                     </span>
 
                     {/* Duration */}
-                    <span data-ev-id="ev_0d3b43b0ed" className="w-10 text-[10px] text-white/30 font-mono text-center flex-shrink-0">
+                    <span data-ev-id="ev_0d3b43b0ed" className="w-10 text-[10px] text-white/60 font-mono text-center flex-shrink-0">
                       {fakeDuration(link.id)}
                     </span>
 
@@ -339,7 +339,7 @@ export const SpotifyView = ({ sections, visible }: SpotifyViewProps) => {
                     rel="noopener noreferrer"
                     aria-label={`${link.title} (נפתח בחלון חדש)`}
                     onClick={(e) => e.stopPropagation()}
-                    className="flex-shrink-0 text-white/0 group-hover:text-white/30 hover:!text-white/70 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
+                    className="flex-shrink-0 text-white/60 group-hover:text-white/70 hover:!text-white/70 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
 
                       <ExternalLink className="w-3.5 h-3.5" />
                     </a>
@@ -348,7 +348,7 @@ export const SpotifyView = ({ sections, visible }: SpotifyViewProps) => {
               })}
 
               {filteredLinks?.length === 0 &&
-              <div data-ev-id="ev_bad5fd98d2" className="text-center py-10 text-white/20 text-sm">
+              <div data-ev-id="ev_bad5fd98d2" className="text-center py-10 text-white/60 text-sm">
                   לא נמצאו שירים
                 </div>
               }
@@ -378,12 +378,12 @@ export const SpotifyView = ({ sections, visible }: SpotifyViewProps) => {
 
                     {nowPlaying.link.title}
                   </a>
-                  <div data-ev-id="ev_3f41bef4ff" className="text-white/35 text-[9px] truncate">{nowPlaying.link.subtitle}</div>
+                  <div data-ev-id="ev_3f41bef4ff" className="text-white/60 text-[9px] truncate">{nowPlaying.link.subtitle}</div>
                 </div>
                 <button data-ev-id="ev_d0dbcbe058"
               onClick={() => nowPlaying && toggleLike(nowPlaying.link.id)}
               className={`flex-shrink-0 ${
-              liked.has(nowPlaying.link.id) ? 'text-[#1db954]' : 'text-white/25 hover:text-white/60'} transition-colors`
+              liked.has(nowPlaying.link.id) ? 'text-[#1db954]' : 'text-white/60 hover:text-white/60'} transition-colors`
               }>
 
                   <Heart className={`w-3.5 h-3.5 ${nowPlaying && liked.has(nowPlaying.link.id) ? 'fill-[#1db954]' : ''}`} />
@@ -397,11 +397,11 @@ export const SpotifyView = ({ sections, visible }: SpotifyViewProps) => {
             <div data-ev-id="ev_7d87a43f05" className="flex items-center gap-4">
               <button data-ev-id="ev_860252c9b1"
               onClick={() => setShuffle(!shuffle)}
-              className={`transition-colors ${shuffle ? 'text-[#1db954]' : 'text-white/30 hover:text-white/60'}`}>
+              className={`transition-colors ${shuffle ? 'text-[#1db954]' : 'text-white/60 hover:text-white/60'}`}>
 
                 <Shuffle className="w-3.5 h-3.5" />
               </button>
-              <button data-ev-id="ev_80612bed24" onClick={skipPrev} className="text-white/50 hover:text-white transition-colors">
+              <button data-ev-id="ev_80612bed24" onClick={skipPrev} className="text-white/60 hover:text-white transition-colors">
                 <SkipBack className="w-4 h-4 fill-current" />
               </button>
               <button data-ev-id="ev_19d1c7e724"
@@ -413,19 +413,19 @@ export const SpotifyView = ({ sections, visible }: SpotifyViewProps) => {
                 <Play className="w-4 h-4 text-black fill-black ml-0.5" />
                 }
               </button>
-              <button data-ev-id="ev_681c96d0df" onClick={skipNext} className="text-white/50 hover:text-white transition-colors">
+              <button data-ev-id="ev_681c96d0df" onClick={skipNext} className="text-white/60 hover:text-white transition-colors">
                 <SkipForward className="w-4 h-4 fill-current" />
               </button>
               <button data-ev-id="ev_41ddabeba4"
               onClick={() => setRepeat(!repeat)}
-              className={`transition-colors ${repeat ? 'text-[#1db954]' : 'text-white/30 hover:text-white/60'}`}>
+              className={`transition-colors ${repeat ? 'text-[#1db954]' : 'text-white/60 hover:text-white/60'}`}>
 
                 <Repeat className="w-3.5 h-3.5" />
               </button>
             </div>
             {/* Progress bar */}
             <div data-ev-id="ev_4c93198c93" className="flex items-center gap-2 w-full max-w-md">
-              <span data-ev-id="ev_d2700fc195" className="text-[9px] font-mono text-white/30 w-8 text-right">
+              <span data-ev-id="ev_d2700fc195" className="text-[9px] font-mono text-white/60 w-8 text-right">
                 {Math.floor(progress / 100 * 3)}:{(Math.floor(progress / 100 * 60) % 60).toString().padStart(2, '0')}
               </span>
               <div data-ev-id="ev_7852e23f13"
@@ -442,7 +442,7 @@ export const SpotifyView = ({ sections, visible }: SpotifyViewProps) => {
                   <div data-ev-id="ev_a94b601b55" className="absolute left-0 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity" style={{ left: '100%', marginLeft: -6 }} />
                 </div>
               </div>
-              <span data-ev-id="ev_994ff2842e" className="text-[9px] font-mono text-white/30 w-8">
+              <span data-ev-id="ev_994ff2842e" className="text-[9px] font-mono text-white/60 w-8">
                 {nowPlaying ? fakeDuration(nowPlaying.link.id) : '0:00'}
               </span>
             </div>
@@ -450,7 +450,7 @@ export const SpotifyView = ({ sections, visible }: SpotifyViewProps) => {
 
           {/* Right: Volume */}
           <div data-ev-id="ev_7751ea07f5" className="flex items-center gap-2 w-32 flex-shrink-0 justify-end">
-            <Volume2 className="w-3.5 h-3.5 text-white/40" />
+            <Volume2 className="w-3.5 h-3.5 text-white/60" />
             <div data-ev-id="ev_e4d6784b81"
             className="w-20 h-1 rounded-full bg-white/10 cursor-pointer group"
             onClick={(e) => {

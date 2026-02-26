@@ -24,7 +24,7 @@ export const AffiliateDisclaimer = ({ visible, customText }: AffiliateDisclaimer
 
         <div data-ev-id="ev_94e0254572" className="flex items-start gap-3">
           <Gift className="w-4 h-4 text-amber-400/70 flex-shrink-0 mt-0.5" aria-hidden="true" />
-          <p data-ev-id="ev_f8a70d03dd" className="text-white/50 text-sm leading-relaxed">
+          <p data-ev-id="ev_f8a70d03dd" className="text-white/60 text-sm leading-relaxed">
             <span data-ev-id="ev_5df66b1777" className="text-white/70 font-medium">שקיפות מלאה</span>{' — '}
             {customText || defaultText}
             {' '}לעולם לא תשלמו יותר אם תשתמשו בקישור, לרוב אפילו תקבלו הטבה בעצמכם{' '}

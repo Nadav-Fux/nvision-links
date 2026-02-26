@@ -174,9 +174,9 @@ export const SmartImporter = ({ sections, onImportComplete }: SmartImporterProps
         </div>
         <div data-ev-id="ev_c0cf7616ff" className="flex-1 text-right">
           <span data-ev-id="ev_5e9a0ef0c2" className="text-white/80 text-sm font-medium">ייבוא חכם בעזרת AI</span>
-          <span data-ev-id="ev_f36d3a0b5d" className="text-white/30 text-xs mr-2">• הדבק טקסט, CSV, או קובץ — ה-AI יחלץ את הקישורים</span>
+          <span data-ev-id="ev_f36d3a0b5d" className="text-white/60 text-xs mr-2">• הדבק טקסט, CSV, או קובץ — ה-AI יחלץ את הקישורים</span>
         </div>
-        {collapsed ? <ChevronDown className="w-4 h-4 text-white/30" /> : <ChevronUp className="w-4 h-4 text-white/30" />}
+        {collapsed ? <ChevronDown className="w-4 h-4 text-white/60" /> : <ChevronUp className="w-4 h-4 text-white/60" />}
       </button>
 
       {!collapsed &&
@@ -193,7 +193,7 @@ export const SmartImporter = ({ sections, onImportComplete }: SmartImporterProps
           {step === 'input' &&
         <div data-ev-id="ev_297794b6a8" className="space-y-3">
               <div data-ev-id="ev_3d2e29e446">
-                <label data-ev-id="ev_044aed94de" htmlFor="import-text" className="text-white/50 text-xs font-medium mb-1.5 block">
+                <label data-ev-id="ev_044aed94de" htmlFor="import-text" className="text-white/60 text-xs font-medium mb-1.5 block">
                   הדבק טקסט עם קישורים
                 </label>
                 <textarea data-ev-id="ev_898580097a"
@@ -205,7 +205,7 @@ export const SmartImporter = ({ sections, onImportComplete }: SmartImporterProps
 • ChatGPT - https://chat.openai.com - צ'אטבוט AI מתקדם
 • Midjourney https://midjourney.com יצירת תמונות
 • או פשוט תוכן CSV/טבלה מ-Google Sheets`}
-            className="w-full px-3 py-2.5 bg-white/[0.04] border border-white/[0.08] rounded-lg text-white/80 text-sm placeholder:text-white/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus:border-primary/40 transition-all resize-y min-h-[120px]" />
+            className="w-full px-3 py-2.5 bg-white/[0.04] border border-white/[0.08] rounded-lg text-white/80 text-sm placeholder:text-white/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus:border-primary/40 transition-all resize-y min-h-[120px]" />
 
               </div>
 
@@ -221,12 +221,12 @@ export const SmartImporter = ({ sections, onImportComplete }: SmartImporterProps
 
                 <button data-ev-id="ev_191a52b4c9"
             onClick={() => fileInputRef.current?.click()}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs text-white/40 hover:text-white/60 border border-white/[0.08] hover:border-white/[0.15] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+            className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs text-white/60 hover:text-white/60 border border-white/[0.08] hover:border-white/[0.15] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
 
                   <Upload className="w-3.5 h-3.5" />
                   העלה קובץ
                 </button>
-                <span data-ev-id="ev_6d87caf75c" className="text-white/20 text-[10px]">CSV, TXT, HTML, MD</span>
+                <span data-ev-id="ev_6d87caf75c" className="text-white/60 text-[10px]">CSV, TXT, HTML, MD</span>
 
                 <div data-ev-id="ev_cc1b7cb4f4" className="flex-1" />
 
@@ -250,8 +250,8 @@ export const SmartImporter = ({ sections, onImportComplete }: SmartImporterProps
                 <Loader2 className="w-8 h-8 text-purple-400 animate-spin" />
                 <Sparkles className="w-4 h-4 text-cyan-400 absolute -top-1 -right-1 animate-pulse" />
               </div>
-              <p data-ev-id="ev_7335bb697f" className="text-white/50 text-sm">ה-AI מנתח את הטקסט...</p>
-              <p data-ev-id="ev_3f016d06d9" className="text-white/20 text-xs">זה יכול לקחת כמה שניות</p>
+              <p data-ev-id="ev_7335bb697f" className="text-white/60 text-sm">ה-AI מנתח את הטקסט...</p>
+              <p data-ev-id="ev_3f016d06d9" className="text-white/60 text-xs">זה יכול לקחת כמה שניות</p>
             </div>
         }
 
@@ -266,13 +266,13 @@ export const SmartImporter = ({ sections, onImportComplete }: SmartImporterProps
 
               {/* Selection controls */}
               <div data-ev-id="ev_181bc90f99" className="flex items-center gap-2">
-                <button data-ev-id="ev_772ab854cb" onClick={selectAll} className="text-xs text-white/40 hover:text-white/60 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded px-2 py-1">
+                <button data-ev-id="ev_772ab854cb" onClick={selectAll} className="text-xs text-white/60 hover:text-white/60 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded px-2 py-1">
                   בחר הכל
                 </button>
-                <button data-ev-id="ev_a24ee180ed" onClick={selectNone} className="text-xs text-white/40 hover:text-white/60 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded px-2 py-1">
+                <button data-ev-id="ev_a24ee180ed" onClick={selectNone} className="text-xs text-white/60 hover:text-white/60 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded px-2 py-1">
                   נקה הכל
                 </button>
-                <span data-ev-id="ev_9566d9f419" className="text-white/25 text-xs">{selectedIndices.size} / {parsedLinks.length} נבחרו</span>
+                <span data-ev-id="ev_9566d9f419" className="text-white/60 text-xs">{selectedIndices.size} / {parsedLinks.length} נבחרו</span>
               </div>
 
               {/* Grouped links */}
@@ -282,7 +282,7 @@ export const SmartImporter = ({ sections, onImportComplete }: SmartImporterProps
                     {/* Section header */}
                     <div data-ev-id="ev_bb2a65e430" className="flex items-center gap-2 px-3 py-2 bg-white/[0.02]">
                       <span data-ev-id="ev_1c9225874a" className="text-white/60 text-xs font-medium">{sectionName}</span>
-                      <span data-ev-id="ev_6d613b6d29" className="text-white/25 text-[10px]">({items.length})</span>
+                      <span data-ev-id="ev_6d613b6d29" className="text-white/60 text-[10px]">({items.length})</span>
                       <div data-ev-id="ev_fefba20185" className="flex-1" />
                       {/* Section mapping dropdown */}
                       <select data-ev-id="ev_b76fbfb6a9"
@@ -335,17 +335,17 @@ export const SmartImporter = ({ sections, onImportComplete }: SmartImporterProps
                   return (
                     <div data-ev-id="ev_28176a0f84" key={idx} className={`flex items-center gap-2 px-3 py-2 transition-colors ${isSelected ? '' : 'opacity-40'}`}>
                             <button data-ev-id="ev_84c9e42c1d" onClick={() => toggleSelect(idx)} className="p-0.5 flex-shrink-0 focus:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded">
-                              {isSelected ? <CheckSquare className="w-4 h-4 text-primary" /> : <Square className="w-4 h-4 text-white/25" />}
+                              {isSelected ? <CheckSquare className="w-4 h-4 text-primary" /> : <Square className="w-4 h-4 text-white/60" />}
                             </button>
                             <div data-ev-id="ev_71368d25b5" className="w-6 h-6 rounded flex items-center justify-center flex-shrink-0" style={{ background: `${link.color}20` }}>
                               <IconComponent className="w-3 h-3" style={{ color: link.color }} />
                             </div>
                             <div data-ev-id="ev_10b79671a6" className="flex-1 min-w-0">
                               <div data-ev-id="ev_1abaad9750" className="text-white/80 text-xs font-medium truncate">{link.title}</div>
-                              <div data-ev-id="ev_9c56d43f64" className="text-white/30 text-[10px] truncate" dir="ltr">{link.url}</div>
+                              <div data-ev-id="ev_9c56d43f64" className="text-white/60 text-[10px] truncate" dir="ltr">{link.url}</div>
                             </div>
                             <button data-ev-id="ev_6f09df968b" onClick={() => setEditingIdx(idx)} aria-label="ערוך"
-                      className="p-1 text-white/15 hover:text-white/40 transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded">
+                      className="p-1 text-white/60 hover:text-white/70 transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded">
                               <Edit2 className="w-3 h-3" />
                             </button>
                           </div>);
@@ -359,7 +359,7 @@ export const SmartImporter = ({ sections, onImportComplete }: SmartImporterProps
               {/* Action buttons */}
               <div data-ev-id="ev_6b0ed26188" className="flex items-center gap-2 pt-2">
                 <button data-ev-id="ev_ff69af4f04" onClick={handleReset}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs text-white/40 hover:text-white/60 border border-white/[0.08] hover:border-white/[0.15] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+            className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs text-white/60 hover:text-white/60 border border-white/[0.08] hover:border-white/[0.15] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
                   <RefreshCw className="w-3.5 h-3.5" /> התחל מחדש
                 </button>
                 <div data-ev-id="ev_1b4297c992" className="flex-1" />
@@ -379,7 +379,7 @@ export const SmartImporter = ({ sections, onImportComplete }: SmartImporterProps
           {step === 'importing' &&
         <div data-ev-id="ev_6607bc8b65" className="flex flex-col items-center justify-center py-10 gap-3">
               <Loader2 className="w-8 h-8 text-green-400 animate-spin" />
-              <p data-ev-id="ev_6fa9126afd" className="text-white/50 text-sm">מייבא {selectedIndices.size} קישורים...</p>
+              <p data-ev-id="ev_6fa9126afd" className="text-white/60 text-sm">מייבא {selectedIndices.size} קישורים...</p>
             </div>
         }
 
@@ -392,7 +392,7 @@ export const SmartImporter = ({ sections, onImportComplete }: SmartImporterProps
               <p data-ev-id="ev_90283bb000" className="text-green-400/80 text-sm font-medium">{importSummary}</p>
               <button data-ev-id="ev_7a6e619f7b"
           onClick={handleReset}
-          className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs text-white/40 hover:text-white/60 border border-white/[0.08] hover:border-white/[0.15] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary mt-2">
+          className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs text-white/60 hover:text-white/60 border border-white/[0.08] hover:border-white/[0.15] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary mt-2">
 
                 <RefreshCw className="w-3.5 h-3.5" /> ייבוא נוסף
               </button>

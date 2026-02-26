@@ -178,7 +178,7 @@ export const ArcadeView = ({ sections, visible }: ArcadeViewProps) => {
 
                   INSERT COIN
                 </div>
-                <div data-ev-id="ev_f41c81930e" className="text-white/30 text-xs font-mono mt-2">PRESS START</div>
+                <div data-ev-id="ev_f41c81930e" className="text-white/60 text-xs font-mono mt-2">PRESS START</div>
               </div>
             </div>
           }
@@ -211,7 +211,7 @@ export const ArcadeView = ({ sections, visible }: ArcadeViewProps) => {
             className={`px-3 py-1.5 rounded text-[11px] font-mono font-bold transition-all flex-shrink-0 flex items-center gap-1.5 ${
             activeLevel === sIdx ?
             'text-black scale-105' :
-            'text-white/30 hover:text-white/60 border border-white/[0.06]'}`
+            'text-white/60 hover:text-white/60 border border-white/[0.06]'}`
             }
             style={{
               backgroundColor: activeLevel === sIdx ? LEVEL_COLORS[sIdx % LEVEL_COLORS.length] : 'transparent',
@@ -239,7 +239,7 @@ export const ArcadeView = ({ sections, visible }: ArcadeViewProps) => {
                   {activeSection.title}
                 </h2>
                 <div data-ev-id="ev_ad5dca34a7" className="flex-1" />
-                <span data-ev-id="ev_a53dbd0461" className="text-white/20 text-[10px] font-mono">
+                <span data-ev-id="ev_a53dbd0461" className="text-white/60 text-[10px] font-mono">
                   {activeSection.links.length} ITEMS
                 </span>
               </div>
@@ -292,7 +292,7 @@ export const ArcadeView = ({ sections, visible }: ArcadeViewProps) => {
                     <h3 data-ev-id="ev_d7e022094a" className="text-white/80 text-[11px] font-mono font-bold text-center truncate mb-0.5">
                       {link.title}
                     </h3>
-                    <p data-ev-id="ev_5033dd9a58" className="text-white/25 text-[9px] font-mono text-center truncate mb-2">
+                    <p data-ev-id="ev_5033dd9a58" className="text-white/60 text-[9px] font-mono text-center truncate mb-2">
                       {link.subtitle}
                     </p>
 
@@ -309,7 +309,7 @@ export const ArcadeView = ({ sections, visible }: ArcadeViewProps) => {
                         }} />
 
                       </div>
-                      <span data-ev-id="ev_c3097c1f60" className="text-[8px] font-mono text-white/30 w-10 text-right">
+                      <span data-ev-id="ev_c3097c1f60" className="text-[8px] font-mono text-white/60 w-10 text-right">
                         {score.toLocaleString()}
                       </span>
                     </div>
@@ -333,7 +333,7 @@ export const ArcadeView = ({ sections, visible }: ArcadeViewProps) => {
                   {/* Expanded: description + play button */}
                   {isSelected &&
                   <div data-ev-id="ev_11f95cae5a" className="px-3 pb-3 border-t border-white/[0.04] pt-2">
-                      <p data-ev-id="ev_fda6ad13fd" className="text-white/40 text-[9px] font-mono leading-relaxed mb-2 line-clamp-2">
+                      <p data-ev-id="ev_fda6ad13fd" className="text-white/60 text-[9px] font-mono leading-relaxed mb-2 line-clamp-2">
                         {link.description || link.subtitle}
                       </p>
                       <a data-ev-id="ev_afe2f1cad3"
@@ -372,12 +372,12 @@ export const ArcadeView = ({ sections, visible }: ArcadeViewProps) => {
               map((link, i) =>
               <div data-ev-id="ev_c58f943b73" key={link.id} className="flex items-center gap-2 px-3 py-1.5">
                     <span data-ev-id="ev_a4247cd085" className={`text-[10px] font-mono font-black w-4 text-center ${
-                i === 0 ? 'text-yellow-400' : i === 1 ? 'text-gray-300' : i === 2 ? 'text-amber-600' : 'text-white/20'}`
+                i === 0 ? 'text-yellow-400' : i === 1 ? 'text-gray-300' : i === 2 ? 'text-amber-600' : 'text-white/60'}`
                 }>
                       {i + 1}
                     </span>
                     <AnimatedIcon icon={link.icon} animation={link.animation} color={link.color} size={12} />
-                    <span data-ev-id="ev_ef14460ba6" className="text-white/50 text-[10px] font-mono flex-1 truncate">{link.title}</span>
+                    <span data-ev-id="ev_ef14460ba6" className="text-white/60 text-[10px] font-mono flex-1 truncate">{link.title}</span>
                     <span data-ev-id="ev_fe7a81f417" className="text-[9px] font-mono font-bold" style={{ color: rankColor(fakeRank(link.id)) }}>
                       {fakeRank(link.id)}
                     </span>

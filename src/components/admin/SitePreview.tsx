@@ -71,7 +71,7 @@ export const SitePreview = ({ open, onClose }: SitePreviewProps) => {
               onClick={() => setDevice('desktop')}
               aria-pressed={device === 'desktop'}
               className={`flex items-center gap-1 px-2 py-1 rounded-md text-xs transition-all ${
-              device === 'desktop' ? 'bg-primary/20 text-primary' : 'text-white/30 hover:text-white/60'}`
+              device === 'desktop' ? 'bg-primary/20 text-primary' : 'text-white/60 hover:text-white/60'}`
               }>
                 <Monitor className="w-3 h-3" />
                 <span data-ev-id="ev_ffcaecf838" className="hidden sm:inline">מחשב</span>
@@ -80,7 +80,7 @@ export const SitePreview = ({ open, onClose }: SitePreviewProps) => {
               onClick={() => setDevice('mobile')}
               aria-pressed={device === 'mobile'}
               className={`flex items-center gap-1 px-2 py-1 rounded-md text-xs transition-all ${
-              device === 'mobile' ? 'bg-primary/20 text-primary' : 'text-white/30 hover:text-white/60'}`
+              device === 'mobile' ? 'bg-primary/20 text-primary' : 'text-white/60 hover:text-white/60'}`
               }>
                 <Smartphone className="w-3 h-3" />
                 <span data-ev-id="ev_d0dc12d5b2" className="hidden sm:inline">נייד</span>
@@ -91,17 +91,17 @@ export const SitePreview = ({ open, onClose }: SitePreviewProps) => {
             <button data-ev-id="ev_99188d57ec"
             onClick={() => setKey((k) => k + 1)}
             aria-label="רענן תצוגה מקדימה"
-            className="p-1.5 rounded-lg text-white/30 hover:text-white/60 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+            className="p-1.5 rounded-lg text-white/60 hover:text-white/60 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
               <RefreshCw className="w-3.5 h-3.5" />
             </button>
             <a data-ev-id="ev_a92be84229"
             href="/" target="_blank" rel="noopener noreferrer"
-            className="p-1.5 rounded-lg text-white/30 hover:text-white/60 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            className="p-1.5 rounded-lg text-white/60 hover:text-white/60 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             aria-label="פתח בחלון חדש">
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
             <button data-ev-id="ev_4d08b9201f" ref={closeRef} onClick={onClose} aria-label="סגור תצוגה מקדימה"
-            className="p-1.5 rounded-lg text-white/30 hover:text-white/60 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+            className="p-1.5 rounded-lg text-white/60 hover:text-white/60 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
               <X className="w-4 h-4" />
             </button>
           </div>

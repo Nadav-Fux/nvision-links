@@ -148,7 +148,7 @@ export const StackCard = ({
             }>
 
               <div data-ev-id="ev_2958428365" className="h-px w-10 mb-1.5" style={{ background: `${color}25` }} />
-              <p data-ev-id="ev_a569fba6a8" className="text-white/20 text-[11px] leading-relaxed">
+              <p data-ev-id="ev_a569fba6a8" className="text-white/60 text-[11px] leading-relaxed">
                 {description}
               </p>
             </div>

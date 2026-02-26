@@ -197,7 +197,7 @@ const NeuralNode = ({
 
               {link.title}
             </h3>
-            <p data-ev-id="ev_cd0179663a" className="text-xs text-white/30 truncate">
+            <p data-ev-id="ev_cd0179663a" className="text-xs text-white/60 truncate">
               {link.subtitle}
             </p>
           </div>
@@ -218,7 +218,7 @@ const NeuralNode = ({
           opacity: hovered ? 1 : 0
         }}>
 
-          <p data-ev-id="ev_89d4b5da93" className="text-white/35 text-xs leading-relaxed mt-2 pt-2 border-t border-white/[0.05] line-clamp-2">
+          <p data-ev-id="ev_89d4b5da93" className="text-white/60 text-xs leading-relaxed mt-2 pt-2 border-t border-white/[0.05] line-clamp-2">
             {link.description}
           </p>
         </div>

@@ -92,7 +92,7 @@ export const TerminalView = ({
             <div data-ev-id="ev_d43ab16d65" className="w-2.5 h-2.5 rounded-full bg-[#febc2e]/70" />
             <div data-ev-id="ev_7d79c29dde" className="w-2.5 h-2.5 rounded-full bg-[#28c840]/70" />
           </div>
-          <span data-ev-id="ev_e18b229110" className="flex-1 text-center text-[11px] text-white/25 font-mono">
+          <span data-ev-id="ev_e18b229110" className="flex-1 text-center text-[11px] text-white/60 font-mono">
             nVision@ai:~/community
           </span>
           <div data-ev-id="ev_9a0fe3b690" className="w-12" />
@@ -117,12 +117,12 @@ export const TerminalView = ({
           }
 
           {show() &&
-          <div data-ev-id="ev_f70e9ead2a" className="text-white/20 text-[11px] mb-3">
+          <div data-ev-id="ev_f70e9ead2a" className="text-white/60 text-[11px] mb-3">
               <span data-ev-id="ev_fdc70a55a3" className="text-cyan-400/50">$</span> neofetch
-              <span data-ev-id="ev_6fba96efc6" className="text-white/10"> — </span>
+              <span data-ev-id="ev_6fba96efc6" className="text-white/60"> — </span>
               <span data-ev-id="ev_7932a349b3" className="text-purple-400/40">Community Hub v2.0</span>
-              <span data-ev-id="ev_ed2b037b8c" className="text-white/10"> · </span>
-              <span data-ev-id="ev_aa8a788912" className="text-white/15">
+              <span data-ev-id="ev_ed2b037b8c" className="text-white/60"> · </span>
+              <span data-ev-id="ev_aa8a788912" className="text-white/60">
                 {allLinks.length} links loaded
               </span>
             </div>
@@ -154,7 +154,7 @@ export const TerminalView = ({
 
           {/* Footer + cursor */}
           {show() &&
-          <div data-ev-id="ev_1bbfcdc0dd" className="mt-3 text-white/10 text-[10px]">
+          <div data-ev-id="ev_1bbfcdc0dd" className="mt-3 text-white/60 text-[10px]">
               ────────────────────────────────────
             </div>
           }
@@ -225,10 +225,10 @@ const TerminalLink = ({
       </span>
 
       {/* Separator */}
-      <span data-ev-id="ev_99358e9cf0" className="text-white/10 flex-shrink-0">—</span>
+      <span data-ev-id="ev_99358e9cf0" className="text-white/60 flex-shrink-0">—</span>
 
       {/* Description */}
-      <span data-ev-id="ev_8b39276adf" className="text-white/25 truncate flex-1 text-xs">
+      <span data-ev-id="ev_8b39276adf" className="text-white/60 truncate flex-1 text-xs">
         {link.subtitle}
       </span>
 

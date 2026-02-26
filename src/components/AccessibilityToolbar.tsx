@@ -239,7 +239,7 @@ export const AccessibilityToolbar = () => {
             </div>
             <div data-ev-id="ev_a60b6cefec">
               <h2 data-ev-id="ev_9a4f00f0de" className="text-sm font-bold text-white/90 leading-tight">{"הגדרות נגישות"}</h2>
-              <p data-ev-id="ev_9bc9da74b7" className="text-[10px] text-white/35 mt-0.5">{"התאמה אישית לאתר"}</p>
+              <p data-ev-id="ev_9bc9da74b7" className="text-[10px] text-white/60 mt-0.5">{"התאמה אישית לאתר"}</p>
             </div>
           </div>
           <button data-ev-id="ev_8e95e2f701"
@@ -332,15 +332,15 @@ export const AccessibilityToolbar = () => {
 
           {/* ═══ SHORTCUTS ═══ */}
           <div data-ev-id="ev_d5642217f1" className="rounded-xl p-3 bg-white/[0.02] border border-white/[0.05]">
-            <p data-ev-id="ev_dd10923b2e" className="text-[10px] font-bold text-white/40 mb-2">{"קיצורי מקלדת"}</p>
+            <p data-ev-id="ev_dd10923b2e" className="text-[10px] font-bold text-white/60 mb-2">{"קיצורי מקלדת"}</p>
             <div data-ev-id="ev_18802781ba" className="space-y-1.5">
               <div data-ev-id="ev_844789734e" className="flex justify-between items-center">
-                <span data-ev-id="ev_94e109a6cc" className="text-[11px] text-white/40">{"פתיחה / סגירה"}</span>
-                <kbd data-ev-id="ev_99f56aa7e2" className="px-2 py-0.5 rounded-md text-[10px] font-mono bg-white/[0.06] text-white/40 border border-white/[0.08]">Alt + A</kbd>
+                <span data-ev-id="ev_94e109a6cc" className="text-[11px] text-white/60">{"פתיחה / סגירה"}</span>
+                <kbd data-ev-id="ev_99f56aa7e2" className="px-2 py-0.5 rounded-md text-[10px] font-mono bg-white/[0.06] text-white/60 border border-white/[0.08]">Alt + A</kbd>
               </div>
               <div data-ev-id="ev_05d1f6244c" className="flex justify-between items-center">
-                <span data-ev-id="ev_5f87caf090" className="text-[11px] text-white/40">{"סגירה מהירה"}</span>
-                <kbd data-ev-id="ev_d0028a6e65" className="px-2 py-0.5 rounded-md text-[10px] font-mono bg-white/[0.06] text-white/40 border border-white/[0.08]">Escape</kbd>
+                <span data-ev-id="ev_5f87caf090" className="text-[11px] text-white/60">{"סגירה מהירה"}</span>
+                <kbd data-ev-id="ev_d0028a6e65" className="px-2 py-0.5 rounded-md text-[10px] font-mono bg-white/[0.06] text-white/60 border border-white/[0.08]">Escape</kbd>
               </div>
             </div>
           </div>
@@ -353,7 +353,7 @@ export const AccessibilityToolbar = () => {
           'w-full flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-sm transition-all duration-300 ' +
           'focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400 ' + (
           isDefault ?
-          'bg-white/[0.03] text-white/15 cursor-not-allowed border border-white/[0.04]' :
+          'bg-white/[0.03] text-white/60 cursor-not-allowed border border-white/[0.04]' :
           'bg-red-500/20 text-red-400 border border-red-500/30 hover:bg-red-500/30 hover:border-red-500/50 active:scale-[0.98]')
           }>
 
@@ -456,7 +456,7 @@ className={
 'w-10 h-10 rounded-xl border flex items-center justify-center transition-all ' +
 'focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06b6d4] ' + (
 disabled ?
-'border-white/[0.04] text-white/15 cursor-not-allowed' :
+'border-white/[0.04] text-white/60 cursor-not-allowed' :
 'border-white/[0.1] text-white/60 bg-white/[0.03] hover:bg-white/[0.08] hover:border-[#06b6d4]/40 hover:text-[#06b6d4] active:scale-95')
 }>
 
@@ -468,7 +468,7 @@ const Slider = ({ label, value, max, display, onChange
 
 }: {label: string;value: number;max: number;display: string;onChange: (v: number) => void;}) =>
 <div data-ev-id="ev_4a79f3a90d" className="flex items-center gap-3 rounded-lg p-2.5 bg-white/[0.02] border border-white/[0.05]">
-    <label data-ev-id="ev_0505fc1686" className="text-[10px] text-white/40 font-semibold w-[52px] flex-shrink-0">{label}</label>
+    <label data-ev-id="ev_0505fc1686" className="text-[10px] text-white/60 font-semibold w-[52px] flex-shrink-0">{label}</label>
     <input data-ev-id="ev_99fe42cae1"
   type="range"
   min={0}

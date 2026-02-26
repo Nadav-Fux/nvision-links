@@ -78,7 +78,7 @@ export const ViewSelector = ({ currentView, selectedViews: initialSelectedViews,
           <Monitor className="w-4 h-4 text-primary" aria-hidden="true" />
           <h3 data-ev-id="ev_6f728809f3" id="view-selector-label" className="text-white/80 text-sm font-semibold">תצוגות פעילות</h3>
         </div>
-        <span data-ev-id="ev_12877432b8" className="text-white/30 text-xs">
+        <span data-ev-id="ev_12877432b8" className="text-white/60 text-xs">
           {selected.length === 1 ?
           'מבקרים יראו תמיד את התצוגה הנבחרת' :
           `${selected.length} נבחרו — מבקרים יראו תצוגה רנדומלית`}
@@ -101,7 +101,7 @@ export const ViewSelector = ({ currentView, selectedViews: initialSelectedViews,
             className={`relative flex flex-col items-center gap-1 py-2.5 px-1 rounded-lg border text-xs transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1 focus-visible:ring-offset-transparent ${
             checked ?
             'bg-primary/15 border-primary/40 text-primary' :
-            'bg-white/[0.02] border-white/[0.06] text-white/50 hover:bg-white/[0.05] hover:text-white/70'}`
+            'bg-white/[0.02] border-white/[0.06] text-white/60 hover:bg-white/[0.05] hover:text-white/70'}`
             }>
 
               {/* Checkmark */}
@@ -112,7 +112,7 @@ export const ViewSelector = ({ currentView, selectedViews: initialSelectedViews,
               }
               <span data-ev-id="ev_8f7facd048" className="text-lg" aria-hidden="true">{view.emoji}</span>
               <span data-ev-id="ev_3621765c0a" className="truncate w-full text-center leading-tight">{view.nameHe}</span>
-              <span data-ev-id="ev_25cafb7a0d" className={`text-[9px] leading-tight ${checked ? 'text-primary/60' : 'text-white/20'}`}>{view.name}</span>
+              <span data-ev-id="ev_25cafb7a0d" className={`text-[9px] leading-tight ${checked ? 'text-primary/60' : 'text-white/60'}`}>{view.name}</span>
             </button>);
 
         })}
@@ -129,7 +129,7 @@ export const ViewSelector = ({ currentView, selectedViews: initialSelectedViews,
             {saving ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Save className="w-3.5 h-3.5" />}
             שמור שינויים
           </button>
-          <span data-ev-id="ev_7f27ae5fd4" className="text-white/25 text-xs">
+          <span data-ev-id="ev_7f27ae5fd4" className="text-white/60 text-xs">
             נבחרו: {selected.map((id) => VIEW_OPTIONS.find((v) => v.id === id)?.nameHe).filter(Boolean).join(', ')}
           </span>
         </div>

@@ -161,7 +161,7 @@ export const LoadingSpinner = ({ fullPage, text = 'טוען...' }: LoadingSpinne
           <div data-ev-id="ev_a430435dcb" className="w-40 sm:w-48 h-[2px] rounded-full bg-white/[0.06] overflow-hidden">
             <div data-ev-id="ev_6730c7f482" className="h-full rounded-full loading-progress" />
           </div>
-          <p data-ev-id="ev_8a0595b9ef" className="text-white/35 text-xs">{text}</p>
+          <p data-ev-id="ev_8a0595b9ef" className="text-white/60 text-xs">{text}</p>
         </div>
 
         <span data-ev-id="ev_faacb0ba0c" className="sr-only">{text}</span>
@@ -177,7 +177,7 @@ export const LoadingSpinner = ({ fullPage, text = 'טוען...' }: LoadingSpinne
         <div data-ev-id="ev_5a19406edd" className="absolute inset-0 w-10 h-10 rounded-full border-2 border-transparent border-t-primary loading-spin" />
         <div data-ev-id="ev_70e38fe277" className="absolute inset-1.5 w-7 h-7 rounded-full border-2 border-transparent border-b-accent/50 loading-spin-reverse" />
       </div>
-      <p data-ev-id="ev_6708b2b1e0" className="text-white/40 text-sm">{text}</p>
+      <p data-ev-id="ev_6708b2b1e0" className="text-white/60 text-sm">{text}</p>
       <span data-ev-id="ev_c4e45f6d7d" className="sr-only">{text}</span>
     </div>);
 

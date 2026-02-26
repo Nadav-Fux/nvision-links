@@ -86,7 +86,7 @@ export const StreamingView = ({ sections, visible }: StreamingViewProps) => {
               {/* Tag line */}
               <div data-ev-id="ev_b7d088055c" className="flex items-center gap-2 mb-2">
                 <span data-ev-id="ev_64bc7e4f0f" className="text-red-500 font-bold text-sm tracking-wider">N</span>
-                <span data-ev-id="ev_8ac1f2c87c" className="text-white/50 text-[11px] font-medium tracking-widest uppercase">סדרה מומלצת</span>
+                <span data-ev-id="ev_8ac1f2c87c" className="text-white/60 text-[11px] font-medium tracking-widest uppercase">סדרה מומלצת</span>
               </div>
 
               <h2 data-ev-id="ev_a090e4a74d" className="text-white text-2xl sm:text-3xl font-bold mb-2 leading-tight">
@@ -129,9 +129,9 @@ export const StreamingView = ({ sections, visible }: StreamingViewProps) => {
               {/* Meta badges */}
               <div data-ev-id="ev_8329c68831" className="flex items-center gap-3 mt-3 text-[11px]">
                 <span data-ev-id="ev_b2656c1215" className="text-green-400 font-bold">{fakeMatch(heroLink.link.id)}% התאמה</span>
-                <span data-ev-id="ev_5ec67cc2b0" className="text-white/40">{fakeYear(heroLink.link.id)}</span>
-                <span data-ev-id="ev_ad810e547c" className="px-1.5 py-0.5 border border-white/20 rounded text-white/50 text-[10px]">HD</span>
-                <span data-ev-id="ev_6a38ecc623" className="flex items-center gap-0.5 text-white/40">
+                <span data-ev-id="ev_5ec67cc2b0" className="text-white/60">{fakeYear(heroLink.link.id)}</span>
+                <span data-ev-id="ev_ad810e547c" className="px-1.5 py-0.5 border border-white/20 rounded text-white/60 text-[10px]">HD</span>
+                <span data-ev-id="ev_6a38ecc623" className="flex items-center gap-0.5 text-white/60">
                   <Star className="w-3 h-3 text-yellow-500 fill-yellow-500" />
                   {fakeRating(heroLink.link.id)}
                 </span>
@@ -165,7 +165,7 @@ export const StreamingView = ({ sections, visible }: StreamingViewProps) => {
         </div>
 
         {/* Footer */}
-        <div data-ev-id="ev_a590ef8a1e" className="px-6 py-3 border-t border-white/[0.04] flex items-center justify-between text-[10px] text-white/20 font-mono">
+        <div data-ev-id="ev_a590ef8a1e" className="px-6 py-3 border-t border-white/[0.04] flex items-center justify-between text-[10px] text-white/60 font-mono">
           <span data-ev-id="ev_6224c06c1b">nVision Streaming © {new Date().getFullYear()}</span>
           <span data-ev-id="ev_cc1913e1dd">{sections.reduce((a, s) => a + s.links.length, 0)} titles available</span>
         </div>
@@ -236,7 +236,7 @@ const SectionRow = ({
       <div data-ev-id="ev_33e6c115ce" className="flex items-center gap-2 mb-2.5">
         <span data-ev-id="ev_46a9867b41" className="text-lg">{section.emoji}</span>
         <h3 data-ev-id="ev_263852a8fd" className="text-white font-bold text-base sm:text-lg">{section.title}</h3>
-        <ChevronLeft className="w-4 h-4 text-white/30 mr-auto rotate-180" />
+        <ChevronLeft className="w-4 h-4 text-white/60 mr-auto rotate-180" />
       </div>
 
       {/* Scroll container */}
@@ -359,7 +359,7 @@ const PosterCard = ({
             <AnimatedIcon icon={link.icon} animation={link.animation} color={link.color} size={12} />
             <span data-ev-id="ev_e23b40edf4" className="text-white text-[11px] font-bold truncate leading-tight">{link.title}</span>
           </div>
-          <p data-ev-id="ev_40261c8176" className="text-white/50 text-[9px] line-clamp-1">{link.subtitle}</p>
+          <p data-ev-id="ev_40261c8176" className="text-white/60 text-[9px] line-clamp-1">{link.subtitle}</p>
         </div>
 
         {/* Hover overlay */}
@@ -401,19 +401,19 @@ const PosterCard = ({
             className={`w-8 h-8 rounded-full border flex items-center justify-center transition-colors ${
             inMyList ?
             'border-white/40 bg-white/10 text-white' :
-            'border-white/20 text-white/50 hover:border-white/40 hover:text-white'}`
+            'border-white/20 text-white/60 hover:border-white/40 hover:text-white'}`
             }>
 
                 <Plus className={`w-4 h-4 ${inMyList ? 'rotate-45' : ''}`} />
               </button>
               <button data-ev-id="ev_cce04e88ae"
-            className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center text-white/50 hover:border-white/40 hover:text-white transition-colors">
+            className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:border-white/40 hover:text-white transition-colors">
 
                 <ThumbsUp className="w-3.5 h-3.5" />
               </button>
               <button data-ev-id="ev_323b353f0f"
             onClick={() => onSetHero(link)}
-            className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center text-white/50 hover:border-white/40 hover:text-white transition-colors mr-auto">
+            className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:border-white/40 hover:text-white transition-colors mr-auto">
 
                 <Info className="w-3.5 h-3.5" />
               </button>
@@ -422,12 +422,12 @@ const PosterCard = ({
             {/* Meta */}
             <div data-ev-id="ev_54e59d4ead" className="flex items-center gap-2 mb-1.5 text-[10px]">
               <span data-ev-id="ev_af1c427c97" className="text-green-400 font-bold">{fakeMatch(link.id)}% התאמה</span>
-              <span data-ev-id="ev_b1380bf90b" className="px-1 py-0.5 border border-white/15 rounded text-white/40 text-[9px]">HD</span>
-              <span data-ev-id="ev_f1a93d708d" className="text-white/30">{fakeYear(link.id)}</span>
+              <span data-ev-id="ev_b1380bf90b" className="px-1 py-0.5 border border-white/15 rounded text-white/60 text-[9px]">HD</span>
+              <span data-ev-id="ev_f1a93d708d" className="text-white/60">{fakeYear(link.id)}</span>
             </div>
 
             {/* Description */}
-            <p data-ev-id="ev_fe81ebd175" className="text-white/50 text-[10px] leading-relaxed line-clamp-2 mb-2">
+            <p data-ev-id="ev_fe81ebd175" className="text-white/60 text-[10px] leading-relaxed line-clamp-2 mb-2">
               {link.description || link.subtitle}
             </p>
 
@@ -435,7 +435,7 @@ const PosterCard = ({
             <div data-ev-id="ev_5db4f70a4c" className="flex items-center gap-1">
               <Star className="w-3 h-3 text-yellow-500 fill-yellow-500" />
               <span data-ev-id="ev_da3e550bac" className="text-white/60 text-[10px]">{fakeRating(link.id)}</span>
-              <span data-ev-id="ev_5297d353cf" className="text-white/20 text-[10px] mx-1">•</span>
+              <span data-ev-id="ev_5297d353cf" className="text-white/60 text-[10px] mx-1">•</span>
               <span data-ev-id="ev_017ec65823"
             className="text-[9px] px-1.5 py-0.5 rounded"
             style={{ background: link.color + '20', color: link.color }}>

@@ -43,7 +43,7 @@ export const StatsBar = () => {
           <span data-ev-id="ev_8be32c5185" className="text-sm sm:text-base leading-tight font-bold" style={{ color: '#22d3ee' }}>
             כל יום
           </span>
-          <span data-ev-id="ev_21debb7389" className="text-[11px] sm:text-xs text-white/55 leading-tight mt-0.5">
+          <span data-ev-id="ev_21debb7389" className="text-[11px] sm:text-xs text-white/60 leading-tight mt-0.5">
             תכנים חדשים בעולם ה-AI
           </span>
         </div>

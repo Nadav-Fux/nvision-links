@@ -210,7 +210,7 @@ export const LinkCard = ({ title, subtitle, description, url, icon, color, anima
               className="h-px w-12 mb-1.5"
               style={{ background: `${color}30` }}
               aria-hidden="true" />
-              <p data-ev-id="ev_bb12962856" className="text-white/50 text-[13px] leading-relaxed">
+              <p data-ev-id="ev_bb12962856" className="text-white/60 text-[13px] leading-relaxed">
                 {description}
               </p>
             </div>

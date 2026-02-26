@@ -59,7 +59,7 @@ export const SEOEditor = ({ config, onSaved }: SEOEditorProps) => {
     <div data-ev-id="ev_4a2447cf09" className="bg-white/[0.03] border border-white/[0.08] rounded-xl p-5 space-y-4">
       {/* OG Title */}
       <div data-ev-id="ev_db43581eb5">
-        <label data-ev-id="ev_6137a07e95" htmlFor="seo-og-title" className="flex items-center gap-2 text-white/50 text-xs font-medium mb-1.5">
+        <label data-ev-id="ev_6137a07e95" htmlFor="seo-og-title" className="flex items-center gap-2 text-white/60 text-xs font-medium mb-1.5">
           <Globe className="w-3.5 h-3.5" aria-hidden="true" />
           OG Title (כותרת שיתוף)
         </label>
@@ -70,12 +70,12 @@ export const SEOEditor = ({ config, onSaved }: SEOEditorProps) => {
         placeholder={config?.site_title || 'nVision Digital AI'}
         className="w-full px-3 py-2.5 bg-white/[0.04] border border-white/[0.08] rounded-lg text-white/80 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus:border-primary/40 transition-all" />
 
-        <p data-ev-id="ev_0afbc1a780" className="text-white/20 text-[10px] mt-1">הכותרת שתוצג בשיתוף ברשתות חברתיות. אם ריק — ישתמש בכותרת האתר.</p>
+        <p data-ev-id="ev_0afbc1a780" className="text-white/60 text-[10px] mt-1">הכותרת שתוצג בשיתוף ברשתות חברתיות. אם ריק — ישתמש בכותרת האתר.</p>
       </div>
 
       {/* OG Description */}
       <div data-ev-id="ev_09f41aaf2b">
-        <label data-ev-id="ev_44f9d69b5d" htmlFor="seo-og-desc" className="flex items-center gap-2 text-white/50 text-xs font-medium mb-1.5">
+        <label data-ev-id="ev_44f9d69b5d" htmlFor="seo-og-desc" className="flex items-center gap-2 text-white/60 text-xs font-medium mb-1.5">
           <Tag className="w-3.5 h-3.5" aria-hidden="true" />
           OG Description (תיאור שיתוף)
         </label>
@@ -91,7 +91,7 @@ export const SEOEditor = ({ config, onSaved }: SEOEditorProps) => {
 
       {/* OG Image */}
       <div data-ev-id="ev_44e59df22a">
-        <label data-ev-id="ev_cafca0abb0" htmlFor="seo-og-image" className="flex items-center gap-2 text-white/50 text-xs font-medium mb-1.5">
+        <label data-ev-id="ev_cafca0abb0" htmlFor="seo-og-image" className="flex items-center gap-2 text-white/60 text-xs font-medium mb-1.5">
           <Image className="w-3.5 h-3.5" aria-hidden="true" />
           OG Image URL (תמונת שיתוף)
         </label>
@@ -114,7 +114,7 @@ export const SEOEditor = ({ config, onSaved }: SEOEditorProps) => {
       <div data-ev-id="ev_300cf32a28" className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {/* Meta Keywords */}
         <div data-ev-id="ev_1c56fb57e7">
-          <label data-ev-id="ev_faff4ff057" htmlFor="seo-keywords" className="flex items-center gap-2 text-white/50 text-xs font-medium mb-1.5">
+          <label data-ev-id="ev_faff4ff057" htmlFor="seo-keywords" className="flex items-center gap-2 text-white/60 text-xs font-medium mb-1.5">
             <Tag className="w-3.5 h-3.5" aria-hidden="true" />
             Meta Keywords
           </label>
@@ -129,7 +129,7 @@ export const SEOEditor = ({ config, onSaved }: SEOEditorProps) => {
 
         {/* Canonical URL */}
         <div data-ev-id="ev_4552aa5f8e">
-          <label data-ev-id="ev_452e8512e9" htmlFor="seo-canonical" className="flex items-center gap-2 text-white/50 text-xs font-medium mb-1.5">
+          <label data-ev-id="ev_452e8512e9" htmlFor="seo-canonical" className="flex items-center gap-2 text-white/60 text-xs font-medium mb-1.5">
             <Link2 className="w-3.5 h-3.5" aria-hidden="true" />
             Canonical URL
           </label>

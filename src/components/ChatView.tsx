@@ -89,7 +89,7 @@ export const ChatView = ({ sections, visible }: ChatViewProps) => {
         style={{ background: '#1f2c34' }}>
 
           {/* Back arrow */}
-          <button data-ev-id="ev_70d1b7d1e3" className="text-white/50 hover:text-white/70 transition-colors p-1">
+          <button data-ev-id="ev_70d1b7d1e3" className="text-white/60 hover:text-white/70 transition-colors p-1">
             <ArrowDown className="w-5 h-5 rotate-90" />
           </button>
 
@@ -113,9 +113,9 @@ export const ChatView = ({ sections, visible }: ChatViewProps) => {
 
           {/* Action icons */}
           <div data-ev-id="ev_eef9e64f5f" className="flex items-center gap-3">
-            <Video className="w-5 h-5 text-white/40" />
-            <Phone className="w-5 h-5 text-white/40" />
-            <MoreVertical className="w-5 h-5 text-white/40" />
+            <Video className="w-5 h-5 text-white/60" />
+            <Phone className="w-5 h-5 text-white/60" />
+            <MoreVertical className="w-5 h-5 text-white/60" />
           </div>
         </div>
 
@@ -133,14 +133,14 @@ export const ChatView = ({ sections, visible }: ChatViewProps) => {
 
           {/* Date pill */}
           <div data-ev-id="ev_42143adeeb" className="flex justify-center mb-3">
-            <span data-ev-id="ev_5c39d6030e" className="text-[11px] text-white/30 bg-[#1f2c34] rounded-lg px-3 py-1 shadow-sm">
+            <span data-ev-id="ev_5c39d6030e" className="text-[11px] text-white/60 bg-[#1f2c34] rounded-lg px-3 py-1 shadow-sm">
               היום
             </span>
           </div>
 
           {/* Encryption notice */}
           <div data-ev-id="ev_2527c2f1bd" className="flex justify-center mb-3">
-            <span data-ev-id="ev_3f1066153e" className="text-[10px] text-white/15 bg-[#1a2730] rounded-lg px-3 py-1.5 text-center max-w-[260px] leading-relaxed flex items-center gap-1">
+            <span data-ev-id="ev_3f1066153e" className="text-[10px] text-white/60 bg-[#1a2730] rounded-lg px-3 py-1.5 text-center max-w-[260px] leading-relaxed flex items-center gap-1">
               🔒 הודעות ושיחות מוצפנות מקצה לקצה
             </span>
           </div>
@@ -149,7 +149,7 @@ export const ChatView = ({ sections, visible }: ChatViewProps) => {
             if (msg.type === 'system') {
               return (
                 <div data-ev-id="ev_3948948dcb" key={msg.id} className="flex justify-center my-2 animate-in fade-in duration-300">
-                  <span data-ev-id="ev_74cb85ad8e" className="text-[10px] text-white/20 bg-[#1f2c34] rounded-lg px-3 py-1">
+                  <span data-ev-id="ev_74cb85ad8e" className="text-[10px] text-white/60 bg-[#1f2c34] rounded-lg px-3 py-1">
                     {msg.text}
                   </span>
                 </div>);
@@ -164,7 +164,7 @@ export const ChatView = ({ sections, visible }: ChatViewProps) => {
                   style={{ background: '#005c4b' }}>
                     <p data-ev-id="ev_ce8a444616" className="text-[13.5px] text-white/90 leading-relaxed">{msg.text}</p>
                     <div data-ev-id="ev_60ef068429" className="flex items-center justify-end gap-1 mt-0.5 -mb-0.5">
-                      <span data-ev-id="ev_77bcb4ca36" className="text-[10px] text-white/25">{msg.time || timeStr}</span>
+                      <span data-ev-id="ev_77bcb4ca36" className="text-[10px] text-white/60">{msg.time || timeStr}</span>
                       <CheckCheck className="w-3.5 h-3.5 text-[#53bdeb]" />
                     </div>
                     {/* Tail */}
@@ -185,7 +185,7 @@ export const ChatView = ({ sections, visible }: ChatViewProps) => {
                   style={{ background: '#1f2c34' }}>
                     <p data-ev-id="ev_f62890d387" className="text-[13.5px] text-white/75 leading-relaxed">{msg.text}</p>
                     <div data-ev-id="ev_e7e7e6d8d3" className="flex items-center justify-end gap-1 mt-0.5 -mb-0.5">
-                      <span data-ev-id="ev_f84cbf9e25" className="text-[10px] text-white/20">{msg.time || timeStr}</span>
+                      <span data-ev-id="ev_f84cbf9e25" className="text-[10px] text-white/60">{msg.time || timeStr}</span>
                     </div>
                     {/* Tail */}
                     <div data-ev-id="ev_b777c2fc5e" className="absolute bottom-0 -right-2 w-0 h-0" style={{
@@ -230,15 +230,15 @@ export const ChatView = ({ sections, visible }: ChatViewProps) => {
         style={{ background: '#1f2c34' }}>
 
           {/* Emoji button */}
-          <button data-ev-id="ev_8a4a738128" className="p-1.5 text-white/30">
+          <button data-ev-id="ev_8a4a738128" className="p-1.5 text-white/60">
             <Smile className="w-5 h-5" />
           </button>
 
           {/* Text input */}
           <div data-ev-id="ev_3aeb6b5b0b"
           className="flex-1 flex items-center bg-[#2a3942] rounded-full px-4 py-2 gap-2">
-            <span data-ev-id="ev_a1d6cc26cc" className="text-white/20 text-[13px] flex-1">כתוב הודעה...</span>
-            <Paperclip className="w-4.5 h-4.5 text-white/25 rotate-45" />
+            <span data-ev-id="ev_a1d6cc26cc" className="text-white/60 text-[13px] flex-1">כתוב הודעה...</span>
+            <Paperclip className="w-4.5 h-4.5 text-white/60 rotate-45" />
           </div>
 
           {/* Voice/Send button */}
@@ -303,7 +303,7 @@ const ChatLinkBubble = ({ link, sectionEmoji, sectionTitle, time
             {/* Text */}
             <div data-ev-id="ev_3e2f255346" className="flex-1 min-w-0">
               <div data-ev-id="ev_80312261a4" className="text-white/90 text-[13px] font-semibold leading-tight">{link.title}</div>
-              <p data-ev-id="ev_dc27af6b87" className="text-white/40 text-[11.5px] mt-0.5 leading-snug line-clamp-2">{link.subtitle}</p>
+              <p data-ev-id="ev_dc27af6b87" className="text-white/60 text-[11.5px] mt-0.5 leading-snug line-clamp-2">{link.subtitle}</p>
             </div>
           </div>
 
@@ -316,7 +316,7 @@ const ChatLinkBubble = ({ link, sectionEmoji, sectionTitle, time
             </span>
 
             <div data-ev-id="ev_e893c7852f" className="flex items-center gap-1">
-              <span data-ev-id="ev_beefb70152" className="text-[10px] text-white/20">{time}</span>
+              <span data-ev-id="ev_beefb70152" className="text-[10px] text-white/60">{time}</span>
             </div>
           </div>
         </div>
@@ -325,7 +325,7 @@ const ChatLinkBubble = ({ link, sectionEmoji, sectionTitle, time
         {isActive && link.description &&
         <div data-ev-id="ev_ee4de2b3c6" className="px-3 pb-2 animate-in fade-in duration-200">
             <div data-ev-id="ev_450b08e34f" className="h-px bg-white/5 mb-1.5" />
-            <p data-ev-id="ev_02b3016925" className="text-white/35 text-[11px] leading-relaxed">{link.description}</p>
+            <p data-ev-id="ev_02b3016925" className="text-white/60 text-[11px] leading-relaxed">{link.description}</p>
             <div data-ev-id="ev_e0630ab036" className="flex items-center gap-1.5 mt-1.5">
               <span data-ev-id="ev_2efaa1467f"
             className="text-[11px] px-2.5 py-1 rounded-full transition-all duration-200 flex items-center gap-1"

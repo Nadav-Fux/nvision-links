@@ -143,7 +143,7 @@ export const AnalyticsDashboard = () => {
           className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
           range === p.key ?
           'bg-primary/20 text-primary border border-primary/30' :
-          'text-white/40 hover:text-white/60 border border-transparent'}`
+          'text-white/60 hover:text-white/60 border border-transparent'}`
           }>
 
               {p.label}
@@ -154,7 +154,7 @@ export const AnalyticsDashboard = () => {
           className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
           range === 'custom' ?
           'bg-primary/20 text-primary border border-primary/30' :
-          'text-white/40 hover:text-white/60 border border-transparent'}`
+          'text-white/60 hover:text-white/60 border border-transparent'}`
           }>
 
             <Calendar className="w-3 h-3 inline-block ml-1" aria-hidden="true" />
@@ -175,7 +175,7 @@ export const AnalyticsDashboard = () => {
             className="pr-7 pl-2 py-1.5 bg-white/[0.04] border border-white/[0.08] rounded-lg text-white/70 text-xs focus:outline-none focus-visible:ring-2 focus-visible:ring-primary [color-scheme:dark]" />
             </div>
 
-            <span data-ev-id="ev_55b347627f" className="text-white/30 text-xs">עד</span>
+            <span data-ev-id="ev_55b347627f" className="text-white/60 text-xs">עד</span>
             <div data-ev-id="ev_3f8ee2e330" className="relative">
               <Calendar className="absolute right-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/30 pointer-events-none" aria-hidden="true" />
               <input data-ev-id="ev_a2c3094194"
@@ -205,7 +205,7 @@ export const AnalyticsDashboard = () => {
           onClick={() => setChartType('area')}
           aria-label="גרף שטח"
           className={`p-1.5 rounded-md transition-all ${
-          chartType === 'area' ? 'bg-primary/20 text-primary' : 'text-white/30 hover:text-white/50'}`
+          chartType === 'area' ? 'bg-primary/20 text-primary' : 'text-white/60 hover:text-white/70'}`
           }>
 
             <TrendingUp className="w-3.5 h-3.5" />
@@ -214,7 +214,7 @@ export const AnalyticsDashboard = () => {
           onClick={() => setChartType('bar')}
           aria-label="גרף עמודות"
           className={`p-1.5 rounded-md transition-all ${
-          chartType === 'bar' ? 'bg-primary/20 text-primary' : 'text-white/30 hover:text-white/50'}`
+          chartType === 'bar' ? 'bg-primary/20 text-primary' : 'text-white/60 hover:text-white/70'}`
           }>
 
             <BarChart3 className="w-3.5 h-3.5" />
@@ -226,7 +226,7 @@ export const AnalyticsDashboard = () => {
         onClick={exportCSV}
         disabled={!data}
         aria-label="ייצוא ל-CSV"
-        className="p-1.5 rounded-lg text-white/30 hover:text-white/50 border border-white/[0.06] hover:border-white/[0.12] transition-all disabled:opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+        className="p-1.5 rounded-lg text-white/60 hover:text-white/70 border border-white/[0.06] hover:border-white/[0.12] transition-all disabled:opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
 
           <Download className="w-3.5 h-3.5" />
         </button>
@@ -236,7 +236,7 @@ export const AnalyticsDashboard = () => {
         onClick={loadData}
         disabled={loading}
         aria-label="רענן נתונים"
-        className="p-1.5 rounded-lg text-white/30 hover:text-white/50 border border-white/[0.06] hover:border-white/[0.12] transition-all disabled:opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+        className="p-1.5 rounded-lg text-white/60 hover:text-white/70 border border-white/[0.06] hover:border-white/[0.12] transition-all disabled:opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
 
           <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
         </button>
@@ -270,7 +270,7 @@ export const AnalyticsDashboard = () => {
           {/* Daily trend chart */}
           {data.daily.length > 0 &&
         <div data-ev-id="ev_9f74def91b" className="bg-white/[0.02] border border-white/[0.06] rounded-xl p-4">
-              <h3 data-ev-id="ev_d2c0d8e8e5" className="text-white/50 text-xs font-semibold mb-4 flex items-center gap-2">
+              <h3 data-ev-id="ev_d2c0d8e8e5" className="text-white/60 text-xs font-semibold mb-4 flex items-center gap-2">
                 <TrendingUp className="w-3.5 h-3.5" aria-hidden="true" />
                 מגמה יומית
               </h3>
@@ -315,21 +315,21 @@ export const AnalyticsDashboard = () => {
             {/* Top clicked links */}
             <div data-ev-id="ev_5c8018763e" className="bg-white/[0.02] border border-white/[0.06] rounded-xl p-4">
               <div data-ev-id="ev_c25f5f9481" className="flex items-center justify-between mb-4">
-                <h3 data-ev-id="ev_2c1f26f342" className="text-white/50 text-xs font-semibold flex items-center gap-2">
+                <h3 data-ev-id="ev_2c1f26f342" className="text-white/60 text-xs font-semibold flex items-center gap-2">
                   <LinkIcon className="w-3.5 h-3.5" aria-hidden="true" />
                   קישורים פופולריים
                 </h3>
                 <div data-ev-id="ev_901d11b050" className="flex items-center gap-1 bg-white/[0.03] rounded-md p-0.5">
                   <button data-ev-id="ev_4890a0fe3a"
                 onClick={() => setTopLinksView('bar')}
-                className={`p-1 rounded text-xs transition-all ${topLinksView === 'bar' ? 'bg-primary/20 text-primary' : 'text-white/30'}`}
+                className={`p-1 rounded text-xs transition-all ${topLinksView === 'bar' ? 'bg-primary/20 text-primary' : 'text-white/60'}`}
                 aria-label="תצוגת עמודות">
 
                     <BarChart3 className="w-3 h-3" />
                   </button>
                   <button data-ev-id="ev_17cbc5d0af"
                 onClick={() => setTopLinksView('pie')}
-                className={`p-1 rounded text-xs transition-all ${topLinksView === 'pie' ? 'bg-primary/20 text-primary' : 'text-white/30'}`}
+                className={`p-1 rounded text-xs transition-all ${topLinksView === 'pie' ? 'bg-primary/20 text-primary' : 'text-white/60'}`}
                 aria-label="תצוגת עוגה">
 
                     <svg data-ev-id="ev_7bbf3e32fa" className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -340,7 +340,7 @@ export const AnalyticsDashboard = () => {
                 </div>
               </div>
               {data.topLinks.length === 0 ?
-            <p data-ev-id="ev_48b8a2c40a" className="text-white/20 text-xs text-center py-8">אין נתוני קליקים עדיין</p> :
+            <p data-ev-id="ev_48b8a2c40a" className="text-white/60 text-xs text-center py-8">אין נתוני קליקים עדיין</p> :
             topLinksView === 'bar' ?
             <div data-ev-id="ev_2dd59158f1" className="space-y-2 max-h-60 overflow-y-auto scrollbar-hide">
                   {data.topLinks.slice(0, 10).map((link, i) => {
@@ -352,7 +352,7 @@ export const AnalyticsDashboard = () => {
                           <span data-ev-id="ev_1827f9cf85" className="text-white/60 text-xs truncate max-w-[70%]" title={link.name}>
                             {link.name}
                           </span>
-                          <span data-ev-id="ev_a273f9095e" className="text-white/40 text-xs font-mono">{link.count}</span>
+                          <span data-ev-id="ev_a273f9095e" className="text-white/60 text-xs font-mono">{link.count}</span>
                         </div>
                         <div data-ev-id="ev_bae9b82d01" className="h-1.5 bg-white/[0.04] rounded-full overflow-hidden">
                           <div data-ev-id="ev_4cf74c6561"
@@ -385,7 +385,7 @@ export const AnalyticsDashboard = () => {
                       <Tooltip content={<CustomTooltip />} />
                       <Legend
                     formatter={(value: string) =>
-                    <span data-ev-id="ev_442dcc29ec" className="text-white/50 text-[10px]">{value.length > 15 ? value.slice(0, 15) + '…' : value}</span>
+                    <span data-ev-id="ev_442dcc29ec" className="text-white/60 text-[10px]">{value.length > 15 ? value.slice(0, 15) + '…' : value}</span>
                     } />
 
                     </PieChart>
@@ -396,7 +396,7 @@ export const AnalyticsDashboard = () => {
 
             {/* Hourly activity heatmap */}
             <div data-ev-id="ev_7cad32ff86" className="bg-white/[0.02] border border-white/[0.06] rounded-xl p-4">
-              <h3 data-ev-id="ev_d0d28a408e" className="text-white/50 text-xs font-semibold mb-4 flex items-center gap-2">
+              <h3 data-ev-id="ev_d0d28a408e" className="text-white/60 text-xs font-semibold mb-4 flex items-center gap-2">
                 <Clock className="w-3.5 h-3.5" aria-hidden="true" />
                 פעילות לפי שעה
               </h3>
@@ -405,7 +405,7 @@ export const AnalyticsDashboard = () => {
               {/* Top views */}
               {data.topViews.length > 0 &&
             <div data-ev-id="ev_2019ee7d8e" className="mt-5 pt-4 border-t border-white/[0.06]">
-                  <h4 data-ev-id="ev_a3c8fd8563" className="text-white/40 text-xs font-semibold mb-3 flex items-center gap-2">
+                  <h4 data-ev-id="ev_a3c8fd8563" className="text-white/60 text-xs font-semibold mb-3 flex items-center gap-2">
                     <Monitor className="w-3.5 h-3.5" aria-hidden="true" />
                     תצוגות פופולריות
                   </h4>
@@ -416,8 +416,8 @@ export const AnalyticsDashboard = () => {
                 className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs border border-white/[0.08] bg-white/[0.02]">
 
                         <span data-ev-id="ev_31e4045d72" className="w-2 h-2 rounded-full" style={{ backgroundColor: COLORS[i % COLORS.length] }} />
-                        <span data-ev-id="ev_f3f8cd4326" className="text-white/50">{v.name}</span>
-                        <span data-ev-id="ev_89559bba2d" className="text-white/30 font-mono">{v.count}</span>
+                        <span data-ev-id="ev_f3f8cd4326" className="text-white/60">{v.name}</span>
+                        <span data-ev-id="ev_89559bba2d" className="text-white/60 font-mono">{v.count}</span>
                       </span>
                 )}
                   </div>
@@ -430,7 +430,7 @@ export const AnalyticsDashboard = () => {
 
       {/* Empty state */}
       {!loading && !error && !data &&
-      <div data-ev-id="ev_af42df7436" className="flex flex-col items-center justify-center py-12 text-white/20">
+      <div data-ev-id="ev_af42df7436" className="flex flex-col items-center justify-center py-12 text-white/60">
           <BarChart3 className="w-10 h-10 mb-3" />
           <p data-ev-id="ev_9c09296ad7" className="text-sm">בחר טווח זמן כדי לצפות בנתונים</p>
         </div>
@@ -456,7 +456,7 @@ function SummaryCard({
     <div data-ev-id="ev_a406346087" className="bg-white/[0.02] border border-white/[0.06] rounded-xl p-3 sm:p-4">
       <div data-ev-id="ev_b4f729e24a" className="flex items-center gap-2 mb-2">
         <Icon className={`w-4 h-4 ${color}`} aria-hidden="true" />
-        <span data-ev-id="ev_ca4f9b9fcf" className="text-white/40 text-xs">{label}</span>
+        <span data-ev-id="ev_ca4f9b9fcf" className="text-white/60 text-xs">{label}</span>
       </div>
       <p data-ev-id="ev_b12a860aac" className={`text-xl sm:text-2xl font-bold ${color}`}>
         {formatNumber(value)}
@@ -485,7 +485,7 @@ function HourlyHeatmap({ data }: {data: number[];}) {
             title={`${hour}:00 — ${count} אירועים`}
             aria-label={`שעה ${hour}: ${count} אירועים`}>
 
-              <span data-ev-id="ev_30d6935117" className={`${intensity > 0.4 ? 'text-white/80' : 'text-white/25'}`}>
+              <span data-ev-id="ev_30d6935117" className={`${intensity > 0.4 ? 'text-white/80' : 'text-white/60'}`}>
                 {hour}
               </span>
             </div>);
@@ -493,7 +493,7 @@ function HourlyHeatmap({ data }: {data: number[];}) {
         })}
       </div>
       {/* Legend row */}
-      <div data-ev-id="ev_b7996db820" className="flex items-center justify-between text-[9px] text-white/20 px-0.5">
+      <div data-ev-id="ev_b7996db820" className="flex items-center justify-between text-[9px] text-white/60 px-0.5">
         <span data-ev-id="ev_d0aafa0e9b">00:00</span>
         <div data-ev-id="ev_c23e01e18e" className="flex items-center gap-1">
           <span data-ev-id="ev_fe7b2b422b">פחות</span>

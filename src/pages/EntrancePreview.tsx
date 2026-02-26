@@ -190,12 +190,12 @@ const EntrancePreview = () => {
               </div>
               <div data-ev-id="ev_854b6c4104">
                 <h1 data-ev-id="ev_9561a20ea4" className="text-lg font-bold">אנימציות כניסה (Splash)</h1>
-                <p data-ev-id="ev_d443de577c" className="text-xs text-white/30">{ANIMS.length} ווריאציות · לחץ על ★ לסימון</p>
+                <p data-ev-id="ev_d443de577c" className="text-xs text-white/60">{ANIMS.length} ווריאציות · לחץ על ★ לסימון</p>
               </div>
             </div>
           </div>
           <div data-ev-id="ev_3b05a20a5c" className="flex items-center gap-2">
-            <Link to="/" className="px-2.5 py-1 text-[11px] text-white/40 hover:text-white/70 border border-white/5 rounded-md hover:border-white/15 transition-colors">🏠 בית</Link>
+            <Link to="/" className="px-2.5 py-1 text-[11px] text-white/60 hover:text-white/70 border border-white/5 rounded-md hover:border-white/15 transition-colors">🏠 בית</Link>
             <Link to="/font-preview" className="px-2.5 py-1 text-[11px] text-cyan-400/60 hover:text-cyan-300 border border-cyan-500/10 hover:border-cyan-500/25 rounded-md transition-colors">🎨 טיפוגרפיה</Link>
             <Link to="/animation-preview" className="px-2.5 py-1 text-[11px] text-purple-400/60 hover:text-purple-300 border border-purple-500/10 hover:border-purple-500/25 rounded-md transition-colors">🎬 אנימציות לוגו</Link>
           </div>
@@ -212,7 +212,7 @@ const EntrancePreview = () => {
           f.value === 'new' ?
           'bg-emerald-500/15 border-emerald-500/30 text-emerald-300' :
           'bg-cyan-500/15 border-cyan-500/30 text-cyan-300' :
-          'border-white/5 text-white/30 hover:text-white/60 hover:border-white/15'}`
+          'border-white/5 text-white/60 hover:text-white/60 hover:border-white/15'}`
           }>
 
               {f.label}
@@ -253,14 +253,14 @@ const EntrancePreview = () => {
                       className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${
                       isFav ?
                       'bg-amber-500/20 border border-amber-500/30 text-amber-400' :
-                      'bg-white/5 border border-white/10 text-white/30 hover:text-amber-400 hover:border-amber-500/20'}`
+                      'bg-white/5 border border-white/10 text-white/60 hover:text-amber-400 hover:border-amber-500/20'}`
                       }>
 
                         {isFav ? <Star className="w-3.5 h-3.5 fill-current" /> : <StarOff className="w-3.5 h-3.5" />}
                       </button>
                       <button data-ev-id="ev_82b69f63cc"
                       onClick={() => setFullscreen(anim.id)}
-                      className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/30 hover:text-white/70 hover:border-white/20 transition-all">
+                      className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-white/70 hover:border-white/20 transition-all">
 
                         <Maximize2 className="w-3.5 h-3.5" />
                       </button>
@@ -278,11 +278,11 @@ const EntrancePreview = () => {
                   <div data-ev-id="ev_952783219e" className="p-4 space-y-2">
                     <div data-ev-id="ev_57717b3fa7" className="flex items-center justify-between">
                       <h3 data-ev-id="ev_38e163d7fa" className="font-bold text-white/90">{anim.nameHe}</h3>
-                      <span data-ev-id="ev_40290bcf77" className="text-[10px] text-white/20 font-mono">{anim.name}</span>
+                      <span data-ev-id="ev_40290bcf77" className="text-[10px] text-white/60 font-mono">{anim.name}</span>
                     </div>
-                    <p data-ev-id="ev_4a54b90fc6" className="text-xs text-white/40 leading-relaxed">{anim.desc}</p>
+                    <p data-ev-id="ev_4a54b90fc6" className="text-xs text-white/60 leading-relaxed">{anim.desc}</p>
                     <div data-ev-id="ev_796515e286" className="flex items-center gap-2">
-                      <span data-ev-id="ev_32b4a86390" className="text-[10px] px-2 py-0.5 rounded-full bg-white/5 text-white/30">{anim.vibe}</span>
+                      <span data-ev-id="ev_32b4a86390" className="text-[10px] px-2 py-0.5 rounded-full bg-white/5 text-white/60">{anim.vibe}</span>
                     </div>
                   </div>
                 </div>
@@ -293,8 +293,8 @@ const EntrancePreview = () => {
 
         {filtered.length === 0 &&
         <div data-ev-id="ev_66524f0d29" className="text-center py-20">
-            <Eye className="w-8 h-8 text-white/10 mx-auto mb-3" />
-            <p data-ev-id="ev_0dc4a467e3" className="text-sm text-white/20">אין אנימציות מתאימות לפילטר הזה</p>
+            <Eye className="w-8 h-8 text-white/60 mx-auto mb-3" />
+            <p data-ev-id="ev_0dc4a467e3" className="text-sm text-white/60">אין אנימציות מתאימות לפילטר הזה</p>
           </div>
         }
       </div>
@@ -310,11 +310,11 @@ const EntrancePreview = () => {
                   {fullAnim.nameHe}
                   {fullAnim.isNew && <span data-ev-id="ev_2431f0f4e8" className="text-emerald-400 text-xs mr-2">✨ חדש</span>}
                 </h2>
-                <p data-ev-id="ev_7c4c5afd14" className="text-xs text-white/30">{fullAnim.name} · {fullAnim.vibe}</p>
+                <p data-ev-id="ev_7c4c5afd14" className="text-xs text-white/60">{fullAnim.name} · {fullAnim.vibe}</p>
               </div>
               <button data-ev-id="ev_042a0746a9"
               onClick={() => setFullscreen(null)}
-              className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/40 hover:text-white/80 transition-colors">
+              className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-white/80 transition-colors">
 
                 <X className="w-5 h-5" />
               </button>

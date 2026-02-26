@@ -323,7 +323,7 @@ export const MetroMapView = ({ sections, visible }: MetroMapViewProps) => {
               nVISION METRO
             </span>
           </div>
-          <div data-ev-id="ev_cb32262fc6" className="flex items-center gap-2 text-[10px] font-mono text-white/30">
+          <div data-ev-id="ev_cb32262fc6" className="flex items-center gap-2 text-[10px] font-mono text-white/60">
             <MapPin className="w-3 h-3" />
             <span data-ev-id="ev_11aa2c034c">{sections.reduce((a, s) => a + s.links.length, 0)} תחנות • {sections.length} קווים</span>
           </div>
@@ -336,7 +336,7 @@ export const MetroMapView = ({ sections, visible }: MetroMapViewProps) => {
           className={`px-3 py-1 rounded text-[11px] font-mono transition-colors flex-shrink-0 ${
           activeLine === null ?
           'bg-white/10 text-white border border-white/20' :
-          'text-white/30 hover:text-white/60 border border-transparent'}`
+          'text-white/60 hover:text-white/60 border border-transparent'}`
           }>
 
             כל הקווים
@@ -348,7 +348,7 @@ export const MetroMapView = ({ sections, visible }: MetroMapViewProps) => {
           className={`px-3 py-1 rounded text-[11px] font-mono transition-colors flex-shrink-0 flex items-center gap-1.5 ${
           activeLine === sIdx ?
           'text-white border' :
-          'text-white/35 hover:text-white/60 border border-transparent'}`
+          'text-white/60 hover:text-white/60 border border-transparent'}`
           }
           style={{
             borderColor: activeLine === sIdx ? LINE_COLORS[sIdx % LINE_COLORS.length] + '60' : undefined,
@@ -395,7 +395,7 @@ export const MetroMapView = ({ sections, visible }: MetroMapViewProps) => {
                     <AnimatedIcon icon={hoveredStation.link.icon} animation={hoveredStation.link.animation} color={hoveredStation.link.color} size={14} />
                     <span data-ev-id="ev_01009e193c" className="text-white font-semibold text-[11px]">{hoveredStation.link.title}</span>
                   </div>
-                  <p data-ev-id="ev_0b63f8d6e2" className="text-white/45 text-[10px] leading-relaxed mb-1.5">{hoveredStation.link.subtitle}</p>
+                  <p data-ev-id="ev_0b63f8d6e2" className="text-white/60 text-[10px] leading-relaxed mb-1.5">{hoveredStation.link.subtitle}</p>
                   <div data-ev-id="ev_a9f1622a6c" className="flex items-center gap-2">
                     <span data-ev-id="ev_49bf1d8757"
                   className="text-[9px] font-mono px-1.5 py-0.5 rounded flex items-center gap-1"
@@ -407,7 +407,7 @@ export const MetroMapView = ({ sections, visible }: MetroMapViewProps) => {
                       <span data-ev-id="ev_ee7376df35" className="w-2 h-1 rounded-full" style={{ backgroundColor: LINE_COLORS[hoveredStation.sectionIdx % LINE_COLORS.length] }} />
                       {LINE_NAMES[hoveredStation.sectionIdx % LINE_NAMES.length]}
                     </span>
-                    <span data-ev-id="ev_a09bde8e9d" className="text-white/25 text-[9px] flex items-center gap-0.5 mr-auto">
+                    <span data-ev-id="ev_a09bde8e9d" className="text-white/60 text-[9px] flex items-center gap-0.5 mr-auto">
                       <ExternalLink className="w-2.5 h-2.5" />
                       לחץ לפתיחה
                     </span>
@@ -419,7 +419,7 @@ export const MetroMapView = ({ sections, visible }: MetroMapViewProps) => {
             {/* Legend */}
             <div data-ev-id="ev_73da579813" className="absolute bottom-5 left-5 flex flex-col gap-1">
               {sections.map((section, sIdx) =>
-              <div data-ev-id="ev_a94168f162" key={section.id} className="flex items-center gap-1.5 text-[9px] text-white/30 font-mono">
+              <div data-ev-id="ev_a94168f162" key={section.id} className="flex items-center gap-1.5 text-[9px] text-white/60 font-mono">
                   <span data-ev-id="ev_d0667a9520" className="w-4 h-1.5 rounded-full" style={{ backgroundColor: LINE_COLORS[sIdx % LINE_COLORS.length] }} />
                   {section.title} ({section.links.length})
                 </div>
@@ -430,7 +430,7 @@ export const MetroMapView = ({ sections, visible }: MetroMapViewProps) => {
           {/* Side panel: Station list */}
           <div data-ev-id="ev_8db9726899" className="lg:w-64 border-t lg:border-t-0 lg:border-l border-white/[0.04] max-h-[400px] lg:max-h-[540px] overflow-y-auto scrollbar-hide">
             <div data-ev-id="ev_1f114a65f3" className="px-3 py-2 border-b border-white/[0.04] sticky top-0 z-10" style={{ background: 'rgba(13,17,23,0.98)' }}>
-              <span data-ev-id="ev_9ec2864c7b" className="text-white/40 text-[10px] font-mono tracking-widest">
+              <span data-ev-id="ev_9ec2864c7b" className="text-white/60 text-[10px] font-mono tracking-widest">
                 ■ תחנות ({activeLine !== null ? sections[activeLine]?.links.length : sections.reduce((a, s) => a + s.links.length, 0)})
               </span>
             </div>
@@ -441,10 +441,10 @@ export const MetroMapView = ({ sections, visible }: MetroMapViewProps) => {
                 <div data-ev-id="ev_a2e58a0825" key={section.id}>
                   <div data-ev-id="ev_96e9405fc0" className="px-3 py-1.5 flex items-center gap-2 border-b border-white/[0.02]" style={{ background: color + '08' }}>
                     <span data-ev-id="ev_27a76542d3" className="w-3 h-1.5 rounded-full" style={{ backgroundColor: color }} />
-                    <span data-ev-id="ev_b33d43d677" className="text-[10px] font-mono font-bold text-white/50 tracking-wide">
+                    <span data-ev-id="ev_b33d43d677" className="text-[10px] font-mono font-bold text-white/60 tracking-wide">
                       {section.emoji} {section.title}
                     </span>
-                    <span data-ev-id="ev_3a6a2ebc0f" className="text-[9px] font-mono text-white/20 mr-auto">
+                    <span data-ev-id="ev_3a6a2ebc0f" className="text-[9px] font-mono text-white/60 mr-auto">
                       [{section.links.length}]
                     </span>
                   </div>
@@ -474,9 +474,9 @@ export const MetroMapView = ({ sections, visible }: MetroMapViewProps) => {
                         <div data-ev-id="ev_4c9f38001e" className="text-white/65 text-[11px] font-mono truncate group-hover:text-white/90 transition-colors">
                           {link.title}
                         </div>
-                        <div data-ev-id="ev_05a0e17514" className="text-white/25 text-[9px] font-mono truncate">{link.subtitle}</div>
+                        <div data-ev-id="ev_05a0e17514" className="text-white/60 text-[9px] font-mono truncate">{link.subtitle}</div>
                       </div>
-                      <ExternalLink className="w-3 h-3 text-white/10 group-hover:text-white/30 transition-colors flex-shrink-0" />
+                      <ExternalLink className="w-3 h-3 text-white/60 group-hover:text-white/70 transition-colors flex-shrink-0" />
                     </a>
                   )}
                 </div>);
@@ -486,7 +486,7 @@ export const MetroMapView = ({ sections, visible }: MetroMapViewProps) => {
         </div>
 
         {/* Footer */}
-        <div data-ev-id="ev_653a378c86" className="flex items-center justify-between px-4 py-2 border-t border-white/[0.04] text-[9px] font-mono text-white/20">
+        <div data-ev-id="ev_653a378c86" className="flex items-center justify-between px-4 py-2 border-t border-white/[0.04] text-[9px] font-mono text-white/60">
           <span data-ev-id="ev_ced6f07184" className="flex items-center gap-1"><Train className="w-3 h-3" /> nVision Metro Authority</span>
           <span data-ev-id="ev_215701858a">{sections.length} lines • {sections.reduce((a, s) => a + s.links.length, 0)} stations</span>
         </div>

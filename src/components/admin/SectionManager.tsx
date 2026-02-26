@@ -80,12 +80,12 @@ const SortableLinkItem = ({
 
       {bulkMode ?
       <button data-ev-id="ev_e06f681d1e" onClick={onToggleSelect} aria-label={isSelected ? 'בטל בחירה' : 'בחר'}
-      className="p-0.5 text-white/30 hover:text-primary transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
+      className="p-0.5 text-white/60 hover:text-primary transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
           {isSelected ? <CheckSquare className="w-4 h-4 text-primary" /> : <Square className="w-4 h-4" />}
         </button> :
 
       <button data-ev-id="ev_7ea9a0ce79"
-      className="touch-none cursor-grab active:cursor-grabbing p-0.5 text-white/15 hover:text-white/40 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
+      className="touch-none cursor-grab active:cursor-grabbing p-0.5 text-white/60 hover:text-white/70 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
       aria-label={`גרור לסידור: ${link.title}`}
       {...attributes}
       {...listeners}>
@@ -101,7 +101,7 @@ const SortableLinkItem = ({
       </div>
       <div data-ev-id="ev_a625da1f4a" className="flex-1 min-w-0">
         <div data-ev-id="ev_8d98cdeccb" className="text-white/80 text-sm font-medium truncate">{link.title}</div>
-        {link.subtitle && <div data-ev-id="ev_e82f462314" className="text-white/30 text-xs truncate">{link.subtitle}</div>}
+        {link.subtitle && <div data-ev-id="ev_e82f462314" className="text-white/60 text-xs truncate">{link.subtitle}</div>}
       </div>
       {/* Click count badge */}
       {clickCount !== undefined && clickCount > 0 &&
@@ -110,18 +110,18 @@ const SortableLinkItem = ({
           {clickCount}
         </span>
       }
-      {!link.is_visible && <EyeOff className="w-3 h-3 text-white/15 flex-shrink-0" aria-label="מוסתר" />}
+      {!link.is_visible && <EyeOff className="w-3 h-3 text-white/60 flex-shrink-0" aria-label="מוסתר" />}
       <div data-ev-id="ev_a67fcbbaac" className="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity">
         {onDuplicate &&
         <button data-ev-id="ev_a20ab405b8" onClick={onDuplicate} aria-label={`שכפל: ${link.title}`}
-        className="p-1.5 text-white/20 hover:text-white/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
+        className="p-1.5 text-white/60 hover:text-white/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
             <Copy className="w-3 h-3" aria-hidden="true" />
           </button>
         }
         <button data-ev-id="ev_a804e6f89f"
         onClick={onEdit}
         aria-label={`ערוך: ${link.title}`}
-        className="p-1.5 text-white/20 hover:text-white/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
+        className="p-1.5 text-white/60 hover:text-white/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
 
           <Edit2 className="w-3 h-3" aria-hidden="true" />
         </button>
@@ -323,10 +323,10 @@ export const SectionManager = ({
           id="link-search" type="search" value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="חיפוש קישורים..."
-          className="w-full pr-10 pl-4 py-2.5 bg-white/[0.04] border border-white/[0.08] rounded-xl text-white/80 text-sm placeholder:text-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus:border-primary/40 focus:bg-white/[0.06] transition-all" />
+          className="w-full pr-10 pl-4 py-2.5 bg-white/[0.04] border border-white/[0.08] rounded-xl text-white/80 text-sm placeholder:text-white/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus:border-primary/40 focus:bg-white/[0.06] transition-all" />
 
           {isSearching &&
-          <button data-ev-id="ev_2799f9290c" onClick={() => setSearchQuery('')} aria-label="נקה חיפוש" className="absolute left-3 top-1/2 -translate-y-1/2 p-1 text-white/25 hover:text-white/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
+          <button data-ev-id="ev_2799f9290c" onClick={() => setSearchQuery('')} aria-label="נקה חיפוש" className="absolute left-3 top-1/2 -translate-y-1/2 p-1 text-white/60 hover:text-white/70 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
               <X className="w-3.5 h-3.5" />
             </button>
           }
@@ -336,7 +336,7 @@ export const SectionManager = ({
         <button data-ev-id="ev_01806c999a" onClick={bulkMode ? exitBulkMode : () => setBulkMode(true)}
         aria-label={bulkMode ? 'צא ממצב בחירה' : 'בחירה מרובה'}
         className={`flex items-center gap-1.5 px-3 py-2.5 rounded-xl border text-xs transition-all flex-shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
-        bulkMode ? 'bg-primary/10 border-primary/30 text-primary' : 'bg-white/[0.04] border-white/[0.08] text-white/35 hover:text-white/60'}`
+        bulkMode ? 'bg-primary/10 border-primary/30 text-primary' : 'bg-white/[0.04] border-white/[0.08] text-white/60 hover:text-white/60'}`
         }>
 
             <CheckSquare className="w-3.5 h-3.5" aria-hidden="true" />
@@ -345,7 +345,7 @@ export const SectionManager = ({
         }
         {sections.length > 1 && !isSearching &&
         <button data-ev-id="ev_2f0cffb3b9" onClick={toggleExpandAll} aria-label={allExpanded ? 'כווץ הכל' : 'הרחב הכל'}
-        className="flex items-center gap-1.5 px-3 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white/35 hover:text-white/60 text-xs transition-all flex-shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+        className="flex items-center gap-1.5 px-3 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white/60 hover:text-white/60 text-xs transition-all flex-shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
             <ChevronsUpDown className="w-3.5 h-3.5" aria-hidden="true" />
             <span data-ev-id="ev_192562ba0b" className="hidden sm:inline">{allExpanded ? 'כווץ' : 'הרחב'}</span>
           </button>
@@ -358,11 +358,11 @@ export const SectionManager = ({
           <span data-ev-id="ev_15ac1af2b8" className="text-primary text-xs font-medium">{selectedLinks.size} נבחרו</span>
           <div data-ev-id="ev_154afe5311" className="flex-1" />
           <button data-ev-id="ev_a86d910108" onClick={() => handleBulkToggle(false)} disabled={actionLoading === 'bulk-toggle'}
-        className="px-3 py-1.5 rounded-lg text-xs text-white/50 hover:text-white/70 border border-white/[0.08] hover:border-white/[0.15] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+        className="px-3 py-1.5 rounded-lg text-xs text-white/60 hover:text-white/70 border border-white/[0.08] hover:border-white/[0.15] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
             <EyeOff className="w-3 h-3 inline ml-1" aria-hidden="true" />הסתר
           </button>
           <button data-ev-id="ev_2f492eb23a" onClick={() => handleBulkToggle(true)} disabled={actionLoading === 'bulk-toggle'}
-        className="px-3 py-1.5 rounded-lg text-xs text-white/50 hover:text-white/70 border border-white/[0.08] hover:border-white/[0.15] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+        className="px-3 py-1.5 rounded-lg text-xs text-white/60 hover:text-white/70 border border-white/[0.08] hover:border-white/[0.15] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
             <Eye className="w-3 h-3 inline ml-1" aria-hidden="true" />הצג
           </button>
           <button data-ev-id="ev_b3f6bc7091" onClick={handleBulkDelete} disabled={actionLoading === 'bulk-delete'}
@@ -379,8 +379,8 @@ export const SectionManager = ({
           <div data-ev-id="ev_4ce3618918" className="w-14 h-14 rounded-2xl bg-primary/5 border border-primary/10 flex items-center justify-center">
             <Plus className="w-6 h-6 text-primary/40" aria-hidden="true" />
           </div>
-          <p data-ev-id="ev_e5e3015c9e" className="text-white/40 text-sm">אין סקציות עדיין</p>
-          <p data-ev-id="ev_539aa4d2f8" className="text-white/20 text-xs max-w-[250px]">צור את הסקציה הראשונה שלך כדי להתחיל להוסיף קישורים</p>
+          <p data-ev-id="ev_e5e3015c9e" className="text-white/60 text-sm">אין סקציות עדיין</p>
+          <p data-ev-id="ev_539aa4d2f8" className="text-white/60 text-xs max-w-[250px]">צור את הסקציה הראשונה שלך כדי להתחיל להוסיף קישורים</p>
         </div>
       }
 
@@ -388,7 +388,7 @@ export const SectionManager = ({
       {isSearching && sections.length > 0 && sections.every((s) => filteredSectionLinks(s.id).length === 0) &&
       <div data-ev-id="ev_d2e50660f4" className="flex flex-col items-center justify-center py-8 gap-2 text-center">
           <Search className="w-6 h-6 text-white/15" aria-hidden="true" />
-          <p data-ev-id="ev_9dd47e02dc" className="text-white/35 text-sm">לא נמצאו קישורים עבור "{searchQuery}"</p>
+          <p data-ev-id="ev_9dd47e02dc" className="text-white/60 text-sm">לא נמצאו קישורים עבור "{searchQuery}"</p>
         </div>
       }
 
@@ -463,14 +463,14 @@ export const SectionManager = ({
           className="px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors disabled:opacity-40 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
               {actionLoading === 'new-section' ? <Loader2 className="w-4 h-4 animate-spin" /> : 'צור'}
             </button>
-            <button data-ev-id="ev_47718acfaa" onClick={() => {setNewSection(false);setSectionTitle('');}} aria-label="ביטול" className="p-2 text-white/30 hover:text-white/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
+            <button data-ev-id="ev_47718acfaa" onClick={() => {setNewSection(false);setSectionTitle('');}} aria-label="ביטול" className="p-2 text-white/60 hover:text-white/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
               <X className="w-4 h-4" />
             </button>
           </div>
         </div> :
 
       <button data-ev-id="ev_0ff91a18a5" onClick={() => setNewSection(true)} aria-label="הוסף סקציה חדשה"
-      className="w-full flex items-center justify-center gap-2 py-3 rounded-xl border border-dashed border-white/[0.1] text-white/40 hover:text-white/60 hover:border-white/[0.2] text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+      className="w-full flex items-center justify-center gap-2 py-3 rounded-xl border border-dashed border-white/[0.1] text-white/60 hover:text-white/60 hover:border-white/[0.2] text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
           <Plus className="w-4 h-4" /> הוסף סקציה
         </button>
       }
@@ -530,7 +530,7 @@ const SortableSectionCard = (props: SortableSectionCardProps) => {
       {/* Section header */}
       <div data-ev-id="ev_b6e2c665dc" className="flex items-center gap-2 px-4 py-3">
         <button data-ev-id="ev_bf96520d01"
-        className="touch-none cursor-grab active:cursor-grabbing p-0.5 text-white/15 hover:text-white/35 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
+        className="touch-none cursor-grab active:cursor-grabbing p-0.5 text-white/60 hover:text-white/70 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
         aria-label={`גרור לסידור: ${section.title}`}
         {...attributes} {...listeners}>
 
@@ -547,7 +547,7 @@ const SortableSectionCard = (props: SortableSectionCardProps) => {
           className="p-1.5 rounded-lg bg-primary/20 text-primary hover:bg-primary/30 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
               {actionLoading === `edit-${section.id}` ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Save className="w-3.5 h-3.5" />}
             </button>
-            <button data-ev-id="ev_51002907b0" onClick={onCancelEdit} aria-label="ביטול" className="p-1.5 rounded-lg text-white/30 hover:text-white/60 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+            <button data-ev-id="ev_51002907b0" onClick={onCancelEdit} aria-label="ביטול" className="p-1.5 rounded-lg text-white/60 hover:text-white/60 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
               <X className="w-3.5 h-3.5" />
             </button>
           </div> :
@@ -557,10 +557,10 @@ const SortableSectionCard = (props: SortableSectionCardProps) => {
           className="flex-1 flex items-center gap-2 text-right focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg">
               <span data-ev-id="ev_4560251b43" className="text-lg" aria-hidden="true">{section.emoji}</span>
               <span data-ev-id="ev_a26d160601" className="text-white/90 font-medium text-sm">{section.title}</span>
-              <span data-ev-id="ev_ac3139da31" className="text-white/30 text-xs">
+              <span data-ev-id="ev_ac3139da31" className="text-white/60 text-xs">
                 ({isSearching ? `${visibleLinks.length}/${totalLinksCount}` : totalLinksCount})
               </span>
-              {!section.is_visible && <EyeOff className="w-3 h-3 text-white/20" aria-label="מוסתר" />}
+              {!section.is_visible && <EyeOff className="w-3 h-3 text-white/60" aria-label="מוסתר" />}
             </button>
             <div data-ev-id="ev_cfa37cd376" className="flex items-center gap-1" role="toolbar" aria-label={`פעולות סקציה: ${section.title}`}>
               {bulkMode &&
@@ -570,27 +570,27 @@ const SortableSectionCard = (props: SortableSectionCardProps) => {
                 </button>
             }
               {idx > 0 &&
-            <button data-ev-id="ev_ebedad685d" onClick={onMoveUp} aria-label={`הזז למעלה: ${section.title}`} className="p-1.5 text-white/20 hover:text-white/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
+            <button data-ev-id="ev_ebedad685d" onClick={onMoveUp} aria-label={`הזז למעלה: ${section.title}`} className="p-1.5 text-white/60 hover:text-white/70 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
                   <ChevronUp className="w-3.5 h-3.5" />
                 </button>
             }
               {idx < totalSections - 1 &&
-            <button data-ev-id="ev_a4fbaeb7d0" onClick={onMoveDown} aria-label={`הזז למטה: ${section.title}`} className="p-1.5 text-white/20 hover:text-white/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
+            <button data-ev-id="ev_a4fbaeb7d0" onClick={onMoveDown} aria-label={`הזז למטה: ${section.title}`} className="p-1.5 text-white/60 hover:text-white/70 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
                   <ChevronDown className="w-3.5 h-3.5" />
                 </button>
             }
               <button data-ev-id="ev_a770764c4e" onClick={onToggleVisibility} aria-label={section.is_visible ? `הסתר: ${section.title}` : `הצג: ${section.title}`}
-            className="p-1.5 text-white/20 hover:text-white/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
+            className="p-1.5 text-white/60 hover:text-white/70 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
                 {section.is_visible ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
               </button>
               {onDuplicateSection &&
             <button data-ev-id="ev_ebcc53719b" onClick={onDuplicateSection} aria-label={`שכפל: ${section.title}`}
-            className="p-1.5 text-white/20 hover:text-white/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
+            className="p-1.5 text-white/60 hover:text-white/70 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
                   <Copy className="w-3.5 h-3.5" />
                 </button>
             }
               <button data-ev-id="ev_65114438d8" onClick={onStartEdit} aria-label={`ערוך: ${section.title}`}
-            className="p-1.5 text-white/20 hover:text-white/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
+            className="p-1.5 text-white/60 hover:text-white/70 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
                 <Edit2 className="w-3.5 h-3.5" />
               </button>
               <button data-ev-id="ev_eb0df7acd7" onClick={onDelete} aria-label={`מחק: ${section.title}`}
@@ -627,7 +627,7 @@ const SortableSectionCard = (props: SortableSectionCardProps) => {
 
           {visibleLinks.length === 0 && addingLinkTo !== section.id &&
         <div data-ev-id="ev_1d1e0ad0a6" className="flex items-center justify-center py-6 gap-2 text-center">
-              <span data-ev-id="ev_f2b7aa5415" className="text-white/15 text-xs">אין קישורים בסקציה הזו</span>
+              <span data-ev-id="ev_f2b7aa5415" className="text-white/60 text-xs">אין קישורים בסקציה הזו</span>
             </div>
         }
 
@@ -635,7 +635,7 @@ const SortableSectionCard = (props: SortableSectionCardProps) => {
         <LinkEditor sectionId={section.id} onSave={onSaveLink} onCancel={onCancelLinkEdit} /> :
 
         <button data-ev-id="ev_d59c1f86e3" onClick={onAddLink} aria-label={`הוסף קישור ל: ${section.title}`}
-        className="w-full flex items-center justify-center gap-1.5 py-2 rounded-lg border border-dashed border-white/[0.08] text-white/30 hover:text-white/50 hover:border-white/[0.15] text-xs transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+        className="w-full flex items-center justify-center gap-1.5 py-2 rounded-lg border border-dashed border-white/[0.08] text-white/60 hover:text-white/70 hover:border-white/[0.15] text-xs transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
               <Plus className="w-3.5 h-3.5" /> הוסף קישור
             </button>
         }

@@ -127,12 +127,12 @@ export const AIPlaygroundView = ({ sections, visible }: AIPlaygroundViewProps) =
             <div data-ev-id="ev_9fbafbfbf3" className="px-4 py-3 border-b border-white/[0.06] flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-emerald-400" />
               <span data-ev-id="ev_b641dd5c17" className="text-white/80 text-sm font-bold">nVision AI</span>
-              <span data-ev-id="ev_c4e6b8f4b5" className="text-white/20 text-[9px] font-mono mr-auto">playground</span>
+              <span data-ev-id="ev_c4e6b8f4b5" className="text-white/60 text-[9px] font-mono mr-auto">playground</span>
             </div>
 
             {/* Model selector */}
             <div data-ev-id="ev_93748b5973" className="px-3 py-2 border-b border-white/[0.04]">
-              <span data-ev-id="ev_ea2ac51795" className="text-white/30 text-[9px] font-mono tracking-wider">מודל</span>
+              <span data-ev-id="ev_ea2ac51795" className="text-white/60 text-[9px] font-mono tracking-wider">מודל</span>
             </div>
             <div data-ev-id="ev_5021a6bd91" className="flex-1 overflow-y-auto scrollbar-hide">
               {sections.map((section, sIdx) => {
@@ -155,11 +155,11 @@ export const AIPlaygroundView = ({ sections, visible }: AIPlaygroundViewProps) =
                     </div>
                     <div data-ev-id="ev_95f3406aae" className="flex-1 min-w-0">
                       <div data-ev-id="ev_431f23b524" className={`text-[11px] font-medium truncate ${
-                      activeModel === sIdx ? 'text-white/80' : 'text-white/45'}`
+                      activeModel === sIdx ? 'text-white/80' : 'text-white/60'}`
                       }>
                         {section.title}
                       </div>
-                      <div data-ev-id="ev_e847b205ec" className="text-white/20 text-[9px] font-mono">
+                      <div data-ev-id="ev_e847b205ec" className="text-white/60 text-[9px] font-mono">
                         {section.links.length} endpoints
                       </div>
                     </div>
@@ -175,7 +175,7 @@ export const AIPlaygroundView = ({ sections, visible }: AIPlaygroundViewProps) =
             <div data-ev-id="ev_79ded46644" className="border-t border-white/[0.06]">
               <button data-ev-id="ev_efc97eef4d"
               onClick={() => setShowSettings(!showSettings)}
-              className="w-full flex items-center gap-2 px-3 py-2 text-white/30 hover:text-white/50 transition-colors">
+              className="w-full flex items-center gap-2 px-3 py-2 text-white/60 hover:text-white/70 transition-colors">
 
                 <Settings2 className="w-3.5 h-3.5" />
                 <span data-ev-id="ev_fdf9385e1e" className="text-[10px] font-mono">הגדרות</span>
@@ -186,10 +186,10 @@ export const AIPlaygroundView = ({ sections, visible }: AIPlaygroundViewProps) =
                   {/* Temperature */}
                   <div data-ev-id="ev_b3fba08cd6">
                     <div data-ev-id="ev_07ae8a63dd" className="flex items-center justify-between mb-1">
-                      <span data-ev-id="ev_baef38c660" className="text-white/30 text-[9px] font-mono flex items-center gap-1">
+                      <span data-ev-id="ev_baef38c660" className="text-white/60 text-[9px] font-mono flex items-center gap-1">
                         <Thermometer className="w-3 h-3" /> Temperature
                       </span>
-                      <span data-ev-id="ev_b527043511" className="text-white/50 text-[10px] font-mono font-bold">{temperature}</span>
+                      <span data-ev-id="ev_b527043511" className="text-white/60 text-[10px] font-mono font-bold">{temperature}</span>
                     </div>
                     <input data-ev-id="ev_7922ccf172"
                   type="range"
@@ -205,10 +205,10 @@ export const AIPlaygroundView = ({ sections, visible }: AIPlaygroundViewProps) =
                   {/* Max tokens */}
                   <div data-ev-id="ev_d189c8b15e">
                     <div data-ev-id="ev_74a797d469" className="flex items-center justify-between mb-1">
-                      <span data-ev-id="ev_4556e90661" className="text-white/30 text-[9px] font-mono flex items-center gap-1">
+                      <span data-ev-id="ev_4556e90661" className="text-white/60 text-[9px] font-mono flex items-center gap-1">
                         <Hash className="w-3 h-3" /> Max Tokens
                       </span>
-                      <span data-ev-id="ev_e255ce3a96" className="text-white/50 text-[10px] font-mono font-bold">{maxTokens}</span>
+                      <span data-ev-id="ev_e255ce3a96" className="text-white/60 text-[10px] font-mono font-bold">{maxTokens}</span>
                     </div>
                     <input data-ev-id="ev_7bf9f1742e"
                   type="range"
@@ -233,12 +233,12 @@ export const AIPlaygroundView = ({ sections, visible }: AIPlaygroundViewProps) =
               <div data-ev-id="ev_15e65c5005" className="flex items-center gap-2 flex-1">
                 <Bot className="w-4 h-4 text-emerald-400" />
                 <span data-ev-id="ev_6bed66619f" className="text-white/60 text-xs font-medium">{activeSection?.title}</span>
-                <span data-ev-id="ev_c1a71f12e0" className="text-white/15 text-[9px] font-mono">• {activeSection?.links.length} completions</span>
+                <span data-ev-id="ev_c1a71f12e0" className="text-white/60 text-[9px] font-mono">• {activeSection?.links.length} completions</span>
               </div>
               <div data-ev-id="ev_9182e92922" className="flex items-center gap-2">
                 <button data-ev-id="ev_84a520097a"
                 onClick={resetAll}
-                className="flex items-center gap-1 px-2.5 py-1 rounded-md text-[10px] font-mono text-white/30 hover:text-white/60 hover:bg-white/[0.04] transition-colors">
+                className="flex items-center gap-1 px-2.5 py-1 rounded-md text-[10px] font-mono text-white/60 hover:text-white/60 hover:bg-white/[0.04] transition-colors">
 
                   <RotateCcw className="w-3 h-3" />
                   Reset
@@ -279,7 +279,7 @@ export const AIPlaygroundView = ({ sections, visible }: AIPlaygroundViewProps) =
                         <MessageSquare className="w-3 h-3 text-blue-400" />
                       </div>
                       <div data-ev-id="ev_4de439ffe3" className="flex-1 min-w-0">
-                        <div data-ev-id="ev_4c8b4fce32" className="text-white/30 text-[9px] font-mono mb-0.5">PROMPT</div>
+                        <div data-ev-id="ev_4c8b4fce32" className="text-white/60 text-[9px] font-mono mb-0.5">PROMPT</div>
                         <p data-ev-id="ev_9ec3595b40" className="text-white/70 text-[12px] leading-relaxed" dir="rtl">
                           {fakePrompt(link)}
                         </p>
@@ -326,22 +326,22 @@ export const AIPlaygroundView = ({ sections, visible }: AIPlaygroundViewProps) =
                         {/* Meta bar */}
                         {isCompleted &&
                       <div data-ev-id="ev_b2bec25cb2" className="flex items-center gap-3 mt-2.5 pt-2 border-t border-white/[0.03]">
-                            <span data-ev-id="ev_3572b0acee" className="text-[9px] font-mono text-white/20 flex items-center gap-1">
+                            <span data-ev-id="ev_3572b0acee" className="text-[9px] font-mono text-white/60 flex items-center gap-1">
                               <Hash className="w-2.5 h-2.5" />
                               {tokens} tokens
                             </span>
-                            <span data-ev-id="ev_5819c39deb" className="text-[9px] font-mono text-white/20 flex items-center gap-1">
+                            <span data-ev-id="ev_5819c39deb" className="text-[9px] font-mono text-white/60 flex items-center gap-1">
                               <Clock className="w-2.5 h-2.5" />
                               {latency}s
                             </span>
-                            <span data-ev-id="ev_d98707b82d" className="text-[9px] font-mono text-white/20 flex items-center gap-1">
+                            <span data-ev-id="ev_d98707b82d" className="text-[9px] font-mono text-white/60 flex items-center gap-1">
                               <Thermometer className="w-2.5 h-2.5" />
                               t={temperature}
                             </span>
                             <div data-ev-id="ev_3727b82113" className="flex-1" />
                             <button data-ev-id="ev_7b47626579"
                         onClick={() => handleCopy(link.id, currentText || '')}
-                        className="text-white/20 hover:text-white/50 transition-colors">
+                        className="text-white/60 hover:text-white/70 transition-colors">
 
                               {copiedId === link.id ?
                           <Check className="w-3 h-3 text-emerald-400" /> :
@@ -353,7 +353,7 @@ export const AIPlaygroundView = ({ sections, visible }: AIPlaygroundViewProps) =
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={`${link.title} (נפתח בחלון חדש)`}
-                        className="text-white/20 hover:text-white/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
+                        className="text-white/60 hover:text-white/70 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
 
                               <ExternalLink className="w-3 h-3" />
                             </a>
@@ -368,14 +368,14 @@ export const AIPlaygroundView = ({ sections, visible }: AIPlaygroundViewProps) =
                         <div data-ev-id="ev_e693aba465" className="w-6 h-6 rounded-md bg-white/[0.03] flex items-center justify-center flex-shrink-0">
                           <AnimatedIcon icon={link.icon} animation={link.animation} color={link.color} size={13} />
                         </div>
-                        <span data-ev-id="ev_c32fcf5477" className="text-white/20 text-[10px] font-mono">לחץ Run להרצת completion</span>
+                        <span data-ev-id="ev_c32fcf5477" className="text-white/60 text-[10px] font-mono">לחץ Run להרצת completion</span>
                         <div data-ev-id="ev_8682242344" className="flex-1" />
                         <a data-ev-id="ev_5786737eb4"
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${link.title} (נפתח בחלון חדש)`}
-                      className="text-white/15 hover:text-white/40 transition-colors text-[9px] font-mono flex items-center gap-1">
+                      className="text-white/60 hover:text-white/70 transition-colors text-[9px] font-mono flex items-center gap-1">
 
                           <ExternalLink className="w-2.5 h-2.5" />
                           קישור
@@ -388,7 +388,7 @@ export const AIPlaygroundView = ({ sections, visible }: AIPlaygroundViewProps) =
             </div>
 
             {/* Bottom stats */}
-            <div data-ev-id="ev_97aa3ebd2b" className="px-4 py-2 border-t border-white/[0.06] flex items-center gap-4 text-[9px] font-mono text-white/20">
+            <div data-ev-id="ev_97aa3ebd2b" className="px-4 py-2 border-t border-white/[0.06] flex items-center gap-4 text-[9px] font-mono text-white/60">
               <span data-ev-id="ev_2a94e8f503" className="flex items-center gap-1">
                 <Zap className="w-3 h-3" />
                 {totalTokens.toLocaleString()} tokens used

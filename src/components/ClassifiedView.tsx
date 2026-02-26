@@ -282,7 +282,7 @@ export const ClassifiedView = ({ sections, visible }: ClassifiedViewProps) => {
                                     {w.text}
                                   </span> :
 
-                              <span data-ev-id="ev_f9623f4b27" className={isOpen ? 'text-white/50' : 'text-amber-500/30'}>
+                              <span data-ev-id="ev_f9623f4b27" className={isOpen ? 'text-white/60' : 'text-amber-500/30'}>
                                     {w.text}{' '}
                                   </span>
                               }

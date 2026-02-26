@@ -50,7 +50,7 @@ const MetricCard = ({ link, sIdx, delay, isActive, onHover
           </div>
           <div data-ev-id="ev_eb7eaf179a" className="flex-1 min-w-0">
             <h3 data-ev-id="ev_357c03d3ce" className="text-[11px] font-bold truncate" style={{ color: color + 'cc' }}>{link.title}</h3>
-            <p data-ev-id="ev_ca2df38c5e" className="text-[8px] truncate text-white/20">{link.subtitle}</p>
+            <p data-ev-id="ev_ca2df38c5e" className="text-[8px] truncate text-white/60">{link.subtitle}</p>
           </div>
           <ExternalLink className="w-2.5 h-2.5 opacity-0 group-hover:opacity-40 transition-opacity" style={{ color }} />
         </div>

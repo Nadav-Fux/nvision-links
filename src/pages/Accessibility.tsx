@@ -31,7 +31,7 @@ const Accessibility = () => {
 
         <main data-ev-id="ev_f381669107" id="a11y-content" tabIndex={-1} className="outline-none">
           <h1 data-ev-id="ev_0253f856b8" className="text-2xl sm:text-3xl font-bold text-white mb-2">הצהרת נגישות</h1>
-          <p data-ev-id="ev_0d4efc63c4" className="text-white/50 text-sm mb-8">עודכן לאחרונה: 26 בפברואר 2026</p>
+          <p data-ev-id="ev_0d4efc63c4" className="text-white/60 text-sm mb-8">עודכן לאחרונה: 26 בפברואר 2026</p>
 
           {/* Intro */}
           <section data-ev-id="ev_0f8badbb36" className="mb-8">
@@ -167,12 +167,12 @@ const Accessibility = () => {
           <div data-ev-id="ev_37dd54a947" className="flex items-center justify-center flex-wrap gap-x-4 gap-y-2 text-xs">
             <Link
               to="/privacy"
-              className="text-white/50 hover:text-white/70 underline underline-offset-2 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
+              className="text-white/60 hover:text-white/70 underline underline-offset-2 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
 
               מדיניות פרטיות
             </Link>
             <span data-ev-id="ev_4c5fdd20d7" className="text-white/25" aria-hidden="true">|</span>
-            <span data-ev-id="ev_8bd0ed065c" className="text-white/35" lang="en">nVision Digital AI © {new Date().getFullYear()}</span>
+            <span data-ev-id="ev_8bd0ed065c" className="text-white/60" lang="en">nVision Digital AI © {new Date().getFullYear()}</span>
           </div>
         </footer>
       </div>

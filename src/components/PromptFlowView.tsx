@@ -56,7 +56,7 @@ const NodeCard = ({ link, sIdx, delay, isActive, onHover
           </div>
           <div data-ev-id="ev_c9163608e4" className="flex-1 min-w-0">
             <h3 data-ev-id="ev_b46c14af8e" className="text-[11px] font-semibold truncate" style={{ color: color + 'cc' }}>{link.title}</h3>
-            <p data-ev-id="ev_d0a58f3063" className="text-[9px] truncate text-white/25">{link.subtitle}</p>
+            <p data-ev-id="ev_d0a58f3063" className="text-[9px] truncate text-white/60">{link.subtitle}</p>
           </div>
         </div>
 

@@ -261,7 +261,7 @@ export const SkillTreeView = ({
         <div data-ev-id="ev_e43d919149" className="relative z-10 flex items-center justify-between px-4 sm:px-6 py-3 border-b border-white/[0.04]">
           <div data-ev-id="ev_3cc9015d7b" className="flex items-center gap-2">
             <Crown className="w-4 h-4 text-yellow-500/50" />
-            <span data-ev-id="ev_71b3869174" className="text-xs font-bold text-white/30">
+            <span data-ev-id="ev_71b3869174" className="text-xs font-bold text-white/60">
               nVision Skill Tree
             </span>
           </div>
@@ -375,7 +375,7 @@ export const SkillTreeView = ({
                   {/* Lock overlay for locked nodes */}
                   {!isUnlocked && !isHovered &&
                   <div data-ev-id="ev_6106925b83" className="absolute inset-0 rounded-full flex items-center justify-center bg-black/20">
-                      <span data-ev-id="ev_365455342e" className="text-[10px] text-white/15">🔒</span>
+                      <span data-ev-id="ev_365455342e" className="text-[10px] text-white/60">🔒</span>
                     </div>
                   }
                 </div>
@@ -409,7 +409,7 @@ export const SkillTreeView = ({
 
         {/* Bottom hint */}
         <div data-ev-id="ev_939d6b1bd1" className="relative z-10 text-center pb-3">
-          <span data-ev-id="ev_93052b047d" className="text-[9px] text-white/10 font-mono">
+          <span data-ev-id="ev_93052b047d" className="text-[9px] text-white/60 font-mono">
             לחץ על כישור לפתיחה • {maxXP - totalXP} נותרו
           </span>
         </div>
@@ -496,8 +496,8 @@ const SkillDetailCard = ({
                 </span>
               }
             </div>
-            <p data-ev-id="ev_38cf78d8c4" className="text-white/30 text-xs mt-0.5">{link.subtitle}</p>
-            <p data-ev-id="ev_b7232819ba" className="text-white/45 text-xs mt-1.5 leading-relaxed">
+            <p data-ev-id="ev_38cf78d8c4" className="text-white/60 text-xs mt-0.5">{link.subtitle}</p>
+            <p data-ev-id="ev_b7232819ba" className="text-white/60 text-xs mt-1.5 leading-relaxed">
               {link.description}
             </p>
 
@@ -519,7 +519,7 @@ const SkillDetailCard = ({
               </a>
               <button data-ev-id="ev_f779fc34af"
               onClick={onClose}
-              className="text-xs px-3 py-1.5 rounded-lg text-white/25 hover:text-white/40 hover:bg-white/[0.04] transition-colors">
+              className="text-xs px-3 py-1.5 rounded-lg text-white/60 hover:text-white/70 hover:bg-white/[0.04] transition-colors">
 
                 סגור
               </button>

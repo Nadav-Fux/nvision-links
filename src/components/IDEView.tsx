@@ -93,7 +93,7 @@ export const IDEView = ({ sections, visible }: IDEViewProps) => {
             <div data-ev-id="ev_58fe3b1712" className="w-2.5 h-2.5 rounded-full bg-[#febc2e]/70" />
             <div data-ev-id="ev_b3fb57fcd9" className="w-2.5 h-2.5 rounded-full bg-[#28c840]/70" />
           </div>
-          <span data-ev-id="ev_05fb690253" className="flex-1 text-center text-[11px] text-white/25 font-mono">
+          <span data-ev-id="ev_05fb690253" className="flex-1 text-center text-[11px] text-white/60 font-mono">
             nVision Hub — VS Code
           </span>
           <div data-ev-id="ev_276e530a13" className="w-12" />
@@ -106,22 +106,22 @@ export const IDEView = ({ sections, visible }: IDEViewProps) => {
             <button data-ev-id="ev_9fa5e54e57"
             onClick={() => setSidebarOpen(!sidebarOpen)}
             className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${
-            sidebarOpen ? 'bg-white/[0.06] text-white/60' : 'text-white/25 hover:text-white/40'}`
+            sidebarOpen ? 'bg-white/[0.06] text-white/60' : 'text-white/60 hover:text-white/70'}`
             }>
 
               <File className="w-4 h-4" />
             </button>
-            <button data-ev-id="ev_492c4df2cf" className="w-8 h-8 rounded-lg flex items-center justify-center text-white/25 hover:text-white/40 transition-colors">
+            <button data-ev-id="ev_492c4df2cf" className="w-8 h-8 rounded-lg flex items-center justify-center text-white/60 hover:text-white/70 transition-colors">
               <Search className="w-4 h-4" />
             </button>
-            <button data-ev-id="ev_e4ad0663f8" className="w-8 h-8 rounded-lg flex items-center justify-center text-white/25 hover:text-white/40 transition-colors">
+            <button data-ev-id="ev_e4ad0663f8" className="w-8 h-8 rounded-lg flex items-center justify-center text-white/60 hover:text-white/70 transition-colors">
               <GitBranch className="w-4 h-4" />
             </button>
-            <button data-ev-id="ev_2681dbab0e" className="w-8 h-8 rounded-lg flex items-center justify-center text-white/25 hover:text-white/40 transition-colors">
+            <button data-ev-id="ev_2681dbab0e" className="w-8 h-8 rounded-lg flex items-center justify-center text-white/60 hover:text-white/70 transition-colors">
               <Sparkles className="w-4 h-4" />
             </button>
             <div data-ev-id="ev_98f4b9927c" className="flex-1" />
-            <button data-ev-id="ev_194c51d593" className="w-8 h-8 rounded-lg flex items-center justify-center text-white/25 hover:text-white/40 transition-colors">
+            <button data-ev-id="ev_194c51d593" className="w-8 h-8 rounded-lg flex items-center justify-center text-white/60 hover:text-white/70 transition-colors">
               <Settings className="w-4 h-4" />
             </button>
           </div>
@@ -133,7 +133,7 @@ export const IDEView = ({ sections, visible }: IDEViewProps) => {
           dir="ltr"
           style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(255,255,255,0.05) transparent' }}>
 
-              <div data-ev-id="ev_599b60adff" className="px-3 py-2 text-[10px] text-white/30 uppercase tracking-wider font-semibold">
+              <div data-ev-id="ev_599b60adff" className="px-3 py-2 text-[10px] text-white/60 uppercase tracking-wider font-semibold">
                 Explorer
               </div>
 
@@ -156,7 +156,7 @@ export const IDEView = ({ sections, visible }: IDEViewProps) => {
                   <Folder className="w-3.5 h-3.5" style={{ color: `${folderColor}b3` }} />
                   }
                       <span data-ev-id="ev_87e9b855ff" className="font-medium">{section.title}</span>
-                      <span data-ev-id="ev_7a3bdd4c91" className="text-white/20 text-[10px] mr-auto">{section.links.length}</span>
+                      <span data-ev-id="ev_7a3bdd4c91" className="text-white/60 text-[10px] mr-auto">{section.links.length}</span>
                     </button>
 
                     {isExpanded &&
@@ -168,7 +168,7 @@ export const IDEView = ({ sections, visible }: IDEViewProps) => {
                   className={`w-full flex items-center gap-2 pr-7 pl-3 py-1 text-xs transition-colors ${
                   activeTab?.id === link.id ?
                   'bg-white/[0.06] text-white/90' :
-                  'text-white/45 hover:bg-white/[0.03] hover:text-white/65'}`
+                  'text-white/60 hover:bg-white/[0.03] hover:text-white/65'}`
                   }
                   onClick={() => openFile(link)}>
 
@@ -180,7 +180,7 @@ export const IDEView = ({ sections, visible }: IDEViewProps) => {
                         isHovered={activeTab?.id === link.id} />
                             </div>
                             <span data-ev-id="ev_ed80d73f21" className="truncate">{link.title}</span>
-                            <span data-ev-id="ev_8483942485" className="text-[9px] text-white/15 mr-auto">.tsx</span>
+                            <span data-ev-id="ev_8483942485" className="text-[9px] text-white/60 mr-auto">.tsx</span>
                           </button> :
                   null;
                 })
@@ -200,7 +200,7 @@ export const IDEView = ({ sections, visible }: IDEViewProps) => {
             style={{ scrollbarWidth: 'none' }}>
 
               {openTabs.length === 0 &&
-              <div data-ev-id="ev_d672060662" className="px-3 py-1.5 text-[11px] text-white/15">
+              <div data-ev-id="ev_d672060662" className="px-3 py-1.5 text-[11px] text-white/60">
                   לחץ על קובץ לפתיחה
                 </div>
               }
@@ -211,7 +211,7 @@ export const IDEView = ({ sections, visible }: IDEViewProps) => {
               className={`flex items-center gap-1.5 px-3 py-1.5 text-xs border-l border-white/[0.04] transition-colors whitespace-nowrap ${
               activeTab?.id === tab.id ?
               'bg-[#1e1e2e] text-white/80 border-t-2' :
-              'bg-[#11111b] text-white/35 hover:text-white/50 border-t-2 border-t-transparent'}`
+              'bg-[#11111b] text-white/60 hover:text-white/70 border-t-2 border-t-transparent'}`
               }
               style={{
                 borderTopColor: activeTab?.id === tab.id ? tab.color : 'transparent'
@@ -251,11 +251,11 @@ export const IDEView = ({ sections, visible }: IDEViewProps) => {
                 <span data-ev-id="ev_4f2cfaf6ee" className="flex items-center gap-1 text-purple-400/60">
                   <GitBranch className="w-3 h-3" /> main
                 </span>
-                <span data-ev-id="ev_94810060b3" className="text-white/20">UTF-8</span>
-                <span data-ev-id="ev_c27c173e27" className="text-white/20">TypeScript React</span>
+                <span data-ev-id="ev_94810060b3" className="text-white/60">UTF-8</span>
+                <span data-ev-id="ev_c27c173e27" className="text-white/60">TypeScript React</span>
               </div>
               <div data-ev-id="ev_3e9e57ce36" className="flex items-center gap-3">
-                <span data-ev-id="ev_0cf0760692" className="text-white/20">Ln 1, Col 1</span>
+                <span data-ev-id="ev_0cf0760692" className="text-white/60">Ln 1, Col 1</span>
                 <span data-ev-id="ev_e3fd04900f" className="text-cyan-400/50 flex items-center gap-1">
                   <Sparkles className="w-3 h-3" /> nVision AI
                 </span>
@@ -274,12 +274,12 @@ const WelcomeTab = () =>
     <div data-ev-id="ev_26018692d6" className="text-white/[0.04] text-[60px] font-bold mb-4 select-none" style={{ fontFamily: 'monospace' }}>
       nV
     </div>
-    <h3 data-ev-id="ev_37afb6c9a2" className="text-white/40 text-base font-medium mb-2">Welcome to nVision Hub</h3>
-    <p data-ev-id="ev_e79b81b95a" className="text-white/20 text-sm max-w-xs leading-relaxed">
+    <h3 data-ev-id="ev_37afb6c9a2" className="text-white/60 text-base font-medium mb-2">Welcome to nVision Hub</h3>
+    <p data-ev-id="ev_e79b81b95a" className="text-white/60 text-sm max-w-xs leading-relaxed">
       Select a file from the Explorer sidebar to view community links and AI tools.
       Each file contains a link and its details.
     </p>
-    <div data-ev-id="ev_d65db7b90b" className="flex gap-3 mt-6 text-[10px] text-white/15">
+    <div data-ev-id="ev_d65db7b90b" className="flex gap-3 mt-6 text-[10px] text-white/60">
       <span data-ev-id="ev_e8ea309143" className="flex items-center gap-1"><Code className="w-3 h-3" /> Open File</span>
       <span data-ev-id="ev_d9b307ba68" className="text-white/[0.06]">|</span>
       <span data-ev-id="ev_632b395e2a" className="flex items-center gap-1"><Terminal className="w-3 h-3" /> Terminal</span>
@@ -328,7 +328,7 @@ const EditorContent = ({ link }: {link: LinkItem;}) => {
   return (
     <div data-ev-id="ev_23f2471c42" className="font-mono text-[12px] leading-[1.7]">
       {/* Breadcrumb */}
-      <div data-ev-id="ev_251dd5c549" className="px-4 py-1.5 text-[10px] text-white/20 border-b border-white/[0.04] flex items-center gap-1">
+      <div data-ev-id="ev_251dd5c549" className="px-4 py-1.5 text-[10px] text-white/60 border-b border-white/[0.04] flex items-center gap-1">
         <span data-ev-id="ev_9aa055239f">src</span>
         <ChevronLeft className="w-3 h-3 rotate-180" />
         <span data-ev-id="ev_46ca763656" className="text-cyan-400/40">{link.title}.tsx</span>
@@ -341,7 +341,7 @@ const EditorContent = ({ link }: {link: LinkItem;}) => {
         key={line.num}
         className="flex hover:bg-white/[0.02] transition-colors">
 
-            <span data-ev-id="ev_b4d992345d" className="w-10 text-left pr-4 text-white/15 text-[11px] select-none flex-shrink-0">
+            <span data-ev-id="ev_b4d992345d" className="w-10 text-left pr-4 text-white/60 text-[11px] select-none flex-shrink-0">
               {line.num}
             </span>
             <span data-ev-id="ev_96e686ec0c" className={`${colorMap[line.color]} whitespace-pre`}>{line.code}</span>
@@ -380,7 +380,7 @@ const EditorContent = ({ link }: {link: LinkItem;}) => {
             </div>
             <div data-ev-id="ev_7dfe32b7b7" className="flex-1 min-w-0">
               <div data-ev-id="ev_438a2242d4" className="text-white/90 text-base font-semibold">{link.title}</div>
-              <div data-ev-id="ev_8c8e76ed6b" className="text-white/40 text-xs mt-0.5">{link.subtitle}</div>
+              <div data-ev-id="ev_8c8e76ed6b" className="text-white/60 text-xs mt-0.5">{link.subtitle}</div>
             </div>
             <span data-ev-id="ev_6880cfbf66"
             className="text-xs px-3 py-1.5 rounded-lg font-medium transition-all duration-200"

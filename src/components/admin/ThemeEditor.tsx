@@ -172,11 +172,11 @@ export const ThemeEditor = ({ config, onSaved }: ThemeEditorProps) => {
         </div>
         <div data-ev-id="ev_390f1ee158" className="flex-1 min-w-0">
           <div data-ev-id="ev_af58c87818" className="text-white/80 text-sm font-medium">ערכת צבעים</div>
-          <div data-ev-id="ev_b54924be43" className="text-white/30 text-xs mt-0.5">
+          <div data-ev-id="ev_b54924be43" className="text-white/60 text-xs mt-0.5">
             {PRESETS.find((p) => isPresetActive(p))?.name || 'מותאם אישית'}
           </div>
         </div>
-        <span data-ev-id="ev_a8d488ab72" className="text-white/15 text-xs group-hover:text-white/30 transition-colors">ערוך</span>
+        <span data-ev-id="ev_a8d488ab72" className="text-white/60 text-xs group-hover:text-white/70 transition-colors">ערוך</span>
       </button>);
 
   }
@@ -192,7 +192,7 @@ export const ThemeEditor = ({ config, onSaved }: ThemeEditorProps) => {
         </div>
         <button data-ev-id="ev_c9a574be79"
         onClick={handleClose}
-        className="text-white/30 hover:text-white/60 text-xs transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
+        className="text-white/60 hover:text-white/60 text-xs transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
 
           סגור
         </button>
@@ -200,7 +200,7 @@ export const ThemeEditor = ({ config, onSaved }: ThemeEditorProps) => {
 
       {/* Preset themes */}
       <div data-ev-id="ev_421d28c828">
-        <label data-ev-id="ev_f49b3aa9e4" className="text-white/50 text-xs mb-2 block">ערכות מוכנות</label>
+        <label data-ev-id="ev_f49b3aa9e4" className="text-white/60 text-xs mb-2 block">ערכות מוכנות</label>
         <div data-ev-id="ev_6c7a6d3d05" className="grid grid-cols-3 sm:grid-cols-5 gap-1.5">
           {PRESETS.map((preset) => {
             const active = isPresetActive(preset);
@@ -230,7 +230,7 @@ export const ThemeEditor = ({ config, onSaved }: ThemeEditorProps) => {
                   style={{ background: preset.colors.accent }} />
 
                 </div>
-                <span data-ev-id="ev_c0a6ec3078" className="text-[10px] text-white/50">
+                <span data-ev-id="ev_c0a6ec3078" className="text-[10px] text-white/60">
                   {preset.emoji} {preset.name}
                 </span>
                 {active &&
@@ -246,7 +246,7 @@ export const ThemeEditor = ({ config, onSaved }: ThemeEditorProps) => {
 
       {/* Custom color pickers */}
       <div data-ev-id="ev_be19443730">
-        <label data-ev-id="ev_b298dc7810" className="text-white/50 text-xs mb-2 block">התאמה אישית</label>
+        <label data-ev-id="ev_b298dc7810" className="text-white/60 text-xs mb-2 block">התאמה אישית</label>
         <div data-ev-id="ev_0b1cfc8060" className="grid grid-cols-3 gap-3">
           {[
           { key: 'primary' as const, label: 'ראשי', desc: 'כפתורים, קישורים' },
@@ -266,8 +266,8 @@ export const ThemeEditor = ({ config, onSaved }: ThemeEditorProps) => {
               className="w-12 h-12 rounded-xl border-2 border-white/10 cursor-pointer hover:border-white/25 transition-colors bg-transparent [&::-webkit-color-swatch-wrapper]:p-0.5 [&::-webkit-color-swatch]:rounded-lg [&::-webkit-color-swatch]:border-0" />
 
               </div>
-              <span data-ev-id="ev_513b696049" className="text-[10px] text-white/25 text-center leading-tight">{desc}</span>
-              <code data-ev-id="ev_0a2e3e1788" className="text-[10px] text-white/30 font-mono">{colors[key]}</code>
+              <span data-ev-id="ev_513b696049" className="text-[10px] text-white/60 text-center leading-tight">{desc}</span>
+              <code data-ev-id="ev_0a2e3e1788" className="text-[10px] text-white/60 font-mono">{colors[key]}</code>
             </div>
           )}
         </div>
@@ -275,7 +275,7 @@ export const ThemeEditor = ({ config, onSaved }: ThemeEditorProps) => {
 
       {/* Live preview strip */}
       <div data-ev-id="ev_6c218b6863">
-        <label data-ev-id="ev_517d6f366d" className="text-white/50 text-xs mb-2 block">תצוגה מקדימה</label>
+        <label data-ev-id="ev_517d6f366d" className="text-white/60 text-xs mb-2 block">תצוגה מקדימה</label>
         <div data-ev-id="ev_beebcc1bf3" className="rounded-xl overflow-hidden border border-white/[0.06]">
           {/* Gradient bar */}
           <div data-ev-id="ev_97f082a089"
@@ -323,7 +323,7 @@ export const ThemeEditor = ({ config, onSaved }: ThemeEditorProps) => {
         <button data-ev-id="ev_d27ead8b63"
         onClick={reset}
         disabled={!hasChanges}
-        className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-white/40 hover:text-white/70 text-sm transition-colors disabled:opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+        className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-white/60 hover:text-white/70 text-sm transition-colors disabled:opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
 
           <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
           איפוס

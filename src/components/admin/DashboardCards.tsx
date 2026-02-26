@@ -108,12 +108,12 @@ export const DashboardCards = ({ config, sections, links }: DashboardCardsProps)
 
                   <card.icon className="w-3.5 h-3.5" style={{ color: card.color }} aria-hidden="true" />
                 </div>
-                <span data-ev-id="ev_b449a26d68" className="text-white/45 text-xs">{card.label}</span>
+                <span data-ev-id="ev_b449a26d68" className="text-white/60 text-xs">{card.label}</span>
               </div>
               <div data-ev-id="ev_2cbf5b1882" className="text-white/90 text-lg font-bold" style={{ color: `${card.color}dd` }}>
                 {card.value}
               </div>
-              <div data-ev-id="ev_e491164326" className="text-white/30 text-[11px] mt-0.5">{card.sub}</div>
+              <div data-ev-id="ev_e491164326" className="text-white/60 text-[11px] mt-0.5">{card.sub}</div>
             </div>
           </div>
         )}

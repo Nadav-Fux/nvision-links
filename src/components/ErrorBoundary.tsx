@@ -73,7 +73,7 @@ export class ErrorBoundary extends Component<Props, State> {
             <p data-ev-id="ev_2775970286" className="text-white/80 font-semibold text-sm mb-1">
               משהו השתבש
             </p>
-            <p data-ev-id="ev_df7c241476" className="text-white/40 text-xs max-w-xs">
+            <p data-ev-id="ev_df7c241476" className="text-white/60 text-xs max-w-xs">
               התצוגה נתקלה בבעיה. נסו לטעון מחדש או לבחור תצוגה אחרת.
             </p>
           </div>
@@ -105,12 +105,12 @@ export class ErrorBoundary extends Component<Props, State> {
           <h1 data-ev-id="ev_8ea7c68e3b" className="text-white font-bold text-xl mb-2">
             משהו השתבש
           </h1>
-          <p data-ev-id="ev_29e7d0873d" className="text-white/50 text-sm leading-relaxed">
+          <p data-ev-id="ev_29e7d0873d" className="text-white/60 text-sm leading-relaxed">
             אירעה שגיאה בלתי צפויה. אפשר לנסות שוב או לרענן את הדף.
           </p>
           {this.state.error &&
           <details data-ev-id="ev_2b034a64a2" className="mt-4 text-right">
-              <summary data-ev-id="ev_41785aa747" className="text-white/30 text-xs cursor-pointer hover:text-white/50 transition-colors">
+              <summary data-ev-id="ev_41785aa747" className="text-white/60 text-xs cursor-pointer hover:text-white/70 transition-colors">
                 פרטים טכניים
               </summary>
               <pre data-ev-id="ev_ec61b79989" className="mt-2 text-red-400/60 text-[10px] bg-white/[0.03] rounded-lg p-3 overflow-auto max-h-32 text-left dir-ltr">

@@ -98,7 +98,7 @@ export const AdminLogin = ({ onSuccess }: AdminLoginProps) => {
                 <Lock className="w-7 h-7 text-primary" aria-hidden="true" />
               </div>
               <h1 data-ev-id="ev_c4d7750312" className="text-xl font-bold text-white">ניהול האתר</h1>
-              <p data-ev-id="ev_e6bc5d3dfc" className="text-white/40 text-sm">הזינו סיסמת אדמין כדי להמשיך</p>
+              <p data-ev-id="ev_e6bc5d3dfc" className="text-white/60 text-sm">הזינו סיסמת אדמין כדי להמשיך</p>
             </div>
 
             <div data-ev-id="ev_4a7f09bc33" className="space-y-4">
@@ -115,14 +115,14 @@ export const AdminLogin = ({ onSuccess }: AdminLoginProps) => {
                 autoComplete="current-password"
                 aria-describedby={error ? 'login-error' : undefined}
                 aria-invalid={!!error}
-                className={`w-full px-4 py-3 pl-11 bg-white/[0.06] border rounded-xl text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/30 text-sm transition-colors ${
+                className={`w-full px-4 py-3 pl-11 bg-white/[0.06] border rounded-xl text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/30 text-sm transition-colors ${
                 error ? 'border-red-400/30' : 'border-white/[0.1]'}`} />
 
                   <button data-ev-id="ev_e429860738"
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
                 aria-label={showPassword ? 'הסתר סיסמה' : 'הצג סיסמה'}
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-white/25 hover:text-white/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-white/60 hover:text-white/70 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
 
                     {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                   </button>
@@ -149,7 +149,7 @@ export const AdminLogin = ({ onSuccess }: AdminLoginProps) => {
             </div>
           </div>
 
-          <p data-ev-id="ev_9b2bfafb78" className="text-center text-white/15 text-[10px] mt-4">
+          <p data-ev-id="ev_9b2bfafb78" className="text-center text-white/60 text-[10px] mt-4">
             nVision Digital AI · Admin Panel
           </p>
         </form>
@@ -164,7 +164,7 @@ export const AdminLogin = ({ onSuccess }: AdminLoginProps) => {
                 <ShieldCheck className="w-7 h-7 text-green-400" aria-hidden="true" />
               </div>
               <h1 data-ev-id="ev_e9ef1393cf" className="text-xl font-bold text-white">אימות דו-שלבי</h1>
-              <p data-ev-id="ev_e67d35db2a" className="text-white/40 text-sm text-center">
+              <p data-ev-id="ev_e67d35db2a" className="text-white/60 text-sm text-center">
                 הזינו את הקוד בן 6 הספרות מ-Google Authenticator
               </p>
             </div>
@@ -209,19 +209,19 @@ export const AdminLogin = ({ onSuccess }: AdminLoginProps) => {
               <button data-ev-id="ev_10c40ed18f"
             type="button"
             onClick={() => {setStep('password');setTotpCode('');setError('');}}
-            className="w-full py-2 text-white/30 text-xs hover:text-white/50 transition-colors flex items-center justify-center gap-1">
+            className="w-full py-2 text-white/60 text-xs hover:text-white/70 transition-colors flex items-center justify-center gap-1">
 
                 <ArrowRight className="w-3 h-3" />
                 חזרה לסיסמה
               </button>
 
-              <p data-ev-id="ev_a4f7547e16" className="text-center text-white/20 text-[10px]">
+              <p data-ev-id="ev_a4f7547e16" className="text-center text-white/60 text-[10px]">
                 ניתן גם להשתמש בקוד גיבוי חד-פעמי
               </p>
             </div>
           </div>
 
-          <p data-ev-id="ev_b7ddb40d5b" className="text-center text-white/15 text-[10px] mt-4">
+          <p data-ev-id="ev_b7ddb40d5b" className="text-center text-white/60 text-[10px] mt-4">
             nVision Digital AI · Admin Panel
           </p>
         </form>

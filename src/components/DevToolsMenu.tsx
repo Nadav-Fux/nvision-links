@@ -61,7 +61,7 @@ export const DevToolsMenu = ({ activeView = 1, onViewChange }: DevToolsMenuProps
       className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 backdrop-blur-xl shadow-lg ${
       open ?
       'bg-white/10 border border-white/20 text-white rotate-90' :
-      'bg-white/[0.04] border border-white/[0.06] text-white/30 hover:text-white/60 hover:border-white/15 hover:bg-white/[0.08]'}`
+      'bg-white/[0.04] border border-white/[0.06] text-white/60 hover:text-white/60 hover:border-white/15 hover:bg-white/[0.08]'}`
       }
       aria-label="כלי פיתוח">
 
@@ -77,7 +77,7 @@ export const DevToolsMenu = ({ activeView = 1, onViewChange }: DevToolsMenuProps
       }>
 
         <div data-ev-id="ev_c9022c6bb8" className="px-3 py-2 border-b border-white/5">
-          <span data-ev-id="ev_5bddba7097" className="text-[10px] font-bold text-white/20 tracking-wider">כלי פיתוח</span>
+          <span data-ev-id="ev_5bddba7097" className="text-[10px] font-bold text-white/60 tracking-wider">כלי פיתוח</span>
         </div>
         <div data-ev-id="ev_848d02416d" className="p-1.5 space-y-0.5">
           {LINKS.map((link) => {
@@ -91,7 +91,7 @@ export const DevToolsMenu = ({ activeView = 1, onViewChange }: DevToolsMenuProps
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 border ${
                 isActive ?
                 `${c.bg} ${c.border} ${c.text}` :
-                `border-transparent text-white/50 hover:text-white/80 ${c.hoverBg}`}`
+                `border-transparent text-white/60 hover:text-white/80 ${c.hoverBg}`}`
                 }>
 
                 <Icon className="w-4 h-4 flex-shrink-0" />
@@ -106,12 +106,12 @@ export const DevToolsMenu = ({ activeView = 1, onViewChange }: DevToolsMenuProps
           className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 border ${
           showViews ?
           'bg-amber-500/[0.06] border-amber-500/20 text-amber-400' :
-          'border-transparent text-white/50 hover:text-white/80 hover:bg-amber-500/15'}`
+          'border-transparent text-white/60 hover:text-white/80 hover:bg-amber-500/15'}`
           }>
 
               <ViewToggleIcon size={16} />
               <span data-ev-id="ev_9a0650bfb7">שנה תצוגה</span>
-              <span data-ev-id="ev_aa35e3128c" className="mr-auto text-[10px] text-white/25">{VIEW_LABELS[activeView] || ''}</span>
+              <span data-ev-id="ev_aa35e3128c" className="mr-auto text-[10px] text-white/60">{VIEW_LABELS[activeView] || ''}</span>
             </button>
           }
         </div>
@@ -124,7 +124,7 @@ export const DevToolsMenu = ({ activeView = 1, onViewChange }: DevToolsMenuProps
         }
 
         <div data-ev-id="ev_ce094c8531" className="px-3 py-2 border-t border-white/5">
-          <span data-ev-id="ev_77ed81db5b" className="text-[9px] text-white/10">זמני — יוסר לאחר בחירה</span>
+          <span data-ev-id="ev_77ed81db5b" className="text-[9px] text-white/60">זמני — יוסר לאחר בחירה</span>
         </div>
       </div>
     </div>);

@@ -74,7 +74,7 @@ export const ConfirmDialog = ({
         <button data-ev-id="ev_75f5f39693"
         onClick={onCancel}
         aria-label="סגור"
-        className="absolute top-3 left-3 w-7 h-7 rounded-lg flex items-center justify-center text-white/25 hover:text-white/50 hover:bg-white/[0.06] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+        className="absolute top-3 left-3 w-7 h-7 rounded-lg flex items-center justify-center text-white/60 hover:text-white/70 hover:bg-white/[0.06] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
 
           <X className="w-3.5 h-3.5" />
         </button>
@@ -107,7 +107,7 @@ export const ConfirmDialog = ({
           </h2>
           <p data-ev-id="ev_e1942215ad"
           id="confirm-message"
-          className="text-white/50 text-sm text-center leading-relaxed">
+          className="text-white/60 text-sm text-center leading-relaxed">
 
             {message}
           </p>

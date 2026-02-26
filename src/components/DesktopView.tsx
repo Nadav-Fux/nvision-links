@@ -206,19 +206,19 @@ export const DesktopView = ({ sections, visible }: DesktopViewProps) => {
                   <div data-ev-id="ev_61091e289f" className="flex items-center gap-1">
                     <button data-ev-id="ev_693bb81059"
                     onClick={(e) => {e.stopPropagation();minimizeWindow(win.id);}}
-                    className="w-5 h-5 rounded flex items-center justify-center text-white/30 hover:bg-white/10 hover:text-white/60 transition-colors">
+                    className="w-5 h-5 rounded flex items-center justify-center text-white/60 hover:bg-white/10 hover:text-white/60 transition-colors">
 
                       <Minus className="w-3 h-3" />
                     </button>
                     <button data-ev-id="ev_02bf344d7f"
                     onClick={(e) => {e.stopPropagation();toggleMaximize(win.id);}}
-                    className="w-5 h-5 rounded flex items-center justify-center text-white/30 hover:bg-white/10 hover:text-white/60 transition-colors">
+                    className="w-5 h-5 rounded flex items-center justify-center text-white/60 hover:bg-white/10 hover:text-white/60 transition-colors">
 
                       {win.maximized ? <Minimize2 className="w-3 h-3" /> : <Maximize2 className="w-3 h-3" />}
                     </button>
                     <button data-ev-id="ev_615501bb4c"
                     onClick={(e) => {e.stopPropagation();closeWindow(win.id);}}
-                    className="w-5 h-5 rounded flex items-center justify-center text-white/30 hover:bg-red-500/80 hover:text-white transition-colors">
+                    className="w-5 h-5 rounded flex items-center justify-center text-white/60 hover:bg-red-500/80 hover:text-white transition-colors">
 
                       <X className="w-3 h-3" />
                     </button>
@@ -229,10 +229,10 @@ export const DesktopView = ({ sections, visible }: DesktopViewProps) => {
                 <div data-ev-id="ev_9ec7679681" className="flex-1 overflow-y-auto scrollbar-hide">
                   {/* Folder header */}
                   <div data-ev-id="ev_a53bce1792" className="px-3 py-2 border-b border-white/[0.04] flex items-center gap-2">
-                    <span data-ev-id="ev_ae87489ef9" className="text-white/20 text-[10px] font-mono">
+                    <span data-ev-id="ev_ae87489ef9" className="text-white/60 text-[10px] font-mono">
                       nVision &gt; {section.title}
                     </span>
-                    <span data-ev-id="ev_6f0ccad2aa" className="text-white/15 text-[10px] font-mono mr-auto">
+                    <span data-ev-id="ev_6f0ccad2aa" className="text-white/60 text-[10px] font-mono mr-auto">
                       {section.links.length} פריטים
                     </span>
                   </div>
@@ -272,7 +272,7 @@ export const DesktopView = ({ sections, visible }: DesktopViewProps) => {
                 </div>
 
                 {/* Window status bar */}
-                <div data-ev-id="ev_c620a74a9c" className="px-3 py-1 border-t border-white/[0.04] flex items-center gap-2 text-[9px] font-mono text-white/20 flex-shrink-0">
+                <div data-ev-id="ev_c620a74a9c" className="px-3 py-1 border-t border-white/[0.04] flex items-center gap-2 text-[9px] font-mono text-white/60 flex-shrink-0">
                   <span data-ev-id="ev_1eef3fab2a">{section.links.length} items</span>
                   <span data-ev-id="ev_dc2808feec" className="mr-auto" />
                   <span data-ev-id="ev_099293bb71" style={{ color }}>{section.emoji} {section.title}</span>
@@ -296,8 +296,8 @@ export const DesktopView = ({ sections, visible }: DesktopViewProps) => {
               {/* Search */}
               <div data-ev-id="ev_b0902f4d80" className="p-3 border-b border-white/[0.06]">
                 <div data-ev-id="ev_87ec3639e6" className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.05] border border-white/[0.08]">
-                  <Search className="w-3.5 h-3.5 text-white/30" />
-                  <span data-ev-id="ev_3d66b5ef45" className="text-white/25 text-[11px]">חיפוש...</span>
+                  <Search className="w-3.5 h-3.5 text-white/60" />
+                  <span data-ev-id="ev_3d66b5ef45" className="text-white/60 text-[11px]">חיפוש...</span>
                 </div>
               </div>
               {/* App list */}
@@ -316,7 +316,7 @@ export const DesktopView = ({ sections, visible }: DesktopViewProps) => {
                     </div>
                     <div data-ev-id="ev_72d95924ef" className="flex-1 min-w-0">
                       <div data-ev-id="ev_158531f1a1" className="text-white/70 text-[11px] font-medium truncate">{section.title}</div>
-                      <div data-ev-id="ev_3bede407bd" className="text-white/25 text-[9px]">{section.links.length} פריטים</div>
+                      <div data-ev-id="ev_3bede407bd" className="text-white/60 text-[9px]">{section.links.length} פריטים</div>
                     </div>
                   </button>
               )}
@@ -326,7 +326,7 @@ export const DesktopView = ({ sections, visible }: DesktopViewProps) => {
                 <div data-ev-id="ev_baad13ad8a" className="w-6 h-6 rounded-full bg-blue-500/20 flex items-center justify-center">
                   <span data-ev-id="ev_e1fd172799" className="text-[10px]">N</span>
                 </div>
-                <span data-ev-id="ev_c47128ec5f" className="text-white/40 text-[10px]">nVision User</span>
+                <span data-ev-id="ev_c47128ec5f" className="text-white/60 text-[10px]">nVision User</span>
               </div>
             </div>
           }
@@ -378,7 +378,7 @@ export const DesktopView = ({ sections, visible }: DesktopViewProps) => {
                   }
                 }}
                 className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[10px] transition-colors flex-shrink-0 ${
-                !win.minimized ? 'bg-white/[0.08] text-white/70' : 'text-white/35 hover:bg-white/[0.04]'}`
+                !win.minimized ? 'bg-white/[0.08] text-white/70' : 'text-white/60 hover:bg-white/[0.04]'}`
                 }>
 
                   <span data-ev-id="ev_39e120c064" className="text-xs">{section.emoji}</span>
@@ -392,14 +392,14 @@ export const DesktopView = ({ sections, visible }: DesktopViewProps) => {
           </div>
 
           {/* System tray */}
-          <div data-ev-id="ev_a010b88171" className="flex items-center gap-2 text-white/30">
+          <div data-ev-id="ev_a010b88171" className="flex items-center gap-2 text-white/60">
             <ChevronUp className="w-3 h-3" />
             <Wifi className="w-3 h-3" />
             <Volume2 className="w-3 h-3" />
             <Battery className="w-3 h-3" />
             <div data-ev-id="ev_8bd226ea87" className="flex flex-col items-end mr-1">
-              <span data-ev-id="ev_e8dc07e69b" className="text-[10px] font-mono text-white/50 leading-none">{clock}</span>
-              <span data-ev-id="ev_4d05635fb7" className="text-[8px] font-mono text-white/25 leading-none">
+              <span data-ev-id="ev_e8dc07e69b" className="text-[10px] font-mono text-white/60 leading-none">{clock}</span>
+              <span data-ev-id="ev_4d05635fb7" className="text-[8px] font-mono text-white/60 leading-none">
                 {new Date().toLocaleDateString('he-IL')}
               </span>
             </div>

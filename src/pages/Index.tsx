@@ -190,7 +190,7 @@ const Index = ({ viewOverride }: IndexProps = {}) => {
                 דברים שלא תמצאו לרוב בשום מקום אחר, והכי חשוב —{' '}
                 <span data-ev-id="ev_dd5bdb34b4" className="text-accent font-semibold">מעניין</span>.</>}
               </p>
-              <p data-ev-id="ev_7446878869" className="text-white/55 text-base sm:text-lg md:text-lg leading-relaxed mt-3">
+              <p data-ev-id="ev_7446878869" className="text-white/60 text-base sm:text-lg md:text-lg leading-relaxed mt-3">
                 {config?.welcome_subtext || 'כאן תמצאו את כל הקהילות, הכלים והמשאבים שיעזרו לכם להתקדם בעולם ה-AI — תכנים חדשים כל יום.'}
               </p>
               <div data-ev-id="ev_c78275f076" className="mt-4 flex items-center justify-center gap-2 text-white/35 text-sm" aria-hidden="true">
@@ -289,19 +289,19 @@ const Index = ({ viewOverride }: IndexProps = {}) => {
           <nav data-ev-id="ev_6c74c5206e" aria-label="ניווט תחתון" className="flex items-center justify-center flex-wrap gap-x-4 gap-y-2 mb-3">
             <Link data-ev-id="ev_0a57211656"
             to="/accessibility"
-            className="text-white/50 hover:text-white/70 text-sm underline underline-offset-2 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-transparent rounded">
+            className="text-white/60 hover:text-white/70 text-sm underline underline-offset-2 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-transparent rounded">
 
               הצהרת נגישות
             </Link>
             <span data-ev-id="ev_66dd3293d1" className="text-white/25" aria-hidden="true">|</span>
             <Link data-ev-id="ev_3fb27d2328"
             to="/privacy"
-            className="text-white/50 hover:text-white/70 text-sm underline underline-offset-2 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-transparent rounded">
+            className="text-white/60 hover:text-white/70 text-sm underline underline-offset-2 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-transparent rounded">
 
               מדיניות פרטיות
             </Link>
           </nav>
-          <div data-ev-id="ev_9ba4d3ac95" className="flex items-center justify-center gap-2 text-white/40 text-sm">
+          <div data-ev-id="ev_9ba4d3ac95" className="flex items-center justify-center gap-2 text-white/60 text-sm">
             <span data-ev-id="ev_7802a2a27d" lang="en">{config?.site_title || 'nVision Digital AI'}</span>
             <span data-ev-id="ev_d773f1e564"
             onClick={() => navigate('/admin')}
@@ -313,7 +313,7 @@ const Index = ({ viewOverride }: IndexProps = {}) => {
             <span data-ev-id="ev_aa062f464d">{new Date().getFullYear()}</span>
           </div>
 
-          <p data-ev-id="ev_35387fc6f2" className="mt-3 text-white/30 text-xs flex items-center justify-center gap-1.5">
+          <p data-ev-id="ev_35387fc6f2" className="mt-3 text-white/60 text-xs flex items-center justify-center gap-1.5">
             <Shield className="w-3 h-3" aria-hidden="true" />
             <span data-ev-id="ev_72782caf72">אתר זה לא אוסף מידע אישי, לא משתמש בעוגיות ולא עוקב אחרי גולשים</span>
           </p>

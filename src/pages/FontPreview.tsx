@@ -231,7 +231,7 @@ const FontPreview = () => {
       <div data-ev-id="ev_b2fe8070c8" className="sticky top-0 z-50 backdrop-blur-xl border-b border-white/5 bg-black/40">
         <div data-ev-id="ev_3583e8b7aa" className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <div data-ev-id="ev_df60e0989e" className="flex items-center gap-3">
-            <Link to="/" className="flex items-center gap-2 text-white/40 hover:text-white/70 transition-colors text-sm">
+            <Link to="/" className="flex items-center gap-2 text-white/60 hover:text-white/70 transition-colors text-sm">
               <ArrowRight className="w-4 h-4" />חזרה
             </Link>
             <div data-ev-id="ev_ceeeaa6955" className="w-px h-5 bg-white/10" />
@@ -259,14 +259,14 @@ const FontPreview = () => {
             const counts = { all: ALL_OPTIONS.length, hybrid: ALL_OPTIONS.filter((o) => o.category === 'hybrid').length, effect: ALL_OPTIONS.filter((o) => o.category === 'effect').length, font: ALL_OPTIONS.filter((o) => o.category === 'font').length };
             const labels = { all: `הכל (${counts.all})`, hybrid: `🔥 שילובים (${counts.hybrid})`, effect: `✨ אפקטים (${counts.effect})`, font: `🅰️ פונטים (${counts.font})` };
             return (
-              <button data-ev-id="ev_fbacacb72e" key={f} onClick={() => setFilter(f)} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${filter === f ? 'bg-cyan-500/15 text-cyan-300 border border-cyan-500/30' : 'text-white/30 hover:text-white/60 border border-transparent hover:border-white/10'}`}>
+              <button data-ev-id="ev_fbacacb72e" key={f} onClick={() => setFilter(f)} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${filter === f ? 'bg-cyan-500/15 text-cyan-300 border border-cyan-500/30' : 'text-white/60 hover:text-white/60 border border-transparent hover:border-white/10'}`}>
                 {labels[f]}
               </button>);
 
           })}
         </div>
 
-        <p data-ev-id="ev_2460067d5e" className="text-white/40 text-center text-sm mb-6">לחץ על האופציה שהכי מדברת אליך — אפשר גם לשלב פונט + אפקט</p>
+        <p data-ev-id="ev_2460067d5e" className="text-white/60 text-center text-sm mb-6">לחץ על האופציה שהכי מדברת אליך — אפשר גם לשלב פונט + אפקט</p>
 
         {cats.map((cat) => {
           const items = filtered.filter((o) => o.category === cat);
@@ -277,7 +277,7 @@ const FontPreview = () => {
             <div data-ev-id="ev_95f4fff118" key={cat}>
               {/* Category header */}
               <div data-ev-id="ev_58f7893b7c" className="mb-4 mt-6">
-                <h2 data-ev-id="ev_c539d41ea6" className="text-white/20 text-xs tracking-widest font-medium flex items-center gap-2">
+                <h2 data-ev-id="ev_c539d41ea6" className="text-white/60 text-xs tracking-widest font-medium flex items-center gap-2">
                   <span data-ev-id="ev_4d86ead61e" className={`h-px flex-1 bg-gradient-to-r ${meta.lineColor}`} />
                   <span data-ev-id="ev_192d04731b">{meta.emoji} {meta.label}</span>
                   <span data-ev-id="ev_87fac877d2" className={`h-px flex-1 bg-gradient-to-r ${meta.lineColor}`} />
@@ -307,10 +307,10 @@ const FontPreview = () => {
                       {/* Header */}
                       <div data-ev-id="ev_2627b36ccf" className="flex items-center justify-between px-6 pt-5 pb-2">
                         <div data-ev-id="ev_972a7d13de" className="flex items-center gap-3">
-                          <span data-ev-id="ev_538e6f8262" className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300 ${isSelected ? 'bg-cyan-500 text-black' : 'bg-white/[0.06] text-white/50 group-hover:bg-white/10 group-hover:text-white/70'}`}>{opt.id}</span>
+                          <span data-ev-id="ev_538e6f8262" className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300 ${isSelected ? 'bg-cyan-500 text-black' : 'bg-white/[0.06] text-white/60 group-hover:bg-white/10 group-hover:text-white/70'}`}>{opt.id}</span>
                           <div data-ev-id="ev_246bc1b129">
                             <span data-ev-id="ev_1500b8ebfe" className="text-white/90 font-semibold text-base">{opt.label}</span>
-                            <span data-ev-id="ev_7b9eaac062" className="text-white/30 text-sm mr-3">— {opt.labelHe}</span>
+                            <span data-ev-id="ev_7b9eaac062" className="text-white/60 text-sm mr-3">— {opt.labelHe}</span>
                           </div>
                         </div>
                         {isSelected &&
@@ -325,7 +325,7 @@ const FontPreview = () => {
 
                       {/* Footer */}
                       <div data-ev-id="ev_a9f7610a1e" className="px-6 pb-5">
-                        <p data-ev-id="ev_6ddeca7040" className="text-white/35 text-sm leading-relaxed">{opt.description}</p>
+                        <p data-ev-id="ev_6ddeca7040" className="text-white/60 text-sm leading-relaxed">{opt.description}</p>
                         <div data-ev-id="ev_4f084aad43" className="flex flex-wrap gap-2 mt-3">
                           {opt.tags.map((tag, i) =>
                           <span data-ev-id="ev_e1d776ae73" key={i} className={`px-2 py-0.5 rounded text-[10px] ${meta.tagBg} ${meta.tagText} border ${meta.tagBorder}`}>{tag}</span>
@@ -342,7 +342,7 @@ const FontPreview = () => {
 
         {/* Current */}
         <div data-ev-id="ev_19bce768a5" className="mt-12 pt-8 border-t border-white/[0.06]">
-          <h2 data-ev-id="ev_28cb32861a" className="text-white/40 text-center text-sm mb-8">📌 להשוואה — המצב הנוכחי (Orbitron פשוט)</h2>
+          <h2 data-ev-id="ev_28cb32861a" className="text-white/60 text-center text-sm mb-8">📌 להשוואה — המצב הנוכחי (Orbitron פשוט)</h2>
           <div data-ev-id="ev_6d2986e5ee" className="rounded-xl border border-white/[0.04] p-10 flex flex-col items-center" style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.01), rgba(255,255,255,0.003))' }}>
             <div data-ev-id="ev_77f427289b" dir="ltr" className="flex items-baseline">
               <span data-ev-id="ev_7f6cad5a16" style={{ fontFamily: '"Orbitron"', fontWeight: 900, fontSize: 'clamp(3rem,8vw,5.5rem)', color: '#22d3ee', textShadow: '0 0 35px rgba(6,182,212,0.5)', lineHeight: 1 }}>n</span>
@@ -353,12 +353,12 @@ const FontPreview = () => {
               <span data-ev-id="ev_e83990fefe" style={{ fontFamily: '"Orbitron"', fontWeight: 500, fontSize: 'clamp(0.75rem,2vw,1.1rem)', color: '#a78bfa', letterSpacing: '0.3em' }}>DIGITAL</span>
               <span data-ev-id="ev_c8350133f3" className="px-3 py-1 rounded-md border" style={{ fontFamily: '"Orbitron"', fontWeight: 900, fontSize: 'clamp(0.85rem,2.2vw,1.25rem)', color: '#06b6d4', textShadow: '0 0 15px rgba(6,182,212,0.5)', borderColor: 'rgba(6,182,212,0.15)', background: 'rgba(6,182,212,0.05)' }}>AI</span>
             </div>
-            <p data-ev-id="ev_41f6bd2cdc" className="text-white/20 text-xs mt-6">← המצב הנוכחי</p>
+            <p data-ev-id="ev_41f6bd2cdc" className="text-white/60 text-xs mt-6">← המצב הנוכחי</p>
           </div>
         </div>
 
         <div data-ev-id="ev_17947fd4fe" className="text-center py-10">
-          <p data-ev-id="ev_7adf59e245" className="text-white/25 text-xs">💡 אפשר לשלב פונט (A-D) + אפקט (E-J) + שילוב מוכן (K-R)</p>
+          <p data-ev-id="ev_7adf59e245" className="text-white/60 text-xs">💡 אפשר לשלב פונט (A-D) + אפקט (E-J) + שילוב מוכן (K-R)</p>
         </div>
       </div>
     </div>);

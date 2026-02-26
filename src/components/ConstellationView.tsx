@@ -365,7 +365,7 @@ export const ConstellationView = ({
         }
 
         {/* Legend — dynamic from sections */}
-        <div data-ev-id="ev_dd98612213" className="absolute bottom-3 right-3 flex items-center gap-4 text-[9px] text-white/15 font-mono">
+        <div data-ev-id="ev_dd98612213" className="absolute bottom-3 right-3 flex items-center gap-4 text-[9px] text-white/60 font-mono">
           {sections.map((section, sIdx) => {
             const legendColors = ['rgba(6,182,212,0.3)', 'rgba(139,92,246,0.3)', 'rgba(245,158,11,0.3)', 'rgba(236,72,153,0.3)', 'rgba(16,185,129,0.3)', 'rgba(239,68,68,0.3)'];
             return (
@@ -433,8 +433,8 @@ const StarDetailCard = ({ star, sections, onClose }: {star: Star; sections: Link
               })()}
             </span>
           </div>
-          <p data-ev-id="ev_bf1d7de1e5" className="text-white/35 text-xs mt-0.5">{link.subtitle}</p>
-          <p data-ev-id="ev_622dd6437d" className="text-white/45 text-xs mt-1.5 leading-relaxed">{link.description}</p>
+          <p data-ev-id="ev_bf1d7de1e5" className="text-white/60 text-xs mt-0.5">{link.subtitle}</p>
+          <p data-ev-id="ev_622dd6437d" className="text-white/60 text-xs mt-1.5 leading-relaxed">{link.description}</p>
 
           <div data-ev-id="ev_510c2aed23" className="flex items-center gap-2 mt-3">
             <a data-ev-id="ev_a1269ba93d"
@@ -454,7 +454,7 @@ const StarDetailCard = ({ star, sections, onClose }: {star: Star; sections: Link
             </a>
             <button data-ev-id="ev_8734e9a01d"
             onClick={onClose}
-            className="text-xs px-3 py-1.5 rounded-lg text-white/25 hover:text-white/40 hover:bg-white/[0.04] transition-colors">
+            className="text-xs px-3 py-1.5 rounded-lg text-white/60 hover:text-white/70 hover:bg-white/[0.04] transition-colors">
 
               סגור
             </button>

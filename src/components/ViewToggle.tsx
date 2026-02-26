@@ -716,7 +716,7 @@ export const ViewToggle = ({ activeView, onChange }: ViewToggleProps) => {
                   focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-transparent
                   ${isActive ?
             'text-white shadow-lg scale-105' :
-            'text-white/55 hover:text-white/80 hover:bg-white/[0.06]'}
+            'text-white/60 hover:text-white/80 hover:bg-white/[0.06]'}
                   px-3 py-2 sm:px-3.5 sm:py-2
                   min-h-[40px] sm:min-h-[42px]
                   text-xs sm:text-sm font-medium

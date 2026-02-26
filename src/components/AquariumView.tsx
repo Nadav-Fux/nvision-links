@@ -460,8 +460,8 @@ const CreatureCard = ({ creature, onClose }: {creature: Creature;onClose: () => 
               })()}
             </span>
           </div>
-          <p data-ev-id="ev_22b4dc0d49" className="text-white/30 text-xs mt-0.5">{link.subtitle}</p>
-          <p data-ev-id="ev_3c16c1dea2" className="text-white/40 text-xs mt-1.5 leading-relaxed">{link.description}</p>
+          <p data-ev-id="ev_22b4dc0d49" className="text-white/60 text-xs mt-0.5">{link.subtitle}</p>
+          <p data-ev-id="ev_3c16c1dea2" className="text-white/60 text-xs mt-1.5 leading-relaxed">{link.description}</p>
 
           <div data-ev-id="ev_c233a733f3" className="flex items-center gap-2 mt-3">
             <a data-ev-id="ev_1c1a090cdb"
@@ -481,7 +481,7 @@ const CreatureCard = ({ creature, onClose }: {creature: Creature;onClose: () => 
             </a>
             <button data-ev-id="ev_a3aa49f52a"
             onClick={onClose}
-            className="text-xs px-3 py-1.5 rounded-lg text-white/25 hover:text-white/40 hover:bg-white/[0.04] transition-colors">
+            className="text-xs px-3 py-1.5 rounded-lg text-white/60 hover:text-white/70 hover:bg-white/[0.04] transition-colors">
 
               סגור
             </button>

@@ -221,7 +221,7 @@ export const RolodexView = ({
           className={`px-3.5 py-1.5 rounded-full text-sm font-medium transition-all duration-500 ${
           activeSectionIdx === sIdx ?
           'bg-white/[0.08] text-white/80 border border-white/[0.12]' :
-          'text-white/25 border border-transparent'}`
+          'text-white/60 border border-transparent'}`
           }>
               {section.emoji} {section.title}
             </span>
@@ -248,7 +248,7 @@ export const RolodexView = ({
         {/* Swipe hint */}
         {showHint &&
         <div data-ev-id="ev_4ca845e52a" className="absolute -bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-            <span data-ev-id="ev_7606bba6f0" className="text-white/20 text-xs font-medium">
+            <span data-ev-id="ev_7606bba6f0" className="text-white/60 text-xs font-medium">
               ← גרור כדי לעבור →
             </span>
           </div>
@@ -307,7 +307,7 @@ export const RolodexView = ({
 
         {/* Counter */}
         <div data-ev-id="ev_12d22b1327" className="text-center mt-3">
-          <span data-ev-id="ev_f214cc4c66" className="text-white/15 text-xs font-mono">
+          <span data-ev-id="ev_f214cc4c66" className="text-white/60 text-xs font-mono">
             {active + 1} / {total}
           </span>
         </div>
@@ -383,17 +383,17 @@ const SingleCard = ({
               <h3 data-ev-id="ev_1867307d56" className="text-white font-bold text-[16px] truncate">
                 {link.title}
               </h3>
-              <p data-ev-id="ev_0ca4ff8d7e" className="text-white/40 text-sm mt-0.5 truncate">
+              <p data-ev-id="ev_0ca4ff8d7e" className="text-white/60 text-sm mt-0.5 truncate">
                 {link.subtitle}
               </p>
             </div>
             <div data-ev-id="ev_6f065cd849" className="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center bg-white/5 border border-white/10 group-hover:bg-white/10 transition-all">
-              <ExternalLink className="w-4 h-4 text-white/35 group-hover:text-white/65 transition-colors" />
+              <ExternalLink className="w-4 h-4 text-white/60 group-hover:text-white/65 transition-colors" />
             </div>
           </div>
 
           {/* Description */}
-          <p data-ev-id="ev_a1f6ab1975" className="text-white/45 text-[13px] leading-relaxed mt-3.5 pt-3.5 border-t border-white/[0.06] line-clamp-3">
+          <p data-ev-id="ev_a1f6ab1975" className="text-white/60 text-[13px] leading-relaxed mt-3.5 pt-3.5 border-t border-white/[0.06] line-clamp-3">
             {link.description}
           </p>
         </div>

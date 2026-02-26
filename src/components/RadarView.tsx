@@ -338,7 +338,7 @@ export const RadarView = ({ sections, visible }: RadarViewProps) => {
           className={`px-3 py-1 rounded text-[11px] font-mono transition-colors flex-shrink-0 flex items-center gap-1.5 ${
           activeSection === sIdx ?
           'border text-white/90' :
-          'text-white/40 hover:text-white/60 border border-transparent'}`
+          'text-white/60 hover:text-white/60 border border-transparent'}`
           }
           style={{
             borderColor: activeSection === sIdx ? SECTION_COLORS[sIdx % SECTION_COLORS.length] + '60' : undefined,
@@ -390,7 +390,7 @@ export const RadarView = ({ sections, visible }: RadarViewProps) => {
                     <AnimatedIcon icon={hoveredBlip.link.icon} animation={hoveredBlip.link.animation} color={hoveredBlip.link.color} size={14} />
                     <span data-ev-id="ev_09ac778a9d" className="text-white font-semibold text-[11px]">{hoveredBlip.link.title}</span>
                   </div>
-                  <p data-ev-id="ev_0f965244d3" className="text-white/50 text-[10px] leading-relaxed">{hoveredBlip.link.subtitle}</p>
+                  <p data-ev-id="ev_0f965244d3" className="text-white/60 text-[10px] leading-relaxed">{hoveredBlip.link.subtitle}</p>
                   <div data-ev-id="ev_60dd760ebb" className="mt-1.5 flex items-center gap-1 text-cyan-400/50 text-[9px]">
                     <ExternalLink className="w-2.5 h-2.5" />
                     <span data-ev-id="ev_1a591c06fb">לחץ לפתיחה</span>
@@ -445,7 +445,7 @@ export const RadarView = ({ sections, visible }: RadarViewProps) => {
                     <span data-ev-id="ev_b56c5e36b2" className="text-[10px] font-mono font-bold text-white/60 tracking-wide">
                       {section.emoji} {section.title}
                     </span>
-                    <span data-ev-id="ev_f97f2a36d3" className="text-[9px] font-mono text-white/25 mr-auto">
+                    <span data-ev-id="ev_f97f2a36d3" className="text-[9px] font-mono text-white/60 mr-auto">
                       [{section.links.length}]
                     </span>
                   </div>
@@ -468,11 +468,11 @@ export const RadarView = ({ sections, visible }: RadarViewProps) => {
                         <div data-ev-id="ev_72768408ea" className="text-white/70 text-[11px] font-mono truncate group-hover:text-white/90 transition-colors">
                           {link.title}
                         </div>
-                        <div data-ev-id="ev_2cfe923320" className="text-white/30 text-[9px] font-mono truncate">
+                        <div data-ev-id="ev_2cfe923320" className="text-white/60 text-[9px] font-mono truncate">
                           {link.subtitle}
                         </div>
                       </div>
-                      <ExternalLink className="w-3 h-3 text-white/15 group-hover:text-cyan-400/50 transition-colors flex-shrink-0" />
+                      <ExternalLink className="w-3 h-3 text-white/60 group-hover:text-cyan-400/50 transition-colors flex-shrink-0" />
                     </a>
                   )}
                 </div>);

@@ -26,7 +26,7 @@ export const LinkHealthChecker = () => {
   return (
     <div data-ev-id="ev_9686f18195" className="bg-white/[0.03] border border-white/[0.08] rounded-xl p-5">
       <div data-ev-id="ev_47d2b7e2a3" className="flex items-center justify-between mb-4">
-        <h3 data-ev-id="ev_25b602a64e" className="text-white/50 text-xs font-semibold flex items-center gap-2">
+        <h3 data-ev-id="ev_25b602a64e" className="text-white/60 text-xs font-semibold flex items-center gap-2">
           <Activity className="w-3.5 h-3.5" aria-hidden="true" />
           בודק קישורים
         </h3>
@@ -74,7 +74,7 @@ export const LinkHealthChecker = () => {
 
             <XCircle className="w-3.5 h-3.5 text-red-400 flex-shrink-0" />
             }
-                  <span data-ev-id="ev_73c339e2b8" className={`truncate flex-1 ${r.ok ? 'text-white/50' : 'text-white/70'}`}>
+                  <span data-ev-id="ev_73c339e2b8" className={`truncate flex-1 ${r.ok ? 'text-white/60' : 'text-white/70'}`}>
                     {r.title}
                   </span>
                   <span data-ev-id="ev_34ca0ba4ec" className={`font-mono flex-shrink-0 ${r.ok ? 'text-green-400/50' : 'text-red-400/70'}`}>
@@ -87,7 +87,7 @@ export const LinkHealthChecker = () => {
       }
 
       {!results && !loading &&
-      <p data-ev-id="ev_7d6a5f8f50" className="text-white/20 text-xs text-center py-6">לחץ על הפעל סריקה לבדוק את כל הקישורים</p>
+      <p data-ev-id="ev_7d6a5f8f50" className="text-white/60 text-xs text-center py-6">לחץ על הפעל סריקה לבדוק את כל הקישורים</p>
       }
     </div>);
 

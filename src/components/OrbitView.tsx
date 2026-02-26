@@ -324,7 +324,7 @@ const OrbitRing = ({
       <div data-ev-id="ev_49d40296b2" className="flex items-center justify-center gap-4 mt-2">
         <button data-ev-id="ev_c02f9469d9"
         onClick={() => setIsSpinning((s) => !s)}
-        className="flex items-center gap-1.5 text-white/20 hover:text-white/40 transition-colors text-xs">
+        className="flex items-center gap-1.5 text-white/60 hover:text-white/70 transition-colors text-xs">
 
           <RotateCcw
             className={`w-3 h-3 ${isSpinning && !isPaused ? 'animate-spin' : ''}`}
@@ -403,8 +403,8 @@ const DetailPanel = ({
 
             <div data-ev-id="ev_8596d5fc53" className="flex-1 min-w-0">
               <h3 data-ev-id="ev_4e8921d105" className="text-white font-bold text-[13px] truncate">{link.title}</h3>
-              <p data-ev-id="ev_44e82438cc" className="text-white/30 text-xs truncate">{link.subtitle}</p>
-              <p data-ev-id="ev_08f3f821f0" className="text-white/40 text-xs leading-relaxed line-clamp-1 mt-0.5">
+              <p data-ev-id="ev_44e82438cc" className="text-white/60 text-xs truncate">{link.subtitle}</p>
+              <p data-ev-id="ev_08f3f821f0" className="text-white/60 text-xs leading-relaxed line-clamp-1 mt-0.5">
                 {link.description}
               </p>
             </div>

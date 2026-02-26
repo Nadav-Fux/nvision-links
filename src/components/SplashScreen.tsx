@@ -69,7 +69,7 @@ style={{
     </div>
     {/* Tagline */}
     <p data-ev-id="ev_5337ce7d50"
-  className="text-sm sm:text-base text-white/35 mt-3 transition-all duration-500"
+  className="text-sm sm:text-base text-white/60 mt-3 transition-all duration-500"
   style={{ opacity: phase >= 5 ? 1 : 0, transform: phase >= 5 ? 'translateY(0)' : 'translateY(8px)' }}>
       העתיד מתחיל עכשיו
     </p>
@@ -130,7 +130,7 @@ const BootVariant = ({ phase }: {phase: number;}) => {
         </div>
       </div>
       <div data-ev-id="ev_eedc35c7d3" className="mt-4 h-5 flex items-center justify-center">
-        <span data-ev-id="ev_d1ca489ce9" className="text-[11px] text-white/25 font-mono tracking-widest">{STATUS[statusIdx]}</span>
+        <span data-ev-id="ev_d1ca489ce9" className="text-[11px] text-white/60 font-mono tracking-widest">{STATUS[statusIdx]}</span>
       </div>
     </div>);
 
@@ -493,7 +493,7 @@ export const SplashScreen = ({ onComplete }: Props) => {
       {/* Skip hint */}
       <div data-ev-id="ev_32fdcf9877" className={'absolute bottom-8 left-0 right-0 text-center transition-all duration-500 ' + (phase >= 1 ? 'opacity-100' : 'opacity-0')}
       style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}>
-        <span data-ev-id="ev_bf53366c0b" className="text-[11px] text-white/15 tracking-wider">הקש לדילוג</span>
+        <span data-ev-id="ev_bf53366c0b" className="text-[11px] text-white/60 tracking-wider">הקש לדילוג</span>
       </div>
     </div>);
 

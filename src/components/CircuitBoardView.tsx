@@ -268,9 +268,9 @@ export const CircuitBoardView = ({
         <div data-ev-id="ev_3730130583" className="relative z-10 flex items-center justify-between px-4 sm:px-6 py-3 border-b border-white/[0.04]">
           <div data-ev-id="ev_6b3f1d513d" className="flex items-center gap-2">
             <Cpu className="w-4 h-4 text-cyan-400/40" />
-            <span data-ev-id="ev_cefa1f50a6" className="text-[11px] font-mono text-white/25 tracking-wider">nVISION PCB v2.0</span>
+            <span data-ev-id="ev_cefa1f50a6" className="text-[11px] font-mono text-white/60 tracking-wider">nVISION PCB v2.0</span>
           </div>
-          <div data-ev-id="ev_0dc5ec5186" className="flex items-center gap-3 text-[9px] font-mono text-white/15">
+          <div data-ev-id="ev_0dc5ec5186" className="flex items-center gap-3 text-[9px] font-mono text-white/60">
             <span data-ev-id="ev_9f489c88d9" className="flex items-center gap-1">
               <span data-ev-id="ev_de4e3cfb7f" className="w-1.5 h-1.5 rounded-full bg-green-500/50 animate-pulse" />
               POWER ON
@@ -325,7 +325,7 @@ export const CircuitBoardView = ({
                     }} />
                     )}
                       </div>
-                      <span data-ev-id="ev_34d29faa84" className="text-[8px] font-mono text-white/10 tracking-widest">DATA BUS</span>
+                      <span data-ev-id="ev_34d29faa84" className="text-[8px] font-mono text-white/60 tracking-widest">DATA BUS</span>
                       <div data-ev-id="ev_7b392bc8bf" className="flex items-center gap-1">
                         {[0, 1, 2, 3, 4, 5, 6, 7].map((b) =>
                     <div data-ev-id="ev_54c9f95aa1"
@@ -349,7 +349,7 @@ export const CircuitBoardView = ({
 
         {/* Bottom status bar */}
         {show() &&
-        <div data-ev-id="ev_1b88a7268d" className="relative z-10 flex items-center justify-between px-4 sm:px-6 py-2.5 border-t border-white/[0.04] text-[8px] font-mono text-white/12 animate-in fade-in duration-500">
+        <div data-ev-id="ev_1b88a7268d" className="relative z-10 flex items-center justify-between px-4 sm:px-6 py-2.5 border-t border-white/[0.04] text-[8px] font-mono text-white/60 animate-in fade-in duration-500">
             <span data-ev-id="ev_b1364f1d21">PCB.REV.4 · FR-4 SUBSTRATE</span>
             <div data-ev-id="ev_54d12d1085" className="flex items-center gap-2">
               <span data-ev-id="ev_d033f51575" className="text-green-400/30">✓ ALL CIRCUITS NOMINAL</span>
@@ -474,7 +474,7 @@ const ChipComponent = ({
                 IC{String(index + 1).padStart(2, '0')}
               </span>
             </div>
-            <p data-ev-id="ev_6f2718041f" className="text-white/30 text-xs truncate mt-0.5">
+            <p data-ev-id="ev_6f2718041f" className="text-white/60 text-xs truncate mt-0.5">
               {link.subtitle}
             </p>
             {/* Chip details on hover */}
@@ -485,7 +485,7 @@ const ChipComponent = ({
               opacity: isActive ? 1 : 0
             }}>
 
-              <p data-ev-id="ev_2f985aa963" className="text-white/40 text-xs leading-relaxed mt-1 line-clamp-2">
+              <p data-ev-id="ev_2f985aa963" className="text-white/60 text-xs leading-relaxed mt-1 line-clamp-2">
                 {link.description}
               </p>
             </div>

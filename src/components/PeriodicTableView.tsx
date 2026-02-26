@@ -122,11 +122,11 @@ export const PeriodicTableView = ({
         <div data-ev-id="ev_b75b2be8bf" className="flex items-center justify-between px-4 sm:px-6 py-3 border-b border-white/[0.04]">
           <div data-ev-id="ev_99b76c6dbe" className="flex items-center gap-2">
             <FlaskConical className="w-4 h-4 text-cyan-400/40" />
-            <span data-ev-id="ev_7e3110b918" className="text-[12px] font-bold text-white/30">
+            <span data-ev-id="ev_7e3110b918" className="text-[12px] font-bold text-white/60">
               nVision טבלה מחזורית
             </span>
           </div>
-          <div data-ev-id="ev_6d83cd5bc8" className="flex items-center gap-3 text-[9px] text-white/15 font-mono flex-wrap">
+          <div data-ev-id="ev_6d83cd5bc8" className="flex items-center gap-3 text-[9px] text-white/60 font-mono flex-wrap">
             {sections.map((section, sIdx) =>
             <span data-ev-id="ev_6f712891d4" key={section.id} className="flex items-center gap-1.5">
                 <span data-ev-id="ev_c31b797d01" className="w-3 h-2 rounded-sm" style={{ backgroundColor: `${PT_COLORS[sIdx % PT_COLORS.length]}40` }} />
@@ -204,7 +204,7 @@ export const PeriodicTableView = ({
         }
 
         {/* Footer */}
-        <div data-ev-id="ev_711e55da8a" className="flex items-center justify-center px-4 py-2.5 border-t border-white/[0.03] text-[8px] font-mono text-white/10">
+        <div data-ev-id="ev_711e55da8a" className="flex items-center justify-center px-4 py-2.5 border-t border-white/[0.03] text-[8px] font-mono text-white/60">
           nVision Periodic Table · {allLinks.length} elements · 2 groups · © 2024
         </div>
       </div>
@@ -418,16 +418,16 @@ const ElementDetailPanel = ({
               {element.category}
             </span>
             <span data-ev-id="ev_eea686932e"
-            className="text-[8px] px-2 py-0.5 rounded-full bg-white/[0.03] text-white/20 font-mono">
+            className="text-[8px] px-2 py-0.5 rounded-full bg-white/[0.03] text-white/60 font-mono">
 
               #{element.number}
             </span>
           </div>
-          <p data-ev-id="ev_b487c9857e" className="text-white/30 text-xs mt-0.5">{link.subtitle}</p>
-          <p data-ev-id="ev_0fd8a8a7a4" className="text-white/45 text-xs mt-1.5 leading-relaxed">{link.description}</p>
+          <p data-ev-id="ev_b487c9857e" className="text-white/60 text-xs mt-0.5">{link.subtitle}</p>
+          <p data-ev-id="ev_0fd8a8a7a4" className="text-white/60 text-xs mt-1.5 leading-relaxed">{link.description}</p>
 
           {/* Properties row */}
-          <div data-ev-id="ev_34b01f0051" className="flex items-center gap-4 mt-3 text-[9px] font-mono text-white/20">
+          <div data-ev-id="ev_34b01f0051" className="flex items-center gap-4 mt-3 text-[9px] font-mono text-white/60">
             <span data-ev-id="ev_6f91a9e26c">מספר אטומי: <strong data-ev-id="ev_eb64cf6e62" style={{ color: `${link.color}80` }}>{element.number}</strong></span>
             <span data-ev-id="ev_48a1c310b5">משקל: <strong data-ev-id="ev_5b172bf764" style={{ color: `${link.color}80` }}>{element.weight}</strong></span>
             <span data-ev-id="ev_13312a595d">קטגוריה: <strong data-ev-id="ev_deac55a1fc" style={{ color: `${link.color}80` }}>{element.category}</strong></span>
@@ -451,7 +451,7 @@ const ElementDetailPanel = ({
             </a>
             <button data-ev-id="ev_ffdb2d7dee"
             onClick={onClose}
-            className="text-xs px-3 py-1.5 rounded-lg text-white/25 hover:text-white/40 hover:bg-white/[0.04] transition-colors">
+            className="text-xs px-3 py-1.5 rounded-lg text-white/60 hover:text-white/70 hover:bg-white/[0.04] transition-colors">
 
               סגור
             </button>

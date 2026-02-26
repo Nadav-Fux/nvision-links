@@ -354,7 +354,7 @@ export const BrainMRIView = ({ sections, visible }: BrainMRIViewProps) => {
               className={`px-3 py-1 rounded text-[10px] font-mono transition-all flex-shrink-0 flex items-center gap-1.5 ${
               isActive ?
               'text-white/80 border' :
-              'text-white/20 hover:text-white/40 border border-transparent'}`
+              'text-white/60 hover:text-white/70 border border-transparent'}`
               }
               style={{
                 borderColor: isActive ? color + '40' : undefined,

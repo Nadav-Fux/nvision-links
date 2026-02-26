@@ -85,7 +85,7 @@ export const LinkEditor = ({ link, sectionId, onSave, onDelete, onCancel }: Link
         <h3 data-ev-id="ev_f2f4ebc3e6" className="text-white/80 font-semibold text-sm">
           {link ? 'עריכת קישור' : 'קישור חדש'}
         </h3>
-        <button data-ev-id="ev_a85c93eb87" onClick={onCancel} aria-label="ביטול" className="text-white/30 hover:text-white/60 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
+        <button data-ev-id="ev_a85c93eb87" onClick={onCancel} aria-label="ביטול" className="text-white/60 hover:text-white/60 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
           <X className="w-4 h-4" aria-hidden="true" />
         </button>
       </div>
@@ -93,11 +93,11 @@ export const LinkEditor = ({ link, sectionId, onSave, onDelete, onCancel }: Link
       {/* Title + URL */}
       <div data-ev-id="ev_f594faa622" className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div data-ev-id="ev_f33e8ae1bc">
-          <label data-ev-id="ev_c51618d650" htmlFor={`${formId}-title`} className="text-white/50 text-xs mb-1 block">כותרת *</label>
+          <label data-ev-id="ev_c51618d650" htmlFor={`${formId}-title`} className="text-white/60 text-xs mb-1 block">כותרת *</label>
           <input data-ev-id="ev_5059e4dd06" id={`${formId}-title`} value={title} onChange={(e) => setTitle(e.target.value)} placeholder="שם הקישור" required className="w-full px-3 py-2 bg-white/[0.06] border border-white/[0.1] rounded-lg text-white text-sm focus:outline-none focus:ring-1 focus:ring-primary/50" />
         </div>
         <div data-ev-id="ev_2fbf8feef4">
-          <label data-ev-id="ev_e33d8fa499" htmlFor={`${formId}-url`} className="text-white/50 text-xs mb-1 block">כתובת URL *</label>
+          <label data-ev-id="ev_e33d8fa499" htmlFor={`${formId}-url`} className="text-white/60 text-xs mb-1 block">כתובת URL *</label>
           <input data-ev-id="ev_4a4878d3cb"
           id={`${formId}-url`}
           value={url}
@@ -120,13 +120,13 @@ export const LinkEditor = ({ link, sectionId, onSave, onDelete, onCancel }: Link
 
       {/* Subtitle */}
       <div data-ev-id="ev_b5e49fdc57">
-        <label data-ev-id="ev_588fce36f8" htmlFor={`${formId}-subtitle`} className="text-white/50 text-xs mb-1 block">כותרת משנה</label>
+        <label data-ev-id="ev_588fce36f8" htmlFor={`${formId}-subtitle`} className="text-white/60 text-xs mb-1 block">כותרת משנה</label>
         <input data-ev-id="ev_7c86b100c1" id={`${formId}-subtitle`} value={subtitle} onChange={(e) => setSubtitle(e.target.value)} placeholder="תיאור קצר" className="w-full px-3 py-2 bg-white/[0.06] border border-white/[0.1] rounded-lg text-white text-sm focus:outline-none focus:ring-1 focus:ring-primary/50" />
       </div>
 
       {/* Description */}
       <div data-ev-id="ev_b25306503f">
-        <label data-ev-id="ev_b4d16d7acf" htmlFor={`${formId}-desc`} className="text-white/50 text-xs mb-1 block">תיאור מפורט</label>
+        <label data-ev-id="ev_b4d16d7acf" htmlFor={`${formId}-desc`} className="text-white/60 text-xs mb-1 block">תיאור מפורט</label>
         <textarea data-ev-id="ev_7a1aada6f5" id={`${formId}-desc`} value={description} onChange={(e) => setDescription(e.target.value)} rows={2} placeholder="תיאור שיופיע בריחוף" className="w-full px-3 py-2 bg-white/[0.06] border border-white/[0.1] rounded-lg text-white text-sm resize-none focus:outline-none focus:ring-1 focus:ring-primary/50" />
       </div>
 
@@ -134,7 +134,7 @@ export const LinkEditor = ({ link, sectionId, onSave, onDelete, onCancel }: Link
       <div data-ev-id="ev_9a79ab0d0d" className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {/* Tag */}
         <div data-ev-id="ev_d72d43c5ae">
-          <label data-ev-id="ev_6647a15c81" htmlFor={`${formId}-tag`} className="text-white/50 text-xs mb-1 flex items-center gap-1">
+          <label data-ev-id="ev_6647a15c81" htmlFor={`${formId}-tag`} className="text-white/60 text-xs mb-1 flex items-center gap-1">
             <Tag className="w-3 h-3" aria-hidden="true" />
             תגית
           </label>
@@ -162,14 +162,14 @@ export const LinkEditor = ({ link, sectionId, onSave, onDelete, onCancel }: Link
 
                 {selectedTag.label}
               </span>
-              <span data-ev-id="ev_a09e994884" className="text-white/30 text-[10px]">תצוגה מקדימה</span>
+              <span data-ev-id="ev_a09e994884" className="text-white/60 text-[10px]">תצוגה מקדימה</span>
             </div>
           }
         </div>
 
         {/* Affiliate Benefit */}
         <div data-ev-id="ev_3cac40ca02">
-          <label data-ev-id="ev_d49e780fa3" htmlFor={`${formId}-affiliate`} className="text-white/50 text-xs mb-1 flex items-center gap-1">
+          <label data-ev-id="ev_d49e780fa3" htmlFor={`${formId}-affiliate`} className="text-white/60 text-xs mb-1 flex items-center gap-1">
             <Gift className="w-3 h-3" aria-hidden="true" />
             הטבת שותפים
           </label>
@@ -180,7 +180,7 @@ export const LinkEditor = ({ link, sectionId, onSave, onDelete, onCancel }: Link
           placeholder="למשל: 5$ חינם בהרשמה..."
           className="w-full px-3 py-2 bg-white/[0.06] border border-white/[0.1] rounded-lg text-white text-sm focus:outline-none focus:ring-1 focus:ring-primary/50" />
 
-          <p data-ev-id="ev_2742b9e0e1" className="mt-0.5 text-white/25 text-[10px]">הטקסט שיופיע ליד הקישור עם אייקון 🎁</p>
+          <p data-ev-id="ev_2742b9e0e1" className="mt-0.5 text-white/60 text-[10px]">הטקסט שיופיע ליד הקישור עם אייקון 🎁</p>
         </div>
       </div>
 
@@ -188,7 +188,7 @@ export const LinkEditor = ({ link, sectionId, onSave, onDelete, onCancel }: Link
       <div data-ev-id="ev_a60327ad70" className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         {/* Icon */}
         <div data-ev-id="ev_ffb1bef181">
-          <label data-ev-id="ev_2a0b5264eb" id={`${formId}-icon-label`} className="text-white/50 text-xs mb-1 block">אייקון</label>
+          <label data-ev-id="ev_2a0b5264eb" id={`${formId}-icon-label`} className="text-white/60 text-xs mb-1 block">אייקון</label>
           <div data-ev-id="ev_22545cd7e8" className="relative">
             <button data-ev-id="ev_ecde35a772"
             type="button"
@@ -230,7 +230,7 @@ export const LinkEditor = ({ link, sectionId, onSave, onDelete, onCancel }: Link
 
         {/* Color */}
         <div data-ev-id="ev_f8e5ea3399">
-          <label data-ev-id="ev_56b9b310de" id={`${formId}-color-label`} className="text-white/50 text-xs mb-1 block">צבע</label>
+          <label data-ev-id="ev_56b9b310de" id={`${formId}-color-label`} className="text-white/60 text-xs mb-1 block">צבע</label>
           <div data-ev-id="ev_528fa810ec" role="radiogroup" aria-labelledby={`${formId}-color-label`} className="flex flex-wrap gap-1">
             {COLOR_PRESETS.map((c) =>
             <button data-ev-id="ev_022bd7ad9a"
@@ -248,7 +248,7 @@ export const LinkEditor = ({ link, sectionId, onSave, onDelete, onCancel }: Link
 
         {/* Animation */}
         <div data-ev-id="ev_209d848277">
-          <label data-ev-id="ev_dfd234e9a4" htmlFor={`${formId}-anim`} className="text-white/50 text-xs mb-1 block">אנימציה</label>
+          <label data-ev-id="ev_dfd234e9a4" htmlFor={`${formId}-anim`} className="text-white/60 text-xs mb-1 block">אנימציה</label>
           <select data-ev-id="ev_7d7888364e"
           id={`${formId}-anim`}
           value={animation}
@@ -273,7 +273,7 @@ export const LinkEditor = ({ link, sectionId, onSave, onDelete, onCancel }: Link
       <div data-ev-id="ev_d3853d7e5c" className="border border-white/[0.06] rounded-xl overflow-hidden">
           <div data-ev-id="ev_0d6971a271" className="flex items-center gap-1.5 px-3 py-1.5 border-b border-white/[0.04] bg-white/[0.02]">
             <Eye className="w-3 h-3 text-white/25" aria-hidden="true" />
-            <span data-ev-id="ev_6f68fdc921" className="text-white/30 text-[10px] font-medium">תצוגה מקדימה</span>
+            <span data-ev-id="ev_6f68fdc921" className="text-white/60 text-[10px] font-medium">תצוגה מקדימה</span>
           </div>
           <div data-ev-id="ev_31f55b2083"
         className="p-3.5 flex items-center gap-3"
@@ -314,7 +314,7 @@ export const LinkEditor = ({ link, sectionId, onSave, onDelete, onCancel }: Link
                 </p>
             }
               {description &&
-            <p data-ev-id="ev_ba950cda80" className="text-white/50 text-xs mt-1 line-clamp-1">{description}</p>
+            <p data-ev-id="ev_ba950cda80" className="text-white/60 text-xs mt-1 line-clamp-1">{description}</p>
             }
             </div>
             <ExternalLink className="w-4 h-4 flex-shrink-0" style={{ color: `${color}80` }} aria-hidden="true" />
@@ -334,7 +334,7 @@ export const LinkEditor = ({ link, sectionId, onSave, onDelete, onCancel }: Link
           שמור
         </button>
         {url &&
-        <a data-ev-id="ev_b9496cb86b" href={url} target="_blank" rel="noopener noreferrer" aria-label={`פתח קישור בחלון חדש: ${title || url}`} className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-white/40 hover:text-white/70 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+        <a data-ev-id="ev_b9496cb86b" href={url} target="_blank" rel="noopener noreferrer" aria-label={`פתח קישור בחלון חדש: ${title || url}`} className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-white/60 hover:text-white/70 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
             <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
             פתח
           </a>

@@ -56,9 +56,9 @@ const DemoShell = ({ children, duration, label }: DemoShellProps) => {
     <div data-ev-id="ev_39feb1be32" className="relative">
       <div data-ev-id="ev_9df194d2ed" key={key} className="entrance-demo">{children(phase, elapsed)}</div>
       <button data-ev-id="ev_f9a10dc746" onClick={replay} className="absolute top-3 left-3 z-20 w-8 h-8 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 flex items-center justify-center transition-colors" aria-label="הפעל מחדש">
-        <RotateCcw className="w-3.5 h-3.5 text-white/50" />
+        <RotateCcw className="w-3.5 h-3.5 text-white/60" />
       </button>
-      <div data-ev-id="ev_0767648c71" className="absolute bottom-3 right-3 z-20 px-2 py-0.5 rounded text-[10px] text-white/20 bg-black/40 backdrop-blur-sm">{label}</div>
+      <div data-ev-id="ev_0767648c71" className="absolute bottom-3 right-3 z-20 px-2 py-0.5 rounded text-[10px] text-white/60 bg-black/40 backdrop-blur-sm">{label}</div>
     </div>);
 
 };
@@ -112,7 +112,7 @@ export const BootSequenceDemo = () => {
             <span data-ev-id="ev_adb2f4cbc5" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-lg font-mono font-bold text-cyan-400" style={{ animation: phase >= 2 ? 'ent-counter-glow 1.5s ease infinite' : 'none' }}>
               {phase >= 2 ? Math.min(100, Math.floor((elapsed - 700) / 10)) : 0}%
             </span>
-            <span data-ev-id="ev_00d53279f0" className="text-[9px] text-white/20 font-mono mt-3 tracking-wider">initializing neural core...</span>
+            <span data-ev-id="ev_00d53279f0" className="text-[9px] text-white/60 font-mono mt-3 tracking-wider">initializing neural core...</span>
           </div>
 
           {phase === 3 && burstParticles.map((p, i) =>

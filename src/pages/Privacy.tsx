@@ -34,7 +34,7 @@ const Privacy = () => {
             <Shield className="w-7 h-7 text-primary" aria-hidden="true" />
             <h1 data-ev-id="ev_5382af7452" className="text-2xl sm:text-3xl font-bold text-white">מדיניות פרטיות</h1>
           </div>
-          <p data-ev-id="ev_ef1624d9dd" className="text-white/50 text-sm mb-8">עודכן לאחרונה: {new Date().toLocaleDateString('he-IL')}</p>
+          <p data-ev-id="ev_ef1624d9dd" className="text-white/60 text-sm mb-8">עודכן לאחרונה: {new Date().toLocaleDateString('he-IL')}</p>
 
           {/* Summary box */}
           <section data-ev-id="ev_fa35726e4f" className="mb-8">
@@ -195,7 +195,7 @@ const Privacy = () => {
               </div>
               <div data-ev-id="ev_a3f4c7150e" className="flex items-center gap-2 mt-3">
                 <MessageCircle className="w-4 h-4 text-green-400" aria-hidden="true" />
-                <span data-ev-id="ev_38876d74be" className="text-white/50 text-sm">וואטסאפ בלבד:</span>
+                <span data-ev-id="ev_38876d74be" className="text-white/60 text-sm">וואטסאפ בלבד:</span>
                 <a data-ev-id="ev_2f27afc3fe"
                 href="https://wa.me/972535300952"
                 target="_blank"
@@ -232,7 +232,7 @@ const Privacy = () => {
                   </li>
                 )}
               </ul>
-              <p data-ev-id="ev_6789085e91" className="text-white/50 text-xs mt-4 leading-relaxed">
+              <p data-ev-id="ev_6789085e91" className="text-white/60 text-xs mt-4 leading-relaxed">
                 מאחר שאיננו אוספים מידע אישי, זכויות אלו רלוונטיות בעיקר לשירותים החיצוניים שאליהם אתם מופנים דרך האתר.
               </p>
             </div>
@@ -254,12 +254,12 @@ const Privacy = () => {
           <div data-ev-id="ev_cc1d719f15" className="flex items-center justify-center flex-wrap gap-x-4 gap-y-2 text-xs">
             <Link
               to="/accessibility"
-              className="text-white/50 hover:text-white/70 underline underline-offset-2 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
+              className="text-white/60 hover:text-white/70 underline underline-offset-2 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
 
               הצהרת נגישות
             </Link>
             <span data-ev-id="ev_6ebfcd57d5" className="text-white/25" aria-hidden="true">|</span>
-            <span data-ev-id="ev_1fb9cca497" className="text-white/35" lang="en">nVision Digital AI © {new Date().getFullYear()}</span>
+            <span data-ev-id="ev_1fb9cca497" className="text-white/60" lang="en">nVision Digital AI © {new Date().getFullYear()}</span>
           </div>
         </footer>
       </div>

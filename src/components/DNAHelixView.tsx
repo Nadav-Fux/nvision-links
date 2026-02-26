@@ -81,7 +81,7 @@ const BasePairCard = ({ link, sIdx, delay, isActive, onHover
           </div>
           <div data-ev-id="ev_027e41e6cf" className="flex-1 min-w-0">
             <h3 data-ev-id="ev_950bae87db" className="text-[11px] font-bold truncate" style={{ color: color + 'cc' }}>{link.title}</h3>
-            <p data-ev-id="ev_9c09fdb859" className="text-[9px] truncate text-white/20">{link.subtitle}</p>
+            <p data-ev-id="ev_9c09fdb859" className="text-[9px] truncate text-white/60">{link.subtitle}</p>
           </div>
           <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-40 transition-opacity flex-shrink-0" style={{ color }} />
         </div>

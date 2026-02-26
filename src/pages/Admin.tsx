@@ -325,7 +325,7 @@ const Admin = () => {
             <Link
               to="/"
               target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-white/40 hover:text-white/70 text-xs transition-colors border border-white/[0.06] hover:border-white/[0.12] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary whitespace-nowrap flex-shrink-0">
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-white/60 hover:text-white/70 text-xs transition-colors border border-white/[0.06] hover:border-white/[0.12] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary whitespace-nowrap flex-shrink-0">
               <ExternalLink className="w-3 h-3" aria-hidden="true" />
               צפה באתר
             </Link>
@@ -338,7 +338,7 @@ const Admin = () => {
             </Link>
             <button data-ev-id="ev_48ae9aa2fc"
             onClick={() => setShowPreview(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-white/40 hover:text-white/70 text-xs transition-colors border border-white/[0.06] hover:border-white/[0.12] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary whitespace-nowrap flex-shrink-0">
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-white/60 hover:text-white/70 text-xs transition-colors border border-white/[0.06] hover:border-white/[0.12] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary whitespace-nowrap flex-shrink-0">
               <Monitor className="w-3 h-3" aria-hidden="true" />
               תצוגה מקדימה
             </button>
@@ -346,7 +346,7 @@ const Admin = () => {
             onClick={fetchData}
             disabled={loading}
             aria-label="רענן נתונים"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-white/40 hover:text-white/70 text-xs transition-colors border border-white/[0.06] hover:border-white/[0.12] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary whitespace-nowrap flex-shrink-0">
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-white/60 hover:text-white/70 text-xs transition-colors border border-white/[0.06] hover:border-white/[0.12] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary whitespace-nowrap flex-shrink-0">
               <RefreshCw className={`w-3 h-3 ${loading ? 'animate-spin' : ''}`} aria-hidden="true" />
               רענן
             </button>
@@ -458,7 +458,7 @@ const Admin = () => {
                 🔧 כלי פיתוח
               </h2>
               <div data-ev-id="ev_c468ba4f41" className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-5 space-y-2" dir="rtl">
-                <p data-ev-id="ev_548b78292c" className="text-white/30 text-xs mb-3">כלים מתקדמים לעיצוב וכיול האתר</p>
+                <p data-ev-id="ev_548b78292c" className="text-white/60 text-xs mb-3">כלים מתקדמים לעיצוב וכיול האתר</p>
                 <div data-ev-id="ev_c9fdf651c4" className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   <Link
                   to="/font-preview"
@@ -469,9 +469,9 @@ const Admin = () => {
                     <Palette className="w-5 h-5 text-cyan-400" aria-hidden="true" />
                     <div data-ev-id="ev_bd707b87c5" className="flex-1 min-w-0">
                       <div data-ev-id="ev_7a28119b5a" className="text-cyan-400/90 text-sm font-medium">בחירת טיפוגרפיה</div>
-                      <div data-ev-id="ev_a44f5f0357" className="text-white/25 text-[11px] mt-0.5">בחירה והשוואת פונטים</div>
+                      <div data-ev-id="ev_a44f5f0357" className="text-white/60 text-[11px] mt-0.5">בחירה והשוואת פונטים</div>
                     </div>
-                    <ExternalLink className="w-3.5 h-3.5 text-white/15 group-hover:text-white/30 transition-colors" aria-hidden="true" />
+                    <ExternalLink className="w-3.5 h-3.5 text-white/15 group-hover:text-white/70 transition-colors" aria-hidden="true" />
                   </Link>
                   <Link
                   to="/animation-preview"
@@ -482,9 +482,9 @@ const Admin = () => {
                     <Film className="w-5 h-5 text-purple-400" aria-hidden="true" />
                     <div data-ev-id="ev_ad1ab28caf" className="flex-1 min-w-0">
                       <div data-ev-id="ev_86a418b281" className="text-purple-400/90 text-sm font-medium">אנימציות לוגו</div>
-                      <div data-ev-id="ev_85527fe164" className="text-white/25 text-[11px] mt-0.5">תצוגה ובחירת אנימציות</div>
+                      <div data-ev-id="ev_85527fe164" className="text-white/60 text-[11px] mt-0.5">תצוגה ובחירת אנימציות</div>
                     </div>
-                    <ExternalLink className="w-3.5 h-3.5 text-white/15 group-hover:text-white/30 transition-colors" aria-hidden="true" />
+                    <ExternalLink className="w-3.5 h-3.5 text-white/15 group-hover:text-white/70 transition-colors" aria-hidden="true" />
                   </Link>
                   <Link
                   to="/entrance-preview"
@@ -495,9 +495,9 @@ const Admin = () => {
                     <Rocket className="w-5 h-5 text-emerald-400" aria-hidden="true" />
                     <div data-ev-id="ev_92b9366758" className="flex-1 min-w-0">
                       <div data-ev-id="ev_a359e024ab" className="text-emerald-400/90 text-sm font-medium">אנימציות כניסה</div>
-                      <div data-ev-id="ev_a77885db61" className="text-white/25 text-[11px] mt-0.5">אפקט כניסה לאתר</div>
+                      <div data-ev-id="ev_a77885db61" className="text-white/60 text-[11px] mt-0.5">אפקט כניסה לאתר</div>
                     </div>
-                    <ExternalLink className="w-3.5 h-3.5 text-white/15 group-hover:text-white/30 transition-colors" aria-hidden="true" />
+                    <ExternalLink className="w-3.5 h-3.5 text-white/15 group-hover:text-white/70 transition-colors" aria-hidden="true" />
                   </Link>
                   <Link
                   to="/admin/preview"
@@ -508,9 +508,9 @@ const Admin = () => {
                     <Wrench className="w-5 h-5 text-amber-400" aria-hidden="true" />
                     <div data-ev-id="ev_c0375494f6" className="flex-1 min-w-0">
                       <div data-ev-id="ev_8d832b9800" className="text-amber-400/90 text-sm font-medium">תצוגה + כלי פיתוח</div>
-                      <div data-ev-id="ev_82e1f74a08" className="text-white/25 text-[11px] mt-0.5">צפייה באתר עם כל הכלים</div>
+                      <div data-ev-id="ev_82e1f74a08" className="text-white/60 text-[11px] mt-0.5">צפייה באתר עם כל הכלים</div>
                     </div>
-                    <ExternalLink className="w-3.5 h-3.5 text-white/15 group-hover:text-white/30 transition-colors" aria-hidden="true" />
+                    <ExternalLink className="w-3.5 h-3.5 text-white/15 group-hover:text-white/70 transition-colors" aria-hidden="true" />
                   </Link>
                 </div>
               </div>

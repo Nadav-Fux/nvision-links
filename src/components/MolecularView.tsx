@@ -558,12 +558,12 @@ const AtomDetailCard = ({
                 return sec ? `${typeof sec.emoji === 'string' ? sec.emoji : ''} ${sec.title}` : atom.section;
               })()}
             </span>
-            <span data-ev-id="ev_241cbc2740" className="text-[8px] text-white/15 font-mono">
+            <span data-ev-id="ev_241cbc2740" className="text-[8px] text-white/60 font-mono">
               {atom.bonds.length} bonds
             </span>
           </div>
-          <p data-ev-id="ev_8449d543e1" className="text-white/30 text-xs mt-0.5">{link.subtitle}</p>
-          <p data-ev-id="ev_2c9a481092" className="text-white/45 text-xs mt-1.5 leading-relaxed">{link.description}</p>
+          <p data-ev-id="ev_8449d543e1" className="text-white/60 text-xs mt-0.5">{link.subtitle}</p>
+          <p data-ev-id="ev_2c9a481092" className="text-white/60 text-xs mt-1.5 leading-relaxed">{link.description}</p>
 
           <div data-ev-id="ev_81b4c55ea1" className="flex items-center gap-2 mt-3">
             <a data-ev-id="ev_12c2a408ff"
@@ -583,7 +583,7 @@ const AtomDetailCard = ({
             </a>
             <button data-ev-id="ev_f558fab90f"
             onClick={onClose}
-            className="text-xs px-3 py-1.5 rounded-lg text-white/25 hover:text-white/40 hover:bg-white/[0.04] transition-colors">
+            className="text-xs px-3 py-1.5 rounded-lg text-white/60 hover:text-white/70 hover:bg-white/[0.04] transition-colors">
 
               סגור
             </button>

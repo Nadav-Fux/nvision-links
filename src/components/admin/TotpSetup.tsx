@@ -174,7 +174,7 @@ export const TotpSetup = () => {
           <ShieldCheck className="w-6 h-6 text-green-400 flex-shrink-0" />
           <div data-ev-id="ev_af52dc4984">
             <p data-ev-id="ev_578b965419" className="text-green-300 font-semibold text-sm">אימות דו-שלבי פעיל</p>
-            <p data-ev-id="ev_a2229c35dd" className="text-white/40 text-xs mt-0.5">
+            <p data-ev-id="ev_a2229c35dd" className="text-white/60 text-xs mt-0.5">
               {status.backup_codes_remaining} קודי גיבוי נותרו
             </p>
           </div>
@@ -210,7 +210,7 @@ export const TotpSetup = () => {
               </button>
               <button data-ev-id="ev_2980769e49"
             onClick={() => {setShowDisable(false);setError('');setDisableCode('');}}
-            className="px-3 py-2 text-white/40 text-sm hover:text-white/60 transition-colors">
+            className="px-3 py-2 text-white/60 text-sm hover:text-white/60 transition-colors">
 
                 ביטול
               </button>
@@ -237,7 +237,7 @@ export const TotpSetup = () => {
             <Shield className="w-6 h-6 text-yellow-400 flex-shrink-0" />
             <div data-ev-id="ev_2b36101718">
               <p data-ev-id="ev_b67dd98a0d" className="text-yellow-300 font-semibold text-sm">אימות דו-שלבי לא פעיל</p>
-              <p data-ev-id="ev_e13b6f79b5" className="text-white/40 text-xs mt-0.5">
+              <p data-ev-id="ev_e13b6f79b5" className="text-white/60 text-xs mt-0.5">
                 הוסיפו שכבת אבטחה נוספת עם Google Authenticator
               </p>
             </div>
@@ -262,7 +262,7 @@ export const TotpSetup = () => {
               <Smartphone className="w-4 h-4 text-primary" />
               שלב 1: סריקת QR
             </h3>
-            <p data-ev-id="ev_d1bb3b61fc" className="text-white/50 text-xs leading-relaxed">
+            <p data-ev-id="ev_d1bb3b61fc" className="text-white/60 text-xs leading-relaxed">
               פתחו את <span data-ev-id="ev_4bb1efa0e5" className="text-primary font-medium">Google Authenticator</span> על
               <span data-ev-id="ev_e1e61d49c1" className="text-white/80 font-medium"> שני הטלפונים</span> וסרקו את הקוד הזה.
               <br data-ev-id="ev_7d2962fc6f" />
@@ -287,14 +287,14 @@ export const TotpSetup = () => {
 
           {/* Manual secret */}
           <div data-ev-id="ev_6e26c41b1c" className="p-3 rounded-xl bg-white/[0.03] border border-white/[0.06]">
-            <p data-ev-id="ev_4c90085429" className="text-white/40 text-xs mb-1.5">לא מצליחים לסרוק? הזינו ידנית:</p>
+            <p data-ev-id="ev_4c90085429" className="text-white/60 text-xs mb-1.5">לא מצליחים לסרוק? הזינו ידנית:</p>
             <div data-ev-id="ev_4da073e2d9" className="flex items-center gap-2">
               <code data-ev-id="ev_db67fee45d" className="flex-1 px-3 py-1.5 bg-white/[0.05] rounded-lg text-xs font-mono text-primary/80 break-all">
                 {showSecret ? secret : '•'.repeat(secret.length)}
               </code>
               <button data-ev-id="ev_7e3710d80e"
             onClick={() => setShowSecret(!showSecret)}
-            className="p-1.5 rounded-lg text-white/30 hover:text-white/60 transition-colors"
+            className="p-1.5 rounded-lg text-white/60 hover:text-white/60 transition-colors"
             aria-label={showSecret ? 'הסתר מפתח' : 'הצג מפתח'}>
 
                 {showSecret ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
@@ -305,7 +305,7 @@ export const TotpSetup = () => {
               setCopied(true);
               setTimeout(() => setCopied(false), 1500);
             }}
-            className="p-1.5 rounded-lg text-white/30 hover:text-white/60 transition-colors"
+            className="p-1.5 rounded-lg text-white/60 hover:text-white/60 transition-colors"
             aria-label="העתק מפתח">
 
                 {copied ? <Check className="w-3.5 h-3.5 text-green-400" /> : <Copy className="w-3.5 h-3.5" />}
@@ -333,7 +333,7 @@ export const TotpSetup = () => {
               <KeyRound className="w-4 h-4 text-primary" />
               שלב 2: אימות קוד
             </h3>
-            <p data-ev-id="ev_b17b99d375" className="text-white/50 text-xs leading-relaxed">
+            <p data-ev-id="ev_b17b99d375" className="text-white/60 text-xs leading-relaxed">
               הזינו את הקוד בן 6 הספרות שמופיע ב-Google Authenticator באחד הטלפונים:
             </p>
           </div>
@@ -363,7 +363,7 @@ export const TotpSetup = () => {
               </button>
               <button data-ev-id="ev_01f58061d5"
             onClick={() => {setStep('qr');setVerifyCode('');setError('');}}
-            className="px-4 py-2.5 text-white/40 text-sm hover:text-white/60 transition-colors">
+            className="px-4 py-2.5 text-white/60 text-sm hover:text-white/60 transition-colors">
 
                 חזרה
               </button>
@@ -387,7 +387,7 @@ export const TotpSetup = () => {
               <ShieldCheck className="w-4 h-4" />
               2FA הופעל בהצלחה!
             </h3>
-            <p data-ev-id="ev_4e7f5ffcb3" className="text-white/50 text-xs">
+            <p data-ev-id="ev_4e7f5ffcb3" className="text-white/60 text-xs">
               מעכשיו תידרשו להזין קוד מ-Google Authenticator בכל כניסה.
             </p>
           </div>
@@ -397,7 +397,7 @@ export const TotpSetup = () => {
               <AlertCircle className="w-4 h-4" />
               קודי גיבוי — שמרו במקום בטוח!
             </h3>
-            <p data-ev-id="ev_eda949be4b" className="text-white/40 text-xs mb-3">
+            <p data-ev-id="ev_eda949be4b" className="text-white/60 text-xs mb-3">
               אם תאבדו גישה לשני הטלפונים, תוכלו להשתמש בקודים האלה במקום קוד 6 ספרות.
               <br data-ev-id="ev_8599c12634" />
               <span data-ev-id="ev_fada38a819" className="text-yellow-400/80 font-medium">כל קוד גיבוי ניתן לשימוש חד-פעמי בלבד.</span>
@@ -416,7 +416,7 @@ export const TotpSetup = () => {
 
             <button data-ev-id="ev_7d62e72af4"
           onClick={copyBackupCodes}
-          className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/[0.06] text-white/50 text-xs hover:text-white/70 transition-colors">
+          className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/[0.06] text-white/60 text-xs hover:text-white/70 transition-colors">
 
               {copied ? <Check className="w-3 h-3 text-green-400" /> : <Copy className="w-3 h-3" />}
               {copied ? 'הועתק!' : 'העתק קודים'}

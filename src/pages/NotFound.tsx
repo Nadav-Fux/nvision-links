@@ -64,7 +64,7 @@ const NotFound = () => {
 
         <div data-ev-id="ev_bfa861808a" className="space-y-2">
           <h1 data-ev-id="ev_173afb4379" className="text-white/90 text-2xl sm:text-3xl font-bold">הדף לא נמצא</h1>
-          <p data-ev-id="ev_a2118ac7e4" className="text-white/40 text-base sm:text-lg leading-relaxed">
+          <p data-ev-id="ev_a2118ac7e4" className="text-white/60 text-base sm:text-lg leading-relaxed">
             נראה שהגעת לכתובת שלא קיימת. אולי הקישור השתנה, או שיש שגיאת הקלדה.
           </p>
         </div>
@@ -78,7 +78,7 @@ const NotFound = () => {
           <ArrowRight className="w-4 h-4" aria-hidden="true" />
         </Link>
 
-        <p data-ev-id="ev_1c40eac95c" className="text-white/30 text-xs mt-4" lang="en">nVision Digital AI</p>
+        <p data-ev-id="ev_1c40eac95c" className="text-white/60 text-xs mt-4" lang="en">nVision Digital AI</p>
       </main>
     </div>);
 

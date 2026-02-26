@@ -406,7 +406,7 @@ export const NeuralNetworkView = ({ sections, visible }: NeuralNetworkViewProps)
           className={`px-3 py-1 rounded text-[11px] font-mono transition-colors flex-shrink-0 flex items-center gap-1.5 ${
           activeLayer === sIdx ?
           'border text-white/90' :
-          'text-white/40 hover:text-white/60 border border-transparent'}`
+          'text-white/60 hover:text-white/60 border border-transparent'}`
           }
           style={{
             borderColor: activeLayer === sIdx ? LAYER_COLORS[sIdx % LAYER_COLORS.length] + '60' : undefined,
@@ -418,7 +418,7 @@ export const NeuralNetworkView = ({ sections, visible }: NeuralNetworkViewProps)
             style={{ backgroundColor: LAYER_COLORS[sIdx % LAYER_COLORS.length] }} />
 
               {layerNames[sIdx]}
-              <span data-ev-id="ev_f01ea94f5f" className="text-white/25 text-[9px]">({section.links.length})</span>
+              <span data-ev-id="ev_f01ea94f5f" className="text-white/60 text-[9px]">({section.links.length})</span>
             </button>
           )}
         </div>
@@ -457,7 +457,7 @@ export const NeuralNetworkView = ({ sections, visible }: NeuralNetworkViewProps)
                     <AnimatedIcon icon={hoveredNeuron.link.icon} animation={hoveredNeuron.link.animation} color={hoveredNeuron.link.color} size={14} />
                     <span data-ev-id="ev_2a7ea34e3c" className="text-white font-semibold text-[11px]">{hoveredNeuron.link.title}</span>
                   </div>
-                  <p data-ev-id="ev_b846a80483" className="text-white/50 text-[10px] leading-relaxed mb-1.5">{hoveredNeuron.link.subtitle}</p>
+                  <p data-ev-id="ev_b846a80483" className="text-white/60 text-[10px] leading-relaxed mb-1.5">{hoveredNeuron.link.subtitle}</p>
                   <div data-ev-id="ev_8a5b038465" className="flex items-center justify-between">
                     <span data-ev-id="ev_5924e7d1eb"
                   className="text-[9px] font-mono px-1.5 py-0.5 rounded"
@@ -519,7 +519,7 @@ export const NeuralNetworkView = ({ sections, visible }: NeuralNetworkViewProps)
                     <span data-ev-id="ev_ed2388e5c5" className="text-[10px] font-mono font-bold text-white/60 tracking-wide">
                       {section.emoji} {layerNames[sIdx]}
                     </span>
-                    <span data-ev-id="ev_49c07e10cb" className="text-[9px] font-mono text-white/25 mr-auto">
+                    <span data-ev-id="ev_49c07e10cb" className="text-[9px] font-mono text-white/60 mr-auto">
                       [{section.links.length} neurons]
                     </span>
                   </div>
@@ -542,11 +542,11 @@ export const NeuralNetworkView = ({ sections, visible }: NeuralNetworkViewProps)
                         <div data-ev-id="ev_8b4e236ea1" className="text-white/70 text-[11px] font-mono truncate group-hover:text-white/90 transition-colors">
                           {link.title}
                         </div>
-                        <div data-ev-id="ev_bba4b6d9f4" className="text-white/30 text-[9px] font-mono truncate">
+                        <div data-ev-id="ev_bba4b6d9f4" className="text-white/60 text-[9px] font-mono truncate">
                           {link.subtitle}
                         </div>
                       </div>
-                      <ExternalLink className="w-3 h-3 text-white/15 group-hover:text-purple-400/50 transition-colors flex-shrink-0" />
+                      <ExternalLink className="w-3 h-3 text-white/60 group-hover:text-purple-400/50 transition-colors flex-shrink-0" />
                     </a>
                   )}
                 </div>);

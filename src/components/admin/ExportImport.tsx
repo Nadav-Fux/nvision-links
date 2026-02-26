@@ -178,7 +178,7 @@ export const ExportImport = ({ onImportComplete }: ExportImportProps) => {
         <button data-ev-id="ev_e63d3d5656"
         onClick={handleExport}
         disabled={exporting || importing}
-        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-white/40 hover:text-white/70 text-xs transition-colors border border-white/[0.06] hover:border-white/[0.12] disabled:opacity-40 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-white/60 hover:text-white/70 text-xs transition-colors border border-white/[0.06] hover:border-white/[0.12] disabled:opacity-40 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
 
           {exporting ?
           <Loader2 className="w-3 h-3 animate-spin" aria-hidden="true" /> :
@@ -192,7 +192,7 @@ export const ExportImport = ({ onImportComplete }: ExportImportProps) => {
         <button data-ev-id="ev_cef31af84b"
         onClick={() => fileRef.current?.click()}
         disabled={exporting || importing}
-        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-white/40 hover:text-white/70 text-xs transition-colors border border-white/[0.06] hover:border-white/[0.12] disabled:opacity-40 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-white/60 hover:text-white/70 text-xs transition-colors border border-white/[0.06] hover:border-white/[0.12] disabled:opacity-40 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
 
           {importing ?
           <Loader2 className="w-3 h-3 animate-spin" aria-hidden="true" /> :

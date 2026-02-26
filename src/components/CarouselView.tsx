@@ -187,7 +187,7 @@ const SingleCarousel = ({ links, accentColor }: SingleCarouselProps) => {
         <button data-ev-id="ev_9f6f7578f7"
         onClick={() => {prev();interact();}}
         aria-label="הקודם"
-        className="group w-11 h-11 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white/80 hover:border-white/25 transition-all hover:scale-110 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+        className="group w-11 h-11 rounded-full border border-white/10 flex items-center justify-center text-white/60 hover:text-white/80 hover:border-white/25 transition-all hover:scale-110 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
 
           <ChevronRight className="w-4 h-4" aria-hidden="true" />
         </button>
@@ -219,7 +219,7 @@ const SingleCarousel = ({ links, accentColor }: SingleCarouselProps) => {
         <button data-ev-id="ev_9b7f135a37"
         onClick={() => {next();interact();}}
         aria-label="הבא"
-        className="group w-11 h-11 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white/80 hover:border-white/25 transition-all hover:scale-110 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+        className="group w-11 h-11 rounded-full border border-white/10 flex items-center justify-center text-white/60 hover:text-white/80 hover:border-white/25 transition-all hover:scale-110 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
 
           <ChevronLeft className="w-4 h-4" aria-hidden="true" />
         </button>
@@ -227,7 +227,7 @@ const SingleCarousel = ({ links, accentColor }: SingleCarouselProps) => {
 
       {/* Active card label */}
       <div data-ev-id="ev_fe337bb1c9" className="flex items-center justify-center gap-3 mt-3">
-        <span data-ev-id="ev_68a668d2ba" className="text-white/12 text-xs font-mono">
+        <span data-ev-id="ev_68a668d2ba" className="text-white/60 text-xs font-mono">
           {active + 1} / {total}
         </span>
         <Sparkles className="w-3 h-3 text-white/10" aria-hidden="true" />
@@ -408,7 +408,7 @@ const CoverCard = ({
               background: `linear-gradient(90deg, transparent, ${link.color}22, transparent)`
             }} />
 
-            <p data-ev-id="ev_e700fc241e" className="text-white/45 text-[13px] leading-relaxed line-clamp-3">
+            <p data-ev-id="ev_e700fc241e" className="text-white/60 text-[13px] leading-relaxed line-clamp-3">
               {link.description}
             </p>
           </div>
