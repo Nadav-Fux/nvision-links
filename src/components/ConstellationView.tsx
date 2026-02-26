@@ -29,7 +29,7 @@ export const ConstellationView = ({
   const [revealed, setRevealed] = useState(0);
   const [selectedStar, setSelectedStar] = useState<Star | null>(null);
   const [hoveredStar, setHoveredStar] = useState<Star | null>(null);
-  const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
+  const mousePosRef = useRef({ x: 0.5, y: 0.5 });
   const animRef = useRef(0);
   const starsRef = useRef<Star[]>([]);
   const bgStarsRef = useRef<{x: number;y: number;s: number;b: number;speed: number;}[]>([]);
@@ -93,10 +93,10 @@ export const ConstellationView = ({
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
     const rect = containerRef.current?.getBoundingClientRect();
     if (!rect) return;
-    setMousePos({
+    mousePosRef.current = {
       x: (e.clientX - rect.left) / rect.width,
       y: (e.clientY - rect.top) / rect.height
-    });
+    };
   }, []);
 
   // Canvas animation - background stars + constellation lines
@@ -123,8 +123,8 @@ export const ConstellationView = ({
       ctx.clearRect(0, 0, w, h);
 
       // Parallax offset
-      const px = (mousePos.x - 0.5) * 8;
-      const py = (mousePos.y - 0.5) * 8;
+      const px = (mousePosRef.current.x - 0.5) * 8;
+      const py = (mousePosRef.current.y - 0.5) * 8;
 
       // Background stars with parallax
       bgStarsRef.current.forEach((star) => {
@@ -235,11 +235,11 @@ export const ConstellationView = ({
       cancelAnimationFrame(animRef.current);
       window.removeEventListener('resize', resize);
     };
-  }, [mousePos, revealed, sections]);
+  }, [revealed, sections]);
 
   // Parallax offset for HTML elements
-  const px = (mousePos.x - 0.5) * 8;
-  const py = (mousePos.y - 0.5) * 8;
+  const px = (mousePosRef.current.x - 0.5) * 8;
+  const py = (mousePosRef.current.y - 0.5) * 8;
 
   return (
     <div data-ev-id="ev_caf080b184"
