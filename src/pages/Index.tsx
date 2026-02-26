@@ -139,7 +139,12 @@ const Index = ({ viewOverride }: IndexProps = {}) => {
       {/* Dynamic SEO meta from DB config */}
       <PageMeta
         title={config?.site_title ? `${config.site_title} — קהילת בינה מלאכותית` : 'nVision Digital AI — קהילת בינה מלאכותית'}
-        description={config?.site_description || 'קהילת nVision Digital AI — כלים, קבוצות ומשאבים בעולם הבינה המלאכותית'} />
+        description={config?.site_description || 'קהילת nVision Digital AI — כלים, קבוצות ומשאבים בעולם הבינה המלאכותית'}
+        ogTitle={config?.og_title || undefined}
+        ogDescription={config?.og_description || undefined}
+        ogImageUrl={config?.og_image_url || undefined}
+        canonicalUrl={config?.canonical_url || undefined}
+        metaKeywords={config?.meta_keywords || undefined} />
 
 
       {/* Skip Navigation — WCAG 2.4.1 */}
