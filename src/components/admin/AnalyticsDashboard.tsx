@@ -121,8 +121,8 @@ export const AnalyticsDashboard = () => {
     return (
       <div data-ev-id="ev_2df172a22e" className="bg-[#1a1a2e] border border-white/10 rounded-lg px-3 py-2 shadow-xl text-xs">
         <p data-ev-id="ev_36d13d3bb3" className="text-white/60 mb-1">{label}</p>
-        {payload.map((entry, i: number) =>
-        <p data-ev-id="ev_b1022553c8" key={i} style={{ color: entry.color }} className="font-medium">
+        {payload.map((entry: {color: string;name: string;value: number;}) =>
+        <p data-ev-id="ev_b1022553c8" key={entry.name} style={{ color: entry.color }} className="font-medium">
             {entry.name}: {entry.value}
           </p>
         )}
@@ -347,7 +347,7 @@ export const AnalyticsDashboard = () => {
                 const maxCount = data.topLinks[0]?.count || 1;
                 const pct = link.count / maxCount * 100;
                 return (
-                  <div data-ev-id="ev_872c390735" key={i} className="group">
+                  <div data-ev-id="ev_872c390735" key={link.name} className="group">
                         <div data-ev-id="ev_d2de427fd4" className="flex items-center justify-between mb-1">
                           <span data-ev-id="ev_1827f9cf85" className="text-white/60 text-xs truncate max-w-[70%]" title={link.name}>
                             {link.name}
@@ -378,8 +378,8 @@ export const AnalyticsDashboard = () => {
                     innerRadius={35}
                     strokeWidth={0}>
 
-                        {data.topLinks.slice(0, 8).map((_, i) =>
-                    <Cell key={i} fill={COLORS[i % COLORS.length]} />
+                        {data.topLinks.slice(0, 8).map((entry, i) =>
+                    <Cell key={entry.name} fill={COLORS[i % COLORS.length]} />
                     )}
                       </Pie>
                       <Tooltip content={<CustomTooltip />} />
@@ -412,7 +412,7 @@ export const AnalyticsDashboard = () => {
                   <div data-ev-id="ev_fa4423672e" className="flex flex-wrap gap-2">
                     {data.topViews.slice(0, 8).map((v, i) =>
                 <span data-ev-id="ev_ff3ab33fab"
-                key={i}
+                key={v.name}
                 className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs border border-white/[0.08] bg-white/[0.02]">
 
                         <span data-ev-id="ev_31e4045d72" className="w-2 h-2 rounded-full" style={{ backgroundColor: COLORS[i % COLORS.length] }} />

@@ -37,6 +37,7 @@ export const LinkCard = ({ title, subtitle, description, url, icon, color, anima
   const [isHovered, setIsHovered] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [faviconFailed, setFaviconFailed] = useState(false);
   const cardRef = useRef<HTMLAnchorElement>(null);
 
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -141,16 +142,16 @@ export const LinkCard = ({ title, subtitle, description, url, icon, color, anima
               'none'
             }}>
 
-              {faviconUrl ?
+              {faviconUrl && !faviconFailed ?
               <img data-ev-id="ev_7168a1e5e3"
               src={faviconUrl}
-              alt=""
+              alt={title}
               loading="lazy"
               decoding="async"
               className="w-6 h-6 rounded-md object-contain"
-              onError={(e) => {(e.target as HTMLImageElement).style.display = 'none';(e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden');}} /> :
+              onError={() => setFaviconFailed(true)} /> :
               null}
-              <span data-ev-id="ev_ed2229102e" className={faviconUrl ? 'hidden' : ''}>
+              <span data-ev-id="ev_ed2229102e" className={faviconUrl && !faviconFailed ? 'hidden' : ''}>
                 <AnimatedIcon
                   icon={icon}
                   animation={animation}

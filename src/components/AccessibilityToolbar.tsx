@@ -432,9 +432,9 @@ const Card = ({ icon, label, active, onClick, accent }: CardProps) => {
           {icon}
         </span>
       }
-      {lines.map((line, i) =>
+      {lines.map((line) =>
       <span data-ev-id="ev_be9ae52f4f"
-      key={i}
+      key={line}
       className="text-[10px] font-semibold leading-tight"
       style={{ color: active ? activeColor : 'rgba(255,255,255,0.5)' }}>
 

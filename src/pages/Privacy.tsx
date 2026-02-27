@@ -67,8 +67,8 @@ const Privacy = () => {
                 { icon: '✘', text: 'כתובות IP, נתוני גלישה או התנהגות באתר' },
                 { icon: '✘', text: 'Google Analytics, Facebook Pixel או כל שירות אנליטיקס' },
                 { icon: '✘', text: 'מידע רגיש (בריאות, דעות פוליטיות, מידע ביומטרי)' }].
-                map((item, i) =>
-                <li data-ev-id="ev_99ff468f6d" key={i} className="flex gap-3 text-white/70 text-sm leading-relaxed">
+                map((item) =>
+                <li data-ev-id="ev_99ff468f6d" key={item.text} className="flex gap-3 text-white/70 text-sm leading-relaxed">
                     <span data-ev-id="ev_4c230df02a" className="text-red-400/70 font-bold mt-0.5 flex-shrink-0" aria-hidden="true">{item.icon}</span>
                     {item.text}
                   </li>
@@ -225,8 +225,8 @@ const Privacy = () => {
                 'זכות תיקון — לבקש תיקון מידע שגוי.',
                 'זכות מחיקה — לבקש מחיקת מידע שאינו נדרש עוד.',
                 'זכות התנגדות — להתנגד לעיבוד מידע לצורך דיוור ישיר.'].
-                map((item, i) =>
-                <li data-ev-id="ev_af34bb028a" key={i} className="flex gap-3 text-white/65 text-sm leading-relaxed">
+                map((item) =>
+                <li data-ev-id="ev_af34bb028a" key={item.slice(0, 30)} className="flex gap-3 text-white/65 text-sm leading-relaxed">
                     <span data-ev-id="ev_c0c236d247" className="text-green-400/60 mt-0.5 flex-shrink-0" aria-hidden="true">✓</span>
                     {item}
                   </li>

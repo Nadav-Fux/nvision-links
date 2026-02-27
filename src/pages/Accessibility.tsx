@@ -68,8 +68,8 @@ const Accessibility = () => {
               'האתר מותאם לקריאה מימין לשמאל (RTL) בעברית, כולל כיוון מקלדת מתאים.',
               'כפתורים ואלמנטים אינטראקטיביים עם מצב פוקוס (focus-visible) ברור ונראה.',
               'ממשק הניהול (Admin) עומד באותם תקני נגישות: skip navigation, תוויות ARIA, ניווט מקלדת, focus-visible, ו-aria-live לעדכוני מצב.',
-              'סרגל נגישות מובנה (כפתור נגישות בפינה הימנית התחתונה) המאפשר: הגדלת טקסט, ניגודיות גבוהה, הדגשת קישורים, עצירת אנימציות, סמן מוגדל וגופן קריא. ההגדרות נשמרות בין ביקורים.'].map((item, i) =>
-              <li data-ev-id="ev_0eeed68df8" key={i} className="flex gap-3 text-white/70 text-sm leading-relaxed">
+              'סרגל נגישות מובנה (כפתור נגישות בפינה הימנית התחתונה) המאפשר: הגדלת טקסט, ניגודיות גבוהה, הדגשת קישורים, עצירת אנימציות, סמן מוגדל וגופן קריא. ההגדרות נשמרות בין ביקורים.'].map((item) =>
+              <li data-ev-id="ev_0eeed68df8" key={item.slice(0, 30)} className="flex gap-3 text-white/70 text-sm leading-relaxed">
                   <span data-ev-id="ev_af5546d86e" className="text-green-400/60 mt-1 flex-shrink-0" aria-hidden="true">✓</span>
                   {item}
                 </li>
@@ -89,8 +89,8 @@ const Accessibility = () => {
                 'חלק מהתצוגות היצירתיות (אקווריום, מולקולרי, מעגל חשמלי ועוד) משתמשות באנימציות מורכבות שעשויות להיות פחות נגיש למשתמשי קוראי מסך — הקישורים עצמם נשארים נגישים במלואם.',
                 'אנימציית הלוגו (Canvas) היא דקורטיבית בלבד ומסומנת כ-aria-hidden. התוכן הטקסטואלי זמין דרך הכותרת הראשית.',
                 'רכיב הרקע המונפש (חלקיקים) מושבת אוטומטית למשתמשים שמעדיפים צמצום תנועה.',
-                'טעינת נתונים מ_SUPABASE_URL — גישה לאינטרנטית נוספת, נדרשת לצורך טעינת נתונים עבור האתר.'].map((item, i) =>
-                <li data-ev-id="ev_df0ac64949" key={i} className="flex gap-3 text-white/65 text-sm leading-relaxed">
+                'טעינת נתונים מ_SUPABASE_URL — גישה לאינטרנטית נוספת, נדרשת לצורך טעינת נתונים עבור האתר.'].map((item) =>
+                <li data-ev-id="ev_df0ac64949" key={item.slice(0, 30)} className="flex gap-3 text-white/65 text-sm leading-relaxed">
                     <span data-ev-id="ev_bc9868931f" className="text-amber-400/60 mt-1 flex-shrink-0" aria-hidden="true">⚠</span>
                     {item}
                   </li>

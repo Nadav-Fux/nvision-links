@@ -1,4 +1,23 @@
-export const MediaIcon = ({ size = 24 }: { size?: number }) => {
-  const html = `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="2.5" stroke="#a78bfa" stroke-width="1.3" fill="#a78bfa" fill-opacity="0.05"/><path d="M6 15C8 11 10 9 13 10C16 11 17 8 19 7" stroke="#ec4899" stroke-width="2" stroke-linecap="round" opacity="0.7"><animate attributeName="opacity" values="0.4;0.8;0.4" dur="3s" repeatCount="indefinite"/></path><circle cx="7" cy="7" r="1.5" fill="#f87171"><animate attributeName="r" values="1.5;1.8;1.5" dur="2s" repeatCount="indefinite"/></circle><circle cx="11" cy="6" r="1.5" fill="#fbbf24"><animate attributeName="r" values="1.5;1.8;1.5" dur="2s" begin="0.3s" repeatCount="indefinite"/></circle><circle cx="15" cy="7.5" r="1.5" fill="#34d399"><animate attributeName="r" values="1.5;1.8;1.5" dur="2s" begin="0.6s" repeatCount="indefinite"/></circle><rect x="17" y="13" width="3" height="2" rx="0.5" fill="#06b6d4" opacity="0.5"><animate attributeName="opacity" values="0.3;0.6;0.3" dur="1.5s" repeatCount="indefinite"/></rect><rect x="17" y="16" width="3" height="2" rx="0.5" fill="#06b6d4" opacity="0.5"><animate attributeName="opacity" values="0.3;0.6;0.3" dur="1.5s" begin="0.3s" repeatCount="indefinite"/></rect></svg>`;
-  return <span className="inline-block" style={{ width: size, height: size }} dangerouslySetInnerHTML={{ __html: html }} />;
-};
+export const MediaIcon = ({ size = 24 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="3" y="3" width="18" height="18" rx="2.5" stroke="#a78bfa" strokeWidth="1.3" fill="#a78bfa" fillOpacity="0.05" />
+    <path d="M6 15C8 11 10 9 13 10C16 11 17 8 19 7" stroke="#ec4899" strokeWidth="2" strokeLinecap="round" opacity="0.7">
+      <animate attributeName="opacity" values="0.4;0.8;0.4" dur="3s" repeatCount="indefinite" />
+    </path>
+    <circle cx="7" cy="7" r="1.5" fill="#f87171">
+      <animate attributeName="r" values="1.5;1.8;1.5" dur="2s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="11" cy="6" r="1.5" fill="#fbbf24">
+      <animate attributeName="r" values="1.5;1.8;1.5" dur="2s" begin="0.3s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="15" cy="7.5" r="1.5" fill="#34d399">
+      <animate attributeName="r" values="1.5;1.8;1.5" dur="2s" begin="0.6s" repeatCount="indefinite" />
+    </circle>
+    <rect x="17" y="13" width="3" height="2" rx="0.5" fill="#06b6d4" opacity="0.5">
+      <animate attributeName="opacity" values="0.3;0.6;0.3" dur="1.5s" repeatCount="indefinite" />
+    </rect>
+    <rect x="17" y="16" width="3" height="2" rx="0.5" fill="#06b6d4" opacity="0.5">
+      <animate attributeName="opacity" values="0.3;0.6;0.3" dur="1.5s" begin="0.3s" repeatCount="indefinite" />
+    </rect>
+  </svg>
+);
