@@ -25,10 +25,15 @@ import { drawCodeflow } from './codeflow';
 import { drawAICore } from './aicore';
 import { drawKatana } from './katana';
 
+/**
+ * Named transition effect played between two logo scenes.
+ * Each transition type animates the canvas differently during the crossfade.
+ */
 export type TransitionType =
   | 'explode' | 'vortex' | 'rain' | 'rise' | 'shatter' | 'wave'
   | 'fade' | 'spiral' | 'glitch' | 'portal' | 'cascade' | 'orbit' | 'zoom';
 
+/** A named logo animation scene with its preferred transition effect. */
 export interface Scene {
   name: string;
   draw: SceneFn;

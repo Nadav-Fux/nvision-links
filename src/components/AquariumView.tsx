@@ -405,7 +405,14 @@ export const AquariumView = ({
         {/* Selected creature detail */}
         {selectedCreature &&
         <div data-ev-id="ev_65f61705a3" className="absolute bottom-4 left-1/2 -translate-x-1/2 z-40 w-80 max-w-[90%] animate-in fade-in slide-in-from-bottom-4 duration-300">
-            <CreatureCard creature={selectedCreature} onClose={() => setSelectedCreature(null)} />
+            <CreatureCard
+              creature={selectedCreature}
+              onClose={() => setSelectedCreature(null)}
+              sectionLabel={(() => {
+                const sec = sections.find((s) => s.id === selectedCreature.section);
+                return sec ? `${typeof sec.emoji === 'string' ? sec.emoji : ''} ${sec.title}`.trim() : selectedCreature.section;
+              })()}
+            />
           </div>
         }
 
@@ -419,7 +426,7 @@ export const AquariumView = ({
 };
 
 /* ═════ Creature Detail Card ═════ */
-const CreatureCard = ({ creature, onClose }: {creature: Creature;onClose: () => void;}) => {
+const CreatureCard = ({ creature, onClose, sectionLabel }: {creature: Creature;onClose: () => void;sectionLabel: string;}) => {
   const [hovered, setHovered] = useState(false);
   const { link } = creature;
 
@@ -454,10 +461,7 @@ const CreatureCard = ({ creature, onClose }: {creature: Creature;onClose: () => 
             className="text-[8px] px-1.5 py-0.5 rounded-full font-mono"
             style={{ backgroundColor: `${link.color}12`, color: `${link.color}70` }}>
 
-              {(() => {
-                const sec = sections.find((s) => s.id === creature.section);
-                return sec ? `${typeof sec.emoji === 'string' ? sec.emoji : ''} ${sec.title}` : creature.section;
-              })()}
+              {sectionLabel}
             </span>
           </div>
           <p data-ev-id="ev_22b4dc0d49" className="text-white/60 text-xs mt-0.5">{link.subtitle}</p>

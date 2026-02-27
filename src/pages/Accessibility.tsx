@@ -2,6 +2,7 @@ import { ArrowRight, CheckCircle, AlertTriangle, Mail, MessageCircle } from 'luc
 import { Link } from 'react-router';
 import { PageMeta } from '@/components/PageMeta';
 
+/** Route: /accessibility — accessibility statement per Israeli Standard 5568 / WCAG 2.1 AA. */
 const Accessibility = () => {
   return (
     <div data-ev-id="ev_930273da99" dir="rtl" className="min-h-screen" style={{ background: 'linear-gradient(160deg, #0a0a14 0%, #0d0d1a 30%, #0f0a1a 60%, #0a0f14 100%)' }}>

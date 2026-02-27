@@ -3,11 +3,16 @@ import { Lock, Loader2, AlertCircle, EyeOff, Eye, ShieldCheck, ArrowRight } from
 import { verifyPassword, setAdminPassword } from '@/lib/adminApi';
 
 interface AdminLoginProps {
+  /** Called after successful authentication (password + optional TOTP). */
   onSuccess: () => void;
 }
 
 type LoginStep = 'password' | 'totp';
 
+/**
+ * Two-step login form: password first, then TOTP (if enabled).
+ * On success, stores the hashed password in sessionStorage via setAdminPassword.
+ */
 export const AdminLogin = ({ onSuccess }: AdminLoginProps) => {
   const [password, setPassword] = useState('');
   const [totpCode, setTotpCode] = useState('');

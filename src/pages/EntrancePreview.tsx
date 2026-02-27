@@ -10,9 +10,7 @@ import {
   ShockwaveDemo,
   QuantumCollapseDemo,
   ElegantFadeDemo,
-  MatrixRainDemo,
-  PlasmaArcDemo,
-  DimensionalRiftDemo } from
+  MatrixRainDemo } from
 '@/components/EntranceDemos';
 
 type AnimId = 'boot' | 'glitch' | 'cinematic' | 'terminal' | 'holo' | 'shockwave' | 'quantum' | 'elegant' | 'matrix' | 'neural' | 'gravity';
@@ -111,26 +109,8 @@ const ANIMS: AnimInfo[] = [
   component: MatrixRainDemo,
   isNew: true
 },
-{
-  id: 'neural',
-  name: 'Neural Ignition',
-  nameHe: 'הצתת נוירונים',
-  desc: 'רשת נוירונים נבנית עם סינפסות מהבהבות שמובילות לחשיפת הלוגו',
-  vibe: 'מדעי, AI',
-  tags: ['science', 'futuristic', 'tech'],
-  component: NeuralIgnitionDemo,
-  isNew: true
-},
-{
-  id: 'gravity',
-  name: 'Gravity Well',
-  nameHe: 'באר כבידה',
-  desc: '40 כוכבים נמשכים לנקודת סינגולריטי שהופכת ללוגו — כמו חור שחור',
-  vibe: 'קוסמי, דרמטי',
-  tags: ['science', 'premium', 'dynamic'],
-  component: GravityWellDemo,
-  isNew: true
-}];
+// NeuralIgnitionDemo and GravityWellDemo are planned but not yet implemented
+];
 
 
 type FilterTag = 'all' | 'tech' | 'cyber' | 'cinematic' | 'futuristic' | 'premium' | 'minimal' | 'new';
@@ -155,6 +135,7 @@ const TAG_MAP: Record<string, string[]> = {
   minimal: ['luxury', 'minimal']
 };
 
+/** Route: /entrance-preview — dev-only gallery of full-screen site entrance animations. */
 const EntrancePreview = () => {
   const [filter, setFilter] = useState<FilterTag>('all');
   const [fullscreen, setFullscreen] = useState<AnimId | null>(null);

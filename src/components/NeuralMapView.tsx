@@ -1,4 +1,4 @@
-import { useRef, useEffect, useCallback, useState } from 'react';
+import React, { useRef, useEffect, useCallback, useState } from 'react';
 import { AnimatedIcon } from '@/components/AnimatedIcon';
 import { ExternalLink } from 'lucide-react';
 import type { LinkItem, LinkSection } from '@/data/links';
@@ -246,7 +246,7 @@ const LayerLabel = ({
 
 
 
-}: {label: string;color: string;emoji: string;}) =>
+}: {label: string;color: string;emoji: React.ReactNode;}) =>
 <div data-ev-id="ev_0d405272bb" className="flex items-center gap-3 mb-4 mt-2">
     <div data-ev-id="ev_f38fa5ece9"
   className="h-px flex-1"

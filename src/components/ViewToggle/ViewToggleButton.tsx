@@ -1,6 +1,7 @@
 import React from 'react';
 import { ViewDef } from './viewData';
 
+/** Props for a single radio-style view toggle button. */
 interface ViewToggleButtonProps {
   view: ViewDef;
   isActive: boolean;
@@ -8,6 +9,10 @@ interface ViewToggleButtonProps {
   onKeyDown: (e: React.KeyboardEvent) => void;
 }
 
+/**
+ * Individual radio button in the view toggle bar.
+ * Uses role="radio" + tabIndex roving to make the group keyboard accessible.
+ */
 export const ViewToggleButton = ({ view, isActive, onClick, onKeyDown }: ViewToggleButtonProps) => (
   <button data-ev-id="ev_63f59d19df"
     key={view.id}

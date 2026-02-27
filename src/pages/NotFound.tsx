@@ -2,6 +2,7 @@ import { Link } from 'react-router';
 import { Home, ArrowRight } from 'lucide-react';
 import { PageMeta } from '@/components/PageMeta';
 
+/** Route: * (catch-all) — 404 page with a link back to the home page. */
 const NotFound = () => {
   return (
     <div data-ev-id="ev_b2b765ecff"

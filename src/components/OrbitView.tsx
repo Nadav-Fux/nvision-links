@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { AnimatedIcon } from '@/components/AnimatedIcon';
 import { ExternalLink, RotateCcw } from 'lucide-react';
 import type { LinkItem, LinkSection } from '@/data/links';
@@ -55,7 +55,7 @@ const OrbitRing = ({
 
 
 
-}: {links: LinkItem[];label: string;emoji: string;accentColor: string;direction: 1 | -1;}) => {
+}: {links: LinkItem[];label: string;emoji: React.ReactNode;accentColor: string;direction: 1 | -1;}) => {
   const total = links.length;
   const [active, setActive] = useState(0);
   const [isSpinning, setIsSpinning] = useState(true);

@@ -488,7 +488,15 @@ export const MolecularView = ({
         {/* Selected atom detail */}
         {selectedAtom &&
         <div data-ev-id="ev_df43c8df05" className="absolute bottom-4 left-1/2 -translate-x-1/2 z-40 w-80 max-w-[90%] animate-in fade-in slide-in-from-bottom-4 duration-300">
-            <AtomDetailCard atom={selectedAtom} index={atomsRef.current.indexOf(selectedAtom)} onClose={() => setSelectedAtom(null)} />
+            <AtomDetailCard
+              atom={selectedAtom}
+              index={atomsRef.current.indexOf(selectedAtom)}
+              onClose={() => setSelectedAtom(null)}
+              sectionLabel={(() => {
+                const sec = sections.find((s) => s.id === selectedAtom.section);
+                return sec ? `${typeof sec.emoji === 'string' ? sec.emoji : ''} ${sec.title}`.trim() : selectedAtom.section;
+              })()}
+            />
           </div>
         }
 
@@ -509,12 +517,9 @@ export const MolecularView = ({
 const AtomDetailCard = ({
   atom,
   index,
-  onClose
-
-
-
-
-}: {atom: AtomNode;index: number;onClose: () => void;}) => {
+  onClose,
+  sectionLabel
+}: {atom: AtomNode;index: number;onClose: () => void;sectionLabel: string;}) => {
   const [hovered, setHovered] = useState(false);
   const { link } = atom;
 
@@ -553,10 +558,7 @@ const AtomDetailCard = ({
             className="text-[8px] px-1.5 py-0.5 rounded-full font-mono"
             style={{ backgroundColor: `${link.color}15`, color: `${link.color}80` }}>
 
-              {(() => {
-                const sec = sections.find((s) => s.id === atom.section);
-                return sec ? `${typeof sec.emoji === 'string' ? sec.emoji : ''} ${sec.title}` : atom.section;
-              })()}
+              {sectionLabel}
             </span>
             <span data-ev-id="ev_241cbc2740" className="text-[8px] text-white/60 font-mono">
               {atom.bonds.length} bonds

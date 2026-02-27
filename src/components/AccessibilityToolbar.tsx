@@ -10,6 +10,7 @@ import {
    ===================================================== */
 const STORAGE_KEY = 'nvision_a11y_v2';
 
+/** All persisted accessibility preferences for the toolbar. Stored in localStorage. */
 interface A11yState {
   fontSize: number; // 0-4
   highContrast: boolean;
@@ -103,6 +104,11 @@ function applyAll(s: A11yState) {
 /* =====================================================
    COMPONENT
    ===================================================== */
+/**
+ * Floating accessibility panel (bottom-right) with 15+ independent features.
+ * All preferences persist to localStorage under STORAGE_KEY and are applied
+ * as CSS classes on <html>, so they survive page navigation within the SPA.
+ */
 export const AccessibilityToolbar = () => {
   const [open, setOpen] = useState(false);
   const [state, setState] = useState<A11yState>(() => load());

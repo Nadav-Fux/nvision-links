@@ -6,14 +6,17 @@ interface AnimatedIconProps {
   icon: LucideIcon;
   animation: IconAnimation;
   color: string;
-  isHovered: boolean;
+  /** When true, shows the active glow + animation. Defaults to false. */
+  isHovered?: boolean;
+  /** Icon size in pixels. When provided, overrides the default Tailwind w-5 h-5 class. */
+  size?: number;
 }
 
 /**
  * AnimatedIcon — renders a Lucide icon with a CSS hover animation.
  * Keyframes are defined globally in accessibility.css (single definition).
  */
-export const AnimatedIcon = ({ icon: Icon, animation, color, isHovered }: AnimatedIconProps) => {
+export const AnimatedIcon = ({ icon: Icon, animation, color, isHovered = false, size }: AnimatedIconProps) => {
   const prefersReduced = useReducedMotion();
 
   const getAnimationStyle = (): React.CSSProperties => {
@@ -38,7 +41,9 @@ export const AnimatedIcon = ({ icon: Icon, animation, color, isHovered }: Animat
   return (
     <div data-ev-id="ev_4ea849a3f6" style={getAnimationStyle()}>
       <Icon
-        className="w-5 h-5 transition-all duration-300"
+        className={size ? 'transition-all duration-300' : 'w-5 h-5 transition-all duration-300'}
+        width={size}
+        height={size}
         style={{
           color: isHovered ? color : `${color}90`,
           filter: isHovered ? `drop-shadow(0 0 8px ${color}70)` : 'none'

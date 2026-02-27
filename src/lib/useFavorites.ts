@@ -2,6 +2,12 @@ import { useState, useEffect, useCallback } from 'react';
 
 const STORAGE_KEY = 'nvision-favorites';
 
+/**
+ * Manages a user's favorite link IDs, persisted to localStorage.
+ * Favorite state is scoped to the current browser — no backend involved.
+ *
+ * @returns favorites set, toggle/check helpers, a clearAll function, and the count.
+ */
 export function useFavorites() {
   const [favorites, setFavorites] = useState<Set<string>>(() => {
     if (typeof window === 'undefined') return new Set();

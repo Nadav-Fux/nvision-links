@@ -2,6 +2,7 @@ import { ArrowRight, Shield, Eye, EyeOff, Globe, Server, UserX, MessageCircle, M
 import { Link } from 'react-router';
 import { PageMeta } from '@/components/PageMeta';
 
+/** Route: /privacy — static privacy policy page. No personal data collection. */
 const Privacy = () => {
   return (
     <div data-ev-id="ev_edc3837eaf" dir="rtl" className="min-h-screen" style={{ background: 'linear-gradient(160deg, #0a0a14 0%, #0d0d1a 30%, #0f0a1a 60%, #0a0f14 100%)' }}>

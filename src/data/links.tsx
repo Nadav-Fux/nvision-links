@@ -39,6 +39,10 @@ import { CodeIcon } from '@/components/icons/CodeIcon';
 import { BrainIcon } from '@/components/icons/BrainIcon';
 import { MediaIcon } from '@/components/icons/MediaIcon';
 
+/**
+ * CSS animation names for link card icons on hover.
+ * Keyframes are defined in accessibility.css and applied via inline style.
+ */
 export type IconAnimation =
   | 'bounce'
   | 'wiggle'
@@ -65,6 +69,10 @@ export type LinkTag =
   | 'open-source'
   | 'israeli';
 
+/**
+ * A single link entry as consumed by view components.
+ * Bridges between the raw DB row shape and the UI — icon is already resolved.
+ */
 export interface LinkItem {
   id: string;
   title: string;
@@ -72,6 +80,7 @@ export interface LinkItem {
   description: string;
   url: string;
   icon: LucideIcon;
+  /** Accent color used for glow effects and icon tinting. */
   color: string;
   animation: IconAnimation;
   faviconUrl?: string;
@@ -80,6 +89,10 @@ export interface LinkItem {
   tag?: LinkTag;
 }
 
+/**
+ * Static section with its child links. Used as the fallback data source
+ * when Supabase is unavailable or returns insufficient content.
+ */
 export interface LinkSection {
   id: string;
   title: string;

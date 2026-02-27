@@ -49,14 +49,17 @@ export const AnimatedBackground = ({ disabled }: AnimatedBackgroundProps) => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    // Capture non-null canvas reference for use inside closures
+    const canvasEl = canvas;
+
     // Adaptive particle count: fewer on mobile for performance
     const isMobile = window.innerWidth < 768;
     const isLowEnd = navigator.hardwareConcurrency !== undefined && navigator.hardwareConcurrency <= 4;
     const particleCount = isMobile ? isLowEnd ? 20 : 30 : 60;
 
     const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      canvasEl.width = window.innerWidth;
+      canvasEl.height = window.innerHeight;
       initParticles();
     };
 
@@ -69,8 +72,8 @@ export const AnimatedBackground = ({ disabled }: AnimatedBackgroundProps) => {
 
     function initParticles() {
       particlesRef.current = Array.from({ length: particleCount }, () => {
-        const x = Math.random() * canvas.width;
-        const y = Math.random() * canvas.height;
+        const x = Math.random() * canvasEl.width;
+        const y = Math.random() * canvasEl.height;
         return {
           x, y,
           baseX: x,

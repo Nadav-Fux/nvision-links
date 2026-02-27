@@ -16,6 +16,10 @@ const LogoFallback = () =>
   </div>;
 
 
+/**
+ * Site logo header — lazy-loads TextLogoMorph + Spotlights to keep the main bundle small.
+ * Shows a gradient text fallback for 200ms while the heavy chunks download.
+ */
 export const Logo = () => {
   const [loaded, setLoaded] = useState(false);
 

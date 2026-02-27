@@ -2,11 +2,17 @@ import React, { useEffect, useRef } from 'react';
 import { views, rows } from './viewData';
 import { ViewToggleButton } from './ViewToggleButton';
 
+/** Props for the view-switcher toolbar. */
 interface ViewToggleProps {
   activeView: number;
   onChange: (view: number) => void;
 }
 
+/**
+ * Horizontal (scrollable on mobile) radiogroup of view-switcher buttons.
+ * Handles arrow-key / Home / End navigation for full keyboard accessibility.
+ * Scrolls the active button into view automatically on mobile.
+ */
 export const ViewToggle = ({ activeView, onChange }: ViewToggleProps) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
@@ -18,6 +24,7 @@ export const ViewToggle = ({ activeView, onChange }: ViewToggleProps) => {
     }
   }, [activeView]);
 
+  /** Arrow/Home/End key handler — moves focus and selection within the radiogroup. */
   const handleKeyDown = (e: React.KeyboardEvent, currentId: number) => {
     const ids = views.map((v) => v.id);
     const idx = ids.indexOf(currentId);

@@ -28,6 +28,11 @@ type SectionRow = Tables<'sections'>;
 type LinkRow = Tables<'links'>;
 type ConfigRow = Tables<'site_config'>;
 
+/**
+ * Protected admin dashboard — shows login screen if no valid session exists.
+ * Manages all CRUD operations for sections, links, config, and theme.
+ * Session timeout is monitored via useSessionWarning; auto-logs out on expiry.
+ */
 const Admin = () => {
   const [authenticated, setAuthenticated] = useState(isAdminLoggedIn());
   const [config, setConfig] = useState<ConfigRow | null>(null);

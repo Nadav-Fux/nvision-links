@@ -1,9 +1,15 @@
 import React from 'react';
 
+/**
+ * Metadata for a single view button in the ViewToggle toolbar.
+ * ID must match the corresponding entry in VIEW_REGISTRY (or 1 for the inline Grid view).
+ */
 export interface ViewDef {
   id: number;
   label: string;
+  /** Inline SVG icon rendered inside the button. */
   icon: JSX.Element;
+  /** Tailwind gradient classes applied to the active-state background. */
   gradient: string;
 }
 
@@ -638,8 +644,10 @@ export const views: ViewDef[] = [
 
 }];
 
+/** Number of view buttons per row in the toggle bar. */
 export const ROW_SIZE = 6;
 
+/** Views split into fixed-size rows for the multi-row toggle layout. */
 export const rows: ViewDef[][] = [];
 for (let i = 0; i < views.length; i += ROW_SIZE) {
   rows.push(views.slice(i, i + ROW_SIZE));

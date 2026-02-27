@@ -14,7 +14,10 @@ type SectionRow = Tables<'sections'>;
 type LinkRow = Tables<'links'>;
 type ConfigRow = Tables<'site_config'>;
 
-// Map section ID to SVG icon component
+/**
+ * Maps a known section ID to its custom SVG icon component.
+ * Falls back to the emoji string when the ID is not in the map.
+ */
 function getSectionIcon(sectionId: string, fallbackEmoji: string): ReactNode {
   const iconMap: Record<string, ReactNode> = {
     'community': <CommunityIcon size={22} />,
@@ -27,6 +30,7 @@ function getSectionIcon(sectionId: string, fallbackEmoji: string): ReactNode {
   return iconMap[sectionId] ?? fallbackEmoji;
 }
 
+/** A section row enriched with its resolved icon and full list of child links. */
 export interface SectionWithLinks {
   id: string;
   title: string;
@@ -35,14 +39,17 @@ export interface SectionWithLinks {
   links: LinkItem[];
 }
 
+/** Shape returned by usePublicData. */
 export interface PublicData {
   config: ConfigRow | null;
   sections: SectionWithLinks[];
   loading: boolean;
   error: string | null;
+  /** Trigger a manual re-fetch after a previous failure. */
   retry: () => void;
 }
 
+/** Converts a raw DB link row into the UI-friendly LinkItem shape. */
 function toLinkItem(row: LinkRow): LinkItem {
   return {
     id: row.id,
@@ -62,6 +69,13 @@ function toLinkItem(row: LinkRow): LinkItem {
 const MAX_RETRIES = 3;
 const RETRY_DELAY_MS = 2000;
 
+/**
+ * Fetches site config, sections, and links from Supabase.
+ * Retries up to 3 times on failure, then exposes the error for display.
+ * Also subscribes to realtime changes so the UI auto-updates without refresh.
+ *
+ * @returns config, sections with links, loading/error state, and a retry function.
+ */
 export function usePublicData(): PublicData {
   const [config, setConfig] = useState<ConfigRow | null>(null);
   const [sections, setSections] = useState<SectionWithLinks[]>([]);
@@ -124,7 +138,8 @@ export function usePublicData(): PublicData {
   useEffect(() => {
     if (!supabase) return;
 
-    const channel = supabase
+    const client = supabase;
+    const channel = client
       .channel('public-data-sync')
       .on('postgres_changes', { event: '*', schema: 'public', table: 'sections' }, () => {
         fetchAll(0);
@@ -138,7 +153,7 @@ export function usePublicData(): PublicData {
       .subscribe();
 
     return () => {
-      supabase.removeChannel(channel);
+      client.removeChannel(channel);
     };
   }, [fetchAll]);
 

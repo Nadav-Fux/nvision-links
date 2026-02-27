@@ -18,6 +18,7 @@ const TAG_CONFIG: Record<string, {label: string;bg: string;text: string;border: 
   israeli: { label: '🇮🇱 ישראלי', bg: 'rgba(59,130,246,0.12)', text: '#60a5fa', border: 'rgba(59,130,246,0.25)' },
 };
 
+/** Props for a single link card item. */
 interface LinkCardProps {
   title: string;
   subtitle: string;
@@ -26,13 +27,20 @@ interface LinkCardProps {
   icon: LucideIcon;
   color: string;
   animation: IconAnimation;
+  /** Stagger delay in ms for the entrance animation. */
   delay: number;
+  /** Controls entrance visibility — false keeps the card hidden until ready. */
   visible: boolean;
   faviconUrl?: string;
   affiliateBenefit?: string;
   tag?: LinkTag;
 }
 
+/**
+ * Interactive link card with hover glow, mouse spotlight, and staggered entrance.
+ * On touch devices, first tap expands the description; second tap follows the URL.
+ * Favicons are tried first; falls back to the Lucide icon on error.
+ */
 export const LinkCard = ({ title, subtitle, description, url, icon, color, animation, delay, visible, faviconUrl, affiliateBenefit, tag }: LinkCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);

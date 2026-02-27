@@ -1,13 +1,20 @@
 import type { ReactNode } from 'react';
 
+/** Props for the animated section heading row. */
 interface SectionDividerProps {
   title: string;
   emoji: ReactNode;
   visible: boolean;
+  /** Entrance animation delay in ms for staggering section appearance. */
   delay: number;
+  /** Optional action slot (e.g. a button) rendered after the title. */
   action?: ReactNode;
 }
 
+/**
+ * Decorative section heading with horizontal rule lines on both sides.
+ * Renders an animated SVG icon for known section titles, falls back to the emoji.
+ */
 export const SectionDivider = ({ title, emoji, visible, delay, action }: SectionDividerProps) => {
   const icon = getSvgForTitle(title);
 
@@ -40,6 +47,10 @@ export const SectionDivider = ({ title, emoji, visible, delay, action }: Section
   );
 };
 
+/**
+ * Returns a custom animated SVG icon for well-known Hebrew section titles.
+ * Returns null for any unrecognised title so the emoji fallback is shown instead.
+ */
 function getSvgForTitle(title: string): ReactNode | null {
   const icons: Record<string, ReactNode> = {
     'כלי Vibe Coding': (

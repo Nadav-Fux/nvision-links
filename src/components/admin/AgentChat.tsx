@@ -30,9 +30,14 @@ function formatTime(ts: number) {
 }
 
 interface AgentChatProps {
+  /** Called after the agent performs a DB mutation so the parent can re-fetch. */
   onActionPerformed?: () => void;
 }
 
+/**
+ * Floating AI chat panel that lets admins manage site content in natural language.
+ * Messages are sent to the admin-agent Edge Function which can read and write DB records.
+ */
 export const AgentChat = ({ onActionPerformed }: AgentChatProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);

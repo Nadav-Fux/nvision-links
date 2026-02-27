@@ -217,6 +217,7 @@ const CATEGORY_META = {
 } as const;
 
 /* ═══════════════════ MAIN PAGE ═══════════════════ */
+/** Route: /font-preview — dev-only visual picker for logo font effects and hybrid styles. */
 const FontPreview = () => {
   const [selected, setSelected] = useState<string | null>(null);
   const [hoveredId, setHoveredId] = useState<string | null>(null);

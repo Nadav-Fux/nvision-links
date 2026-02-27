@@ -38,6 +38,7 @@ const SCENE_ICONS: Record<string, string> = {
 
 type Tab = 'scenes' | 'transitions' | 'full';
 
+/** Route: /animation-preview — dev-only gallery of all logo scenes and transition effects. */
 const AnimationPreview = () => {
   const [tab, setTab] = useState<Tab>('scenes');
   const [selectedScene, setSelectedScene] = useState<number | null>(null);

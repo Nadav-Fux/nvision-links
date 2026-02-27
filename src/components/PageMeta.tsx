@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 
+/** Props for the headless PageMeta component. */
 interface PageMetaProps {
   title: string;
   description: string;
@@ -10,6 +11,7 @@ interface PageMetaProps {
   metaKeywords?: string;
 }
 
+/** Updates a single meta attribute imperatively; returns the original value for cleanup. */
 function setMeta(selector: string, value: string | undefined, attr: 'content' = 'content'): string {
   const el = document.querySelector(selector) as HTMLMetaElement | null;
   const original = el?.getAttribute(attr) ?? '';
@@ -17,6 +19,11 @@ function setMeta(selector: string, value: string | undefined, attr: 'content' = 
   return original;
 }
 
+/**
+ * Headless component that imperatively updates <title>, meta description,
+ * OG tags, Twitter cards, canonical URL, and keywords in the document <head>.
+ * Restores original values on unmount to prevent leaking between route changes.
+ */
 export const PageMeta = ({ title, description, ogTitle, ogDescription, ogImageUrl, canonicalUrl, metaKeywords }: PageMetaProps) => {
   useEffect(() => {
     // Title

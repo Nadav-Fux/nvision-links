@@ -5,6 +5,7 @@ import { VIEW_REGISTRY } from '@/lib/viewRegistry';
 import type { LinkSection } from '@/data/links';
 import type { SectionWithLinks } from '@/lib/usePublicData';
 
+/** Props for ViewContainer. sections accepts both static and DB-sourced section shapes. */
 interface ViewContainerProps {
   activeView: number;
   sections: (LinkSection | SectionWithLinks)[];

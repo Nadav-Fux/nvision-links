@@ -9,7 +9,7 @@ const SESSION_WARNING_MS = 2 * 60 * 1000; // warn when 2 minutes remain
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string;
 const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY as string;
 
-// ===== SHA-256 hashing =====
+/** Hashes a UTF-8 string with SHA-256 using the Web Crypto API. */
 async function sha256(message: string): Promise<string> {
   const msgBuffer = new TextEncoder().encode(message);
   const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
@@ -18,6 +18,10 @@ async function sha256(message: string): Promise<string> {
 }
 
 // ===== Session management =====
+/**
+ * Returns the stored SHA-256 password hash if the session is still valid.
+ * Refreshes the session timestamp on each access (activity-based timeout).
+ */
 export function getAdminPassword(): string | null {
   const hash = sessionStorage.getItem(SESSION_KEY);
   const ts = sessionStorage.getItem(SESSION_TS_KEY);
@@ -35,17 +39,20 @@ export function getAdminPassword(): string | null {
   return hash;
 }
 
+/** Hashes and stores the admin password in sessionStorage, marking session start time. */
 export async function setAdminPassword(pw: string) {
   const hash = await sha256(pw);
   sessionStorage.setItem(SESSION_KEY, hash);
   sessionStorage.setItem(SESSION_TS_KEY, String(Date.now()));
 }
 
+/** Removes admin session data from sessionStorage — effectively logs out. */
 export function clearAdminSession() {
   sessionStorage.removeItem(SESSION_KEY);
   sessionStorage.removeItem(SESSION_TS_KEY);
 }
 
+/** Returns true if a valid (non-expired) admin session is active. */
 export function isAdminLoggedIn(): boolean {
   return !!getAdminPassword();
 }
@@ -60,6 +67,11 @@ export function getSessionRemainingMs(): number {
 
 export { SESSION_WARNING_MS };
 
+/**
+ * Internal helper that POSTs an action to the admin-api Edge Function.
+ * Passes the SHA-256 password hash in x-admin-password header for auth.
+ * Throws on network or application errors.
+ */
 async function callAdmin(body: Record<string, unknown>) {
   const passwordHash = getAdminPassword();
   if (!passwordHash || !supabase) throw new Error('Not authenticated');
@@ -83,12 +95,18 @@ async function callAdmin(body: Record<string, unknown>) {
 }
 
 // ===== Verify =====
+/** Result returned by verifyPassword. */
 export interface VerifyResult {
   success: boolean;
   totp_required?: boolean;
   totp_active?: boolean;
 }
 
+/**
+ * Verifies the admin password (and optional TOTP code) against the Edge Function.
+ * Retries once on network failure to handle Supabase cold starts.
+ * Throws TIMEOUT or NETWORK_ERROR if all retries fail.
+ */
 export async function verifyPassword(pw: string, totpCode?: string): Promise<VerifyResult> {
   if (!supabase) return { success: false };
   const url = `${SUPABASE_URL}/functions/v1/admin-api`;
@@ -169,6 +187,7 @@ export async function verifyPassword(pw: string, totpCode?: string): Promise<Ver
 }
 
 // ===== Config =====
+/** Updates top-level site_config fields (title, description, theme, etc.). */
 export const updateConfig = (data: Record<string, unknown>) =>
   callAdmin({ action: 'update_config', data });
 
@@ -201,6 +220,11 @@ export const reorderLinks = (items: { id: string; sort_order: number }[]) =>
 // ===== AI Agent =====
 interface AgentAction { tool: string; args: Record<string, unknown>; result: { success: boolean; data?: unknown; error?: string } }
 
+/**
+ * Sends a conversation history to the admin-agent Edge Function.
+ * The function can execute DB actions and returns a natural-language reply.
+ * Times out after 45 seconds to account for multi-step AI workflows.
+ */
 export async function callAgent(messages: { role: string; content: string }[]): Promise<{ reply: string; actions: AgentAction[]; _routing?: { tier: string; reason: string; classifierModel: string; executionModel: string } }> {
   const password = getAdminPassword();
   if (!password || !supabase) throw new Error('Not authenticated');
@@ -239,6 +263,7 @@ export const fetchAuditLog = (limit: number = 50) =>
   callAdmin({ action: 'fetch_audit_log', data: { limit } });
 
 // ===== Analytics =====
+/** Aggregated analytics data returned by fetchAnalytics. */
 export interface AnalyticsData {
   summary: {
     totalPageViews: number;
@@ -265,6 +290,7 @@ export const fetchLinkStats = (): Promise<Record<string, number>> =>
   callAdmin({ action: 'fetch_link_stats' });
 
 // ===== Link Health Check =====
+/** HTTP health check result for a single link. */
 export interface LinkCheckResult {
   id: string;
   title: string;
@@ -291,6 +317,7 @@ export const bulkToggleLinks = (ids: string[], is_visible: boolean) =>
   callAdmin({ action: 'bulk_toggle_links', data: { ids, is_visible } });
 
 // ===== Smart Import =====
+/** A link candidate produced by the AI parser during smart import. */
 export interface ParsedLink {
   title: string;
   url: string;
@@ -300,16 +327,19 @@ export interface ParsedLink {
   color: string;
 }
 
+/** Result of parsing free-form text into link candidates. */
 export interface ParseResult {
   links: ParsedLink[];
   summary: string;
 }
 
+/** Per-link import results returned after committing parsed links to the DB. */
 export interface ImportResult {
   results: { title: string; success: boolean; error?: string }[];
   summary: string;
 }
 
+/** Internal helper for smart-import Edge Function calls — same auth pattern as callAdmin. */
 async function callSmartImport(body: Record<string, unknown>) {
   const passwordHash = getAdminPassword();
   if (!passwordHash || !supabase) throw new Error('Not authenticated');
@@ -332,9 +362,14 @@ async function callSmartImport(body: Record<string, unknown>) {
   return json;
 }
 
+/** Sends free-form text to the AI parser and returns structured link candidates. */
 export const parseLinksFromText = (text: string): Promise<ParseResult> =>
   callSmartImport({ action: 'parse', text });
 
+/**
+ * Commits a list of parsed links to the database.
+ * @param sectionMapping - optional override from suggested_section → actual section ID
+ */
 export const importParsedLinks = (
   links: ParsedLink[],
   sectionMapping?: Record<string, string>

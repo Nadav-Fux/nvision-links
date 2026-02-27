@@ -19,10 +19,16 @@ const AnimatedBackground = lazy(() =>
 import('@/components/AnimatedBackground').then((m) => ({ default: m.AnimatedBackground }))
 );
 
+/** Props for the main index page. viewOverride is used by AdminPreview to lock a specific view. */
 interface IndexProps {
   viewOverride?: number;
 }
 
+/**
+ * Main public-facing page — renders the logo, welcome text, and all link sections.
+ * Loads data from Supabase on mount, falling back to staticSections if DB is empty.
+ * Picks a random view from config.selected_views on first load (or uses viewOverride).
+ */
 const Index = ({ viewOverride }: IndexProps = {}) => {
   const { config, sections: dbSections, loading: dbLoading, error: dbError, retry: retryFetch } = usePublicData();
 
@@ -254,7 +260,7 @@ const Index = ({ viewOverride }: IndexProps = {}) => {
 
                     <div data-ev-id="ev_571534aeb8" className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                       <div data-ev-id="ev_45047ebde7" className="flex flex-col gap-3">
-                        {section.links.filter((_: unknown, i: number) => i % 2 === 0).map((link: Record<string, unknown>, i: number) =>
+                        {section.links.filter((_: unknown, i: number) => i % 2 === 0).map((link, i) =>
                     <LinkCard
                       key={link.id as string}
                       {...link}
@@ -264,7 +270,7 @@ const Index = ({ viewOverride }: IndexProps = {}) => {
                     )}
                       </div>
                       <div data-ev-id="ev_7a8cdc7d66" className="flex flex-col gap-3">
-                        {section.links.filter((_: unknown, i: number) => i % 2 === 1).map((link: Record<string, unknown>, i: number) =>
+                        {section.links.filter((_: unknown, i: number) => i % 2 === 1).map((link, i) =>
                     <LinkCard
                       key={link.id as string}
                       {...link}

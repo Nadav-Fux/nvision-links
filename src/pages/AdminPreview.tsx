@@ -7,6 +7,11 @@ import Index from '@/pages/Index';
 import { ArrowRight, Shield } from 'lucide-react';
 import { PageMeta } from '@/components/PageMeta';
 
+/**
+ * Inner content for admin preview — renders the DevToolsMenu overlay
+ * and the Index page with viewOverride so admins can switch views in real time.
+ * Redirects to /admin if no valid session is found.
+ */
 const AdminPreviewContent = () => {
   const navigate = useNavigate();
   const { activeView, setActiveView } = useViewContext();
@@ -51,6 +56,7 @@ const AdminPreviewContent = () => {
 
 };
 
+/** Route: /admin/preview — admin-only live site preview with dev tools overlay. */
 const AdminPreview = () =>
 <ViewProvider>
     <AdminPreviewContent />
