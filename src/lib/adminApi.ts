@@ -3,6 +3,7 @@ import { supabase } from '@/integrations/supabase/client';
 const SESSION_KEY = 'nvision_admin_session';
 const SESSION_TS_KEY = 'nvision_admin_ts';
 const SESSION_TIMEOUT_MS = 30 * 60 * 1000; // 30 minutes
+const SESSION_WARNING_MS = 2 * 60 * 1000; // warn when 2 minutes remain
 
 // ===== Supabase connection details =====
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string;
@@ -48,6 +49,16 @@ export function clearAdminSession() {
 export function isAdminLoggedIn(): boolean {
   return !!getAdminPassword();
 }
+
+/** Returns milliseconds remaining before session expires, or 0 if expired/not logged in. */
+export function getSessionRemainingMs(): number {
+  const ts = sessionStorage.getItem(SESSION_TS_KEY);
+  if (!ts) return 0;
+  const elapsed = Date.now() - parseInt(ts, 10);
+  return Math.max(0, SESSION_TIMEOUT_MS - elapsed);
+}
+
+export { SESSION_WARNING_MS };
 
 async function callAdmin(body: Record<string, unknown>) {
   const passwordHash = getAdminPassword();

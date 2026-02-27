@@ -10,7 +10,6 @@ import {
   Calendar,
   Download,
   RefreshCw,
-  Loader2,
   Clock,
   LinkIcon,
   Monitor } from
@@ -242,11 +241,62 @@ export const AnalyticsDashboard = () => {
         </button>
       </div>
 
-      {/* Loading / Error */}
+      {/* Loading skeletons */}
       {loading &&
-      <div data-ev-id="ev_b4013d1671" className="flex items-center justify-center py-12" role="status">
-          <Loader2 className="w-6 h-6 text-primary animate-spin" aria-hidden="true" />
-          <span data-ev-id="ev_b8473cb20e" className="sr-only">טוען נתוני אנליטיקס...</span>
+      <div className="space-y-5" role="status">
+          <span className="sr-only">טוען נתוני אנליטיקס...</span>
+          {/* Summary card skeletons */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <div key={i} className="bg-white/[0.02] border border-white/[0.06] rounded-xl p-3 sm:p-4">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-4 h-4 rounded bg-white/[0.06] animate-pulse" />
+                  <div className="h-3 w-16 rounded bg-white/[0.06] animate-pulse" />
+                </div>
+                <div className="h-7 w-20 rounded bg-white/[0.06] animate-pulse" />
+              </div>
+            ))}
+          </div>
+          {/* Chart skeleton */}
+          <div className="bg-white/[0.02] border border-white/[0.06] rounded-xl p-4">
+            <div className="h-3 w-24 rounded bg-white/[0.06] animate-pulse mb-4" />
+            <div className="h-64 flex items-end gap-1.5 px-2">
+              {Array.from({ length: 14 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="flex-1 rounded-t bg-white/[0.04] animate-pulse"
+                  style={{ height: `${20 + Math.sin(i * 0.8) * 30 + ((i * 37) % 30)}%` }}
+                />
+              ))}
+            </div>
+          </div>
+          {/* Bottom row skeletons */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-white/[0.02] border border-white/[0.06] rounded-xl p-4">
+              <div className="h-3 w-28 rounded bg-white/[0.06] animate-pulse mb-4" />
+              <div className="space-y-3">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <div key={i}>
+                    <div className="flex items-center justify-between mb-1.5">
+                      <div className="h-2.5 rounded bg-white/[0.06] animate-pulse" style={{ width: `${50 + i * 8}%` }} />
+                      <div className="h-2.5 w-8 rounded bg-white/[0.06] animate-pulse" />
+                    </div>
+                    <div className="h-1.5 bg-white/[0.04] rounded-full overflow-hidden">
+                      <div className="h-full rounded-full bg-white/[0.06] animate-pulse" style={{ width: `${90 - i * 15}%` }} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="bg-white/[0.02] border border-white/[0.06] rounded-xl p-4">
+              <div className="h-3 w-24 rounded bg-white/[0.06] animate-pulse mb-4" />
+              <div className="grid grid-cols-12 gap-1">
+                {Array.from({ length: 24 }).map((_, i) => (
+                  <div key={i} className="aspect-square rounded-md bg-white/[0.04] animate-pulse" />
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       }
 

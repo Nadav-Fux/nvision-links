@@ -21,6 +21,7 @@ import { AgentChat } from '@/components/admin/AgentChat';
 import { SmartImporter } from '@/components/admin/SmartImporter';
 import { TotpSetup } from '@/components/admin/TotpSetup';
 import { toast } from 'sonner';
+import { useSessionWarning } from '@/lib/useSessionWarning';
 import type { Tables } from '@/integrations/supabase/helpers';
 
 type SectionRow = Tables<'sections'>;
@@ -36,6 +37,9 @@ const Admin = () => {
   const [saving, setSaving] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
   const [linkStats, setLinkStats] = useState<Record<string, number>>({});
+
+  // Session timeout warning — fires toast when ~2 min remain, logs out on expiry
+  useSessionWarning(useCallback(() => setAuthenticated(false), []));
 
   const fetchData = useCallback(async () => {
     if (!supabase) return;
