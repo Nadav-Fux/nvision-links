@@ -1,4 +1,5 @@
 import { createClient } from 'npm:@supabase/supabase-js@2.47.3';
+import { TOTP } from 'npm:otpauth@9.3.5';
 
 const NVIDIA_API_URL = 'https://integrate.api.nvidia.com/v1/chat/completions';
 // Best model for JSON extraction: fast (431ms), very high quality, direct answers
@@ -9,14 +10,13 @@ const FALLBACK_MODEL = 'qwen/qwen3-235b-a22b';
 
 // ===== CORS =====
 const ALLOWED_ORIGINS = [
-  'https://nvision.digital',
+  'https://nvision.me',
   'http://localhost:3000',
   'http://localhost:5173',
 ];
 
 function isAllowedOrigin(origin: string): boolean {
   if (ALLOWED_ORIGINS.includes(origin)) return true;
-  if (/^https:\/\/[a-z0-9-]+\.preview\.sticklight\.com$/.test(origin)) return true;
   return false;
 }
 
@@ -25,7 +25,7 @@ function getCorsHeaders(req: Request) {
   const allowed = isAllowedOrigin(origin) ? origin : ALLOWED_ORIGINS[0];
   return {
     'Access-Control-Allow-Origin': allowed,
-    'Access-Control-Allow-Headers': 'authorization, x-admin-password, content-type',
+    'Access-Control-Allow-Headers': 'authorization, x-admin-password, x-totp-code, content-type',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
   };
 }
@@ -144,6 +144,55 @@ Deno.serve(async (req: Request) => {
         status: 401,
         headers: { ...getCorsHeaders(req), 'Content-Type': 'application/json' },
       });
+    }
+
+    // ═══════ TOTP verification ═══════
+    {
+      const totpSupabase = createClient(
+        Deno.env.get('SUPABASE_URL')!,
+        Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
+      );
+      const { data: totpRow } = await totpSupabase
+        .from('admin_totp')
+        .select('*')
+        .limit(1)
+        .single();
+
+      if (totpRow?.is_active === true) {
+        const totpCode = req.headers.get('x-totp-code') || '';
+        if (!totpCode) {
+          return new Response(JSON.stringify({ error: 'TOTP code required', totp_required: true }), {
+            status: 403, headers: { ...getCorsHeaders(req), 'Content-Type': 'application/json' },
+          });
+        }
+
+        const totp = new TOTP({
+          issuer: 'nVision Digital AI',
+          label: 'nVision Admin',
+          algorithm: 'SHA1',
+          digits: 6,
+          period: 30,
+          secret: totpRow.secret,
+        });
+        const delta = totp.validate({ token: totpCode, window: 1 });
+
+        if (delta === null) {
+          // Check backup codes
+          const backupCodes: string[] = totpRow.backup_codes || [];
+          const codeIndex = backupCodes.indexOf(totpCode);
+          if (codeIndex === -1) {
+            return new Response(JSON.stringify({ error: 'Invalid TOTP code', totp_invalid: true }), {
+              status: 403, headers: { ...getCorsHeaders(req), 'Content-Type': 'application/json' },
+            });
+          }
+          // Consume backup code
+          backupCodes.splice(codeIndex, 1);
+          await totpSupabase
+            .from('admin_totp')
+            .update({ backup_codes: backupCodes, updated_at: new Date().toISOString() })
+            .eq('id', totpRow.id);
+        }
+      }
     }
 
     const nvidiaKey = Deno.env.get('NVIDIA_API_KEY') || Deno.env.get('NVIDIA');
@@ -272,6 +321,9 @@ Deno.serve(async (req: Request) => {
           continue;
         }
 
+        // Skip links without valid http(s) URLs
+        if (!/^https?:\/\//i.test((link.url || '').trim())) continue;
+
         // Get next sort order for this section
         const maxLinkOrder = await supabase.from('links').select('sort_order').eq('section_id', sectionId).order('sort_order', { ascending: false }).limit(1);
         const nextLinkOrder = (maxLinkOrder.data?.[0]?.sort_order ?? 0) + 1;
@@ -324,9 +376,8 @@ Deno.serve(async (req: Request) => {
 
   } catch (err: unknown) {
     console.error('Smart import error:', err);
-    const message = err instanceof Error ? err.message : 'Internal server error';
     return new Response(
-      JSON.stringify({ error: message }),
+      JSON.stringify({ error: 'Internal server error' }),
       {
         status: 500,
         headers: { ...getCorsHeaders(req), 'Content-Type': 'application/json' },

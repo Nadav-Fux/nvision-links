@@ -55,6 +55,23 @@ Deno.serve(async (req: Request) => {
       );
     }
 
+    // Use service role to bypass RLS for volume check + insert
+    const supabase = createClient(
+      Deno.env.get('SUPABASE_URL')!,
+      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
+    );
+
+    // Volume guard — reject if more than 500 events in the last 60 seconds
+    const { count } = await supabase.from('analytics_events')
+      .select('*', { count: 'exact', head: true })
+      .gte('created_at', new Date(Date.now() - 60_000).toISOString());
+    if ((count ?? 0) > 500) {
+      return new Response(
+        JSON.stringify({ error: 'Too Many Requests' }),
+        { status: 429, headers: { ...getCorsHeaders(req), 'Content-Type': 'application/json' } }
+      );
+    }
+
     const body = await req.json();
     const { event_type, event_target, page_path } = body;
 
@@ -69,12 +86,6 @@ Deno.serve(async (req: Request) => {
     // Sanitize inputs — truncate to reasonable lengths
     const safeTarget = typeof event_target === 'string' ? event_target.slice(0, 500) : '';
     const safePath = typeof page_path === 'string' ? page_path.slice(0, 200) : '/';
-
-    // Use service role to bypass RLS for insert (RLS allows anon insert, but service role is safer)
-    const supabase = createClient(
-      Deno.env.get('SUPABASE_URL')!,
-      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
-    );
 
     const { error } = await supabase.from('analytics_events').insert({
       event_type,

@@ -3,7 +3,7 @@ import { Download, Copy, Check } from 'lucide-react';
 import { toast } from 'sonner';
 
 const QR_SIZE = 200;
-const DEFAULT_URL = 'https://nvision.digital';
+const DEFAULT_URL = 'https://nvision.me';
 
 function getQRUrl(text: string, size: number = QR_SIZE): string {
   return `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(text)}&format=svg&margin=8&color=06b6d4&bgcolor=0a0a14`;
@@ -92,7 +92,7 @@ export const QRCodeGenerator = () => {
             type="url"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
-            placeholder="https://nvision.digital"
+            placeholder="https://nvision.me"
             dir="ltr"
             className="w-full px-3 py-2.5 bg-white/[0.04] border border-white/[0.08] rounded-lg text-white/80 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus:border-primary/40 transition-all" />
 

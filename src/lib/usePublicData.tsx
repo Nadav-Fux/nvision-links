@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import type { ReactNode } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { getIcon } from '@/lib/iconMap';
@@ -82,6 +82,7 @@ export function usePublicData(): PublicData {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [retryCount, setRetryCount] = useState(0);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const fetchAll = useCallback(async (attempt: number = 0) => {
     if (!supabase) {
@@ -118,7 +119,7 @@ export function usePublicData(): PublicData {
       console.error(`Failed to load public data (attempt ${attempt + 1}):`, err);
 
       if (attempt < MAX_RETRIES - 1) {
-        setTimeout(() => {
+        timerRef.current = setTimeout(() => {
           fetchAll(attempt + 1);
         }, RETRY_DELAY_MS * (attempt + 1));
         return;
@@ -132,6 +133,9 @@ export function usePublicData(): PublicData {
 
   useEffect(() => {
     fetchAll(0);
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
   }, [fetchAll, retryCount]);
 
   // ===== Realtime subscriptions — auto-refetch on changes =====

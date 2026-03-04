@@ -100,7 +100,7 @@ export const SEOEditor = ({ config, onSaved }: SEOEditorProps) => {
         type="url"
         value={ogImageUrl}
         onChange={(e) => setOgImageUrl(e.target.value)}
-        placeholder="https://nvision.digital/og-image.png"
+        placeholder="https://nvision.me/og-image.png"
         dir="ltr"
         className="w-full px-3 py-2.5 bg-white/[0.04] border border-white/[0.08] rounded-lg text-white/80 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus:border-primary/40 transition-all" />
 
@@ -138,7 +138,7 @@ export const SEOEditor = ({ config, onSaved }: SEOEditorProps) => {
           type="url"
           value={canonicalUrl}
           onChange={(e) => setCanonicalUrl(e.target.value)}
-          placeholder="https://nvision.digital"
+          placeholder="https://nvision.me"
           dir="ltr"
           className="w-full px-3 py-2.5 bg-white/[0.04] border border-white/[0.08] rounded-lg text-white/80 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus:border-primary/40 transition-all" />
 

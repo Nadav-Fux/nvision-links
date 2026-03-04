@@ -32,17 +32,15 @@ interface FullLinkRow {
   sort_order: number;
 }
 
-// ===== Dynamic CORS — allow production domain + local dev + sandbox preview =====
+// ===== Dynamic CORS — allow production domain + local dev =====
 const ALLOWED_ORIGINS = [
-  'https://nvision.digital',
+  'https://nvision.me',
   'http://localhost:3000',
   'http://localhost:5173',
 ];
 
 function isAllowedOrigin(origin: string): boolean {
   if (ALLOWED_ORIGINS.includes(origin)) return true;
-  // Allow sandbox preview domains (*.preview.sticklight.com)
-  if (/^https:\/\/[a-z0-9-]+\.preview\.sticklight\.com$/.test(origin)) return true;
   return false;
 }
 
@@ -404,9 +402,11 @@ Deno.serve(async (req: Request) => {
 
       // ========== CONFIG ==========
       case 'update_config': {
+        const configAllowed = ['site_title', 'site_description', 'default_view', 'selected_views', 'theme', 'font_family', 'font_weight', 'og_title', 'og_description', 'og_image', 'logo_animation'];
+        const safeConfigData = Object.fromEntries(Object.entries(data).filter(([k]) => configAllowed.includes(k)));
         const { error } = await supabase
           .from('site_config')
-          .update(data)
+          .update(safeConfigData)
           .eq('id', 1);
         if (error) throw error;
         logAudit('update_config', 'site_config', '1', data);
@@ -436,9 +436,11 @@ Deno.serve(async (req: Request) => {
       }
 
       case 'update_section': {
+        const sectionAllowed = ['title', 'emoji', 'sort_order', 'is_visible'];
+        const safeSectionData = Object.fromEntries(Object.entries(data).filter(([k]) => sectionAllowed.includes(k)));
         const { error } = await supabase
           .from('sections')
-          .update(data)
+          .update(safeSectionData)
           .eq('id', id);
         if (error) throw error;
         logAudit('update_section', 'sections', id, data);
@@ -494,9 +496,11 @@ Deno.serve(async (req: Request) => {
       }
 
       case 'update_link': {
+        const linkAllowed = ['title', 'url', 'description', 'subtitle', 'icon_name', 'favicon_url', 'color', 'animation', 'section_id', 'sort_order', 'is_visible', 'tag', 'affiliate_benefit'];
+        const safeLinkData = Object.fromEntries(Object.entries(data).filter(([k]) => linkAllowed.includes(k)));
         const { error } = await supabase
           .from('links')
-          .update(data)
+          .update(safeLinkData)
           .eq('id', id);
         if (error) throw error;
         logAudit('update_link', 'links', id, data);
@@ -779,7 +783,7 @@ Deno.serve(async (req: Request) => {
   } catch (err) {
     console.error('Admin API error:', err);
     return new Response(
-      JSON.stringify({ error: err.message || 'Internal error' }),
+      JSON.stringify({ error: 'Internal server error' }),
       { status: 500, headers: { ...getCorsHeaders(req), 'Content-Type': 'application/json' } }
     );
   }

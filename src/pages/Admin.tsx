@@ -49,16 +49,38 @@ const Admin = () => {
   const fetchData = useCallback(async () => {
     if (!supabase) return;
     setLoading(true);
-    const [configRes, sectionsRes, linksRes] = await Promise.all([
-    supabase.from('site_config').select('*').single(),
-    supabase.from('sections').select('*').order('sort_order'),
-    supabase.from('links').select('*').order('sort_order')]);
-    if (configRes.data) setConfig(configRes.data);
-    if (sectionsRes.data) setSections(sectionsRes.data);
-    if (linksRes.data) setLinks(linksRes.data);
-    setLoading(false);
-    // Fetch link stats in background (non-blocking)
-    fetchLinkStats().then((stats) => setLinkStats(stats)).catch(() => {});
+    try {
+      const [configRes, sectionsRes, linksRes] = await Promise.all([
+        supabase.from('site_config').select('*').single(),
+        supabase.from('sections').select('*').order('sort_order'),
+        supabase.from('links').select('*').order('sort_order'),
+      ]);
+      if (configRes.error) {
+        console.error('Failed to fetch config:', configRes.error.message);
+        toast.error('שגיאה בטעינת הגדרות האתר');
+      } else if (configRes.data) {
+        setConfig(configRes.data);
+      }
+      if (sectionsRes.error) {
+        console.error('Failed to fetch sections:', sectionsRes.error.message);
+        toast.error('שגיאה בטעינת סקציות');
+      } else if (sectionsRes.data) {
+        setSections(sectionsRes.data);
+      }
+      if (linksRes.error) {
+        console.error('Failed to fetch links:', linksRes.error.message);
+        toast.error('שגיאה בטעינת קישורים');
+      } else if (linksRes.data) {
+        setLinks(linksRes.data);
+      }
+      // Fetch link stats in background (non-blocking)
+      fetchLinkStats().then((stats) => setLinkStats(stats)).catch(() => {});
+    } catch (err: unknown) {
+      console.error('fetchData error:', err);
+      toast.error('שגיאה בטעינת נתונים');
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   useEffect(() => {

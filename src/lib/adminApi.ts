@@ -79,19 +79,27 @@ async function callAdmin(body: Record<string, unknown>) {
   const url = `${SUPABASE_URL}/functions/v1/admin-api`;
   const anonKey = SUPABASE_ANON_KEY;
 
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${anonKey}`,
-      'x-admin-password': passwordHash,
-    },
-    body: JSON.stringify(body),
-  });
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 30000);
 
-  const json = await res.json();
-  if (!res.ok) throw new Error(json.error || 'Request failed');
-  return json;
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${anonKey}`,
+        'x-admin-password': passwordHash,
+      },
+      body: JSON.stringify(body),
+      signal: controller.signal,
+    });
+
+    const json = await res.json();
+    if (!res.ok) throw new Error(json.error || 'Request failed');
+    return json;
+  } finally {
+    clearTimeout(timeout);
+  }
 }
 
 // ===== Verify =====
