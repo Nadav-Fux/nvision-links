@@ -65,6 +65,10 @@ async function sha256(message: string): Promise<string> {
 }
 
 // ===== Basic in-memory rate limiter =====
+// NOTE: This Map resets on each cold start, which is a known limitation of
+// serverless edge functions. This is intentional — it provides basic abuse
+// prevention (brute-force login lockout) without external state. Persistent
+// rate limiting would require a database or KV store.
 const failedAttempts = new Map<string, { count: number; resetAt: number }>();
 const MAX_FAILURES = 5;
 const LOCKOUT_MS = 5 * 60 * 1000; // 5 minutes

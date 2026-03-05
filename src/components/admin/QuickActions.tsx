@@ -120,13 +120,11 @@ export const QuickActions = ({ onRefresh, onPreview, onImportComplete, loading }
         sectionIdMap[oldId] = data.id;
       }
 
-      // 3. Insert links (mapped to new section IDs)
-      for (const link of pendingFile.links) {
-        const newSectionId = sectionIdMap[link.section_id as string];
-        if (!newSectionId) continue; // orphan link — skip
-
-        const { error } = await supabase.from('links').insert({
-          section_id: newSectionId,
+      // 3. Batch insert links (mapped to new section IDs)
+      const linkRows = pendingFile.links
+        .filter((link) => sectionIdMap[link.section_id as string])
+        .map((link) => ({
+          section_id: sectionIdMap[link.section_id as string],
           title: link.title as string,
           subtitle: (link.subtitle as string) || '',
           description: (link.description as string) || '',
@@ -136,7 +134,10 @@ export const QuickActions = ({ onRefresh, onPreview, onImportComplete, loading }
           animation: (link.animation as string) || 'float',
           sort_order: link.sort_order as number,
           is_visible: (link.is_visible as boolean) ?? true,
-        });
+        }));
+
+      if (linkRows.length > 0) {
+        const { error } = await supabase.from('links').insert(linkRows);
         if (error) throw error;
       }
 

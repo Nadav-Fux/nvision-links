@@ -711,12 +711,13 @@ async function executeTool(supabase: SupabaseClient, name: string, args: Record<
         const startDate = args.start_date || new Date(now.getTime() - 7 * 86400000).toISOString().slice(0, 10);
         const endDate = args.end_date || now.toISOString().slice(0, 10);
 
-        // Fetch all events in the date range
+        // Fetch events in the date range (capped at 10K rows to avoid memory issues)
         const { data: events, error } = await supabase
           .from('analytics_events')
           .select('event_type, event_target, page_path')
           .gte('created_at', `${startDate}T00:00:00Z`)
-          .lte('created_at', `${endDate}T23:59:59Z`);
+          .lte('created_at', `${endDate}T23:59:59Z`)
+          .limit(10000);
         if (error) throw error;
 
         // Aggregate counts

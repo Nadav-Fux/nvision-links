@@ -7,7 +7,7 @@ const SESSION_WARNING_MS = 2 * 60 * 1000; // warn when 2 minutes remain
 
 // ── TEMPORARY AUTH BYPASS ──────────────────────────────────────
 // Set to false to re-enable login + 2FA
-const AUTH_BYPASS = true;
+const AUTH_BYPASS = false;
 const BYPASS_HASH = '1b943b8edb577860b4ba4db184c7f766f9e659ea402c44ad7283528b142121e8';
 // ───────────────────────────────────────────────────────────────
 

@@ -16,6 +16,10 @@ function getCorsHeaders(req: Request) {
 const ALLOWED_EVENT_TYPES = ['page_view', 'link_click', 'view_switch'];
 
 // ===== Simple in-memory rate limiter (per-origin, not per-user) =====
+// NOTE: This Map resets on each cold start, which is a known limitation of
+// serverless edge functions. This is intentional — it provides basic abuse
+// prevention without external state. Persistent rate limiting would require
+// a database or KV store.
 const requestCounts = new Map<string, { count: number; resetAt: number }>();
 const MAX_REQUESTS_PER_WINDOW = 100; // 100 events per 60 seconds per origin
 const WINDOW_MS = 60_000;

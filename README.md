@@ -87,4 +87,4 @@ See [GDD.md](GDD.md) for full architecture docs.
 
 ---
 
-**כיוון:** RTL · **שפה:** עברית · **דומיין:** [nvision.digital](https://nvision.digital)
+**כיוון:** RTL · **שפה:** עברית · **דומיין:** [nvision.me](https://nvision.me)
