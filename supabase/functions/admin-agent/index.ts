@@ -8,8 +8,9 @@ import { TOTP } from 'npm:otpauth@9.3.5';
 
 // Provider endpoints
 const PROVIDERS = {
-  nvidia: { url: 'https://integrate.api.nvidia.com/v1/chat/completions' },
-  groq:   { url: 'https://api.groq.com/openai/v1/chat/completions' },
+  nvidia:   { url: 'https://integrate.api.nvidia.com/v1/chat/completions' },
+  groq:     { url: 'https://api.groq.com/openai/v1/chat/completions' },
+  cerebras: { url: 'https://api.cerebras.ai/v1/chat/completions' },
 } as const;
 
 // Model tiers — Groq primary (proven fast+reliable), NVIDIA for heavy lifting
@@ -20,11 +21,12 @@ const MODELS = {
     { provider: 'nvidia', id: 'abacusai/dracarys-llama-3.1-70b-instruct', latency: 308,  secret: 'NVIDIA' },
   ],
   // ── Fast / simple tasks (with tool calling) ──
-  // Groq proven reliable for tool calling. NVIDIA 405b as fallback.
+  // Cerebras ultra-fast inference first, Groq proven reliable, NVIDIA 405b fallback.
   fast: [
-    { provider: 'groq',   id: 'llama-3.3-70b-versatile',                  latency: 133,  secret: 'GROQ' },
-    { provider: 'nvidia', id: 'meta/llama-3.1-405b-instruct',             latency: 431,  secret: 'NVIDIA' },
-    { provider: 'nvidia', id: 'abacusai/dracarys-llama-3.1-70b-instruct', latency: 308,  secret: 'NVIDIA' },
+    { provider: 'cerebras', id: 'llama-3.3-70b',                            latency: 50,   secret: 'CEREBRAS_API_KEY' },
+    { provider: 'groq',     id: 'llama-3.3-70b-versatile',                  latency: 133,  secret: 'GROQ' },
+    { provider: 'nvidia',   id: 'meta/llama-3.1-405b-instruct',             latency: 431,  secret: 'NVIDIA' },
+    { provider: 'nvidia',   id: 'abacusai/dracarys-llama-3.1-70b-instruct', latency: 308,  secret: 'NVIDIA' },
   ],
   // ── Deep reasoning tasks (with tool calling) ──
   // qwen3 proven fast (2-4s) and reliable with tools
@@ -39,7 +41,9 @@ type Tier = 'simple' | 'deep';
 
 // ═══════════ CORS ═══════════
 const ALLOWED_ORIGINS = [
+  'https://links.74111147.xyz',
   'https://nvision.me',
+  'https://nvision-links.pages.dev',
   'http://localhost:3000',
   'http://localhost:5173',
 ];
@@ -244,8 +248,8 @@ async function classifyQuestion(userMessages: LLMMessage[]): Promise<{ tier: Tie
   const lastMessage = userMessages[userMessages.length - 1]?.content || '';
 
   // Quick heuristics — skip AI call for obvious cases
-  const simplePatterns = /^(הצג|תראה|רשימ|כמה|מה |מהם|מהן|הראה|סטטוס|status|list|show|count)/i;
-  const deepPatterns = /(צור|מחק|עדכן|שנה|הוסף|ארגן|תציע|שפר|העבר|create|delete|update|add|change|move|suggest|improve)/i;
+  const simplePatterns = /^(הצג|תראה|רשימ|כמה|מה |מהם|מהן|הראה|סטטוס|חפש|חיפוש|אנליטי|לוג|בדוק|status|list|show|count|search|analytics|audit|health|check)/i;
+  const deepPatterns = /(צור|מחק|עדכן|שנה|הוסף|ארגן|תציע|שפר|העבר|הסתר|הצג מחדש|create|delete|update|add|change|move|suggest|improve|toggle|bulk|hide)/i;
 
   if (simplePatterns.test(lastMessage) && !deepPatterns.test(lastMessage)) {
     return { tier: 'simple', reason: 'זיהוי מהיר: שאילתת צפייה/רשימה', modelUsed: 'heuristic' };
@@ -451,6 +455,93 @@ const tools = [
       },
     },
   },
+  {
+    type: 'function',
+    function: {
+      name: 'search_links',
+      description: 'Search links by title, URL, or description. Uses fuzzy matching (case-insensitive).',
+      parameters: {
+        type: 'object',
+        properties: {
+          query: { type: 'string', description: 'Search query to match against link title, URL, or description' },
+        },
+        required: ['query'],
+      },
+    },
+  },
+  {
+    type: 'function',
+    function: {
+      name: 'get_analytics_summary',
+      description: 'Get analytics summary for a date range: total page views, clicks, view switches, and top clicked links.',
+      parameters: {
+        type: 'object',
+        properties: {
+          start_date: { type: 'string', description: 'Start date in ISO format (YYYY-MM-DD). Defaults to 7 days ago.' },
+          end_date: { type: 'string', description: 'End date in ISO format (YYYY-MM-DD). Defaults to today.' },
+        },
+        required: [],
+      },
+    },
+  },
+  {
+    type: 'function',
+    function: {
+      name: 'get_audit_log',
+      description: 'Read recent audit log entries ordered by most recent first.',
+      parameters: {
+        type: 'object',
+        properties: {
+          limit: { type: 'number', description: 'Number of entries to return (default 20, max 100)' },
+        },
+        required: [],
+      },
+    },
+  },
+  {
+    type: 'function',
+    function: {
+      name: 'check_link_health',
+      description: 'Check if a URL is reachable by sending a HEAD request. Returns HTTP status code and response time in ms.',
+      parameters: {
+        type: 'object',
+        properties: {
+          url: { type: 'string', description: 'The URL to check (https://...)' },
+        },
+        required: ['url'],
+      },
+    },
+  },
+  {
+    type: 'function',
+    function: {
+      name: 'move_link',
+      description: 'Move a link to a different section by updating its section_id.',
+      parameters: {
+        type: 'object',
+        properties: {
+          link_id: { type: 'string', description: 'The link UUID to move' },
+          target_section_id: { type: 'string', description: 'The destination section UUID' },
+        },
+        required: ['link_id', 'target_section_id'],
+      },
+    },
+  },
+  {
+    type: 'function',
+    function: {
+      name: 'bulk_toggle_visibility',
+      description: 'Toggle visibility (show/hide) for multiple links at once.',
+      parameters: {
+        type: 'object',
+        properties: {
+          link_ids: { type: 'array', items: { type: 'string' }, description: 'Array of link UUIDs to update' },
+          is_visible: { type: 'boolean', description: 'true to show, false to hide' },
+        },
+        required: ['link_ids', 'is_visible'],
+      },
+    },
+  },
 ];
 
 // ═══════════ Tool Executors ═══════════
@@ -605,6 +696,117 @@ async function executeTool(supabase: SupabaseClient, name: string, args: Record<
         if (error) throw error;
         return { success: true, data };
       }
+      case 'search_links': {
+        const q = `%${args.query}%`;
+        const { data, error } = await supabase
+          .from('links')
+          .select('*, sections(title, emoji)')
+          .or(`title.ilike.${q},url.ilike.${q},description.ilike.${q}`)
+          .order('sort_order');
+        if (error) throw error;
+        return { success: true, data };
+      }
+      case 'get_analytics_summary': {
+        const now = new Date();
+        const startDate = args.start_date || new Date(now.getTime() - 7 * 86400000).toISOString().slice(0, 10);
+        const endDate = args.end_date || now.toISOString().slice(0, 10);
+
+        // Fetch all events in the date range
+        const { data: events, error } = await supabase
+          .from('analytics_events')
+          .select('event_type, event_target, page_path')
+          .gte('created_at', `${startDate}T00:00:00Z`)
+          .lte('created_at', `${endDate}T23:59:59Z`);
+        if (error) throw error;
+
+        // Aggregate counts
+        const totals: Record<string, number> = {};
+        const clickCounts: Record<string, number> = {};
+
+        for (const ev of events || []) {
+          totals[ev.event_type] = (totals[ev.event_type] || 0) + 1;
+          if (ev.event_type === 'link_click' && ev.event_target) {
+            clickCounts[ev.event_target] = (clickCounts[ev.event_target] || 0) + 1;
+          }
+        }
+
+        // Top 10 clicked links
+        const topClicked = Object.entries(clickCounts)
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, 10)
+          .map(([name, count]) => ({ name, clicks: count }));
+
+        return {
+          success: true,
+          data: {
+            date_range: { start: startDate, end: endDate },
+            total_events: (events || []).length,
+            page_views: totals['page_view'] || 0,
+            link_clicks: totals['link_click'] || 0,
+            view_switches: totals['view_switch'] || 0,
+            top_clicked_links: topClicked,
+          },
+        };
+      }
+      case 'get_audit_log': {
+        const limit = Math.min(Math.max(Number(args.limit) || 20, 1), 100);
+        const { data, error } = await supabase
+          .from('audit_log')
+          .select('*')
+          .order('created_at', { ascending: false })
+          .limit(limit);
+        if (error) throw error;
+        return { success: true, data };
+      }
+      case 'check_link_health': {
+        const url = String(args.url);
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), 10000);
+        const start = Date.now();
+        try {
+          const res = await fetch(url, {
+            method: 'HEAD',
+            signal: controller.signal,
+            headers: { 'User-Agent': 'Mozilla/5.0 (compatible; nVisionHealthCheck/1.0)' },
+            redirect: 'follow',
+          });
+          clearTimeout(timer);
+          const elapsed = Date.now() - start;
+          return {
+            success: true,
+            data: { url, status: res.status, statusText: res.statusText, response_time_ms: elapsed, reachable: res.ok },
+          };
+        } catch (err: unknown) {
+          clearTimeout(timer);
+          const message = err instanceof Error ? err.message : String(err);
+          const elapsed = Date.now() - start;
+          return {
+            success: true,
+            data: { url, status: 0, statusText: message, response_time_ms: elapsed, reachable: false },
+          };
+        }
+      }
+      case 'move_link': {
+        const { data, error } = await supabase
+          .from('links')
+          .update({ section_id: args.target_section_id, updated_at: new Date().toISOString() })
+          .eq('id', args.link_id)
+          .select()
+          .single();
+        if (error) throw error;
+        return { success: true, data };
+      }
+      case 'bulk_toggle_visibility': {
+        const ids = args.link_ids as string[];
+        const visible = Boolean(args.is_visible);
+        const { data, error } = await supabase
+          .from('links')
+          .update({ is_visible: visible, updated_at: new Date().toISOString() })
+          .in('id', ids)
+          .select();
+        if (error) throw error;
+        return { success: true, data: { updated_count: (data || []).length, is_visible: visible, links: data } };
+      }
       default:
         return { success: false, error: `Unknown tool: ${name}` };
     }
@@ -622,6 +824,12 @@ You can perform real actions on the site by calling tools. Available actions:
 - **fetch_url_info** — Fetch metadata (title, description, favicon) from a URL
 - List, create, update, delete **sections** (categories)
 - List, create, update, delete **links** (items in sections)
+- **search_links** — Search links by title, URL, or description (fuzzy matching)
+- **move_link** — Move a link to a different section
+- **bulk_toggle_visibility** — Show/hide multiple links at once
+- **check_link_health** — Check if a URL is reachable (status code + response time)
+- **get_analytics_summary** — View analytics: page views, clicks, view switches, top links (by date range)
+- **get_audit_log** — View recent audit log entries (admin actions history)
 - View and update **site configuration** (title, description, default view)
 
 IMPORTANT RULES:

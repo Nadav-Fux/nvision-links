@@ -1,8 +1,24 @@
 import { useState } from 'react';
+import type { ReactNode } from 'react';
 import { ChevronDown, ChevronUp, Plus, Edit2, Trash2, GripVertical, Eye, EyeOff, Save, X, Loader2, Search, ChevronsUpDown, Copy, CheckSquare, Square, MousePointerClick } from 'lucide-react';
 import { LinkEditor } from '@/components/admin/LinkEditor';
 import { ConfirmDialog } from '@/components/admin/ConfirmDialog';
 import { ICON_MAP } from '@/lib/iconMap';
+import { CommunityIcon } from '@/components/icons/CommunityIcon';
+import { CodeIcon } from '@/components/icons/CodeIcon';
+import { BrainIcon } from '@/components/icons/BrainIcon';
+import { MediaIcon } from '@/components/icons/MediaIcon';
+
+/** Maps known section titles to animated SVG icons instead of raw emojis. */
+const SECTION_ICON_MAP: Record<string, ReactNode> = {
+  'קהילות וקבוצות': <CommunityIcon size={18} />,
+  'כלי Vibe Coding': <CodeIcon size={18} />,
+  'מודלים ותשתיות': <BrainIcon size={18} />,
+  'גרפיקה, וידאו ואודיו': <MediaIcon size={18} />,
+};
+function getSectionDisplayIcon(title: string, fallbackEmoji: string): ReactNode {
+  return SECTION_ICON_MAP[title] ?? <span className="text-lg">{fallbackEmoji}</span>;
+}
 import type { Tables } from '@/integrations/supabase/helpers';
 import {
   DndContext,
@@ -555,7 +571,7 @@ const SortableSectionCard = (props: SortableSectionCardProps) => {
         <>
             <button data-ev-id="ev_33bb145f51" onClick={onToggle} aria-expanded={isExpanded}
           className="flex-1 flex items-center gap-2 text-right focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg">
-              <span data-ev-id="ev_4560251b43" className="text-lg" aria-hidden="true">{section.emoji}</span>
+              <span data-ev-id="ev_4560251b43" className="flex items-center" aria-hidden="true">{getSectionDisplayIcon(section.title, section.emoji)}</span>
               <span data-ev-id="ev_a26d160601" className="text-white/90 font-medium text-sm">{section.title}</span>
               <span data-ev-id="ev_ac3139da31" className="text-white/60 text-xs">
                 ({isSearching ? `${visibleLinks.length}/${totalLinksCount}` : totalLinksCount})

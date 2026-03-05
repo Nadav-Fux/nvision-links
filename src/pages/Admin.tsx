@@ -4,7 +4,7 @@ import { AdminLogin } from '@/components/admin/AdminLogin';
 import { SectionManager } from '@/components/admin/SectionManager';
 import { ViewSelector } from '@/components/admin/ViewSelector';
 import { DashboardCards } from '@/components/admin/DashboardCards';
-import { ExportImport } from '@/components/admin/ExportImport';
+import { QuickActions } from '@/components/admin/QuickActions';
 import { SiteConfigEditor } from '@/components/admin/SiteConfigEditor';
 import { ThemeEditor } from '@/components/admin/ThemeEditor';
 import { AuditLog } from '@/components/admin/AuditLog';
@@ -14,8 +14,8 @@ import { SEOEditor } from '@/components/admin/SEOEditor';
 import { QRCodeGenerator } from '@/components/admin/QRCodeGenerator';
 import { LinkHealthChecker } from '@/components/admin/LinkHealthChecker';
 import { isAdminLoggedIn, clearAdminSession, updateConfig, createSection, updateSection, deleteSection, reorderSections, createLink, updateLink, deleteLink, reorderLinks, fetchLinkStats, duplicateSection, duplicateLink, bulkDeleteLinks, bulkToggleLinks } from '@/lib/adminApi';
-import { Link } from 'react-router';
-import { LogOut, RefreshCw, ExternalLink, Loader2, LayoutDashboard, Monitor, Wrench, Palette, Film, Rocket } from 'lucide-react';
+import { LogOut, Loader2, LayoutDashboard } from 'lucide-react';
+import { AnalyticsIcon, SEOIcon, ImportIcon, LinkHealthIcon, QRIcon, SecurityIcon } from '@/components/icons/AdminIcons';
 import { PageMeta } from '@/components/PageMeta';
 import { AgentChat } from '@/components/admin/AgentChat';
 import { SmartImporter } from '@/components/admin/SmartImporter';
@@ -325,8 +325,7 @@ const Admin = () => {
 
       <div data-ev-id="ev_825e9d184d" className="w-full max-w-4xl mx-auto px-4 sm:px-6 py-6">
         {/* Top bar */}
-        <header data-ev-id="ev_570f6c4fbb" className="mb-6 space-y-3">
-          {/* Title row */}
+        <header data-ev-id="ev_570f6c4fbb" className="mb-6">
           <div data-ev-id="ev_eff1438b2c" className="flex items-center justify-between">
             <div data-ev-id="ev_4ae7712f63" className="flex items-center gap-3">
               <LayoutDashboard className="w-5 h-5 text-primary" aria-hidden="true" />
@@ -340,56 +339,14 @@ const Admin = () => {
                 }
               </div>
             </div>
-            {/* Desktop-only: logout on the right */}
             <button data-ev-id="ev_8fae2686d1"
             onClick={handleLogout}
             aria-label="יציאה מממשק הניהול"
-            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-red-400/50 hover:text-red-400 text-xs transition-colors border border-red-400/10 hover:border-red-400/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400">
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-red-400/50 hover:text-red-400 text-xs transition-colors border border-red-400/10 hover:border-red-400/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400">
               <LogOut className="w-3 h-3" aria-hidden="true" />
               יציאה
             </button>
           </div>
-
-          {/* Actions row — scrollable on mobile */}
-          <nav data-ev-id="ev_0f68271d45" aria-label="פעולות ניהול" className="flex items-center gap-2 overflow-x-auto pb-1 -mb-1 scrollbar-hide">
-            <ExportImport onImportComplete={fetchData} />
-            <Link
-              to="/"
-              target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-white/60 hover:text-white/70 text-xs transition-colors border border-white/[0.06] hover:border-white/[0.12] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary whitespace-nowrap flex-shrink-0">
-              <ExternalLink className="w-3 h-3" aria-hidden="true" />
-              צפה באתר
-            </Link>
-            <Link
-              to="/admin/preview"
-              target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-amber-400/40 hover:text-amber-400/70 text-xs transition-colors border border-amber-400/10 hover:border-amber-400/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 whitespace-nowrap flex-shrink-0">
-              <Monitor className="w-3 h-3" aria-hidden="true" />
-              תצוגה + כלי פיתוח
-            </Link>
-            <button data-ev-id="ev_48ae9aa2fc"
-            onClick={() => setShowPreview(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-white/60 hover:text-white/70 text-xs transition-colors border border-white/[0.06] hover:border-white/[0.12] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary whitespace-nowrap flex-shrink-0">
-              <Monitor className="w-3 h-3" aria-hidden="true" />
-              תצוגה מקדימה
-            </button>
-            <button data-ev-id="ev_6f058aeb24"
-            onClick={fetchData}
-            disabled={loading}
-            aria-label="רענן נתונים"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-white/60 hover:text-white/70 text-xs transition-colors border border-white/[0.06] hover:border-white/[0.12] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary whitespace-nowrap flex-shrink-0">
-              <RefreshCw className={`w-3 h-3 ${loading ? 'animate-spin' : ''}`} aria-hidden="true" />
-              רענן
-            </button>
-            {/* Mobile-only: logout in action bar */}
-            <button data-ev-id="ev_4e330376c2"
-            onClick={handleLogout}
-            aria-label="יציאה מממשק הניהול"
-            className="sm:hidden flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-red-400/50 hover:text-red-400 text-xs transition-colors border border-red-400/10 hover:border-red-400/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400 whitespace-nowrap flex-shrink-0">
-              <LogOut className="w-3 h-3" aria-hidden="true" />
-              יציאה
-            </button>
-          </nav>
         </header>
 
         {loading ?
@@ -402,10 +359,18 @@ const Admin = () => {
             {/* Dashboard overview cards */}
             <DashboardCards config={config} sections={sections} links={links} />
 
+            {/* Quick Actions panel */}
+            <QuickActions
+              onRefresh={fetchData}
+              onPreview={() => setShowPreview(true)}
+              onImportComplete={fetchData}
+              loading={loading}
+            />
+
             {/* Anonymous Analytics Dashboard */}
             <section data-ev-id="ev_9fcea8049c" aria-labelledby="analytics-heading">
-              <h2 data-ev-id="ev_fa5e828330" id="analytics-heading" className="text-white/60 text-sm font-semibold mb-3">
-                📊 אנליטיקס אנונימי
+              <h2 data-ev-id="ev_fa5e828330" id="analytics-heading" className="text-white/60 text-sm font-semibold mb-3 flex items-center gap-2">
+                <AnalyticsIcon size={18} /> אנליטיקס אנונימי
               </h2>
               <AnalyticsDashboard />
             </section>
@@ -453,104 +418,40 @@ const Admin = () => {
 
             {/* Smart Importer — AI-powered bulk link import */}
             <section data-ev-id="ev_2ecbf29661" aria-labelledby="smart-import-heading">
-              <h2 data-ev-id="ev_a3d4171261" id="smart-import-heading" className="text-white/60 text-sm font-semibold mb-3">
-                🤖 ייבוא חכם
+              <h2 data-ev-id="ev_a3d4171261" id="smart-import-heading" className="text-white/60 text-sm font-semibold mb-3 flex items-center gap-2">
+                <ImportIcon size={18} /> ייבוא חכם
               </h2>
               <SmartImporter sections={sections} onImportComplete={fetchData} />
             </section>
 
             {/* Link Health Checker */}
             <section data-ev-id="ev_1172f115f2" aria-labelledby="link-health-heading">
-              <h2 data-ev-id="ev_de07340b4a" id="link-health-heading" className="text-white/60 text-sm font-semibold mb-3">
-                🔗 בדיקת קישורים
+              <h2 data-ev-id="ev_de07340b4a" id="link-health-heading" className="text-white/60 text-sm font-semibold mb-3 flex items-center gap-2">
+                <LinkHealthIcon size={18} /> בדיקת קישורים
               </h2>
               <LinkHealthChecker />
             </section>
 
             {/* SEO / OG Editor */}
             <section data-ev-id="ev_01f9e45f1f" aria-labelledby="seo-heading">
-              <h2 data-ev-id="ev_78441b5c63" id="seo-heading" className="text-white/60 text-sm font-semibold mb-3">
-                🌐 SEO ושיתוף חברתי
+              <h2 data-ev-id="ev_78441b5c63" id="seo-heading" className="text-white/60 text-sm font-semibold mb-3 flex items-center gap-2">
+                <SEOIcon size={18} /> SEO ושיתוף חברתי
               </h2>
               <SEOEditor config={config} onSaved={fetchData} />
             </section>
 
             {/* QR Code Generator */}
             <section data-ev-id="ev_03c4e1234d" aria-labelledby="qr-heading">
-              <h2 data-ev-id="ev_51ba8dbd41" id="qr-heading" className="text-white/60 text-sm font-semibold mb-3">
-                📱 מחולל QR Code
+              <h2 data-ev-id="ev_51ba8dbd41" id="qr-heading" className="text-white/60 text-sm font-semibold mb-3 flex items-center gap-2">
+                <QRIcon size={18} /> מחולל QR Code
               </h2>
               <QRCodeGenerator />
             </section>
 
-            {/* Dev Tools Section */}
-            <section data-ev-id="ev_f6f90f48e5" aria-labelledby="devtools-heading">
-              <h2 data-ev-id="ev_bb2d69f27d" id="devtools-heading" className="text-white/60 text-sm font-semibold mb-3">
-                🔧 כלי פיתוח
-              </h2>
-              <div data-ev-id="ev_c468ba4f41" className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-5 space-y-2" dir="rtl">
-                <p data-ev-id="ev_548b78292c" className="text-white/60 text-xs mb-3">כלים מתקדמים לעיצוב וכיול האתר</p>
-                <div data-ev-id="ev_c9fdf651c4" className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  <Link
-                  to="/font-preview"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 px-4 py-3 rounded-xl bg-cyan-500/[0.06] border border-cyan-500/15 hover:border-cyan-500/30 hover:bg-cyan-500/10 transition-all group focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400">
-
-                    <Palette className="w-5 h-5 text-cyan-400" aria-hidden="true" />
-                    <div data-ev-id="ev_bd707b87c5" className="flex-1 min-w-0">
-                      <div data-ev-id="ev_7a28119b5a" className="text-cyan-400/90 text-sm font-medium">בחירת טיפוגרפיה</div>
-                      <div data-ev-id="ev_a44f5f0357" className="text-white/60 text-[11px] mt-0.5">בחירה והשוואת פונטים</div>
-                    </div>
-                    <ExternalLink className="w-3.5 h-3.5 text-white/15 group-hover:text-white/70 transition-colors" aria-hidden="true" />
-                  </Link>
-                  <Link
-                  to="/animation-preview"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 px-4 py-3 rounded-xl bg-purple-500/[0.06] border border-purple-500/15 hover:border-purple-500/30 hover:bg-purple-500/10 transition-all group focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400">
-
-                    <Film className="w-5 h-5 text-purple-400" aria-hidden="true" />
-                    <div data-ev-id="ev_ad1ab28caf" className="flex-1 min-w-0">
-                      <div data-ev-id="ev_86a418b281" className="text-purple-400/90 text-sm font-medium">אנימציות לוגו</div>
-                      <div data-ev-id="ev_85527fe164" className="text-white/60 text-[11px] mt-0.5">תצוגה ובחירת אנימציות</div>
-                    </div>
-                    <ExternalLink className="w-3.5 h-3.5 text-white/15 group-hover:text-white/70 transition-colors" aria-hidden="true" />
-                  </Link>
-                  <Link
-                  to="/entrance-preview"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 px-4 py-3 rounded-xl bg-emerald-500/[0.06] border border-emerald-500/15 hover:border-emerald-500/30 hover:bg-emerald-500/10 transition-all group focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400">
-
-                    <Rocket className="w-5 h-5 text-emerald-400" aria-hidden="true" />
-                    <div data-ev-id="ev_92b9366758" className="flex-1 min-w-0">
-                      <div data-ev-id="ev_a359e024ab" className="text-emerald-400/90 text-sm font-medium">אנימציות כניסה</div>
-                      <div data-ev-id="ev_a77885db61" className="text-white/60 text-[11px] mt-0.5">אפקט כניסה לאתר</div>
-                    </div>
-                    <ExternalLink className="w-3.5 h-3.5 text-white/15 group-hover:text-white/70 transition-colors" aria-hidden="true" />
-                  </Link>
-                  <Link
-                  to="/admin/preview"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 px-4 py-3 rounded-xl bg-amber-500/[0.06] border border-amber-500/15 hover:border-amber-500/30 hover:bg-amber-500/10 transition-all group focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400">
-
-                    <Wrench className="w-5 h-5 text-amber-400" aria-hidden="true" />
-                    <div data-ev-id="ev_c0375494f6" className="flex-1 min-w-0">
-                      <div data-ev-id="ev_8d832b9800" className="text-amber-400/90 text-sm font-medium">תצוגה + כלי פיתוח</div>
-                      <div data-ev-id="ev_82e1f74a08" className="text-white/60 text-[11px] mt-0.5">צפייה באתר עם כל הכלים</div>
-                    </div>
-                    <ExternalLink className="w-3.5 h-3.5 text-white/15 group-hover:text-white/70 transition-colors" aria-hidden="true" />
-                  </Link>
-                </div>
-              </div>
-            </section>
-
             {/* Security — 2FA */}
             <section data-ev-id="ev_d393b9f1c9" aria-labelledby="security-heading">
-              <h2 data-ev-id="ev_f2edb2cf81" id="security-heading" className="text-white/60 text-sm font-semibold mb-3">
-                🔒 אבטחה — אימות דו-שלבי (2FA)
+              <h2 data-ev-id="ev_f2edb2cf81" id="security-heading" className="text-white/60 text-sm font-semibold mb-3 flex items-center gap-2">
+                <SecurityIcon size={18} /> אבטחה — אימות דו-שלבי (2FA)
               </h2>
               <div data-ev-id="ev_037da94166" className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-5">
                 <TotpSetup />

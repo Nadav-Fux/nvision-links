@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Monitor, Check, Save, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { updateConfig } from '@/lib/adminApi';
+import { VIEW_ICONS } from '@/components/icons/ViewIcons';
 
 const VIEW_OPTIONS = [
 { id: 1, name: 'Grid', nameHe: 'רשת', emoji: '📱' },
@@ -20,7 +21,30 @@ const VIEW_OPTIONS = [
 { id: 14, name: 'RPG', nameHe: 'עץ כישורים', emoji: '🎮' },
 { id: 15, name: 'Atoms', nameHe: 'מולקולרי', emoji: '⚛️' },
 { id: 16, name: 'Table', nameHe: 'טבלה מחזורית', emoji: '🧪' },
-{ id: 17, name: 'Ocean', nameHe: 'אקווריום', emoji: '🐠' }];
+{ id: 17, name: 'Ocean', nameHe: 'אקווריום', emoji: '🐠' },
+{ id: 18, name: 'Radar', nameHe: 'מכ"מ', emoji: '📡' },
+{ id: 19, name: 'NN', nameHe: 'רשת עצבית', emoji: '🤖' },
+{ id: 20, name: 'Stream', nameHe: 'סטרימינג', emoji: '🎬' },
+{ id: 21, name: 'Dash', nameHe: 'דשבורד', emoji: '📊' },
+{ id: 22, name: 'Secret', nameHe: 'מסווג', emoji: '🔒' },
+{ id: 23, name: 'Spotify', nameHe: 'ספוטיפיי', emoji: '🎵' },
+{ id: 24, name: 'News', nameHe: 'עיתון', emoji: '📰' },
+{ id: 25, name: 'Metro', nameHe: 'מטרו', emoji: '🚇' },
+{ id: 26, name: 'Arcade', nameHe: 'ארקייד', emoji: '🕹️' },
+{ id: 27, name: 'Desktop', nameHe: 'שולחן עבודה', emoji: '🖥️' },
+{ id: 28, name: 'AI', nameHe: 'בינה מלאכותית', emoji: '🤖' },
+{ id: 29, name: 'Holo', nameHe: 'הולוגרמה', emoji: '💎' },
+{ id: 30, name: 'MRI', nameHe: 'סריקת מוח', emoji: '🧠' },
+{ id: 31, name: 'Prompt', nameHe: 'זרימת פרומפט', emoji: '🔀' },
+{ id: 32, name: 'GPU', nameHe: 'מעבד גרפי', emoji: '💻' },
+{ id: 33, name: 'Train', nameHe: 'אימון', emoji: '📈' },
+{ id: 34, name: 'Robot', nameHe: 'רובוט', emoji: '🤖' },
+{ id: 35, name: 'DNA', nameHe: 'סליל DNA', emoji: '🧬' },
+{ id: 36, name: 'Satellite', nameHe: 'לוויין', emoji: '🛰️' },
+{ id: 37, name: 'Wormhole', nameHe: 'חור תולעת', emoji: '🌀' },
+{ id: 38, name: 'Stock', nameHe: 'מניות', emoji: '📊' },
+{ id: 39, name: 'Blueprint', nameHe: 'שרטוט', emoji: '📐' },
+{ id: 40, name: 'Quantum', nameHe: 'קוונטום', emoji: '⚛️' }];
 
 
 interface ViewSelectorProps {
@@ -88,7 +112,7 @@ export const ViewSelector = ({ currentView, selectedViews: initialSelectedViews,
       <div data-ev-id="ev_bac3a45dcf"
       role="group"
       aria-labelledby="view-selector-label"
-      className="grid grid-cols-4 sm:grid-cols-6 gap-2">
+      className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-2 lg:gap-3">
 
         {VIEW_OPTIONS.map((view) => {
           const checked = isSelected(view.id);
@@ -98,7 +122,7 @@ export const ViewSelector = ({ currentView, selectedViews: initialSelectedViews,
             aria-pressed={checked}
             aria-label={`תצוגת ${view.name} (${view.nameHe})`}
             onClick={() => toggleView(view.id)}
-            className={`relative flex flex-col items-center gap-1 py-2.5 px-1 rounded-lg border text-xs transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1 focus-visible:ring-offset-transparent ${
+            className={`relative flex flex-col items-center gap-1 py-2.5 px-1 lg:py-4 lg:px-2 rounded-lg border text-xs transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1 focus-visible:ring-offset-transparent ${
             checked ?
             'bg-primary/15 border-primary/40 text-primary' :
             'bg-white/[0.02] border-white/[0.06] text-white/60 hover:bg-white/[0.05] hover:text-white/70'}`
@@ -110,7 +134,9 @@ export const ViewSelector = ({ currentView, selectedViews: initialSelectedViews,
                   <Check className="w-2.5 h-2.5 text-primary" />
                 </div>
               }
-              <span data-ev-id="ev_8f7facd048" className="text-lg" aria-hidden="true">{view.emoji}</span>
+              <span data-ev-id="ev_8f7facd048" className="flex items-center justify-center" aria-hidden="true">
+                {VIEW_ICONS[view.id] ? VIEW_ICONS[view.id]({ size: 20, className: 'sm:w-6 sm:h-6 lg:w-8 lg:h-8' }) : <span className="text-lg lg:text-2xl">{view.emoji}</span>}
+              </span>
               <span data-ev-id="ev_3621765c0a" className="truncate w-full text-center leading-tight">{view.nameHe}</span>
               <span data-ev-id="ev_25cafb7a0d" className={`text-[9px] leading-tight ${checked ? 'text-primary/60' : 'text-white/60'}`}>{view.name}</span>
             </button>);

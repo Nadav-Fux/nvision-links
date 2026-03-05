@@ -93,6 +93,9 @@ export const SmartImporter = ({ sections, onImportComplete }: SmartImporterProps
       return;
     }
 
+    const confirmed = window.confirm(`האם אתה בטוח שברצונך לייבא ${linksToImport.length} קישורים?`);
+    if (!confirmed) return;
+
     setStep('importing');
     setError(null);
 

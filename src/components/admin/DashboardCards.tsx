@@ -1,4 +1,4 @@
-import { Layers, Link2, Eye, Clock } from 'lucide-react';
+import { SectionsIcon, LinksIcon, CurrentViewIcon, LastUpdatedIcon } from '@/components/icons/AdminIcons';
 import type { Tables } from '@/integrations/supabase/helpers';
 
 type SectionRow = Tables<'sections'>;
@@ -55,28 +55,28 @@ export const DashboardCards = ({ config, sections, links }: DashboardCardsProps)
 
   const cards = [
   {
-    icon: Layers,
+    Icon: SectionsIcon,
     label: 'סקציות',
     value: `${visibleSections}`,
     sub: sections.length > visibleSections ? `${sections.length - visibleSections} מוסתרות` : 'הכל גלויות',
     color: '#06b6d4'
   },
   {
-    icon: Link2,
+    Icon: LinksIcon,
     label: 'קישורים',
     value: `${visibleLinks}`,
     sub: hiddenLinks > 0 ? `${hiddenLinks} מוסתרים` : 'הכל גלויים',
     color: '#8b5cf6'
   },
   {
-    icon: Eye,
+    Icon: CurrentViewIcon,
     label: 'תצוגה נוכחית',
     value: VIEW_NAMES[currentView] || `#${currentView}`,
     sub: `תצוגה ${currentView} מתוך 17`,
     color: '#22d3ee'
   },
   {
-    icon: Clock,
+    Icon: LastUpdatedIcon,
     label: 'עודכן לאחרונה',
     value: formatRelativeTime(config?.updated_at),
     sub: config?.updated_at ? new Date(config.updated_at).toLocaleDateString('he-IL') : '',
@@ -106,7 +106,7 @@ export const DashboardCards = ({ config, sections, links }: DashboardCardsProps)
                 border: `1px solid ${card.color}18`
               }}>
 
-                  <card.icon className="w-3.5 h-3.5" style={{ color: card.color }} aria-hidden="true" />
+                  <card.Icon size={14} className="sm:w-4 sm:h-4" />
                 </div>
                 <span data-ev-id="ev_b449a26d68" className="text-white/60 text-xs">{card.label}</span>
               </div>

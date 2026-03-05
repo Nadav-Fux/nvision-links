@@ -1,8 +1,9 @@
-import { useState, useEffect, useId } from 'react';
+import React, { useState, useEffect, useId } from 'react';
 import { Palette, Save, Loader2, RotateCcw, Check, Sparkles } from 'lucide-react';
 import { toast } from 'sonner';
 import { updateConfig } from '@/lib/adminApi';
 import type { Tables } from '@/integrations/supabase/helpers';
+import { WaveIcon, LeafIcon, SunIcon, FlowerIcon, BoltIcon, GlowIcon, FlameIcon, SnowflakeIcon, SparkleIcon } from '@/components/icons/AdminIcons';
 
 type ConfigRow = Tables<'site_config'>;
 
@@ -71,6 +72,17 @@ const PRESETS: Preset[] = [
   colors: { primary: '#eab308', secondary: '#a855f7', accent: '#fbbf24' }
 }];
 
+const PRESET_ICONS: Record<string, (props: { size?: number; color?: string; className?: string }) => React.JSX.Element> = {
+  'Cyber': WaveIcon,
+  'Emerald': LeafIcon,
+  'Sunset': SunIcon,
+  'Rose': FlowerIcon,
+  'Electric': BoltIcon,
+  'Neon': GlowIcon,
+  'Crimson': FlameIcon,
+  'Arctic': SnowflakeIcon,
+  'Gold': SparkleIcon,
+};
 
 function parseThemeColors(raw: unknown): ThemeColors {
   if (typeof raw === 'object' && raw !== null) {
@@ -230,8 +242,11 @@ export const ThemeEditor = ({ config, onSaved }: ThemeEditorProps) => {
                   style={{ background: preset.colors.accent }} />
 
                 </div>
-                <span data-ev-id="ev_c0a6ec3078" className="text-[10px] text-white/60">
-                  {preset.emoji} {preset.name}
+                <span data-ev-id="ev_c0a6ec3078" className="text-[10px] text-white/60 flex items-center gap-1">
+                  {PRESET_ICONS[preset.name] ?
+                    React.createElement(PRESET_ICONS[preset.name], { size: 12, color: preset.colors.primary }) :
+                    preset.emoji
+                  } {preset.name}
                 </span>
                 {active &&
                 <div data-ev-id="ev_b267604798" className="absolute -top-1 -left-1 w-4 h-4 rounded-full bg-primary flex items-center justify-center">

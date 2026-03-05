@@ -10,7 +10,9 @@ const FALLBACK_MODEL = 'qwen/qwen3-235b-a22b';
 
 // ===== CORS =====
 const ALLOWED_ORIGINS = [
+  'https://links.74111147.xyz',
   'https://nvision.me',
+  'https://nvision-links.pages.dev',
   'http://localhost:3000',
   'http://localhost:5173',
 ];

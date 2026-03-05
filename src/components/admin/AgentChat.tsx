@@ -22,7 +22,13 @@ const TOOL_LABELS: Record<string, string> = {
   update_link: '✏️ עדכון קישור',
   delete_link: '🗑️ מחיקת קישור',
   get_site_config: '⚙️ קריאת הגדרות',
-  update_site_config: '⚙️ עדכון הגדרות'
+  update_site_config: '⚙️ עדכון הגדרות',
+  search_links: '🔍 חיפוש קישורים',
+  get_analytics_summary: '📊 סיכום אנליטיקס',
+  get_audit_log: '📜 יומן פעולות',
+  check_link_health: '🩺 בדיקת תקינות קישור',
+  move_link: '↕️ העברת קישור',
+  bulk_toggle_visibility: '👁️ שינוי נראות קבוצתי'
 };
 
 function formatTime(ts: number) {
