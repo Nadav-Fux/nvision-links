@@ -1,10 +1,12 @@
 import { useState, useMemo } from 'react';
-import { ArrowRight, Check, Sparkles, Play, Eye } from 'lucide-react';
+import { ArrowRight, Check, Sparkles, Play, Eye, Zap, Heart, Star, Globe, Rocket, Shield, Bell, Camera, Music, Coffee } from 'lucide-react';
 import { Link } from 'react-router';
 import { scenes } from '@/components/logoScenes';
 import type { TransitionType } from '@/components/logoScenes';
 import { ScenePreviewCanvas } from '@/components/ScenePreviewCanvas';
 import { TransitionPreviewCanvas } from '@/components/TransitionPreviewCanvas';
+import { AnimatedIcon } from '@/components/AnimatedIcon';
+import type { IconAnimation } from '@/data/links';
 
 /* ═══════════════════════════════════════════════════
  *  Animation Preview Page
@@ -36,11 +38,37 @@ const SCENE_ICONS: Record<string, string> = {
   Circuit: '🔌', Transformer: '🤖', CodeFlow: '💻', 'AI Core': '🧪', Katana: '⚔️'
 };
 
-type Tab = 'scenes' | 'transitions' | 'full';
+type Tab = 'icons' | 'scenes' | 'transitions' | 'full';
+
+const DEMO_ICONS = [Zap, Heart, Star, Globe, Rocket, Shield, Bell, Camera, Music, Coffee];
+const DEMO_COLORS = ['#06b6d4', '#ec4899', '#f59e0b', '#6366f1', '#ef4444', '#22c55e', '#8b5cf6', '#f97316', '#14b8a6', '#a855f7'];
+
+const ALL_ICON_ANIMATIONS: { type: IconAnimation; label: string; labelHe: string; description: string; speed: string }[] = [
+  { type: 'bounce', label: 'Bounce', labelHe: 'קפיצה', description: 'תנועה אנכית למעלה ולמטה', speed: '0.6s' },
+  { type: 'wiggle', label: 'Wiggle', labelHe: 'ניענוע', description: 'סיבוב מהיר ימינה ושמאלה', speed: '0.5s' },
+  { type: 'pulse-grow', label: 'Pulse Grow', labelHe: 'פעימה', description: 'הגדלה והקטנה מחזורית', speed: '1s' },
+  { type: 'spin-slow', label: 'Spin', labelHe: 'סיבוב', description: 'סיבוב מלא 360 מעלות', speed: '2s' },
+  { type: 'float', label: 'Float', labelHe: 'ריחוף', description: 'ריחוף עדין עם הטיה קלה', speed: '1.5s' },
+  { type: 'swing', label: 'Swing', labelHe: 'נדנוד', description: 'תנועת מטוטלת ±15 מעלות', speed: '0.8s' },
+  { type: 'rubber', label: 'Rubber', labelHe: 'גומי', description: 'אפקט גומייה — מתיחה וכיווץ', speed: '0.8s' },
+  { type: 'flash', label: 'Flash', labelHe: 'הבזק', description: 'הבהוב שקיפות מהיר', speed: '1s' },
+  { type: 'tilt', label: 'Tilt', labelHe: 'הטיה', description: 'הטיה עם הזזה צדית', speed: '0.6s' },
+  { type: 'breathe', label: 'Breathe', labelHe: 'נשימה', description: 'נשימה — הגדלה עדינה עם שקיפות', speed: '1.5s' },
+  { type: 'jello', label: 'Jello', labelHe: "ג'לי", description: 'רעידת ג\'לי תלת-ממדית', speed: '0.9s' },
+  { type: 'flip', label: 'Flip', labelHe: 'הפיכה', description: 'הפיכה תלת-ממדית סביב ציר Y', speed: '1.2s' },
+  { type: 'heartbeat', label: 'Heartbeat', labelHe: 'דופק', description: 'פעימת לב — הגדלה כפולה מהירה', speed: '1.4s' },
+  { type: 'shake', label: 'Shake', labelHe: 'רעידה', description: 'רעידה אופקית מהירה', speed: '0.5s' },
+  { type: 'tada', label: 'Tada', labelHe: 'טאדא!', description: 'סיבוב עם הגדלה דרמטית', speed: '1s' },
+  { type: 'pendulum', label: 'Pendulum', labelHe: 'מטוטלת', description: 'נדנוד מטוטלת מנקודת ציר עליונה', speed: '1.5s' },
+  { type: 'morph', label: 'Morph', labelHe: 'מורפינג', description: 'שינוי צורה — עיגול לריבוע', speed: '2s' },
+  { type: 'orbit-spin', label: 'Orbit Spin', labelHe: 'מסלול', description: 'סיבוב במסלול אליפטי', speed: '2s' },
+  { type: 'glitch-icon', label: 'Glitch', labelHe: "גליץ'", description: 'אפקט גליץ\' — הזזה רנדומלית', speed: '0.6s' },
+  { type: 'zoom-pulse', label: 'Zoom Pulse', labelHe: 'זום פעימה', description: 'הגדלה פתאומית עם הבהוב', speed: '1.2s' },
+];
 
 /** Route: /animation-preview — dev-only gallery of all logo scenes and transition effects. */
 const AnimationPreview = () => {
-  const [tab, setTab] = useState<Tab>('scenes');
+  const [tab, setTab] = useState<Tab>('icons');
   const [selectedScene, setSelectedScene] = useState<number | null>(null);
   const [selectedTransition, setSelectedTransition] = useState<TransitionType | null>(null);
   const [fullScreenIdx, setFullScreenIdx] = useState<number | null>(null);
@@ -57,25 +85,26 @@ const AnimationPreview = () => {
             <Link to="/" className="flex items-center gap-2 text-white/60 hover:text-white/70 transition-colors text-sm">
               <ArrowRight className="w-4 h-4" />חזרה
             </Link>
-            <div data-ev-id="ev_66c444d3d4" className="w-px h-5 bg-white/10" />
-            <h1 data-ev-id="ev_b0dc2a31da" className="text-white/90 text-lg font-bold flex items-center gap-2">
-              <Play className="w-5 h-5 text-purple-400" />
-              תצוגת אנימציות לוגו
+            <div data-ev-id="ev_66c444d3d4" className="w-px h-5 bg-white/10 hidden sm:block" />
+            <h1 data-ev-id="ev_b0dc2a31da" className="text-white/90 text-sm sm:text-lg font-bold flex items-center gap-2">
+              <Play className="w-5 h-5 text-purple-400 hidden sm:block" />
+              אנימציות
             </h1>
           </div>
-          <div data-ev-id="ev_fc20439986" className="flex items-center gap-2">
-            <Link to="/font-preview" className="px-2.5 py-1 text-[11px] text-cyan-400/60 hover:text-cyan-300 border border-cyan-500/10 hover:border-cyan-500/25 rounded-md transition-colors">🎨 טיפוגרפיה</Link>
-            <Link to="/entrance-preview" className="px-2.5 py-1 text-[11px] text-emerald-400/60 hover:text-emerald-300 border border-emerald-500/10 hover:border-emerald-500/25 rounded-md transition-colors">🚀 אנימציות כניסה</Link>
-            <div data-ev-id="ev_f8c018b868" className="w-px h-4 bg-white/10 mx-1" />
-            <span data-ev-id="ev_38762c3d9c" className="text-white/60 text-xs">{scenes.length} סצנות · 13 מעברים</span>
+          <div data-ev-id="ev_fc20439986" className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto">
+            <Link to="/font-preview" className="px-2 sm:px-2.5 py-1 text-[10px] sm:text-[11px] text-cyan-400/60 hover:text-cyan-300 border border-cyan-500/10 hover:border-cyan-500/25 rounded-md transition-colors whitespace-nowrap">🎨 טיפוגרפיה</Link>
+            <Link to="/entrance-preview" className="px-2 sm:px-2.5 py-1 text-[10px] sm:text-[11px] text-emerald-400/60 hover:text-emerald-300 border border-emerald-500/10 hover:border-emerald-500/25 rounded-md transition-colors whitespace-nowrap">🚀 כניסה</Link>
+            <div data-ev-id="ev_f8c018b868" className="w-px h-4 bg-white/10 mx-0.5 hidden sm:block" />
+            <span data-ev-id="ev_38762c3d9c" className="text-white/60 text-[10px] sm:text-xs whitespace-nowrap hidden sm:inline">{scenes.length} סצנות · 13 מעברים</span>
           </div>
         </div>
       </div>
 
       {/* Tabs */}
       <div data-ev-id="ev_0c3f993922" className="max-w-7xl mx-auto px-4 pt-6 pb-4">
-        <div data-ev-id="ev_7383932d63" className="flex items-center justify-center gap-2">
+        <div data-ev-id="ev_7383932d63" className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0">
           {[
+          { key: 'icons' as Tab, label: `✨ אייקונים (${ALL_ICON_ANIMATIONS.length})`, desc: 'אנימציות לקישורים' },
           { key: 'scenes' as Tab, label: `🎬 סצנות (${scenes.length})`, desc: 'כל אנימציות הרקע' },
           { key: 'transitions' as Tab, label: '🌀 מעברים (13)', desc: 'אפקטי פיזור חלקיקים' },
           { key: 'full' as Tab, label: '🔮 סצנה מלאה', desc: 'ראה סצנה בגדול' }].
@@ -83,7 +112,7 @@ const AnimationPreview = () => {
           <button data-ev-id="ev_abb675a1ed"
           key={key}
           onClick={() => setTab(key)}
-          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+          className={`px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-300 whitespace-nowrap ${
           tab === key ?
           'bg-purple-500/15 text-purple-300 border border-purple-500/30' :
           'text-white/60 hover:text-white/60 border border-transparent hover:border-white/10'}`
@@ -96,6 +125,29 @@ const AnimationPreview = () => {
       </div>
 
       <div data-ev-id="ev_194d95b89d" className="max-w-7xl mx-auto px-4 pb-16">
+
+        {/* ═══ ICON ANIMATIONS TAB ═══ */}
+        {tab === 'icons' &&
+        <div>
+            <p className="text-white/60 text-center text-sm mb-2">העבר עכבר או לחץ על כרטיס כדי לראות את האנימציה חיה</p>
+            <p className="text-white/40 text-center text-xs mb-8">10 הראשונים פעילים · 10 חדשים זמינים להפעלה</p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
+              {ALL_ICON_ANIMATIONS.map((anim, i) => {
+              const DemoIcon = DEMO_ICONS[i % DEMO_ICONS.length];
+              const demoColor = DEMO_COLORS[i % DEMO_COLORS.length];
+              const isNew = i >= 10;
+              return (
+                <IconAnimCard
+                  key={anim.type}
+                  anim={anim}
+                  icon={DemoIcon}
+                  color={demoColor}
+                  isNew={isNew} />
+              );
+            })}
+            </div>
+          </div>
+        }
 
         {/* ═══ SCENES TAB ═══ */}
         {tab === 'scenes' &&
@@ -209,7 +261,7 @@ const AnimationPreview = () => {
             <p data-ev-id="ev_30d45a7658" className="text-white/60 text-center text-sm mb-6">לחץ על סצנה לראות אותה בגדול מלא עם אינטראקציית עכבר</p>
 
             {/* Scene selector pills */}
-            <div data-ev-id="ev_056e8c0cba" className="flex flex-wrap items-center justify-center gap-2 mb-8">
+            <div data-ev-id="ev_056e8c0cba" className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mb-8 max-h-48 overflow-y-auto">
               {scenes.map((s, i) =>
             <button data-ev-id="ev_a3e2029470"
             key={i}
@@ -276,6 +328,51 @@ const AnimationPreview = () => {
       </div>
     </div>);
 
+};
+
+/** Interactive card that plays an icon animation on hover/tap */
+const IconAnimCard = ({ anim, icon, color, isNew }: {
+  anim: typeof ALL_ICON_ANIMATIONS[0];
+  icon: typeof Zap;
+  color: string;
+  isNew: boolean;
+}) => {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <button
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onFocus={() => setHovered(true)}
+      onBlur={() => setHovered(false)}
+      onClick={() => setHovered((h) => !h)}
+      className={`relative flex flex-col items-center rounded-2xl border-2 transition-all duration-300 p-4 sm:p-5 cursor-pointer ${
+        hovered
+          ? 'border-purple-500/50 shadow-[0_0_30px_rgba(139,92,246,0.15)] bg-purple-500/[0.04] scale-105'
+          : 'border-white/[0.05] hover:border-white/15 bg-white/[0.01]'
+      }`}>
+      {isNew && (
+        <span className="absolute top-2 left-2 text-[9px] font-bold px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/25">
+          חדש
+        </span>
+      )}
+      <div
+        className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl flex items-center justify-center mb-3 transition-all duration-300"
+        style={{
+          background: `${color}15`,
+          border: `1px solid ${hovered ? `${color}50` : `${color}20`}`,
+          boxShadow: hovered ? `0 0 25px ${color}30` : 'none',
+        }}>
+        <AnimatedIcon icon={icon} animation={anim.type} color={color} isHovered={hovered} size={28} />
+      </div>
+      <span className="text-white/90 font-bold text-sm mb-0.5">{anim.label}</span>
+      <span className="text-white/60 text-xs mb-1">{anim.labelHe}</span>
+      <p className="text-white/40 text-[10px] sm:text-[11px] leading-relaxed text-center">{anim.description}</p>
+      <span className="mt-2 text-[10px] px-2 py-0.5 rounded bg-white/[0.04] text-white/50 border border-white/[0.04]">
+        {anim.speed}
+      </span>
+    </button>
+  );
 };
 
 export default AnimationPreview;

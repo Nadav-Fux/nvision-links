@@ -32,7 +32,17 @@ export const AnimatedIcon = ({ icon: Icon, animation, color, isHovered = false, 
       rubber: 'iconRubber 0.8s ease infinite',
       flash: 'iconFlash 1s ease infinite',
       tilt: 'iconTilt 0.6s ease infinite',
-      breathe: 'iconBreathe 1.5s ease-in-out infinite'
+      breathe: 'iconBreathe 1.5s ease-in-out infinite',
+      jello: 'iconJello 0.9s ease infinite',
+      flip: 'iconFlip 1.2s ease infinite',
+      heartbeat: 'iconHeartbeat 1.4s ease-in-out infinite',
+      shake: 'iconShake 0.5s ease infinite',
+      tada: 'iconTada 1s ease infinite',
+      pendulum: 'iconPendulum 1.5s ease-in-out infinite',
+      morph: 'iconMorph 2s ease-in-out infinite',
+      'orbit-spin': 'iconOrbitSpin 2s linear infinite',
+      'glitch-icon': 'iconGlitch 0.6s steps(1) infinite',
+      'zoom-pulse': 'iconZoomPulse 1.2s ease-in-out infinite'
     };
 
     return { animation: animations[animation] };

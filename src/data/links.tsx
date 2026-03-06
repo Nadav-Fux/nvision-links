@@ -53,7 +53,17 @@ export type IconAnimation =
   | 'rubber'
   | 'flash'
   | 'tilt'
-  | 'breathe';
+  | 'breathe'
+  | 'jello'
+  | 'flip'
+  | 'heartbeat'
+  | 'shake'
+  | 'tada'
+  | 'pendulum'
+  | 'morph'
+  | 'orbit-spin'
+  | 'glitch-icon'
+  | 'zoom-pulse';
 
 /** Pricing / availability tag shown as a small badge on the card */
 export type LinkTag =
