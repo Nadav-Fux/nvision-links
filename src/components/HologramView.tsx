@@ -102,6 +102,7 @@ const HoloCard = ({
 
 }: {link: LinkItem;sIdx: number;delay: number;mouseX: number;mouseY: number;containerW: number;containerH: number;onHover: (id: string | null) => void;isHovered: boolean;}) => {
   const [show, setShow] = useState(false);
+  const [tapped, setTapped] = useState(false);
   const color = HUD_COLORS[sIdx % HUD_COLORS.length];
 
   useEffect(() => {
@@ -109,9 +110,10 @@ const HoloCard = ({
     return () => clearTimeout(t);
   }, [delay]);
 
-  // Parallax based on mouse
-  const px = containerW ? (mouseX / containerW - 0.5) * 8 : 0;
-  const py = containerH ? (mouseY / containerH - 0.5) * 5 : 0;
+  // Parallax based on mouse (desktop) or fixed tilt (touch tapped)
+  const isTouchDevice = typeof window !== 'undefined' && 'ontouchstart' in window;
+  const px = tapped ? 5 : containerW ? (mouseX / containerW - 0.5) * 8 : 0;
+  const py = tapped ? -3 : containerH ? (mouseY / containerH - 0.5) * 5 : 0;
 
   return (
     <a data-ev-id="ev_26eb241cf4"
@@ -121,18 +123,19 @@ const HoloCard = ({
     aria-label={`${link.title} — ${link.subtitle} (נפתח בחלון חדש)`}
     className={`block rounded-lg overflow-hidden transition-all duration-500 group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
     show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'} ${
-    isHovered ? 'scale-[1.04] z-10' : 'hover:scale-[1.02]'}`}
+    isHovered || tapped ? 'scale-[1.04] z-10' : 'hover:scale-[1.02]'}`}
     style={{
       background: `linear-gradient(135deg, ${color}08 0%, rgba(0,240,255,0.02) 50%, ${color}05 100%)`,
-      border: `1px solid ${isHovered ? color + '40' : color + '12'}`,
+      border: `1px solid ${isHovered || tapped ? color + '40' : color + '12'}`,
       backdropFilter: 'blur(8px)',
-      boxShadow: isHovered ?
+      boxShadow: isHovered || tapped ?
       `0 0 30px ${color}15, inset 0 0 30px ${color}05, 0 10px 30px rgba(0,0,0,0.3)` :
       `0 0 15px ${color}05, 0 5px 15px rgba(0,0,0,0.2)`,
       transform: show ? `perspective(800px) rotateY(${px * 0.3}deg) rotateX(${-py * 0.3}deg) translateY(0)` : 'translateY(16px)'
     }}
     onMouseEnter={() => onHover(link.id)}
-    onMouseLeave={() => onHover(null)}>
+    onMouseLeave={() => onHover(null)}
+    onClick={(e) => { if (isTouchDevice && !tapped) { e.preventDefault(); setTapped(true); } else if (isTouchDevice && tapped) { setTapped(false); } }}>
 
       {/* Scan line effect */}
       <div data-ev-id="ev_5784a0dacf"

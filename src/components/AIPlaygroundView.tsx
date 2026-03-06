@@ -341,11 +341,11 @@ export const AIPlaygroundView = ({ sections, visible }: AIPlaygroundViewProps) =
                             <div data-ev-id="ev_3727b82113" className="flex-1" />
                             <button data-ev-id="ev_7b47626579"
                         onClick={() => handleCopy(link.id, currentText || '')}
-                        className="text-white/60 hover:text-white/70 transition-colors">
+                        className="text-white/60 hover:text-white/70 transition-colors p-2 min-w-[44px] min-h-[44px] flex items-center justify-center">
 
                               {copiedId === link.id ?
-                          <Check className="w-3 h-3 text-emerald-400" /> :
-                          <Copy className="w-3 h-3" />
+                          <Check className="w-3.5 h-3.5 text-emerald-400" /> :
+                          <Copy className="w-3.5 h-3.5" />
                           }
                             </button>
                             <a data-ev-id="ev_6e9fe682ef"
@@ -353,9 +353,9 @@ export const AIPlaygroundView = ({ sections, visible }: AIPlaygroundViewProps) =
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={`${link.title} (נפתח בחלון חדש)`}
-                        className="text-white/60 hover:text-white/70 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
+                        className="text-white/60 hover:text-white/70 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded p-2 min-w-[44px] min-h-[44px] flex items-center justify-center">
 
-                              <ExternalLink className="w-3 h-3" />
+                              <ExternalLink className="w-3.5 h-3.5" />
                             </a>
                           </div>
                       }
@@ -375,9 +375,9 @@ export const AIPlaygroundView = ({ sections, visible }: AIPlaygroundViewProps) =
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${link.title} (נפתח בחלון חדש)`}
-                      className="text-white/60 hover:text-white/70 transition-colors text-[9px] font-mono flex items-center gap-1">
+                      className="text-white/60 hover:text-white/70 transition-colors text-[9px] font-mono flex items-center gap-1 py-2 min-h-[44px]">
 
-                          <ExternalLink className="w-2.5 h-2.5" />
+                          <ExternalLink className="w-3 h-3" />
                           קישור
                         </a>
                       </div>

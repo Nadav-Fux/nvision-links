@@ -199,6 +199,7 @@ const SectionRow = ({
   const [showLeft, setShowLeft] = useState(false);
   const [showRight, setShowRight] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
+  const isTouch = typeof window !== 'undefined' && 'ontouchstart' in window;
 
   useEffect(() => {
     if (revealed) {
@@ -245,7 +246,7 @@ const SectionRow = ({
         {showLeft &&
         <button data-ev-id="ev_76333dbd2c"
         onClick={() => scroll('left')}
-        className="absolute left-0 top-0 bottom-0 z-10 w-10 bg-gradient-to-r from-[#141414] to-transparent flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+        className={`absolute left-0 top-0 bottom-0 z-10 w-10 bg-gradient-to-r from-[#141414] to-transparent flex items-center justify-center transition-opacity ${isTouch ? 'opacity-70' : 'opacity-0 group-hover:opacity-100'}`}>
 
             <ChevronRight className="w-6 h-6 text-white rotate-180" />
           </button>
@@ -255,7 +256,7 @@ const SectionRow = ({
         {showRight &&
         <button data-ev-id="ev_545c5c34b2"
         onClick={() => scroll('right')}
-        className="absolute right-0 top-0 bottom-0 z-10 w-10 bg-gradient-to-l from-[#141414] to-transparent flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+        className={`absolute right-0 top-0 bottom-0 z-10 w-10 bg-gradient-to-l from-[#141414] to-transparent flex items-center justify-center transition-opacity ${isTouch ? 'opacity-70' : 'opacity-0 group-hover:opacity-100'}`}>
 
             <ChevronRight className="w-6 h-6 text-white" />
           </button>
@@ -264,7 +265,7 @@ const SectionRow = ({
         <div data-ev-id="ev_b26fb31d82"
         ref={scrollRef}
         className="flex gap-2 overflow-x-auto scrollbar-hide scroll-smooth pb-2"
-        style={{ WebkitOverflowScrolling: 'touch' }}>
+        style={{ WebkitOverflowScrolling: 'touch', scrollSnapType: 'x mandatory' }}>
 
           {section.links.map((link, lIdx) =>
           <PosterCard
@@ -313,9 +314,11 @@ const PosterCard = ({
   return (
     <div data-ev-id="ev_d71a138c5f"
     className="relative flex-shrink-0 group/card"
-    style={{ width: 160 }}
+    style={{ width: 160, scrollSnapAlign: 'start' }}
     onMouseEnter={() => onHover(link.id)}
-    onMouseLeave={() => onHover(null)}>
+    onMouseLeave={() => onHover(null)}
+    onClick={() => { if ('ontouchstart' in window) onHover(isHovered ? null : link.id); }}
+    onTouchStart={() => { if (!isHovered) onHover(link.id); }}>
 
       {/* Main card */}
       <div data-ev-id="ev_8352e1d58c"

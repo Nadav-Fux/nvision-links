@@ -148,6 +148,8 @@ const QubitCard = ({ link, sIdx, lIdx, delay, isActive, onHover
     <a data-ev-id="ev_813da27f15" href={link.url} target="_blank" rel="noopener noreferrer"
     aria-label={`${link.title} — ${link.subtitle} (נפתח בחלון חדש)`}
     onMouseEnter={() => onHover(link.id)} onMouseLeave={() => onHover(null)}
+    onClick={() => { if ('ontouchstart' in window) onHover(isActive ? null : link.id); }}
+    onTouchStart={() => { if (!isActive) onHover(link.id); }}
     className={`block rounded-xl transition-all duration-500 group focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:outline-none ${
     show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'} ${
     isActive ? 'scale-[1.03]' : 'hover:scale-[1.01]'}`}
@@ -172,7 +174,7 @@ const QubitCard = ({ link, sIdx, lIdx, delay, isActive, onHover
           <div data-ev-id="ev_9aa9e9a714" className="flex-1 min-w-0">
             <div data-ev-id="ev_bf721a32cf" className="flex items-center gap-1.5">
               <h3 data-ev-id="ev_bc285d7f70" className="text-[11px] font-bold truncate" style={{ color: color + 'dd' }}>{link.title}</h3>
-              <span data-ev-id="ev_45d7039871" className="flex-shrink-0 px-1 py-px rounded text-[7px] font-mono font-bold"
+              <span data-ev-id="ev_45d7039871" className="flex-shrink-0 px-1 py-px rounded text-[10px] font-mono font-bold"
               style={{ color, backgroundColor: color + '12', border: `1px solid ${color}18` }}>
                 {gateType}
               </span>
@@ -185,24 +187,24 @@ const QubitCard = ({ link, sIdx, lIdx, delay, isActive, onHover
         {/* Probability bars */}
         <div data-ev-id="ev_9b319325fd" className="mt-3 space-y-1.5">
           <div data-ev-id="ev_13e45cef2f" className="flex items-center gap-2">
-            <span data-ev-id="ev_02d4d1acde" className="text-[8px] font-mono font-bold w-4" style={{ color: '#38bdf880' }}>|0⟩</span>
+            <span data-ev-id="ev_02d4d1acde" className="text-[10px] font-mono font-bold w-4" style={{ color: '#38bdf880' }}>|0⟩</span>
             <div data-ev-id="ev_e54e464155" className="flex-1 h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(56,189,248,0.06)' }}>
               <div data-ev-id="ev_2c95b0c480" className="h-full rounded-full transition-all duration-700" style={{
                 width: `${prob0}%`,
                 background: `linear-gradient(90deg, #38bdf850, #38bdf820)`
               }} />
             </div>
-            <span data-ev-id="ev_7c56aaeee0" className="text-[7px] font-mono" style={{ color: '#38bdf830' }}>{prob0}%</span>
+            <span data-ev-id="ev_7c56aaeee0" className="text-[10px] font-mono" style={{ color: '#38bdf830' }}>{prob0}%</span>
           </div>
           <div data-ev-id="ev_b565b4cb3a" className="flex items-center gap-2">
-            <span data-ev-id="ev_e6de1b0554" className="text-[8px] font-mono font-bold w-4" style={{ color: '#a78bfa80' }}>|1⟩</span>
+            <span data-ev-id="ev_e6de1b0554" className="text-[10px] font-mono font-bold w-4" style={{ color: '#a78bfa80' }}>|1⟩</span>
             <div data-ev-id="ev_660bb9d5d0" className="flex-1 h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(167,139,250,0.06)' }}>
               <div data-ev-id="ev_fe7d1f0057" className="h-full rounded-full transition-all duration-700" style={{
                 width: `${prob1}%`,
                 background: `linear-gradient(90deg, #a78bfa50, #a78bfa20)`
               }} />
             </div>
-            <span data-ev-id="ev_0aa76b0f64" className="text-[7px] font-mono" style={{ color: '#a78bfa30' }}>{prob1}%</span>
+            <span data-ev-id="ev_0aa76b0f64" className="text-[10px] font-mono" style={{ color: '#a78bfa30' }}>{prob1}%</span>
           </div>
         </div>
 
@@ -210,10 +212,10 @@ const QubitCard = ({ link, sIdx, lIdx, delay, isActive, onHover
         <div data-ev-id="ev_d68f34cce5" className="mt-2.5 flex items-center justify-between pt-2" style={{ borderTop: `1px solid ${color}08` }}>
           <div data-ev-id="ev_bfd9870647" className="flex items-center gap-1">
             <div data-ev-id="ev_3e5fb3ce1e" className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: coherence > 85 ? '#34d39960' : coherence > 70 ? '#fbbf2460' : '#f4724460' }} />
-            <span data-ev-id="ev_df9290142c" className="text-[7px] font-mono" style={{ color: color + '30' }}>COHERENCE {coherence}%</span>
+            <span data-ev-id="ev_df9290142c" className="text-[10px] font-mono" style={{ color: color + '30' }}>COHERENCE {coherence}%</span>
           </div>
           <span data-ev-id="ev_d2eefc57f8" className="text-[9px] font-mono font-bold" style={{ color: color + '50' }}>{state}</span>
-          <span data-ev-id="ev_34297ab17d" className="text-[7px] font-mono" style={{ color: color + '20' }}>
+          <span data-ev-id="ev_34297ab17d" className="text-[10px] font-mono" style={{ color: color + '20' }}>
             {link.tag === 'free' ? 'OPEN' : link.tag === 'deal' ? '⚡ SUPER' : 'STD'}
           </span>
         </div>
@@ -259,7 +261,7 @@ export const QuantumView = ({ sections, visible }: Props) => {
         background: 'linear-gradient(170deg, #04061a 0%, #080c24 40%, #06081c 100%)',
         borderColor: 'rgba(56,189,248,0.06)',
         boxShadow: '0 25px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(56,189,248,0.04)',
-        minHeight: 600
+        minHeight: 'min(600px, 85vh)'
       }}>
 
         <QuantumCanvas w={size.w} h={size.h} />
@@ -310,7 +312,7 @@ export const QuantumView = ({ sections, visible }: Props) => {
                     <span data-ev-id="ev_b060b95b72" className="text-xs font-mono font-bold" style={{ color: color + 'aa' }}>
                       {section.emoji} {section.title}
                     </span>
-                    <span data-ev-id="ev_2d1112d63b" className="text-[8px] font-mono block" style={{ color: color + '25' }}>
+                    <span data-ev-id="ev_2d1112d63b" className="text-[10px] font-mono block" style={{ color: color + '25' }}>
                       CIRCUIT DEPTH: {section.links.length} • FIDELITY: {90 + sIdx % 10}%
                     </span>
                   </div>

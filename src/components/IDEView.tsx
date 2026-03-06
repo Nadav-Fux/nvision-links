@@ -7,6 +7,7 @@ import {
   File,
   Folder,
   FolderOpen,
+  Menu,
   X,
   Code,
   Settings,
@@ -28,7 +29,8 @@ export const IDEView = ({ sections, visible }: IDEViewProps) => {
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
   const [activeTab, setActiveTab] = useState<LinkItem | null>(null);
   const [openTabs, setOpenTabs] = useState<LinkItem[]>([]);
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(typeof window !== 'undefined' ? window.innerWidth > 640 : true);
+  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 640;
   const [revealed, setRevealed] = useState(0);
   const allLinks = sections.flatMap((s) => s.links);
 
@@ -126,10 +128,26 @@ export const IDEView = ({ sections, visible }: IDEViewProps) => {
             </button>
           </div>
 
+          {/* Mobile sidebar toggle */}
+          {!sidebarOpen && isMobile &&
+          <button
+          onClick={() => setSidebarOpen(true)}
+          className="absolute top-12 left-12 z-40 w-8 h-8 rounded-lg flex items-center justify-center bg-[#181825] border border-white/[0.08] text-white/60 hover:text-white/80 transition-colors">
+            <Menu className="w-4 h-4" />
+          </button>
+          }
+
+          {/* Sidebar backdrop on mobile */}
+          {sidebarOpen && isMobile &&
+          <div
+          className="absolute inset-0 z-30 bg-black/40"
+          onClick={() => setSidebarOpen(false)} />
+          }
+
           {/* Sidebar / Explorer */}
           {sidebarOpen &&
           <div data-ev-id="ev_a5783d219d"
-          className="w-52 bg-[#181825] border-l border-white/[0.04] overflow-y-auto flex-shrink-0"
+          className={`bg-[#181825] border-l border-white/[0.04] overflow-y-auto flex-shrink-0 ${isMobile ? 'absolute left-11 top-0 bottom-0 z-40 w-48' : 'w-52'}`}
           dir="ltr"
           style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(255,255,255,0.05) transparent' }}>
 

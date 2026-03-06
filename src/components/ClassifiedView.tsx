@@ -37,6 +37,7 @@ export const ClassifiedView = ({ sections, visible }: ClassifiedViewProps) => {
   const [declassifiedFiles, setDeclassifiedFiles] = useState<Set<string>>(new Set());
   const [activeFolder, setActiveFolder] = useState<number | null>(null);
   const [scanLine, setScanLine] = useState(0);
+  const [visibleCounts, setVisibleCounts] = useState<Record<string, number>>({});
 
   useEffect(() => {
     if (visible) {
@@ -61,6 +62,13 @@ export const ClassifiedView = ({ sections, visible }: ClassifiedViewProps) => {
   }, []);
 
   const isFileVisible = (id: string) => declassifiedAll || declassifiedFiles.has(id);
+
+  const INITIAL_SHOW = 6;
+  const SHOW_MORE_STEP = 6;
+  const getVisibleCount = (sectionId: string) => visibleCounts[sectionId] || INITIAL_SHOW;
+  const showMore = useCallback((sectionId: string) => {
+    setVisibleCounts((prev) => ({ ...prev, [sectionId]: (prev[sectionId] || INITIAL_SHOW) + SHOW_MORE_STEP }));
+  }, []);
 
   const totalFiles = sections.reduce((a, s) => a + s.links.length, 0);
   const declassifiedCount = declassifiedAll ? totalFiles : declassifiedFiles.size;
@@ -194,7 +202,7 @@ export const ClassifiedView = ({ sections, visible }: ClassifiedViewProps) => {
 
                 {/* File cards */}
                 <div data-ev-id="ev_d115a15bcb" className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {section.links.map((link, lIdx) => {
+                  {section.links.slice(0, getVisibleCount(section.id)).map((link, lIdx) => {
                     const isOpen = isFileVisible(link.id);
                     const redactionLevel = isOpen ? 0 : 2;
                     const words = redactText(link.description || link.subtitle, redactionLevel);
@@ -236,13 +244,13 @@ export const ClassifiedView = ({ sections, visible }: ClassifiedViewProps) => {
                             </span>
                             <button data-ev-id="ev_c98e5648b1"
                             onClick={() => toggleDeclassify(link.id)}
-                            className={`flex items-center gap-1 text-[9px] font-mono px-2 py-0.5 rounded transition-colors ${
+                            className={`flex items-center gap-1 text-[9px] font-mono px-2 py-1.5 rounded transition-colors min-h-[36px] ${
                             isOpen ?
                             'text-green-400/70 bg-green-500/10 hover:bg-green-500/20' :
                             'text-red-400/50 bg-red-500/[0.06] hover:bg-red-500/10'}`
                             }>
 
-                              {isOpen ? <Eye className="w-2.5 h-2.5" /> : <EyeOff className="w-2.5 h-2.5" />}
+                              {isOpen ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
                               {isOpen ? 'OPEN' : 'CLASSIFIED'}
                             </button>
                           </div>
@@ -326,6 +334,15 @@ export const ClassifiedView = ({ sections, visible }: ClassifiedViewProps) => {
 
                   })}
                 </div>
+                {section.links.length > getVisibleCount(section.id) &&
+                <div className="flex justify-center mt-3">
+                  <button
+                    onClick={() => showMore(section.id)}
+                    className="px-4 py-1.5 rounded text-[11px] font-mono text-amber-400/70 border border-amber-600/20 bg-amber-500/[0.06] hover:bg-amber-500/[0.12] transition-colors">
+                    SHOW MORE ({section.links.length - getVisibleCount(section.id)} remaining)
+                  </button>
+                </div>
+                }
               </div>);
 
           })}

@@ -41,6 +41,8 @@ const MetricCard = ({ link, sIdx, delay, isActive, onHover
     <a data-ev-id="ev_feaf694262" href={link.url} target="_blank" rel="noopener noreferrer"
     aria-label={`${link.title} — ${link.subtitle} (נפתח בחלון חדש)`}
     onMouseEnter={() => onHover(link.id)} onMouseLeave={() => onHover(null)}
+    onClick={() => { if ('ontouchstart' in window) onHover(isActive ? null : link.id); }}
+    onTouchStart={() => { if (!isActive) onHover(link.id); }}
     className={`block rounded-lg transition-all duration-400 group focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:outline-none ${show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'} ${isActive ? 'scale-[1.02]' : 'hover:scale-[1.01]'}`}
     style={{ background: 'rgba(10,10,20,0.5)', border: `1px solid ${isActive ? color + '35' : 'rgba(255,255,255,0.04)'}`, boxShadow: isActive ? `0 0 20px ${color}08` : 'none' }}>
       <div data-ev-id="ev_4277815d8d" className="p-3">
@@ -50,7 +52,7 @@ const MetricCard = ({ link, sIdx, delay, isActive, onHover
           </div>
           <div data-ev-id="ev_eb7eaf179a" className="flex-1 min-w-0">
             <h3 data-ev-id="ev_357c03d3ce" className="text-[11px] font-bold truncate" style={{ color: color + 'cc' }}>{link.title}</h3>
-            <p data-ev-id="ev_ca2df38c5e" className="text-[8px] truncate text-white/60">{link.subtitle}</p>
+            <p data-ev-id="ev_ca2df38c5e" className="text-[10px] truncate text-white/60">{link.subtitle}</p>
           </div>
           <ExternalLink className="w-2.5 h-2.5 opacity-0 group-hover:opacity-40 transition-opacity" style={{ color }} />
         </div>
@@ -61,7 +63,7 @@ const MetricCard = ({ link, sIdx, delay, isActive, onHover
         </div>
 
         {/* Stats */}
-        <div data-ev-id="ev_f908773b91" className="grid grid-cols-3 gap-1 text-[8px] font-mono">
+        <div data-ev-id="ev_f908773b91" className="grid grid-cols-3 gap-1 text-[10px] font-mono">
           <div data-ev-id="ev_d31f5bddb6" className="text-center p-1 rounded" style={{ background: color + '06' }}>
             <div data-ev-id="ev_d8a1e41787" style={{ color: color + '50' }}>LOSS</div>
             <div data-ev-id="ev_4c6a4586e8" className="font-bold" style={{ color: color + '90' }}>{loss}</div>

@@ -22,6 +22,8 @@ const GPUCard = ({ link, sIdx, delay, isActive, onHover
     <a data-ev-id="ev_976f278293" href={link.url} target="_blank" rel="noopener noreferrer"
     aria-label={`${link.title} — ${link.subtitle} (נפתח בחלון חדש)`}
     onMouseEnter={() => onHover(link.id)} onMouseLeave={() => onHover(null)}
+    onClick={() => { if ('ontouchstart' in window) onHover(isActive ? null : link.id); }}
+    onTouchStart={() => { if (!isActive) onHover(link.id); }}
     className={`block rounded transition-all duration-400 group focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:outline-none ${show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'} ${isActive ? 'scale-[1.02] z-10' : 'hover:scale-[1.01]'}`}
     style={{ background: 'rgba(8,8,16,0.7)', border: `1px solid ${isActive ? color + '40' : 'rgba(255,255,255,0.04)'}`, boxShadow: isActive ? `0 0 20px ${color}10` : 'none' }}>
 
@@ -41,7 +43,7 @@ const GPUCard = ({ link, sIdx, delay, isActive, onHover
           </div>
           <div data-ev-id="ev_b0af023276" className="flex-1 min-w-0">
             <h3 data-ev-id="ev_521b743750" className="text-[11px] font-bold truncate" style={{ color: color + 'cc' }}>{link.title}</h3>
-            <p data-ev-id="ev_afb477d43e" className="text-[8px] truncate text-white/60">{link.subtitle}</p>
+            <p data-ev-id="ev_afb477d43e" className="text-[10px] truncate text-white/60">{link.subtitle}</p>
           </div>
         </div>
 
@@ -50,7 +52,7 @@ const GPUCard = ({ link, sIdx, delay, isActive, onHover
           {[{ label: 'TEMP', value: temp, max: 95, unit: '°C', warn: temp > 70 },
           { label: 'VRAM', value: vram, max: 100, unit: '%', warn: vram > 90 },
           { label: 'UTIL', value: util, max: 100, unit: '%', warn: false }].map((m) =>
-          <div data-ev-id="ev_d75936b4f1" key={m.label} className="flex items-center gap-1.5 text-[7px] font-mono">
+          <div data-ev-id="ev_d75936b4f1" key={m.label} className="flex items-center gap-1.5 text-[10px] font-mono">
               <span data-ev-id="ev_1a99d7bdaf" className="w-7 text-right" style={{ color: 'rgba(255,255,255,0.2)' }}>{m.label}</span>
               <div data-ev-id="ev_94f8a2c4e7" className="flex-1 h-1.5 rounded-full bg-white/[0.04] overflow-hidden">
                 <div data-ev-id="ev_4d97982fef" className="h-full rounded-full transition-all duration-1000" style={{ width: `${m.value / m.max * 100}%`, background: m.warn ? '#ef4444' : color, opacity: 0.6 }} />

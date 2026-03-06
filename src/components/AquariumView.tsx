@@ -305,7 +305,7 @@ export const AquariumView = ({
       ref={containerRef}
       className="relative mx-auto max-w-4xl rounded-xl overflow-hidden border border-white/[0.05] select-none"
       style={{
-        height: 520,
+        height: 'min(520px, 85vh)',
         background: 'linear-gradient(180deg, #030a15 0%, #041020 30%, #020818 70%, #010510 100%)',
         boxShadow: '0 25px 60px rgba(0,0,0,0.6), inset 0 -60px 80px rgba(0,0,0,0.3)'
       }}

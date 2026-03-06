@@ -71,6 +71,8 @@ const BasePairCard = ({ link, sIdx, delay, isActive, onHover
     <a data-ev-id="ev_5f54879285" href={link.url} target="_blank" rel="noopener noreferrer"
     aria-label={`${link.title} — ${link.subtitle} (נפתח בחלון חדש)`}
     onMouseEnter={() => onHover(link.id)} onMouseLeave={() => onHover(null)}
+    onClick={() => { if ('ontouchstart' in window) onHover(isActive ? null : link.id); }}
+    onTouchStart={() => { if (!isActive) onHover(link.id); }}
     className={`block rounded-lg transition-all duration-400 group focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:outline-none ${show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'} ${isActive ? 'scale-[1.03]' : 'hover:scale-[1.01]'}`}
     style={{ background: 'rgba(8,12,16,0.65)', border: `1px solid ${isActive ? color + '35' : color + '0a'}`, backdropFilter: 'blur(4px)', boxShadow: isActive ? `0 0 20px ${color}0a` : 'none' }}>
       <div data-ev-id="ev_f8fa9b045c" className="p-3">
@@ -88,12 +90,12 @@ const BasePairCard = ({ link, sIdx, delay, isActive, onHover
         {/* Sequence readout */}
         <div data-ev-id="ev_64659ab94b" className="mt-2 flex items-center gap-0.5 overflow-hidden">
           {['A', 'T', 'G', 'C', 'A', 'G', 'T', 'C', 'A', 'T'].map((base, i) =>
-          <span data-ev-id="ev_dbb2d2a091" key={i} className="text-[7px] font-mono font-bold" style={{
+          <span data-ev-id="ev_dbb2d2a091" key={i} className="text-[10px] font-mono font-bold" style={{
             color: base === 'A' ? '#22d3ee40' : base === 'T' ? '#a855f740' : base === 'G' ? '#34d39940' : '#f472b640'
           }}>{base}</span>
           )}
           <div data-ev-id="ev_db04aae067" className="flex-1" />
-          <span data-ev-id="ev_d48f65f3b9" className="text-[7px] font-mono" style={{ color: color + '25' }}>
+          <span data-ev-id="ev_d48f65f3b9" className="text-[10px] font-mono" style={{ color: color + '25' }}>
             {link.tag === 'free' ? 'OPEN' : link.tag === 'deal' ? 'EDITED' : 'WILD'}
           </span>
         </div>
@@ -128,7 +130,7 @@ export const DNAHelixView = ({ sections, visible }: Props) => {
 
   return (
     <div data-ev-id="ev_2114e2274a" className={`transition-[opacity,transform] duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
-      <div data-ev-id="ev_98077a0aae" ref={containerRef} className="mx-auto max-w-5xl rounded-xl overflow-hidden border relative" style={{ background: 'linear-gradient(180deg, #040810 0%, #08101a 100%)', borderColor: 'rgba(0,229,255,0.06)', boxShadow: '0 20px 50px rgba(0,0,0,0.5)', minHeight: 560 }}>
+      <div data-ev-id="ev_98077a0aae" ref={containerRef} className="mx-auto max-w-5xl rounded-xl overflow-hidden border relative" style={{ background: 'linear-gradient(180deg, #040810 0%, #08101a 100%)', borderColor: 'rgba(0,229,255,0.06)', boxShadow: '0 20px 50px rgba(0,0,0,0.5)', minHeight: 'min(560px, 85vh)' }}>
         <HelixCanvas w={size.w} h={size.h} />
 
         {/* Header */}
@@ -153,7 +155,7 @@ export const DNAHelixView = ({ sections, visible }: Props) => {
             return (
               <div data-ev-id="ev_5f1fc13d3a" key={section.id}>
                 <div data-ev-id="ev_5019a419ce" className="flex items-center gap-2 mb-3">
-                  <div data-ev-id="ev_9d950673b5" className="w-5 h-5 rounded-full flex items-center justify-center text-[8px] font-mono font-bold" style={{ color, backgroundColor: color + '15', border: `1px solid ${color}25` }}>
+                  <div data-ev-id="ev_9d950673b5" className="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-mono font-bold" style={{ color, backgroundColor: color + '15', border: `1px solid ${color}25` }}>
                     {sIdx + 1}
                   </div>
                   <span data-ev-id="ev_b26ef387a6" className="text-xs font-bold font-mono" style={{ color: color + 'aa' }}>{section.emoji} {section.title}</span>

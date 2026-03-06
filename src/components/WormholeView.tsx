@@ -77,6 +77,8 @@ const DimensionCard = ({ link, sIdx, delay, isActive, onHover
     <a data-ev-id="ev_6a8639b89f" href={link.url} target="_blank" rel="noopener noreferrer"
     aria-label={`${link.title} — ${link.subtitle} (נפתח בחלון חדש)`}
     onMouseEnter={() => onHover(link.id)} onMouseLeave={() => onHover(null)}
+    onClick={() => { if ('ontouchstart' in window) onHover(isActive ? null : link.id); }}
+    onTouchStart={() => { if (!isActive) onHover(link.id); }}
     className={`block rounded-xl transition-all duration-500 group focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:outline-none ${show ? 'opacity-100 scale-100' : 'opacity-0 scale-90'} ${isActive ? 'scale-[1.04]' : 'hover:scale-[1.01]'}`}
     style={{ background: 'rgba(10,6,22,0.7)', border: `1px solid ${isActive ? color + '30' : color + '0a'}`, backdropFilter: 'blur(8px)', boxShadow: isActive ? `0 0 24px ${color}10, inset 0 0 12px ${color}05` : 'none' }}>
       <div data-ev-id="ev_e87e72f9a4" className="p-3">
@@ -97,7 +99,7 @@ const DimensionCard = ({ link, sIdx, delay, isActive, onHover
           <div data-ev-id="ev_4dd88ada68" className="flex-1 h-1 rounded-full overflow-hidden" style={{ background: color + '08' }}>
             <div data-ev-id="ev_c276d5b8f4" className="h-full rounded-full" style={{ width: `${40 + link.id.charCodeAt(0) % 55}%`, background: `linear-gradient(90deg, ${color}40, ${color}10)` }} />
           </div>
-          <span data-ev-id="ev_eddab394ae" className="text-[7px] font-mono" style={{ color: color + '25' }}>WARP {link.id.charCodeAt(0) % 9 + 1}</span>
+          <span data-ev-id="ev_eddab394ae" className="text-[10px] font-mono" style={{ color: color + '25' }}>WARP {link.id.charCodeAt(0) % 9 + 1}</span>
         </div>
       </div>
     </a>);
@@ -130,7 +132,7 @@ export const WormholeView = ({ sections, visible }: Props) => {
 
   return (
     <div data-ev-id="ev_d6a6bc7052" className={`transition-[opacity,transform] duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
-      <div data-ev-id="ev_eddbe60e6d" ref={containerRef} className="mx-auto max-w-5xl rounded-xl overflow-hidden border relative" style={{ background: 'linear-gradient(180deg, #04020e 0%, #0a0618 100%)', borderColor: 'rgba(192,132,252,0.06)', boxShadow: '0 20px 50px rgba(0,0,0,0.5)', minHeight: 560 }}>
+      <div data-ev-id="ev_eddbe60e6d" ref={containerRef} className="mx-auto max-w-5xl rounded-xl overflow-hidden border relative" style={{ background: 'linear-gradient(180deg, #04020e 0%, #0a0618 100%)', borderColor: 'rgba(192,132,252,0.06)', boxShadow: '0 20px 50px rgba(0,0,0,0.5)', minHeight: 'min(560px, 85vh)' }}>
         <TunnelCanvas w={size.w} h={size.h} />
 
         {/* Header */}

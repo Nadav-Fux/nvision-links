@@ -243,6 +243,24 @@ const SingleCarousel = ({ links, accentColor }: SingleCarouselProps) => {
 };
 
 /* ═══════════ Cover-Flow Card ═══════════ */
+const useResponsiveCardWidths = () => {
+  const getWidths = () => {
+    const vw = typeof window !== 'undefined' ? window.innerWidth : 800;
+    return {
+      active: vw < 400 ? vw - 48 : vw < 640 ? 280 : 340,
+      inactive: vw < 400 ? vw - 80 : vw < 640 ? 220 : 280,
+      offset: vw < 400 ? vw * 0.55 : vw < 640 ? 220 : 280,
+    };
+  };
+  const [widths, setWidths] = useState(getWidths);
+  useEffect(() => {
+    const onResize = () => setWidths(getWidths());
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+  return widths;
+};
+
 const CoverCard = ({
   link,
   offset,
@@ -258,6 +276,7 @@ const CoverCard = ({
 }: {link: LinkItem;offset: number;dragX: number;isDragging: boolean;onClick: () => void;}) => {
   const isActive = offset === 0;
   const sign = Math.sign(offset) || 1;
+  const cardWidths = useResponsiveCardWidths();
 
   let tx: number, tz: number, ry: number, sc: number, op: number;
 
@@ -268,7 +287,7 @@ const CoverCard = ({
     sc = 1;
     op = 1;
   } else {
-    tx = sign * 280;
+    tx = sign * cardWidths.offset;
     tz = -60;
     ry = sign * -65;
     sc = 0.82;
@@ -292,7 +311,7 @@ const CoverCard = ({
     onMouseLeave={() => setMousePos({ x: 0.5, y: 0.5 })}
     className="absolute top-1/2 left-1/2"
     style={{
-      width: isActive ? 340 : 280,
+      width: isActive ? cardWidths.active : cardWidths.inactive,
       transform: [
       'translate(-50%, -50%)',
       `translateX(${tx}px)`,

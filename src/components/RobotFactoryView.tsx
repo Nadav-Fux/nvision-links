@@ -17,6 +17,8 @@ const PartCard = ({ link, sIdx, delay, isActive, onHover
     <a data-ev-id="ev_fba449e977" href={link.url} target="_blank" rel="noopener noreferrer"
     aria-label={`${link.title} — ${link.subtitle} (נפתח בחלון חדש)`}
     onMouseEnter={() => onHover(link.id)} onMouseLeave={() => onHover(null)}
+    onClick={() => { if ('ontouchstart' in window) onHover(isActive ? null : link.id); }}
+    onTouchStart={() => { if (!isActive) onHover(link.id); }}
     className={`block rounded-lg transition-all duration-400 group focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:outline-none ${show ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'} ${isActive ? 'scale-[1.03]' : 'hover:scale-[1.01]'}`}
     style={{ background: 'rgba(15,12,8,0.6)', border: `1px solid ${isActive ? color + '40' : color + '10'}`, boxShadow: isActive ? `0 0 20px ${color}10` : 'none' }}>
       <div data-ev-id="ev_a1ef1d7fb6" className="p-3">
@@ -37,7 +39,7 @@ const PartCard = ({ link, sIdx, delay, isActive, onHover
         <div data-ev-id="ev_76966aa1c4" className="mt-2 h-1 rounded-full overflow-hidden" style={{ background: color + '08' }}>
           <div data-ev-id="ev_f5db9104d3" className="h-full rounded-full" style={{ width: `${60 + link.id.charCodeAt(0) % 40}%`, background: `linear-gradient(90deg, ${color}50, ${color}20)` }} />
         </div>
-        <div data-ev-id="ev_6467a725d5" className="flex justify-between mt-1 text-[7px] font-mono" style={{ color: color + '30' }}>
+        <div data-ev-id="ev_6467a725d5" className="flex justify-between mt-1 text-[10px] font-mono" style={{ color: color + '30' }}>
           <span data-ev-id="ev_9823d13e39">ASSEMBLING</span>
           <span data-ev-id="ev_554cde2c1c">{link.tag === 'free' ? 'OPEN-SOURCE' : link.tag === 'deal' ? '⚡ BOOSTED' : 'STANDARD'}</span>
         </div>

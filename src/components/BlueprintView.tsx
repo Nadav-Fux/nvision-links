@@ -21,6 +21,8 @@ const RoomCard = ({ link, sIdx, delay, isActive, onHover
     <a data-ev-id="ev_72b2604a58" href={link.url} target="_blank" rel="noopener noreferrer"
     aria-label={`${link.title} — ${link.subtitle} (נפתח בחלון חדש)`}
     onMouseEnter={() => onHover(link.id)} onMouseLeave={() => onHover(null)}
+    onClick={() => { if ('ontouchstart' in window) onHover(isActive ? null : link.id); }}
+    onTouchStart={() => { if (!isActive) onHover(link.id); }}
     className={`block transition-all duration-400 group focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:outline-none ${show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'} ${isActive ? 'scale-[1.02]' : 'hover:scale-[1.01]'}`}
     style={{ border: `1px solid ${isActive ? color + '40' : color + '18'}`, background: isActive ? `${color}06` : 'transparent', borderStyle: 'dashed' }}>
       <div data-ev-id="ev_5fdeb3dbb0" className="p-3">
@@ -38,15 +40,15 @@ const RoomCard = ({ link, sIdx, delay, isActive, onHover
         <div data-ev-id="ev_3eaa647a58" className="mt-2 flex items-center justify-between">
           <div data-ev-id="ev_37e982241c" className="flex items-center gap-1">
             <Ruler className="w-2.5 h-2.5" style={{ color: color + '30' }} />
-            <span data-ev-id="ev_a81f305a75" className="text-[7px] font-mono" style={{ color: color + '35' }}>{w}.0m × {h_}.0m</span>
+            <span data-ev-id="ev_a81f305a75" className="text-[10px] font-mono" style={{ color: color + '35' }}>{w}.0m × {h_}.0m</span>
           </div>
-          <span data-ev-id="ev_a48812ed3a" className="text-[7px] font-mono px-1.5 py-0.5" style={{ color: color + '50', backgroundColor: color + '08', border: `1px solid ${color}12` }}>
+          <span data-ev-id="ev_a48812ed3a" className="text-[10px] font-mono px-1.5 py-0.5" style={{ color: color + '50', backgroundColor: color + '08', border: `1px solid ${color}12` }}>
             {link.tag === 'free' ? 'OPEN' : link.tag === 'deal' ? 'PREMIUM' : 'STD'}
           </span>
         </div>
         {/* Annotation arrows */}
         <div data-ev-id="ev_3ec6411b3b" className="mt-1.5 border-t" style={{ borderColor: color + '0c', borderStyle: 'dashed' }}>
-          <div data-ev-id="ev_88f8191597" className="flex justify-between pt-1 text-[6px] font-mono" style={{ color: color + '25' }}>
+          <div data-ev-id="ev_88f8191597" className="flex justify-between pt-1 text-[10px] font-mono" style={{ color: color + '25' }}>
             <span data-ev-id="ev_b01ceb3fe6">← {w}.0m →</span>
             <span data-ev-id="ev_614ad19107">A={w * h_}m²</span>
           </div>

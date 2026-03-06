@@ -108,7 +108,7 @@ export const PhoneView = ({ sections, visible }: PhoneViewProps) => {
       <div data-ev-id="ev_c0bd5ed353"
       className="relative overflow-hidden"
       style={{
-        width: 370,
+        width: Math.min(370, (typeof window !== 'undefined' ? window.innerWidth : 400) - 32),
         borderRadius: '3rem',
         border: '3px solid rgba(255,255,255,0.08)',
         background: '#000',

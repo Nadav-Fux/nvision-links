@@ -66,15 +66,19 @@ export const DesktopView = ({ sections, visible }: DesktopViewProps) => {
       }
       const newZ = topZ + 1;
       setTopZ(newZ);
-      const baseX = 40 + sIdx * 30 % 200;
-      const baseY = 20 + sIdx * 25 % 120;
+      const containerW = desktopRef.current?.clientWidth ?? 600;
+      const containerH = desktopRef.current?.clientHeight ?? 520;
+      const winW = Math.min(380, containerW - 20);
+      const winH = Math.min(320, containerH - 40);
+      const baseX = Math.min(40 + sIdx * 30 % 200, containerW - winW - 10);
+      const baseY = Math.min(20 + sIdx * 25 % 120, containerH - winH - 10);
       return [...prev, {
         id: `win-${sIdx}`,
         sectionIdx: sIdx,
         x: baseX,
         y: baseY,
-        w: 380,
-        h: 320,
+        w: winW,
+        h: winH,
         minimized: false,
         maximized: false,
         zIndex: newZ
@@ -125,6 +129,32 @@ export const DesktopView = ({ sections, visible }: DesktopViewProps) => {
     dragRef.current = null;
   }, []);
 
+  // Touch drag handling
+  const handleTouchStart = useCallback((e: React.TouchEvent, wId: string) => {
+    const win = windows.find((w) => w.id === wId);
+    if (!win || win.maximized) return;
+    bringToFront(wId);
+    const touch = e.touches[0];
+    dragRef.current = {
+      wId,
+      offsetX: touch.clientX - win.x,
+      offsetY: touch.clientY - win.y
+    };
+  }, [windows, bringToFront]);
+
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+    if (!dragRef.current) return;
+    const touch = e.touches[0];
+    const { wId, offsetX, offsetY } = dragRef.current;
+    const newX = Math.max(0, touch.clientX - offsetX);
+    const newY = Math.max(0, touch.clientY - offsetY);
+    setWindows((prev) => prev.map((w) => w.id === wId ? { ...w, x: newX, y: newY } : w));
+  }, []);
+
+  const handleTouchEnd = useCallback(() => {
+    dragRef.current = null;
+  }, []);
+
   return (
     <div data-ev-id="ev_35c528bf1d"
     className={`transition-[opacity,transform] duration-700 ${
@@ -140,13 +170,15 @@ export const DesktopView = ({ sections, visible }: DesktopViewProps) => {
         ref={desktopRef}
         className="relative select-none"
         style={{
-          height: 520,
+          height: 'min(520px, 85vh)',
           background: 'linear-gradient(135deg, #0c1929 0%, #1a0a2e 40%, #0d1f3c 70%, #0a1628 100%)',
           cursor: dragRef.current ? 'grabbing' : 'default'
         }}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
         onClick={() => startOpen && setStartOpen(false)}>
 
           {/* Desktop icons */}
@@ -199,6 +231,7 @@ export const DesktopView = ({ sections, visible }: DesktopViewProps) => {
                 <div data-ev-id="ev_325f91cf78"
                 className="flex items-center gap-2 px-3 py-2 border-b border-white/[0.06] cursor-grab active:cursor-grabbing flex-shrink-0"
                 onMouseDown={(e) => handleMouseDown(e, win.id)}
+                onTouchStart={(e) => handleTouchStart(e, win.id)}
                 style={{ background: 'rgba(30,30,40,0.98)' }}>
 
                   <span data-ev-id="ev_5ee453abce" className="text-xs">{section.emoji}</span>

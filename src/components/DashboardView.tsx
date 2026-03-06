@@ -190,7 +190,7 @@ export const DashboardView = ({ sections, visible }: DashboardViewProps) => {
           </div>
           <div data-ev-id="ev_cf403357ca" className="flex items-center gap-3">
             {/* Time range selector */}
-            <div data-ev-id="ev_97290da914" className="relative">
+            <div data-ev-id="ev_97290da914" className="relative" onMouseLeave={() => setShowTimeDropdown(false)}>
               <button data-ev-id="ev_b3ee5862a8"
               onClick={() => setShowTimeDropdown(!showTimeDropdown)}
               className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-white/[0.04] border border-white/[0.08] text-white/60 text-[11px] font-mono hover:bg-white/[0.08] transition-colors">

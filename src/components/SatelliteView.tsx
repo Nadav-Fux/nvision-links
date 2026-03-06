@@ -86,6 +86,8 @@ const SatCard = ({ link, sIdx, delay, isActive, onHover
     <a data-ev-id="ev_4f3b1b945e" href={link.url} target="_blank" rel="noopener noreferrer"
     aria-label={`${link.title} — ${link.subtitle} (נפתח בחלון חדש)`}
     onMouseEnter={() => onHover(link.id)} onMouseLeave={() => onHover(null)}
+    onClick={() => { if ('ontouchstart' in window) onHover(isActive ? null : link.id); }}
+    onTouchStart={() => { if (!isActive) onHover(link.id); }}
     className={`block rounded-lg transition-all duration-400 group focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:outline-none ${show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'} ${isActive ? 'scale-[1.03]' : 'hover:scale-[1.01]'}`}
     style={{ background: 'rgba(6,12,24,0.7)', border: `1px solid ${isActive ? color + '30' : color + '0a'}`, backdropFilter: 'blur(6px)', boxShadow: isActive ? `0 0 18px ${color}0c` : 'none' }}>
       <div data-ev-id="ev_1a0d83f082" className="p-3">
@@ -106,9 +108,9 @@ const SatCard = ({ link, sIdx, delay, isActive, onHover
             <div data-ev-id="ev_d143b56647" key={i} className="rounded-sm" style={{ width: 2, height: 3 + i * 2, backgroundColor: i < Math.floor(signal / 20) ? color + '50' : color + '10' }} />
             )}
           </div>
-          <span data-ev-id="ev_4a0725e1e7" className="text-[7px] font-mono" style={{ color: color + '30' }}>SIG {signal}%</span>
+          <span data-ev-id="ev_4a0725e1e7" className="text-[10px] font-mono" style={{ color: color + '30' }}>SIG {signal}%</span>
           <div data-ev-id="ev_fcf7d92013" className="flex-1" />
-          <span data-ev-id="ev_c7785cc50c" className="text-[7px] font-mono" style={{ color: color + '20' }}>ALT {200 + sIdx * 100}km</span>
+          <span data-ev-id="ev_c7785cc50c" className="text-[10px] font-mono" style={{ color: color + '20' }}>ALT {200 + sIdx * 100}km</span>
         </div>
       </div>
     </a>);
@@ -141,7 +143,7 @@ export const SatelliteView = ({ sections, visible }: Props) => {
 
   return (
     <div data-ev-id="ev_ced3a34baf" className={`transition-[opacity,transform] duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
-      <div data-ev-id="ev_da8ab142ee" ref={containerRef} className="mx-auto max-w-5xl rounded-xl overflow-hidden border relative" style={{ background: 'linear-gradient(180deg, #020818 0%, #060c1a 100%)', borderColor: 'rgba(56,189,248,0.06)', boxShadow: '0 20px 50px rgba(0,0,0,0.5)', minHeight: 560 }}>
+      <div data-ev-id="ev_da8ab142ee" ref={containerRef} className="mx-auto max-w-5xl rounded-xl overflow-hidden border relative" style={{ background: 'linear-gradient(180deg, #020818 0%, #060c1a 100%)', borderColor: 'rgba(56,189,248,0.06)', boxShadow: '0 20px 50px rgba(0,0,0,0.5)', minHeight: 'min(560px, 85vh)' }}>
         <SpaceCanvas w={size.w} h={size.h} />
 
         {/* Header */}

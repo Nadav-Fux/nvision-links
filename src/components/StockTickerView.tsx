@@ -44,6 +44,8 @@ const TickerCard = ({ link, sIdx, delay, isActive, onHover
     <a data-ev-id="ev_171efb314d" href={link.url} target="_blank" rel="noopener noreferrer"
     aria-label={`${link.title} — ${link.subtitle} (נפתח בחלון חדש)`}
     onMouseEnter={() => onHover(link.id)} onMouseLeave={() => onHover(null)}
+    onClick={() => { if ('ontouchstart' in window) onHover(isActive ? null : link.id); }}
+    onTouchStart={() => { if (!isActive) onHover(link.id); }}
     className={`block rounded-lg transition-all duration-400 group focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:outline-none ${show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'} ${isActive ? 'scale-[1.02]' : 'hover:scale-[1.01]'}`}
     style={{ background: 'rgba(8,10,16,0.75)', border: `1px solid ${isActive ? color + '25' : 'rgba(255,255,255,0.03)'}`, boxShadow: isActive ? `0 0 16px ${color}0a` : 'none' }}>
       <div data-ev-id="ev_6b1cf08586" className="p-3">
