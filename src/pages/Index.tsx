@@ -1,15 +1,18 @@
-import { useEffect, useState, useRef, lazy, Suspense } from 'react';
+import { useEffect, useState, useRef, useCallback, useMemo, lazy, Suspense } from 'react';
 import { Logo } from '@/components/Logo';
 import { LinkCard } from '@/components/LinkCard';
 import { SectionDivider } from '@/components/SectionDivider';
 import { ViewContainer } from '@/components/ViewContainer';
+import { ScrollspyNav } from '@/components/ScrollspyNav';
 import { usePublicData } from '@/lib/usePublicData';
 import { useTheme } from '@/lib/useTheme';
 import { useAnalytics } from '@/lib/useAnalytics';
 import {
   staticSections } from
 '@/data/links';
-import { Heart, ArrowUp, AlertTriangle, RefreshCw, Shield } from 'lucide-react';
+import type { LinkSection } from '@/data/links';
+import type { SectionWithLinks } from '@/lib/usePublicData';
+import { Heart, ArrowUp, AlertTriangle, RefreshCw, Shield, Search, X } from 'lucide-react';
 import { PageMeta } from '@/components/PageMeta';
 import { AffiliateDisclaimer } from '@/components/AffiliateDisclaimer';
 import { CANVAS_VIEW_IDS } from '@/lib/viewRegistry';
@@ -18,6 +21,27 @@ import { Link, useNavigate } from 'react-router';
 const AnimatedBackground = lazy(() =>
 import('@/components/AnimatedBackground').then((m) => ({ default: m.AnimatedBackground }))
 );
+
+/** Hook: animates a number from 0 to `target` over `duration` ms using requestAnimationFrame. */
+function useAnimatedCounter(target: number, duration: number, enabled: boolean): number {
+  const [value, setValue] = useState(0);
+  useEffect(() => {
+    if (!enabled) { setValue(0); return; }
+    let start: number | null = null;
+    let raf: number;
+    const step = (ts: number) => {
+      if (start === null) start = ts;
+      const progress = Math.min((ts - start) / duration, 1);
+      // ease-out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setValue(Math.round(eased * target));
+      if (progress < 1) raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
+  }, [target, duration, enabled]);
+  return value;
+}
 
 /** Props for the main index page. viewOverride is used by AdminPreview to lock a specific view. */
 interface IndexProps {
@@ -44,7 +68,13 @@ const Index = ({ viewOverride }: IndexProps = {}) => {
   const [linksVisible, setLinksVisible] = useState(false);
   const [toolsVisible, setToolsVisible] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [collapsedSections, setCollapsedSections] = useState<Set<string>>(new Set());
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [currentSectionName, setCurrentSectionName] = useState('');
+  const [pastHero, setPastHero] = useState(false);
   const toolsRef = useRef<HTMLElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   const navigate = useNavigate();
 
@@ -72,6 +102,55 @@ const Index = ({ viewOverride }: IndexProps = {}) => {
   const dbSectionsWithLinks = useDB ? dbSections.filter((s) => s.links.length > 0) : [];
   const dbHasContent = dbSectionsWithLinks.length >= staticSections.length;
   const gridSections = dbHasContent ? dbSections : staticSections;
+
+  // --- Stats computation ---
+  const stats = useMemo(() => {
+    const allLinks = gridSections.flatMap((s) => s.links);
+    const totalLinks = allLinks.length;
+    const totalSections = gridSections.length;
+    const freeCount = allLinks.filter((l) => l.tag === 'free' || l.tag === 'freemium').length;
+    const recommendedCount = allLinks.filter((l) => l.tag === 'recommended' || l.tag === 'popular').length;
+    return { totalLinks, totalSections, freeCount, recommendedCount };
+  }, [gridSections]);
+
+  const animatedTotalLinks = useAnimatedCounter(stats.totalLinks, 1500, sectionsVisible);
+  const animatedTotalSections = useAnimatedCounter(stats.totalSections, 1500, sectionsVisible);
+  const animatedFreeCount = useAnimatedCounter(stats.freeCount, 1500, sectionsVisible);
+  const animatedRecommendedCount = useAnimatedCounter(stats.recommendedCount, 1500, sectionsVisible);
+
+  // --- Search filtering ---
+  const filteredSections = useMemo(() => {
+    if (!searchQuery.trim()) return gridSections;
+    const q = searchQuery.trim().toLowerCase();
+    return gridSections
+      .map((section) => {
+        const matchingLinks = section.links.filter(
+          (link) =>
+            link.title.toLowerCase().includes(q) ||
+            link.subtitle.toLowerCase().includes(q) ||
+            link.description.toLowerCase().includes(q)
+        );
+        if (matchingLinks.length === 0) return null;
+        return { ...section, links: matchingLinks };
+      })
+      .filter(Boolean) as (LinkSection | SectionWithLinks)[];
+  }, [gridSections, searchQuery]);
+
+  // --- Collapsible section toggle ---
+  const toggleSection = useCallback((sectionId: string) => {
+    setCollapsedSections((prev) => {
+      const next = new Set(prev);
+      if (next.has(sectionId)) next.delete(sectionId);
+      else next.add(sectionId);
+      return next;
+    });
+  }, []);
+
+  // --- Scrollspy section list ---
+  const scrollspySections = useMemo(
+    () => filteredSections.map((s) => ({ id: `section-${s.id}`, title: s.title })),
+    [filteredSections]
+  );
 
   useEffect(() => {
     const t1 = setTimeout(() => setSectionsVisible(true), 500);
@@ -101,11 +180,43 @@ const Index = ({ viewOverride }: IndexProps = {}) => {
     return () => observer.disconnect();
   }, []);
 
+  // Scroll handler: scroll-to-top button, progress bar, section indicator, past-hero
   useEffect(() => {
-    const handleScroll = () => setShowScrollTop(window.scrollY > 400);
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      setShowScrollTop(scrollY > 400);
+      setPastHero(scrollY > 300);
+
+      // Scroll progress
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? Math.min(scrollY / docHeight, 1) : 0;
+      setScrollProgress(progress);
+    };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // IntersectionObserver for current section name (progress indicator)
+  useEffect(() => {
+    if (activeView !== 1) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            const title = entry.target.getAttribute('data-section-title');
+            if (title) setCurrentSectionName(title);
+          }
+        }
+      },
+      { threshold: 0.2, rootMargin: '-10% 0px -60% 0px' }
+    );
+    // Small delay to ensure elements are rendered
+    const timer = setTimeout(() => {
+      const sectionEls = document.querySelectorAll('[data-section-title]');
+      sectionEls.forEach((el) => observer.observe(el));
+    }, 1000);
+    return () => { clearTimeout(timer); observer.disconnect(); };
+  }, [activeView, filteredSections]);
 
   // Track external link clicks via event delegation (covers all views)
   useEffect(() => {
@@ -127,7 +238,7 @@ const Index = ({ viewOverride }: IndexProps = {}) => {
 
   /* —— Shared props for lazy views —— */
   const viewProps = {
-    sections: gridSections,
+    sections: filteredSections,
     visible: sectionsVisible
   };
 
@@ -141,6 +252,27 @@ const Index = ({ viewOverride }: IndexProps = {}) => {
       background:
       'linear-gradient(160deg, #0a0a14 0%, #0d0d1a 30%, #0f0a1a 60%, #0a0f14 100%)'
     }}>
+
+      {/* ===== SCROLL PROGRESS BAR ===== */}
+      <div
+        className="fixed top-0 left-0 right-0 z-50 h-[3px] pointer-events-none"
+        aria-hidden="true"
+      >
+        <div
+          className="h-full bg-gradient-to-l from-primary via-accent to-secondary"
+          style={{ width: `${scrollProgress * 100}%`, transition: 'width 100ms linear' }}
+        />
+      </div>
+
+      {/* ===== SECTION INDICATOR BADGE ===== */}
+      <div
+        className={`fixed top-2 left-4 z-50 px-3 py-1 rounded-full text-xs text-white/70 backdrop-blur-md bg-white/[0.06] border border-white/10 transition-opacity duration-500 pointer-events-none ${
+          pastHero && currentSectionName && isView(1) ? 'opacity-100' : 'opacity-0'
+        }`}
+        aria-hidden="true"
+      >
+        {currentSectionName}
+      </div>
 
       {/* Dynamic SEO meta from DB config */}
       <PageMeta
@@ -170,6 +302,9 @@ const Index = ({ viewOverride }: IndexProps = {}) => {
         <div data-ev-id="ev_4572bb9020" className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
         <div data-ev-id="ev_926f8d6c8b" className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/5 rounded-full blur-3xl" />
       </div>
+
+      {/* ===== SCROLLSPY NAV ===== */}
+      {isView(1) && <ScrollspyNav sections={scrollspySections} heroHeight={300} />}
 
       {/* Content */}
       <div data-ev-id="ev_c0ac3af43a" className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 py-10 md:py-16">
@@ -206,11 +341,73 @@ const Index = ({ viewOverride }: IndexProps = {}) => {
               </p>
               <div data-ev-id="ev_c78275f076" className="mt-4 flex items-center justify-center gap-2 text-white/35 text-sm" aria-hidden="true">
                 <div data-ev-id="ev_b3fc800354" className="w-8 h-px bg-white/15" />
-                <span data-ev-id="ev_dd389b1723">{config?.tagline || '✨ העתיד מתחיל עכשיו'}</span>
+                <span data-ev-id="ev_dd389b1723">{config?.tagline || '\u2728 העתיד מתחיל עכשיו'}</span>
                 <div data-ev-id="ev_64526c3d7c" className="w-8 h-px bg-white/15" />
               </div>
             </div>
           </section>
+
+          {/* ===== ANIMATED HERO STATS ===== */}
+          <div
+            className={`mb-8 transition-[opacity,transform] duration-700 delay-200 ${
+              sectionsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+            }`}
+            aria-label="סטטיסטיקות האתר"
+          >
+            <div className="flex items-center justify-center gap-6 sm:gap-10 flex-wrap">
+              {[
+                { value: animatedTotalLinks, label: 'קישורים' },
+                { value: animatedTotalSections, label: 'קטגוריות' },
+                { value: animatedFreeCount, label: 'חינם' },
+                { value: animatedRecommendedCount, label: 'מומלצים' },
+              ]
+                .filter((s) => s.value > 0 || sectionsVisible)
+                .map((stat) => (
+                  <div key={stat.label} className="flex flex-col items-center gap-1">
+                    <span className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
+                      {stat.value}
+                    </span>
+                    <span className="text-xs text-white/40">{stat.label}</span>
+                  </div>
+                ))}
+            </div>
+          </div>
+
+          {/* ===== STICKY SEARCH BAR ===== */}
+          <div
+            className={`sticky top-[3px] z-30 mb-6 transition-[opacity,transform] duration-500 ${
+              sectionsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            }`}
+          >
+            <div className="relative flex items-center rounded-xl border border-white/10 backdrop-blur-[16px] bg-[#0d0d1a]/70 px-4 py-2.5 shadow-lg">
+              <Search className="w-5 h-5 text-white/30 flex-shrink-0" aria-hidden="true" />
+              <input
+                ref={searchInputRef}
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="חיפוש כלים, קהילות, משאבים..."
+                aria-label="חיפוש באתר"
+                className="flex-1 bg-transparent text-white/90 placeholder:text-white/30 text-sm sm:text-base px-3 py-1 outline-none"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => { setSearchQuery(''); searchInputRef.current?.focus(); }}
+                  aria-label="נקה חיפוש"
+                  className="flex-shrink-0 p-1 rounded-full hover:bg-white/10 transition-colors"
+                >
+                  <X className="w-4 h-4 text-white/40" />
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* No results message */}
+          {searchQuery.trim() && filteredSections.length === 0 && (
+            <div className="text-center py-12 text-white/50 text-lg">
+              לא נמצאו תוצאות
+            </div>
+          )}
 
           {/* DB Error Banner */}
           {dbError &&
@@ -247,8 +444,17 @@ const Index = ({ viewOverride }: IndexProps = {}) => {
 
             {isView(1) &&
             <>
-                {gridSections.map((section, sIdx) =>
-              <section data-ev-id="ev_93c4b1ab1f" key={section.id} className={sIdx > 0 ? 'mt-14' : 'mt-2'} ref={sIdx === 1 ? toolsRef : undefined}>
+                {filteredSections.map((section, sIdx) => {
+                  const isCollapsed = collapsedSections.has(section.id);
+                  return (
+              <section
+                data-ev-id="ev_93c4b1ab1f"
+                key={section.id}
+                id={`section-${section.id}`}
+                data-section-title={section.title}
+                className={sIdx > 0 ? 'mt-14' : 'mt-2'}
+                ref={sIdx === 1 ? toolsRef : undefined}
+              >
                     {/* Affiliate disclaimer between communities and first tools section */}
                     {sIdx === 1 && <AffiliateDisclaimer visible={sectionsVisible} customText={config?.affiliate_disclaimer_text} />}
 
@@ -256,38 +462,62 @@ const Index = ({ viewOverride }: IndexProps = {}) => {
                   title={section.title}
                   emoji={section.emoji}
                   visible={sIdx === 0 ? sectionsVisible : toolsVisible}
-                  delay={sIdx === 0 ? 200 : 0} />
+                  delay={sIdx === 0 ? 200 : 0}
+                  collapsed={isCollapsed}
+                  onToggle={() => toggleSection(section.id)} />
 
+                    {/* Collapsible content wrapper */}
+                    <div
+                      className={`transition-all duration-500 overflow-hidden ${
+                        isCollapsed ? 'max-h-0 opacity-0' : 'max-h-[4000px] opacity-100'
+                      }`}
+                    >
                     <div data-ev-id="ev_571534aeb8" className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                      {/* Featured first card — spans both columns */}
+                      {section.links.length > 0 &&
+                      <div className="col-span-1 sm:col-span-2">
+                          <LinkCard
+                            key={section.links[0].id as string}
+                            {...section.links[0]}
+                            delay={0}
+                            visible={sIdx === 0 ? linksVisible : toolsVisible}
+                            featured
+                            direction="right" />
+                        </div>
+                      }
                       <div data-ev-id="ev_45047ebde7" className="flex flex-col gap-3">
-                        {section.links.filter((_: unknown, i: number) => i % 2 === 0).map((link, i) =>
+                        {section.links.slice(1).filter((_: unknown, i: number) => i % 2 === 0).map((link, i) =>
                     <LinkCard
                       key={link.id as string}
                       {...link}
-                      delay={i * 100}
-                      visible={sIdx === 0 ? linksVisible : toolsVisible} />
+                      delay={(i + 1) * 100}
+                      visible={sIdx === 0 ? linksVisible : toolsVisible}
+                      direction="right" />
 
                     )}
                       </div>
                       <div data-ev-id="ev_7a8cdc7d66" className="flex flex-col gap-3">
-                        {section.links.filter((_: unknown, i: number) => i % 2 === 1).map((link, i) =>
+                        {section.links.slice(1).filter((_: unknown, i: number) => i % 2 === 1).map((link, i) =>
                     <LinkCard
                       key={link.id as string}
                       {...link}
-                      delay={i * 100 + 50}
-                      visible={sIdx === 0 ? linksVisible : toolsVisible} />
+                      delay={(i + 1) * 100 + 50}
+                      visible={sIdx === 0 ? linksVisible : toolsVisible}
+                      direction="left" />
 
                     )}
                       </div>
                     </div>
+                    </div>
                   </section>
-              )}
+                  );
+                })}
               </>
             }
           </div>
 
           {/* ===== LAZY VIEWS 2–40 (from registry) ===== */}
-          <ViewContainer activeView={activeView} sections={gridSections} visible={sectionsVisible} />
+          <ViewContainer activeView={activeView} sections={filteredSections} visible={sectionsVisible} />
         </main>
 
         {/* Footer */}

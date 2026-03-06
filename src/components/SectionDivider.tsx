@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { ChevronDown } from 'lucide-react';
 
 /** Props for the animated section heading row. */
 interface SectionDividerProps {
@@ -9,14 +10,20 @@ interface SectionDividerProps {
   delay: number;
   /** Optional action slot (e.g. a button) rendered after the title. */
   action?: ReactNode;
+  /** Whether this section is collapsed (content hidden). */
+  collapsed?: boolean;
+  /** Callback when the heading is clicked to toggle collapse. */
+  onToggle?: () => void;
 }
 
 /**
  * Decorative section heading with horizontal rule lines on both sides.
  * Renders an animated SVG icon for known section titles, falls back to the emoji.
+ * Optionally collapsible when onToggle is provided.
  */
-export const SectionDivider = ({ title, emoji, visible, delay, action }: SectionDividerProps) => {
+export const SectionDivider = ({ title, emoji, visible, delay, action, collapsed, onToggle }: SectionDividerProps) => {
   const icon = getSvgForTitle(title);
+  const isCollapsible = typeof onToggle === 'function';
 
   return (
     <div
@@ -26,7 +33,16 @@ export const SectionDivider = ({ title, emoji, visible, delay, action }: Section
       style={{ transitionDelay: `${delay}ms` }}
     >
       <div className="flex-1 h-px bg-gradient-to-l from-primary/20 to-transparent" aria-hidden="true" />
-      <div className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/[0.06]">
+      <div
+        className={`flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/[0.06] ${
+          isCollapsible ? 'cursor-pointer hover:border-white/15 transition-colors select-none' : ''
+        }`}
+        onClick={isCollapsible ? onToggle : undefined}
+        role={isCollapsible ? 'button' : undefined}
+        tabIndex={isCollapsible ? 0 : undefined}
+        aria-expanded={isCollapsible ? !collapsed : undefined}
+        onKeyDown={isCollapsible ? (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onToggle!(); } } : undefined}
+      >
         <h2 className="text-white/80 text-base sm:text-lg font-semibold tracking-wide">
           {title}
         </h2>
@@ -34,6 +50,14 @@ export const SectionDivider = ({ title, emoji, visible, delay, action }: Section
           <span aria-hidden="true" className="flex items-center">
             {icon}
           </span>
+        )}
+        {isCollapsible && (
+          <ChevronDown
+            className={`w-4 h-4 text-white/30 transition-transform duration-300 ${
+              collapsed ? '' : 'rotate-180'
+            }`}
+            aria-hidden="true"
+          />
         )}
         {action && (
           <>

@@ -34,6 +34,10 @@ interface LinkCardProps {
   faviconUrl?: string;
   affiliateBenefit?: string;
   tag?: LinkTag;
+  /** When true, renders the card in a larger featured style. */
+  featured?: boolean;
+  /** Entrance animation direction — cards slide in from left or right. */
+  direction?: 'left' | 'right';
 }
 
 /**
@@ -41,7 +45,7 @@ interface LinkCardProps {
  * On touch devices, first tap expands the description; second tap follows the URL.
  * Favicons are tried first; falls back to the Lucide icon on error.
  */
-export const LinkCard = ({ title, subtitle, description, url, icon, color, animation, delay, visible, faviconUrl, affiliateBenefit, tag }: LinkCardProps) => {
+export const LinkCard = ({ title, subtitle, description, url, icon, color, animation, delay, visible, faviconUrl, affiliateBenefit, tag, featured = false, direction = 'right' }: LinkCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -87,7 +91,7 @@ export const LinkCard = ({ title, subtitle, description, url, icon, color, anima
         group relative block w-full rounded-2xl cursor-pointer
         transition-[opacity,transform] duration-500 ease-out
         focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-transparent
-        ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}
+        ${visible ? 'opacity-100 translate-x-0' : `opacity-0 ${direction === 'right' ? 'translate-x-8' : '-translate-x-8'}`}
         ${isHovered ? 'scale-[1.02]' : 'scale-100'}
       `}
     style={{
@@ -106,11 +110,36 @@ export const LinkCard = ({ title, subtitle, description, url, icon, color, anima
       <div data-ev-id="ev_6e813cbe82"
       className="relative rounded-2xl overflow-hidden"
       style={{
-        borderRight: `2px solid ${isHovered ? color : `${color}30`}`,
+        borderRight: isHovered ? 'none' : `2px solid ${color}30`,
+        borderImage: isHovered ? `linear-gradient(180deg, ${color}, ${color}40, transparent, ${color}40, ${color}) 1` : 'none',
+        borderRightWidth: '2px',
+        borderRightStyle: 'solid',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
         background: isHovered ?
-        `linear-gradient(135deg, ${color}08 0%, transparent 60%)` :
-        'transparent'
+        `linear-gradient(135deg, rgba(255,255,255,0.04), ${color}08 0%, transparent 60%)` :
+        'rgba(255,255,255,0.02)'
       }}>
+
+        {/* Top edge highlight */}
+        <div
+        className="absolute top-0 left-[5%] right-[5%] h-px pointer-events-none"
+        style={{
+          background: isHovered
+            ? `linear-gradient(90deg, transparent, ${color}50, transparent)`
+            : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent)'
+        }}
+        aria-hidden="true" />
+
+        {/* Featured gradient overlay */}
+        {featured &&
+        <div
+        className="absolute top-0 left-0 right-0 h-16 pointer-events-none"
+        style={{
+          background: `linear-gradient(180deg, ${color}12 0%, transparent 100%)`
+        }}
+        aria-hidden="true" />
+        }
 
         {/* Mouse spotlight */}
         {isHovered &&
@@ -139,11 +168,11 @@ export const LinkCard = ({ title, subtitle, description, url, icon, color, anima
           {/* Animated Icon */}
           <div data-ev-id="ev_da29941c82" className="relative flex-shrink-0">
             <div data-ev-id="ev_411d1dc930"
-            className={`relative w-10 h-10 rounded-xl flex items-center justify-center transition-transform duration-300 ${
+            className={`relative ${featured ? 'w-14 h-14' : 'w-12 h-12'} rounded-2xl flex items-center justify-center transition-transform duration-300 ${
             isHovered ? 'scale-110' : ''}`
             }
             style={{
-              background: `${color}10`,
+              background: `radial-gradient(circle, ${color}15, ${color}05)`,
               border: `1px solid ${isHovered ? `${color}40` : `${color}15`}`,
               boxShadow: isHovered ?
               `0 0 20px ${color}25` :
@@ -174,7 +203,7 @@ export const LinkCard = ({ title, subtitle, description, url, icon, color, anima
           <div data-ev-id="ev_5fb18d5edd" className="flex-1 min-w-0">
             <div data-ev-id="ev_a3e328b636" className="flex items-center gap-2">
               <span data-ev-id="ev_ae54bbcb49"
-              className="font-semibold text-base block truncate transition-colors duration-300"
+              className={`font-semibold ${featured ? 'text-lg' : 'text-base'} block truncate transition-colors duration-300`}
               style={{ color: isHovered ? color : 'rgba(255,255,255,0.92)' }}>
                 {title}
               </span>
@@ -210,10 +239,10 @@ export const LinkCard = ({ title, subtitle, description, url, icon, color, anima
               </div>
             }
 
-            {/* Description - hover/expand only */}
+            {/* Description - hover/expand only (always visible for featured cards) */}
             <div data-ev-id="ev_ab2044e6cd"
             className={`overflow-hidden transition-[max-height,opacity] duration-500 ease-out ${
-            isHovered || isExpanded ? 'max-h-24 opacity-100 mt-1.5' : 'max-h-0 opacity-0'}`
+            featured || isHovered || isExpanded ? 'max-h-24 opacity-100 mt-1.5' : 'max-h-0 opacity-0'}`
             }>
               <div data-ev-id="ev_6e3531618f"
               className="h-px w-12 mb-1.5"
