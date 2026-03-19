@@ -356,13 +356,22 @@ s3_access_key = "env(S3_ACCESS_KEY)"
 # Configures AWS_SECRET_ACCESS_KEY for S3 bucket
 s3_secret_key = "env(S3_SECRET_KEY)"
 
-[functions.hello]
+[functions.admin-api]
 enabled = true
-verify_jwt = true
-import_map = "./functions/hello/deno.json"
-# Uncomment to specify a custom file path to the entrypoint.
-# Supported file extensions are: .ts, .js, .mjs, .jsx, .tsx
-entrypoint = "./functions/hello/index.ts"
-# Specifies static files to be bundled with the function. Supports glob patterns.
-# For example, if you want to serve static HTML pages in your function:
-# static_files = [ "./functions/hello/*.html" ]
+verify_jwt = false # Admin API handles its own password-based auth
+entrypoint = "./functions/admin-api/index.ts"
+
+[functions.analytics-track]
+enabled = true
+verify_jwt = false # Public tracking endpoint
+entrypoint = "./functions/analytics-track/index.ts"
+
+[functions.admin-agent]
+enabled = true
+verify_jwt = false # Agent API handles its own auth
+entrypoint = "./functions/admin-agent/index.ts"
+
+[functions.smart-import]
+enabled = true
+verify_jwt = false # Admin-only tool with internal auth
+entrypoint = "./functions/smart-import/index.ts"
