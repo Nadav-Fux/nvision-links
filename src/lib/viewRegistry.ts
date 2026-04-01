@@ -64,8 +64,8 @@ export const VIEW_REGISTRY: ViewEntry[] = [
   { id: 40, label: 'Quantum',   component: lazy(() => import('@/components/QuantumView').then(m => ({ default: m.QuantumView }))),             exitClass: 'scale-95' },
   { id: 41, label: 'Tabs',      component: lazy(() => import('@/components/TabsView').then(m => ({ default: m.TabsView }))),               exitClass: 'translate-y-8' },
   { id: 42, label: 'TabStack',  component: lazy(() => import('@/components/TabStackView').then(m => ({ default: m.TabStackView }))),       exitClass: 'translate-y-8' },
-  { id: 43, label: 'Vortex',    component: lazy(() => import('@/components/BlackHoleView').then(m => ({ default: m.BlackHoleView }))),     exitClass: 'scale-95' },
-  { id: 44, label: 'TabCards',  component: lazy(() => import('@/components/TabCardsView').then(m => ({ default: m.TabCardsView }))),     exitClass: 'translate-y-8' },
+  { id: 43, label: 'TabCards',  component: lazy(() => import('@/components/TabCardsView').then(m => ({ default: m.TabCardsView }))),     exitClass: 'translate-y-8' },
+  { id: 44, label: 'Vortex',    component: lazy(() => import('@/components/BlackHoleView').then(m => ({ default: m.BlackHoleView }))),     exitClass: 'scale-95' },
 ];
 
 /** Label map for all 40 views (including Grid) */

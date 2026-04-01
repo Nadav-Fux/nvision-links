@@ -675,21 +675,6 @@ export const views: ViewDef[] = [
 },
 {
   id: 43,
-  label: 'Vortex',
-  gradient: 'from-purple-500 to-fuchsia-600',
-  icon:
-  <svg width="16" height="16" viewBox="0 0 14 14" fill="none" className="opacity-80">
-        <circle cx="7" cy="10" r="3" stroke="currentColor" strokeWidth="0.6" opacity="0.3" />
-        <circle cx="7" cy="10" r="1.5" fill="currentColor" opacity="0.4" />
-        <ellipse cx="7" cy="10" rx="4" ry="1.2" stroke="currentColor" strokeWidth="0.5" opacity="0.2" />
-        <rect x="1" y="1" width="5" height="3" rx="0.7" stroke="currentColor" strokeWidth="0.8" opacity="0.6" transform="rotate(-2 3.5 2.5)" />
-        <rect x="8" y="1" width="5" height="3" rx="0.7" stroke="currentColor" strokeWidth="0.8" opacity="0.5" transform="rotate(1.5 10.5 2.5)" />
-        <rect x="3" y="5" width="4" height="2.5" rx="0.7" stroke="currentColor" strokeWidth="0.7" opacity="0.35" transform="rotate(-1 5 6.2)" />
-        <rect x="8" y="5.5" width="4" height="2.5" rx="0.7" stroke="currentColor" strokeWidth="0.7" opacity="0.3" transform="rotate(2 10 6.7)" />
-      </svg>
-},
-{
-  id: 44,
   label: 'TabCards',
   gradient: 'from-rose-400 to-pink-500',
   icon:
@@ -703,6 +688,21 @@ export const views: ViewDef[] = [
         <rect x="7.5" y="3.5" width="5.5" height="2" rx="0.6" stroke="currentColor" strokeWidth="0.8" transform="rotate(1.2 10.25 4.5)" />
         <rect x="7.5" y="6" width="5.5" height="2" rx="0.6" stroke="currentColor" strokeWidth="0.7" transform="rotate(-0.8 10.25 7)" opacity="0.7" />
         <rect x="7.5" y="8.5" width="5.5" height="2" rx="0.6" stroke="currentColor" strokeWidth="0.6" transform="rotate(0.5 10.25 9.5)" opacity="0.4" />
+      </svg>
+},
+{
+  id: 44,
+  label: 'Vortex',
+  gradient: 'from-purple-500 to-fuchsia-600',
+  icon:
+  <svg width="16" height="16" viewBox="0 0 14 14" fill="none" className="opacity-80">
+        <circle cx="7" cy="10" r="3" stroke="currentColor" strokeWidth="0.6" opacity="0.3" />
+        <circle cx="7" cy="10" r="1.5" fill="currentColor" opacity="0.4" />
+        <ellipse cx="7" cy="10" rx="4" ry="1.2" stroke="currentColor" strokeWidth="0.5" opacity="0.2" />
+        <rect x="1" y="1" width="5" height="3" rx="0.7" stroke="currentColor" strokeWidth="0.8" opacity="0.6" transform="rotate(-2 3.5 2.5)" />
+        <rect x="8" y="1" width="5" height="3" rx="0.7" stroke="currentColor" strokeWidth="0.8" opacity="0.5" transform="rotate(1.5 10.5 2.5)" />
+        <rect x="3" y="5" width="4" height="2.5" rx="0.7" stroke="currentColor" strokeWidth="0.7" opacity="0.35" transform="rotate(-1 5 6.2)" />
+        <rect x="8" y="5.5" width="4" height="2.5" rx="0.7" stroke="currentColor" strokeWidth="0.7" opacity="0.3" transform="rotate(2 10 6.7)" />
       </svg>
 }];
 
