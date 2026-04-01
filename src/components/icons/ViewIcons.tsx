@@ -849,6 +849,81 @@ export const QuantumViewIcon = ({ size = 20, className }: IconProps) => (
   </svg>
 );
 
+// ═══════ View 41: Tabs ═══════
+const TabsViewIcon = ({ size = 24, className = '' }: IconProps) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
+    <rect x="2" y="2" width="6" height="4" rx="1.5" stroke="#06b6d4" strokeWidth="1.5" fill="#06b6d4" fillOpacity="0.15" />
+    <rect x="9" y="2" width="6" height="4" rx="1.5" stroke="#a78bfa" strokeWidth="1.5" fill="#a78bfa" fillOpacity="0.1" />
+    <rect x="16" y="2" width="6" height="4" rx="1.5" stroke="#8b5cf6" strokeWidth="1" opacity="0.4" />
+    <rect x="2" y="8" width="20" height="14" rx="2" stroke="#a78bfa" strokeWidth="1.5" fill="#a78bfa" fillOpacity="0.05">
+      <animate attributeName="fill-opacity" values="0.05;0.1;0.05" dur="3s" repeatCount="indefinite" />
+    </rect>
+    <rect x="4" y="11" width="7" height="2.5" rx="1" fill="#06b6d4" fillOpacity="0.3" />
+    <rect x="13" y="11" width="7" height="2.5" rx="1" fill="#ec4899" fillOpacity="0.25" />
+    <rect x="4" y="15" width="7" height="2.5" rx="1" fill="#06b6d4" fillOpacity="0.2" />
+    <rect x="13" y="15" width="7" height="2.5" rx="1" fill="#ec4899" fillOpacity="0.15" />
+  </svg>
+);
+
+// ═══════ View 42: TabStack ═══════
+const TabStackViewIcon = ({ size = 24, className = '' }: IconProps) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
+    <rect x="3" y="1" width="5" height="3.5" rx="1" stroke="#06b6d4" strokeWidth="1.3" fill="#06b6d4" fillOpacity="0.15" />
+    <rect x="9.5" y="1" width="5" height="3.5" rx="1" stroke="#a78bfa" strokeWidth="1.3" fill="#a78bfa" fillOpacity="0.1" />
+    <rect x="16" y="1" width="5" height="3.5" rx="1" stroke="#8b5cf6" strokeWidth="1" opacity="0.35" />
+    <rect x="3" y="7" width="8" height="3" rx="1" stroke="#a78bfa" strokeWidth="1.2" transform="rotate(-1.5 7 8.5)" fill="#a78bfa" fillOpacity="0.06">
+      <animate attributeName="fill-opacity" values="0.06;0.12;0.06" dur="2s" repeatCount="indefinite" />
+    </rect>
+    <rect x="3" y="11" width="8" height="3" rx="1" stroke="#a78bfa" strokeWidth="1" transform="rotate(1 7 12.5)" opacity="0.5" />
+    <rect x="13" y="7" width="8" height="3" rx="1" stroke="#ec4899" strokeWidth="1.2" transform="rotate(1.2 17 8.5)" fill="#ec4899" fillOpacity="0.06">
+      <animate attributeName="fill-opacity" values="0.06;0.12;0.06" dur="2s" begin="0.3s" repeatCount="indefinite" />
+    </rect>
+    <rect x="13" y="11" width="8" height="3" rx="1" stroke="#ec4899" strokeWidth="1" transform="rotate(-0.8 17 12.5)" opacity="0.5" />
+    <rect x="3" y="15" width="8" height="3" rx="1" stroke="#a78bfa" strokeWidth="0.8" transform="rotate(-0.5 7 16.5)" opacity="0.3" />
+    <rect x="13" y="15" width="8" height="3" rx="1" stroke="#ec4899" strokeWidth="0.8" transform="rotate(0.7 17 16.5)" opacity="0.3" />
+  </svg>
+);
+
+// ═══════ View 43: TabCards ═══════
+const TabCardsViewIcon = ({ size = 24, className = '' }: IconProps) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
+    <rect x="3" y="1" width="5" height="3.5" rx="1" stroke="#06b6d4" strokeWidth="1.3" fill="#06b6d4" fillOpacity="0.15" />
+    <rect x="9.5" y="1" width="5" height="3.5" rx="1" stroke="#a78bfa" strokeWidth="1.3" fill="#a78bfa" fillOpacity="0.1" />
+    <rect x="16" y="1" width="5" height="3.5" rx="1" stroke="#8b5cf6" strokeWidth="1" opacity="0.35" />
+    <circle cx="12" cy="20" r="3" stroke="#8b5cf6" strokeWidth="0.8" opacity="0.3">
+      <animate attributeName="r" values="3;3.5;3" dur="2s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="12" cy="20" r="1.2" fill="#a78bfa" fillOpacity="0.5">
+      <animate attributeName="fill-opacity" values="0.3;0.6;0.3" dur="1.5s" repeatCount="indefinite" />
+    </circle>
+    <rect x="3" y="7" width="7" height="3" rx="1" stroke="#a78bfa" strokeWidth="1.2" transform="rotate(-2 6.5 8.5)">
+      <animate attributeName="opacity" values="1;0.6;1" dur="3s" repeatCount="indefinite" />
+    </rect>
+    <rect x="14" y="7" width="7" height="3" rx="1" stroke="#ec4899" strokeWidth="1.2" transform="rotate(1.5 17.5 8.5)">
+      <animate attributeName="opacity" values="1;0.6;1" dur="3s" begin="0.5s" repeatCount="indefinite" />
+    </rect>
+    <rect x="4" y="12" width="7" height="3" rx="1" stroke="#06b6d4" strokeWidth="1" transform="rotate(1 7.5 13.5)" opacity="0.5" />
+    <rect x="13" y="12" width="7" height="3" rx="1" stroke="#fbbf24" strokeWidth="1" transform="rotate(-1 16.5 13.5)" opacity="0.5" />
+  </svg>
+);
+
+// ═══════ View 44: Vortex ═══════
+const VortexViewIcon = ({ size = 24, className = '' }: IconProps) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
+    <rect x="1" y="2" width="6" height="4" rx="1" stroke="#8b5cf6" strokeWidth="1.2" fill="#8b5cf6" fillOpacity="0.15">
+      <animate attributeName="fill-opacity" values="0.15;0.25;0.15" dur="2s" repeatCount="indefinite" />
+    </rect>
+    <rect x="1" y="8" width="6" height="4" rx="1" stroke="#8b5cf6" strokeWidth="1" opacity="0.5" />
+    <rect x="1" y="14" width="6" height="4" rx="1" stroke="#8b5cf6" strokeWidth="0.8" opacity="0.3" />
+    <rect x="1" y="20" width="6" height="3" rx="1" stroke="#8b5cf6" strokeWidth="0.6" opacity="0.2" />
+    <rect x="9" y="3" width="13" height="4" rx="1.2" stroke="#a78bfa" strokeWidth="1.2" transform="rotate(-1 15.5 5)" fill="#a78bfa" fillOpacity="0.06">
+      <animate attributeName="fill-opacity" values="0.06;0.12;0.06" dur="2.5s" repeatCount="indefinite" />
+    </rect>
+    <rect x="9" y="9" width="13" height="4" rx="1.2" stroke="#06b6d4" strokeWidth="1.1" transform="rotate(0.8 15.5 11)" fill="#06b6d4" fillOpacity="0.05" />
+    <rect x="9" y="15" width="13" height="4" rx="1.2" stroke="#ec4899" strokeWidth="1" transform="rotate(-0.5 15.5 17)" opacity="0.5" />
+  </svg>
+);
+
 // Lookup map: view ID → icon component
 export const VIEW_ICONS: Record<number, (props: IconProps) => React.JSX.Element> = {
   1: GridViewIcon,
@@ -896,78 +971,3 @@ export const VIEW_ICONS: Record<number, (props: IconProps) => React.JSX.Element>
   43: TabCardsViewIcon,
   44: VortexViewIcon,
 };
-
-// ═══════ View 41: Tabs ═══════
-const TabsViewIcon = ({ size = 24, className = '' }: IconProps) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
-    <rect x="2" y="2" width="6" height="4" rx="1.5" stroke="#06b6d4" strokeWidth="1.5" fill="#06b6d4" fillOpacity="0.15" />
-    <rect x="9" y="2" width="6" height="4" rx="1.5" stroke="#a78bfa" strokeWidth="1.5" fill="#a78bfa" fillOpacity="0.1" />
-    <rect x="16" y="2" width="6" height="4" rx="1.5" stroke="#8b5cf6" strokeWidth="1" opacity="0.4" />
-    <rect x="2" y="8" width="20" height="14" rx="2" stroke="#a78bfa" strokeWidth="1.5" fill="#a78bfa" fillOpacity="0.05">
-      <animate attributeName="fill-opacity" values="0.05;0.1;0.05" dur="3s" repeatCount="indefinite" />
-    </rect>
-    <rect x="4" y="11" width="7" height="2.5" rx="1" fill="#06b6d4" fillOpacity="0.3" />
-    <rect x="13" y="11" width="7" height="2.5" rx="1" fill="#ec4899" fillOpacity="0.25" />
-    <rect x="4" y="15" width="7" height="2.5" rx="1" fill="#06b6d4" fillOpacity="0.2" />
-    <rect x="13" y="15" width="7" height="2.5" rx="1" fill="#ec4899" fillOpacity="0.15" />
-  </svg>
-);
-
-// ═══════ View 42: TabStack ═══════
-const TabStackViewIcon = ({ size = 24, className = '' }: IconProps) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
-    <rect x="3" y="1" width="5" height="3.5" rx="1" stroke="#06b6d4" strokeWidth="1.3" fill="#06b6d4" fillOpacity="0.15" />
-    <rect x="9.5" y="1" width="5" height="3.5" rx="1" stroke="#a78bfa" strokeWidth="1.3" fill="#a78bfa" fillOpacity="0.1" />
-    <rect x="16" y="1" width="5" height="3.5" rx="1" stroke="#8b5cf6" strokeWidth="1" opacity="0.35" />
-    <rect x="3" y="7" width="8" height="3" rx="1" stroke="#a78bfa" strokeWidth="1.2" transform="rotate(-1.5 7 8.5)" fill="#a78bfa" fillOpacity="0.06">
-      <animate attributeName="fill-opacity" values="0.06;0.12;0.06" dur="2s" repeatCount="indefinite" />
-    </rect>
-    <rect x="3" y="11" width="8" height="3" rx="1" stroke="#a78bfa" strokeWidth="1" transform="rotate(1 7 12.5)" opacity="0.5" />
-    <rect x="13" y="7" width="8" height="3" rx="1" stroke="#ec4899" strokeWidth="1.2" transform="rotate(1.2 17 8.5)" fill="#ec4899" fillOpacity="0.06">
-      <animate attributeName="fill-opacity" values="0.06;0.12;0.06" dur="2s" begin="0.3s" repeatCount="indefinite" />
-    </rect>
-    <rect x="13" y="11" width="8" height="3" rx="1" stroke="#ec4899" strokeWidth="1" transform="rotate(-0.8 17 12.5)" opacity="0.5" />
-    <rect x="3" y="15" width="8" height="3" rx="1" stroke="#a78bfa" strokeWidth="0.8" transform="rotate(-0.5 7 16.5)" opacity="0.3" />
-    <rect x="13" y="15" width="8" height="3" rx="1" stroke="#ec4899" strokeWidth="0.8" transform="rotate(0.7 17 16.5)" opacity="0.3" />
-  </svg>
-);
-
-// ═══════ View 43: TabCards (with vortex transition) ═══════
-const TabCardsViewIcon = ({ size = 24, className = '' }: IconProps) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
-    <rect x="3" y="1" width="5" height="3.5" rx="1" stroke="#06b6d4" strokeWidth="1.3" fill="#06b6d4" fillOpacity="0.15" />
-    <rect x="9.5" y="1" width="5" height="3.5" rx="1" stroke="#a78bfa" strokeWidth="1.3" fill="#a78bfa" fillOpacity="0.1" />
-    <rect x="16" y="1" width="5" height="3.5" rx="1" stroke="#8b5cf6" strokeWidth="1" opacity="0.35" />
-    <circle cx="12" cy="20" r="3" stroke="#8b5cf6" strokeWidth="0.8" opacity="0.3">
-      <animate attributeName="r" values="3;3.5;3" dur="2s" repeatCount="indefinite" />
-    </circle>
-    <circle cx="12" cy="20" r="1.2" fill="#a78bfa" fillOpacity="0.5">
-      <animate attributeName="fill-opacity" values="0.3;0.6;0.3" dur="1.5s" repeatCount="indefinite" />
-    </circle>
-    <rect x="3" y="7" width="7" height="3" rx="1" stroke="#a78bfa" strokeWidth="1.2" transform="rotate(-2 6.5 8.5)">
-      <animate attributeName="opacity" values="1;0.6;1" dur="3s" repeatCount="indefinite" />
-    </rect>
-    <rect x="14" y="7" width="7" height="3" rx="1" stroke="#ec4899" strokeWidth="1.2" transform="rotate(1.5 17.5 8.5)">
-      <animate attributeName="opacity" values="1;0.6;1" dur="3s" begin="0.5s" repeatCount="indefinite" />
-    </rect>
-    <rect x="4" y="12" width="7" height="3" rx="1" stroke="#06b6d4" strokeWidth="1" transform="rotate(1 7.5 13.5)" opacity="0.5" />
-    <rect x="13" y="12" width="7" height="3" rx="1" stroke="#fbbf24" strokeWidth="1" transform="rotate(-1 16.5 13.5)" opacity="0.5" />
-  </svg>
-);
-
-// ═══════ View 44: Vortex (sidebar layout) ═══════
-const VortexViewIcon = ({ size = 24, className = '' }: IconProps) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
-    <rect x="1" y="2" width="6" height="4" rx="1" stroke="#8b5cf6" strokeWidth="1.2" fill="#8b5cf6" fillOpacity="0.15">
-      <animate attributeName="fill-opacity" values="0.15;0.25;0.15" dur="2s" repeatCount="indefinite" />
-    </rect>
-    <rect x="1" y="8" width="6" height="4" rx="1" stroke="#8b5cf6" strokeWidth="1" opacity="0.5" />
-    <rect x="1" y="14" width="6" height="4" rx="1" stroke="#8b5cf6" strokeWidth="0.8" opacity="0.3" />
-    <rect x="1" y="20" width="6" height="3" rx="1" stroke="#8b5cf6" strokeWidth="0.6" opacity="0.2" />
-    <rect x="9" y="3" width="13" height="4" rx="1.2" stroke="#a78bfa" strokeWidth="1.2" transform="rotate(-1 15.5 5)" fill="#a78bfa" fillOpacity="0.06">
-      <animate attributeName="fill-opacity" values="0.06;0.12;0.06" dur="2.5s" repeatCount="indefinite" />
-    </rect>
-    <rect x="9" y="9" width="13" height="4" rx="1.2" stroke="#06b6d4" strokeWidth="1.1" transform="rotate(0.8 15.5 11)" fill="#06b6d4" fillOpacity="0.05" />
-    <rect x="9" y="15" width="13" height="4" rx="1.2" stroke="#ec4899" strokeWidth="1" transform="rotate(-0.5 15.5 17)" opacity="0.5" />
-  </svg>
-);
