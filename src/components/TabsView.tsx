@@ -39,9 +39,9 @@ export const TabsView = ({ sections, visible }: TabsViewProps) => {
 
   return (
     <div className="w-full max-w-4xl mx-auto px-3 sm:px-4 pt-4" dir="rtl">
-      {/* Tab bar */}
+      {/* Tab bar — centered */}
       <div
-        className={`flex gap-1.5 overflow-x-auto pb-3 mb-6 scrollbar-hide transition-all duration-500 ${
+        className={`flex gap-1.5 justify-center overflow-x-auto pb-3 mb-6 scrollbar-hide transition-all duration-500 ${
           headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
         }`}
       >
@@ -76,37 +76,25 @@ export const TabsView = ({ sections, visible }: TabsViewProps) => {
         <p className="text-white/40 text-sm mt-1">{links.length} כלים</p>
       </div>
 
-      {/* Links grid */}
+      {/* Links grid — all cards same size */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pb-8">
-        {links.length > 0 && (
-          <div className="col-span-1 sm:col-span-2">
-            <LinkCard
-              key={links[0].id as string}
-              {...links[0]}
-              delay={0}
-              visible={tabVisible}
-              featured
-              direction="right"
-            />
-          </div>
-        )}
         <div className="flex flex-col gap-3">
-          {links.slice(1).filter((_, i) => i % 2 === 0).map((link, i) => (
+          {links.filter((_, i) => i % 2 === 0).map((link, i) => (
             <LinkCard
               key={link.id as string}
               {...link}
-              delay={(i + 1) * 60}
+              delay={i * 60}
               visible={tabVisible}
               direction="right"
             />
           ))}
         </div>
         <div className="flex flex-col gap-3">
-          {links.slice(1).filter((_, i) => i % 2 === 1).map((link, i) => (
+          {links.filter((_, i) => i % 2 === 1).map((link, i) => (
             <LinkCard
               key={link.id as string}
               {...link}
-              delay={(i + 1) * 60 + 30}
+              delay={i * 60 + 30}
               visible={tabVisible}
               direction="left"
             />
