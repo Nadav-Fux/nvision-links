@@ -1,17 +1,18 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Lock, Loader2, AlertCircle, EyeOff, Eye, ShieldCheck, ArrowRight } from 'lucide-react';
-import { verifyPassword, setAdminPassword } from '@/lib/adminApi';
+import { verifyPassword, setAdminPassword, checkAuthMode, verifyTotp } from '@/lib/adminApi';
 
 interface AdminLoginProps {
-  /** Called after successful authentication (password + optional TOTP). */
+  /** Called after successful authentication. */
   onSuccess: () => void;
 }
 
-type LoginStep = 'password' | 'totp';
+type LoginStep = 'loading' | 'totp' | 'password';
 
 /**
- * Two-step login form: password first, then TOTP (if enabled).
- * On success, stores the hashed password in sessionStorage via setAdminPassword.
+ * Login form that auto-detects auth mode:
+ * - TOTP active → show only 6-digit code input (no password)
+ * - TOTP not active → show password input (for initial TOTP setup)
  */
 export const AdminLogin = ({ onSuccess }: AdminLoginProps) => {
   const [password, setPassword] = useState('');
@@ -19,8 +20,48 @@ export const AdminLogin = ({ onSuccess }: AdminLoginProps) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [step, setStep] = useState<LoginStep>('password');
+  const [step, setStep] = useState<LoginStep>('loading');
+  const [totpOnly, setTotpOnly] = useState(false);
   const totpInputRef = useRef<HTMLInputElement>(null);
+
+  // On mount, check if TOTP-only auth is active
+  useEffect(() => {
+    checkAuthMode().then(({ totp_only }) => {
+      setTotpOnly(totp_only);
+      setStep(totp_only ? 'totp' : 'password');
+      if (totp_only) setTimeout(() => totpInputRef.current?.focus(), 100);
+    });
+  }, []);
+
+  const handleTotpSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (totpCode.length < 6) return;
+    setLoading(true);
+    setError('');
+
+    try {
+      const result = await verifyTotp(totpCode);
+
+      if (result.success) {
+        onSuccess();
+      } else {
+        setError('קוד אימות שגוי — ודאו שהשעון בטלפון מסונכרן');
+        setTotpCode('');
+        totpInputRef.current?.focus();
+      }
+    } catch (err: unknown) {
+      const errMsg = err instanceof Error ? err.message : String(err);
+      if (errMsg === 'TOO_MANY_ATTEMPTS') {
+        setError('יותר מדי ניסיונות — נסו שוב בעוד 5 דקות');
+      } else if (errMsg === 'TIMEOUT') {
+        setError('השרת לא הגיב — נסו שוב');
+      } else {
+        setError('שגיאה בחיבור לשרת — בדקו חיבור אינטרנט ונסו שוב');
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handlePasswordSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,7 +73,6 @@ export const AdminLogin = ({ onSuccess }: AdminLoginProps) => {
       const result = await verifyPassword(password);
 
       if (result.totp_required) {
-        // Password correct, TOTP needed
         setStep('totp');
         setTimeout(() => totpInputRef.current?.focus(), 100);
       } else if (result.success) {
@@ -55,37 +95,6 @@ export const AdminLogin = ({ onSuccess }: AdminLoginProps) => {
     }
   };
 
-  const handleTotpSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (totpCode.length !== 6) return;
-    setLoading(true);
-    setError('');
-
-    try {
-      const result = await verifyPassword(password, totpCode);
-
-      if (result.success) {
-        await setAdminPassword(password);
-        onSuccess();
-      } else {
-        setError('קוד אימות שגוי — ודאו שהשעון בטלפון מסונכרן');
-        setTotpCode('');
-        totpInputRef.current?.focus();
-      }
-    } catch (err: unknown) {
-      const errMsg = err instanceof Error ? err.message : String(err);
-      if (errMsg === 'TOO_MANY_ATTEMPTS') {
-        setError('יותר מדי ניסיונות — נסו שוב בעוד 5 דקות');
-      } else if (errMsg === 'TIMEOUT') {
-        setError('השרת לא הגיב — נסו שוב');
-      } else {
-        setError('שגיאה בחיבור לשרת — בדקו חיבור אינטרנט ונסו שוב');
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const handleTotpInput = (value: string) => {
     const digits = value.replace(/\D/g, '').slice(0, 6);
     setTotpCode(digits);
@@ -94,7 +103,15 @@ export const AdminLogin = ({ onSuccess }: AdminLoginProps) => {
   return (
     <div data-ev-id="ev_e7a6e52237" className="min-h-screen flex items-center justify-center px-4" style={{ background: 'linear-gradient(160deg, #0a0a14 0%, #0d0d1a 30%, #0f0a1a 60%, #0a0f14 100%)' }}>
 
-      {/* ===== STEP 1: Password ===== */}
+      {/* ===== Loading auth mode ===== */}
+      {step === 'loading' &&
+      <div className="flex flex-col items-center gap-3">
+        <Loader2 className="w-8 h-8 text-primary animate-spin" />
+        <p className="text-white/60 text-sm">בודק מצב אימות...</p>
+      </div>
+      }
+
+      {/* ===== Password (only when TOTP not yet set up) ===== */}
       {step === 'password' &&
       <form data-ev-id="ev_8e1ec2a464" onSubmit={handlePasswordSubmit} className="w-full max-w-sm" dir="rtl" aria-label="טופס כניסה">
           <div data-ev-id="ev_a923d331d9" className="bg-white/[0.04] border border-white/[0.08] rounded-2xl p-8">
@@ -160,7 +177,7 @@ export const AdminLogin = ({ onSuccess }: AdminLoginProps) => {
         </form>
       }
 
-      {/* ===== STEP 2: TOTP Code ===== */}
+      {/* ===== TOTP Code (primary auth when active, or step 2 after password) ===== */}
       {step === 'totp' &&
       <form data-ev-id="ev_5648439226" onSubmit={handleTotpSubmit} className="w-full max-w-sm" dir="rtl" aria-label="אימות דו-שלבי">
           <div data-ev-id="ev_f6b6835efc" className="bg-white/[0.04] border border-white/[0.08] rounded-2xl p-8">
@@ -211,6 +228,7 @@ export const AdminLogin = ({ onSuccess }: AdminLoginProps) => {
                 אימות וכניסה
               </button>
 
+              {!totpOnly &&
               <button data-ev-id="ev_10c40ed18f"
             type="button"
             onClick={() => {setStep('password');setTotpCode('');setError('');}}
@@ -219,6 +237,7 @@ export const AdminLogin = ({ onSuccess }: AdminLoginProps) => {
                 <ArrowRight className="w-3 h-3" />
                 חזרה לסיסמה
               </button>
+              }
 
               <p data-ev-id="ev_a4f7547e16" className="text-center text-white/60 text-[10px]">
                 ניתן גם להשתמש בקוד גיבוי חד-פעמי
