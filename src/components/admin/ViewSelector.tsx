@@ -44,7 +44,10 @@ const VIEW_OPTIONS = [
 { id: 37, name: 'Wormhole', nameHe: 'חור תולעת', emoji: '🌀' },
 { id: 38, name: 'Stock', nameHe: 'מניות', emoji: '📊' },
 { id: 39, name: 'Blueprint', nameHe: 'שרטוט', emoji: '📐' },
-{ id: 40, name: 'Quantum', nameHe: 'קוונטום', emoji: '⚛️' }];
+{ id: 40, name: 'Quantum', nameHe: 'קוונטום', emoji: '⚛️' },
+{ id: 41, name: 'Tabs', nameHe: 'טאבים', emoji: '📑' },
+{ id: 42, name: 'TabStack', nameHe: 'ערימת טאבים', emoji: '🗂️' },
+{ id: 43, name: 'Vortex', nameHe: 'חור שחור', emoji: '🌀' }];
 
 
 interface ViewSelectorProps {

@@ -16,7 +16,6 @@ import { Heart, ArrowUp, AlertTriangle, RefreshCw, Shield, Search, X } from 'luc
 import { PageMeta } from '@/components/PageMeta';
 import { AffiliateDisclaimer } from '@/components/AffiliateDisclaimer';
 import { CANVAS_VIEW_IDS } from '@/lib/viewRegistry';
-import { DevToolsMenu } from '@/components/DevToolsMenu';
 import { Link, useNavigate } from 'react-router';
 
 const AnimatedBackground = lazy(() =>
@@ -575,8 +574,6 @@ const Index = ({ viewOverride }: IndexProps = {}) => {
         <ArrowUp className="w-4 h-4 text-primary" aria-hidden="true" />
       </button>
 
-      {/* View switcher (wrench icon) */}
-      <DevToolsMenu activeView={activeView} onViewChange={(v) => setLocalView(v)} />
     </div>);
 
 };
