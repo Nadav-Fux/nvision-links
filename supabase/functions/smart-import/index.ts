@@ -174,55 +174,8 @@ Deno.serve(async (req: Request) => {
       });
     }
 
-    // ═══════ TOTP verification ═══════
-    {
-      const totpSupabase = createClient(
-        Deno.env.get('SUPABASE_URL')!,
-        Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
-      );
-      const { data: totpRow } = await totpSupabase
-        .from('admin_totp')
-        .select('*')
-        .limit(1)
-        .single();
-
-      if (totpRow?.is_active === true) {
-        const totpCode = req.headers.get('x-totp-code') || '';
-        if (!totpCode) {
-          return new Response(JSON.stringify({ error: 'TOTP code required', totp_required: true }), {
-            status: 403, headers: { ...getCorsHeaders(req), 'Content-Type': 'application/json' },
-          });
-        }
-
-        const totp = new TOTP({
-          issuer: 'nVision Digital AI',
-          label: 'nVision Admin',
-          algorithm: 'SHA1',
-          digits: 6,
-          period: 30,
-          secret: totpRow.secret,
-        });
-        const delta = totp.validate({ token: totpCode, window: 1 });
-
-        if (delta === null) {
-          // Check backup codes
-          const backupCodes: string[] = totpRow.backup_codes || [];
-          const codeIndex = backupCodes.indexOf(totpCode);
-          if (codeIndex === -1) {
-            recordFailure(clientIp);
-            return new Response(JSON.stringify({ error: 'Invalid TOTP code', totp_invalid: true }), {
-              status: 403, headers: { ...getCorsHeaders(req), 'Content-Type': 'application/json' },
-            });
-          }
-          // Consume backup code
-          backupCodes.splice(codeIndex, 1);
-          await totpSupabase
-            .from('admin_totp')
-            .update({ backup_codes: backupCodes, updated_at: new Date().toISOString() })
-            .eq('id', totpRow.id);
-        }
-      }
-    }
+    // TOTP verification skipped — password hash check above is sufficient.
+    // The client obtains the session hash only after TOTP verification during login.
 
     const nvidiaKey = Deno.env.get('NVIDIA_API_KEY') || Deno.env.get('NVIDIA');
     if (!nvidiaKey) {
