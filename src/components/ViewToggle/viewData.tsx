@@ -642,6 +642,51 @@ export const views: ViewDef[] = [
         <circle data-ev-id="ev_dabe442806" cx="3" cy="9.5" r="0.5" fill="currentColor" opacity="0.2" />
       </svg>
 
+},
+{
+  id: 41,
+  label: 'Tabs',
+  gradient: 'from-teal-400 to-emerald-500',
+  icon:
+  <svg width="16" height="16" viewBox="0 0 14 14" fill="none" className="opacity-80">
+        <rect x="1" y="1" width="3" height="2.5" rx="0.7" stroke="currentColor" strokeWidth="1" />
+        <rect x="5.5" y="1" width="3" height="2.5" rx="0.7" stroke="currentColor" strokeWidth="1" />
+        <rect x="10" y="1" width="3" height="2.5" rx="0.7" stroke="currentColor" strokeWidth="1" opacity="0.4" />
+        <rect x="1" y="5" width="12" height="8" rx="1" stroke="currentColor" strokeWidth="1" opacity="0.5" />
+        <rect x="2.5" y="7" width="4" height="1.5" rx="0.5" fill="currentColor" opacity="0.2" />
+        <rect x="7.5" y="7" width="4" height="1.5" rx="0.5" fill="currentColor" opacity="0.2" />
+        <rect x="2.5" y="9.5" width="4" height="1.5" rx="0.5" fill="currentColor" opacity="0.15" />
+        <rect x="7.5" y="9.5" width="4" height="1.5" rx="0.5" fill="currentColor" opacity="0.15" />
+      </svg>
+},
+{
+  id: 42,
+  label: 'TabStack',
+  gradient: 'from-amber-400 to-orange-500',
+  icon:
+  <svg width="16" height="16" viewBox="0 0 14 14" fill="none" className="opacity-80">
+        <rect x="1" y="0.5" width="3" height="2" rx="0.5" stroke="currentColor" strokeWidth="0.8" />
+        <rect x="5" y="0.5" width="3" height="2" rx="0.5" stroke="currentColor" strokeWidth="0.8" />
+        <rect x="9" y="0.5" width="4" height="2" rx="0.5" stroke="currentColor" strokeWidth="0.8" opacity="0.4" />
+        <rect x="2" y="4" width="10" height="8" rx="1.2" stroke="currentColor" strokeWidth="1" transform="rotate(-1.5 7 8)" />
+        <rect x="1.5" y="4.5" width="10" height="8" rx="1.2" stroke="currentColor" strokeWidth="0.6" opacity="0.2" transform="rotate(1.5 7 8.5)" />
+        <rect x="2.5" y="5" width="10" height="8" rx="1.2" stroke="currentColor" strokeWidth="0.4" opacity="0.1" transform="rotate(3 7.5 9)" />
+      </svg>
+},
+{
+  id: 43,
+  label: 'Vortex',
+  gradient: 'from-purple-500 to-fuchsia-600',
+  icon:
+  <svg width="16" height="16" viewBox="0 0 14 14" fill="none" className="opacity-80">
+        <circle cx="7" cy="10" r="3" stroke="currentColor" strokeWidth="0.6" opacity="0.3" />
+        <circle cx="7" cy="10" r="1.5" fill="currentColor" opacity="0.4" />
+        <ellipse cx="7" cy="10" rx="4" ry="1.2" stroke="currentColor" strokeWidth="0.5" opacity="0.2" />
+        <rect x="1" y="1" width="5" height="3" rx="0.7" stroke="currentColor" strokeWidth="0.8" opacity="0.6" transform="rotate(-2 3.5 2.5)" />
+        <rect x="8" y="1" width="5" height="3" rx="0.7" stroke="currentColor" strokeWidth="0.8" opacity="0.5" transform="rotate(1.5 10.5 2.5)" />
+        <rect x="3" y="5" width="4" height="2.5" rx="0.7" stroke="currentColor" strokeWidth="0.7" opacity="0.35" transform="rotate(-1 5 6.2)" />
+        <rect x="8" y="5.5" width="4" height="2.5" rx="0.7" stroke="currentColor" strokeWidth="0.7" opacity="0.3" transform="rotate(2 10 6.7)" />
+      </svg>
 }];
 
 /** Number of view buttons per row in the toggle bar. */
