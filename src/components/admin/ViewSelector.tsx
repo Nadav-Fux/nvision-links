@@ -47,7 +47,8 @@ const VIEW_OPTIONS = [
 { id: 40, name: 'Quantum', nameHe: 'קוונטום', emoji: '⚛️' },
 { id: 41, name: 'Tabs', nameHe: 'טאבים', emoji: '📑' },
 { id: 42, name: 'TabStack', nameHe: 'ערימת טאבים', emoji: '🗂️' },
-{ id: 43, name: 'Vortex', nameHe: 'חור שחור', emoji: '🌀' }];
+{ id: 43, name: 'Vortex', nameHe: 'חור שחור', emoji: '🌀' },
+{ id: 44, name: 'TabCards', nameHe: 'טאבים + ערמה', emoji: '🃏' }];
 
 
 interface ViewSelectorProps {
