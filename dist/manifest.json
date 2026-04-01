@@ -1,0 +1,18 @@
+{
+  "name": "nVision Digital AI — קהילת בינה מלאכותית",
+  "short_name": "nVision AI",
+  "description": "קהילת בינה מלאכותית ישראלית — כלים, קהילות ומשאבים לעולם ה-AI",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a14",
+  "theme_color": "#0a0a14",
+  "dir": "rtl",
+  "lang": "he",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

@@ -5,12 +5,6 @@ const SESSION_TS_KEY = 'nvision_admin_ts';
 const SESSION_TIMEOUT_MS = 30 * 60 * 1000; // 30 minutes
 const SESSION_WARNING_MS = 2 * 60 * 1000; // warn when 2 minutes remain
 
-// ── TEMPORARY AUTH BYPASS ──────────────────────────────────────
-// Set to false to re-enable login + 2FA
-const AUTH_BYPASS = true;
-const BYPASS_HASH = '1b943b8edb577860b4ba4db184c7f766f9e659ea402c44ad7283528b142121e8';
-// ───────────────────────────────────────────────────────────────
-
 // ===== Supabase connection details =====
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string;
 const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY as string;
@@ -29,16 +23,6 @@ async function sha256(message: string): Promise<string> {
  * Refreshes the session timestamp on each access (activity-based timeout).
  */
 export function getAdminPassword(): string | null {
-  // Bypass: auto-set session with known hash
-  if (AUTH_BYPASS) {
-    if (!sessionStorage.getItem(SESSION_KEY)) {
-      sessionStorage.setItem(SESSION_KEY, BYPASS_HASH);
-      sessionStorage.setItem(SESSION_TS_KEY, String(Date.now()));
-    }
-    sessionStorage.setItem(SESSION_TS_KEY, String(Date.now()));
-    return BYPASS_HASH;
-  }
-
   const hash = sessionStorage.getItem(SESSION_KEY);
   const ts = sessionStorage.getItem(SESSION_TS_KEY);
 
@@ -70,7 +54,6 @@ export function clearAdminSession() {
 
 /** Returns true if a valid (non-expired) admin session is active. */
 export function isAdminLoggedIn(): boolean {
-  if (AUTH_BYPASS) return true;
   return !!getAdminPassword();
 }
 
@@ -119,8 +102,71 @@ async function callAdmin(body: Record<string, unknown>) {
   }
 }
 
-// ===== Verify =====
-/** Result returned by verifyPassword. */
+// ===== Auth mode check =====
+/** Checks whether TOTP-only auth is active (no password needed). */
+export async function checkAuthMode(): Promise<{ totp_only: boolean }> {
+  if (!supabase) return { totp_only: false };
+  try {
+    const res = await fetch(`${SUPABASE_URL}/functions/v1/admin-api`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+      },
+      body: JSON.stringify({ action: 'check_auth_mode' }),
+    });
+    return await res.json();
+  } catch {
+    return { totp_only: false };
+  }
+}
+
+/** Verifies TOTP code directly (no password). Returns session hash on success. */
+export async function verifyTotp(code: string): Promise<VerifyResult> {
+  if (!supabase) return { success: false };
+  const url = `${SUPABASE_URL}/functions/v1/admin-api`;
+
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 15000);
+
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'x-admin-totp': code,
+      },
+      body: JSON.stringify({ action: 'verify', totp_code: code }),
+      signal: controller.signal,
+    });
+    clearTimeout(timeout);
+    const json = await res.json();
+
+    if (res.ok && json.success && json.session_hash) {
+      // Store the session hash — used by callAdmin for all subsequent requests
+      sessionStorage.setItem(SESSION_KEY, json.session_hash);
+      sessionStorage.setItem(SESSION_TS_KEY, String(Date.now()));
+      return { success: true, totp_active: true };
+    }
+
+    if (res.status === 403) {
+      return { success: false, totp_required: true };
+    }
+    if (res.status === 429) {
+      throw new Error('TOO_MANY_ATTEMPTS');
+    }
+    return { success: false };
+  } catch (err) {
+    clearTimeout(timeout);
+    if (err instanceof Error && err.message === 'TOO_MANY_ATTEMPTS') throw err;
+    if (err instanceof Error && err.name === 'AbortError') throw new Error('TIMEOUT');
+    throw new Error('NETWORK_ERROR');
+  }
+}
+
+// ===== Verify (password-based, for initial TOTP setup) =====
+/** Result returned by verifyPassword / verifyTotp. */
 export interface VerifyResult {
   success: boolean;
   totp_required?: boolean;
@@ -173,6 +219,11 @@ export async function verifyPassword(pw: string, totpCode?: string): Promise<Ver
       }
 
       if (res.ok && json.success !== false) {
+        // Store session hash if server returned one (for TOTP-only subsequent requests)
+        if (json.session_hash) {
+          sessionStorage.setItem(SESSION_KEY, json.session_hash);
+          sessionStorage.setItem(SESSION_TS_KEY, String(Date.now()));
+        }
         return { success: true, totp_active: json.totp_active };
       }
 

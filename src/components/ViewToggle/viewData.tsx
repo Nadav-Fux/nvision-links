@@ -687,7 +687,7 @@ export const views: ViewDef[] = [
         <rect x="3" y="5" width="4" height="2.5" rx="0.7" stroke="currentColor" strokeWidth="0.7" opacity="0.35" transform="rotate(-1 5 6.2)" />
         <rect x="8" y="5.5" width="4" height="2.5" rx="0.7" stroke="currentColor" strokeWidth="0.7" opacity="0.3" transform="rotate(2 10 6.7)" />
       </svg>
-}];
+}}];
 
 /** Number of view buttons per row in the toggle bar. */
 export const ROW_SIZE = 6;
