@@ -1,0 +1,84 @@
+name: "Keepalive: Text Generator"
+
+on:
+  schedule:
+    # Twice daily — 10:00 and 22:00 UTC (staggered from health check)
+    - cron: '0 10,22 * * *'
+  workflow_dispatch: {}
+
+jobs:
+  keepalive-text:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Random delay (0-55 min)
+        run: |
+          DELAY=$((RANDOM % 3300))
+          echo "Sleeping ${DELAY}s (~$((DELAY/60))min) for random spacing"
+          sleep $DELAY
+
+      - name: "Generate text via Groq"
+        id: generate
+        run: |
+          # Generate a short AI fact/tip using Groq (free tier)
+          RESPONSE=$(curl -sf "https://api.groq.com/openai/v1/chat/completions" \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer ${{ secrets.GROQ_API_KEY }}" \
+            -d '{
+              "model": "llama-3.3-70b-versatile",
+              "messages": [{"role": "user", "content": "Write one interesting AI fact or tip in Hebrew, max 2 sentences. No markdown."}],
+              "max_tokens": 150,
+              "temperature": 1.0
+            }' 2>/dev/null || echo '{"choices":[{"message":{"content":"AI keepalive ping"}}]}')
+
+          TEXT=$(echo "$RESPONSE" | python3 -c "
+          import sys, json
+          try:
+              data = json.load(sys.stdin)
+              print(data['choices'][0]['message']['content'][:200])
+          except:
+              print('keepalive-text-fallback')
+          ")
+
+          # Escape for JSON
+          TEXT_ESCAPED=$(echo "$TEXT" | python3 -c "import sys,json; print(json.dumps(sys.stdin.read().strip()))")
+          echo "text=$TEXT_ESCAPED" >> "$GITHUB_OUTPUT"
+
+      - name: "Write 1: Insert generated text event"
+        run: |
+          curl -sf -X POST \
+            "${{ secrets.SUPABASE_URL }}/rest/v1/analytics_events" \
+            -H "Content-Type: application/json" \
+            -H "apikey: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" \
+            -H "Prefer: return=minimal" \
+            -d "{
+              \"event_type\": \"keepalive_text\",
+              \"event_target\": ${{ steps.generate.outputs.text }},
+              \"page_path\": \"/keepalive/text/$(date +%s)\"
+            }"
+          echo "Write 1 OK"
+
+      - name: "Write 2: Insert text meta event"
+        run: |
+          curl -sf -X POST \
+            "${{ secrets.SUPABASE_URL }}/rest/v1/analytics_events" \
+            -H "Content-Type: application/json" \
+            -H "apikey: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" \
+            -H "Prefer: return=minimal" \
+            -d "{
+              \"event_type\": \"keepalive_text_meta\",
+              \"event_target\": \"github-actions|groq|$(date -u +%Y-%m-%dT%H:%M:%SZ)\",
+              \"page_path\": \"/keepalive/text/meta\"
+            }"
+          echo "Write 2 OK"
+
+      - name: "Search: Full-text query on links"
+        run: |
+          # Search for links containing "AI" in title
+          RESULT=$(curl -sf \
+            "${{ secrets.SUPABASE_URL }}/rest/v1/links?select=id,title&title=ilike.*ai*&limit=10" \
+            -H "apikey: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}")
+          echo "Search OK — AI links: $RESULT"

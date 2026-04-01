@@ -1,0 +1,20 @@
+name = "nvision-keepalive"
+main = "src/index.ts"
+compatibility_date = "2024-09-23"
+
+# Every 2 hours — worker decides randomly whether to execute
+# This gives 12 trigger points/day; KV logic ensures 2+ per source type
+[triggers]
+crons = ["0 */2 * * *"]
+
+# KV namespace for tracking last execution times
+[[kv_namespaces]]
+binding = "STATE"
+id = "5cb1875ea0d4407bb7016e45474d87ce"
+
+[vars]
+SUPABASE_URL = "https://iboroipmdnmwworqiypi.supabase.co"
+
+# Secrets (set via wrangler secret put):
+# - SUPABASE_SERVICE_ROLE_KEY
+# - UNSPLASH_ACCESS_KEY (optional, for image source)

@@ -1,0 +1,63 @@
+name: "Keepalive: Health Check"
+
+on:
+  schedule:
+    # Twice daily — 07:00 and 19:00 UTC
+    # GH Actions has built-in ~5-15 min jitter on cron
+    - cron: '0 7,19 * * *'
+  workflow_dispatch: {}
+
+jobs:
+  keepalive-health:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Random delay (0-60 min)
+        run: |
+          DELAY=$((RANDOM % 3600))
+          echo "Sleeping ${DELAY}s (~$((DELAY/60))min) for random spacing"
+          sleep $DELAY
+
+      - name: "Write 1: Insert health check event"
+        run: |
+          curl -sf -X POST \
+            "${{ secrets.SUPABASE_URL }}/rest/v1/analytics_events" \
+            -H "Content-Type: application/json" \
+            -H "apikey: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" \
+            -H "Prefer: return=minimal" \
+            -d "{
+              \"event_type\": \"keepalive_health\",
+              \"event_target\": \"github-actions\",
+              \"page_path\": \"/keepalive/health/$(date +%s)\"
+            }"
+          echo "Write 1 OK"
+
+      - name: "Write 2: Insert health meta event"
+        run: |
+          LINK_COUNT=$(curl -sf \
+            "${{ secrets.SUPABASE_URL }}/rest/v1/links?select=id&is_visible=eq.true" \
+            -H "apikey: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" \
+            | python3 -c "import sys,json; print(len(json.load(sys.stdin)))")
+
+          curl -sf -X POST \
+            "${{ secrets.SUPABASE_URL }}/rest/v1/analytics_events" \
+            -H "Content-Type: application/json" \
+            -H "apikey: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" \
+            -H "Prefer: return=minimal" \
+            -d "{
+              \"event_type\": \"keepalive_health_meta\",
+              \"event_target\": \"links_count=${LINK_COUNT}\",
+              \"page_path\": \"/keepalive/health/meta\"
+            }"
+          echo "Write 2 OK — ${LINK_COUNT} links found"
+
+      - name: "Search: Query sections"
+        run: |
+          RESULT=$(curl -sf \
+            "${{ secrets.SUPABASE_URL }}/rest/v1/sections?select=id,title&is_visible=eq.true" \
+            -H "apikey: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}")
+          echo "Search OK — sections: $RESULT"
