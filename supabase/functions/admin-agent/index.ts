@@ -982,9 +982,10 @@ Deno.serve(async (req: Request) => {
       { headers: { ...getCorsHeaders(req), 'Content-Type': 'application/json' } },
     );
   } catch (err: unknown) {
-    console.error('Agent error:', err);
+    const message = err instanceof Error ? err.message : String(err);
+    console.error('Agent error:', message);
     return new Response(
-      JSON.stringify({ error: 'Internal server error' }),
+      JSON.stringify({ error: message || 'Internal server error' }),
       { status: 500, headers: { ...getCorsHeaders(req), 'Content-Type': 'application/json' } },
     );
   }
