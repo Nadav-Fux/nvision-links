@@ -200,7 +200,7 @@ const communityLinks: LinkItem[] = [
     title: 'על האתר',
     subtitle: 'בקרוב — עמוד מידע על הפרויקט',
     description: 'בקרוב יהיה כאן עמוד מידע מלא על הפרויקט, הצוות והחזון מאחורי nVision Digital AI',
-    url: '#',
+    url: 'https://nvision.me',
     icon: Globe,
     color: '#94a3b8',
     animation: 'breathe',

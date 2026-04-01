@@ -125,12 +125,38 @@ Respond with this exact JSON structure:
 
 console.info('smart-import started');
 
+// Rate limiter (same pattern as admin-api)
+const failedAttempts = new Map<string, { count: number; resetAt: number }>();
+function getClientIp(req: Request): string {
+  return req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+         req.headers.get('cf-connecting-ip') || 'unknown';
+}
+function isRateLimited(ip: string): boolean {
+  const entry = failedAttempts.get(ip);
+  if (!entry) return false;
+  if (Date.now() > entry.resetAt) { failedAttempts.delete(ip); return false; }
+  return entry.count >= 5;
+}
+function recordFailure(ip: string): void {
+  const entry = failedAttempts.get(ip);
+  if (entry && Date.now() < entry.resetAt) { entry.count++; }
+  else { failedAttempts.set(ip, { count: 1, resetAt: Date.now() + 5 * 60 * 1000 }); }
+}
+
 Deno.serve(async (req: Request) => {
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: getCorsHeaders(req) });
   }
 
+  const clientIp = getClientIp(req);
+
   try {
+    // Rate limit check
+    if (isRateLimited(clientIp)) {
+      return new Response(JSON.stringify({ error: 'Too many attempts. Try again in 5 minutes.' }),
+        { status: 429, headers: { ...getCorsHeaders(req), 'Content-Type': 'application/json' } });
+    }
+
     // Auth check
     const providedHash = req.headers.get('x-admin-password');
     const expectedPw = Deno.env.get('ADMIN_PASSWORD');
@@ -183,6 +209,7 @@ Deno.serve(async (req: Request) => {
           const backupCodes: string[] = totpRow.backup_codes || [];
           const codeIndex = backupCodes.indexOf(totpCode);
           if (codeIndex === -1) {
+            recordFailure(clientIp);
             return new Response(JSON.stringify({ error: 'Invalid TOTP code', totp_invalid: true }), {
               status: 403, headers: { ...getCorsHeaders(req), 'Content-Type': 'application/json' },
             });

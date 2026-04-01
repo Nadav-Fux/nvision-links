@@ -163,31 +163,6 @@ Deno.serve(async (req: Request) => {
       );
     }
 
-    // Verify admin password (now accepts SHA-256 hash from client)
-    const adminPassword = Deno.env.get('ADMIN_PASSWORD');
-    const providedHash = req.headers.get('x-admin-password');
-
-    if (!adminPassword || !providedHash) {
-      return new Response(
-        JSON.stringify({ error: 'Missing password' }),
-        { status: 401, headers: { ...getCorsHeaders(req), 'Content-Type': 'application/json' } }
-      );
-    }
-
-    // Hash the server-side password and compare with client-sent hash
-    const serverHash = await sha256(adminPassword);
-
-    if (providedHash !== serverHash) {
-      recordFailure(clientIp);
-      return new Response(
-        JSON.stringify({ error: 'Invalid password' }),
-        { status: 403, headers: { ...getCorsHeaders(req), 'Content-Type': 'application/json' } }
-      );
-    }
-
-    // Password correct — clear any failure records
-    clearFailures(clientIp);
-
     // Create Supabase client with service role (bypasses RLS)
     const supabase = createClient(
       Deno.env.get('SUPABASE_URL')!,
@@ -199,6 +174,100 @@ Deno.serve(async (req: Request) => {
 
     // TOTP code from client (for login verification)
     const totpCode = body.totp_code || req.headers.get('x-admin-totp') || '';
+
+    // ── Public endpoint: check auth mode (no auth required) ──
+    if (action === 'check_auth_mode') {
+      const { data: totpRow } = await supabase
+        .from('admin_totp')
+        .select('is_active')
+        .limit(1)
+        .single();
+      return new Response(
+        JSON.stringify({ totp_only: totpRow?.is_active === true }),
+        { headers: { ...getCorsHeaders(req), 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // ── Authentication ──
+    const adminPassword = Deno.env.get('ADMIN_PASSWORD');
+    const providedHash = req.headers.get('x-admin-password');
+    const serverHash = adminPassword ? await sha256(adminPassword) : null;
+    let authenticated = false;
+
+    // Method 1: Session hash from prior TOTP login (or password login)
+    if (providedHash && serverHash && providedHash === serverHash) {
+      authenticated = true;
+    }
+
+    // Method 2: TOTP-only login (action=verify, no password, TOTP code provided)
+    if (!authenticated && action === 'verify' && totpCode) {
+      const { data: totpRow } = await supabase
+        .from('admin_totp')
+        .select('*')
+        .limit(1)
+        .single();
+
+      if (totpRow?.is_active) {
+        const totp = createTotpInstance(totpRow.secret);
+        const delta = totp.validate({ token: totpCode, window: 1 });
+
+        if (delta !== null) {
+          // Valid TOTP — return session hash so client can use it for subsequent requests
+          clearFailures(clientIp);
+          const logAudit = (a: string) => {
+            supabase.from('audit_log').insert({ action: a, ip_address: clientIp }).then(() => {});
+          };
+          logAudit('admin_login_totp');
+          return new Response(
+            JSON.stringify({ success: true, totp_active: true, session_hash: serverHash }),
+            { headers: { ...getCorsHeaders(req), 'Content-Type': 'application/json' } }
+          );
+        }
+
+        // Check backup codes
+        const backupCodes: string[] = totpRow.backup_codes || [];
+        const codeIndex = backupCodes.indexOf(totpCode);
+        if (codeIndex !== -1) {
+          backupCodes.splice(codeIndex, 1);
+          await supabase.from('admin_totp')
+            .update({ backup_codes: backupCodes, updated_at: new Date().toISOString() })
+            .eq('id', totpRow.id);
+          clearFailures(clientIp);
+          return new Response(
+            JSON.stringify({ success: true, totp_active: true, session_hash: serverHash }),
+            { headers: { ...getCorsHeaders(req), 'Content-Type': 'application/json' } }
+          );
+        }
+
+        // Invalid TOTP code
+        recordFailure(clientIp);
+        return new Response(
+          JSON.stringify({ error: 'קוד אימות שגוי', totp_invalid: true }),
+          { status: 403, headers: { ...getCorsHeaders(req), 'Content-Type': 'application/json' } }
+        );
+      }
+    }
+
+    // If still not authenticated, require password
+    if (!authenticated) {
+      if (!adminPassword || !providedHash) {
+        return new Response(
+          JSON.stringify({ error: 'Missing credentials' }),
+          { status: 401, headers: { ...getCorsHeaders(req), 'Content-Type': 'application/json' } }
+        );
+      }
+      if (providedHash !== serverHash) {
+        recordFailure(clientIp);
+        return new Response(
+          JSON.stringify({ error: 'Invalid password' }),
+          { status: 403, headers: { ...getCorsHeaders(req), 'Content-Type': 'application/json' } }
+        );
+      }
+      authenticated = true;
+    }
+
+    // Authenticated — clear any failure records
+    clearFailures(clientIp);
 
     // Audit log helper — fire-and-forget (non-blocking)
     const logAudit = (a: string, entityType?: string, entityId?: string, details?: Record<string, unknown>) => {
@@ -214,57 +283,27 @@ Deno.serve(async (req: Request) => {
     let result;
 
     switch (action) {
-      // ========== VERIFY PASSWORD ==========
+      // ========== VERIFY (password-based login, used when TOTP not yet active) ==========
       case 'verify': {
-        // Check if TOTP is active
         const { data: totpRow } = await supabase
           .from('admin_totp')
-          .select('*')
+          .select('is_active')
           .limit(1)
           .single();
 
         const totpActive = totpRow?.is_active === true;
 
-        if (totpActive) {
-          // TOTP is required — check if code was provided
-          if (!totpCode) {
-            return new Response(
-              JSON.stringify({ success: false, totp_required: true }),
-              { headers: { ...getCorsHeaders(req), 'Content-Type': 'application/json' } }
-            );
-          }
-
-          // Verify the TOTP code
-          const totp = createTotpInstance(totpRow.secret);
-          const delta = totp.validate({ token: totpCode, window: 1 });
-
-          if (delta === null) {
-            // Check backup codes
-            const backupCodes: string[] = totpRow.backup_codes || [];
-            const codeIndex = backupCodes.indexOf(totpCode);
-
-            if (codeIndex === -1) {
-              recordFailure(clientIp);
-              return new Response(
-                JSON.stringify({ error: 'קוד אימות שגוי', totp_invalid: true }),
-                { status: 403, headers: { ...getCorsHeaders(req), 'Content-Type': 'application/json' } }
-              );
-            }
-
-            // Backup code used — remove it
-            backupCodes.splice(codeIndex, 1);
-            await supabase
-              .from('admin_totp')
-              .update({ backup_codes: backupCodes, updated_at: new Date().toISOString() })
-              .eq('id', totpRow.id);
-
-            logAudit('totp_backup_code_used', 'admin_totp', totpRow.id, { remaining: backupCodes.length });
-          }
+        // If TOTP is active and no code provided, tell client to use TOTP-only flow
+        if (totpActive && !totpCode) {
+          return new Response(
+            JSON.stringify({ success: false, totp_required: true, totp_only: true }),
+            { headers: { ...getCorsHeaders(req), 'Content-Type': 'application/json' } }
+          );
         }
 
         logAudit('admin_login');
         return new Response(
-          JSON.stringify({ success: true, totp_active: totpActive }),
+          JSON.stringify({ success: true, totp_active: totpActive, session_hash: serverHash }),
           { headers: { ...getCorsHeaders(req), 'Content-Type': 'application/json' } }
         );
       }
@@ -408,7 +447,7 @@ Deno.serve(async (req: Request) => {
 
       // ========== CONFIG ==========
       case 'update_config': {
-        const configAllowed = ['site_title', 'site_description', 'default_view', 'selected_views', 'theme', 'font_family', 'font_weight', 'og_title', 'og_description', 'og_image', 'logo_animation'];
+        const configAllowed = ['site_title', 'site_description', 'tagline', 'welcome_text', 'welcome_subtext', 'affiliate_disclaimer_text', 'theme_colors', 'default_view', 'selected_views', 'og_title', 'og_description', 'og_image_url', 'meta_keywords', 'canonical_url'];
         const safeConfigData = Object.fromEntries(Object.entries(data).filter(([k]) => configAllowed.includes(k)));
         const { error } = await supabase
           .from('site_config')
@@ -481,6 +520,14 @@ Deno.serve(async (req: Request) => {
 
       // ========== LINKS ==========
       case 'create_link': {
+        // Validate URL
+        if (data.url) {
+          const urlLower = data.url.toLowerCase().trim();
+          if (urlLower.startsWith('javascript:') || urlLower.startsWith('data:') || urlLower.startsWith('vbscript:')) {
+            throw new Error('URL scheme not allowed');
+          }
+        }
+
         const { data: maxRow } = await supabase
           .from('links')
           .select('sort_order')
@@ -502,6 +549,14 @@ Deno.serve(async (req: Request) => {
       }
 
       case 'update_link': {
+        // Validate URL if being updated
+        if (data.url) {
+          const urlLower = data.url.toLowerCase().trim();
+          if (urlLower.startsWith('javascript:') || urlLower.startsWith('data:') || urlLower.startsWith('vbscript:')) {
+            throw new Error('URL scheme not allowed');
+          }
+        }
+
         const linkAllowed = ['title', 'url', 'description', 'subtitle', 'icon_name', 'favicon_url', 'color', 'animation', 'section_id', 'sort_order', 'is_visible', 'tag', 'affiliate_benefit'];
         const safeLinkData = Object.fromEntries(Object.entries(data).filter(([k]) => linkAllowed.includes(k)));
         const { error } = await supabase
