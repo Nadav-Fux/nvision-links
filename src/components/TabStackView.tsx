@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { StackCard } from '@/components/StackCard';
+import { getSectionIcon } from '@/lib/sectionIcons';
 import type { LinkSection } from '@/data/links';
 import type { SectionWithLinks } from '@/lib/usePublicData';
 
@@ -69,19 +70,20 @@ export const TabStackView = ({ sections, visible }: TabStackViewProps) => {
       >
         {sections.map((section, i) => {
           const isActive = i === activeTab;
-          const emoji = 'emoji' in section ? section.emoji : '';
+          const icon = getSectionIcon(section.title);
           return (
             <button
               key={i}
               onClick={() => setActiveTab(i)}
-              className={`flex-shrink-0 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 border ${
+              className={`flex-shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 border ${
                 isActive
                   ? 'bg-primary/20 border-primary/40 text-white shadow-lg shadow-primary/10 scale-105'
                   : 'bg-white/[0.04] border-white/[0.08] text-white/60 hover:bg-white/[0.08] hover:text-white/80'
               }`}
             >
-              <span className="ml-1.5">{emoji}</span>
-              {section.title}
+              {icon && <span className="flex-shrink-0">{icon}</span>}
+              <span className="hidden sm:inline">{section.title}</span>
+              <span className="sm:hidden">{section.title.split(' ')[0]}</span>
             </button>
           );
         })}
