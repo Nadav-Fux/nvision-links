@@ -17,68 +17,62 @@ jobs:
           echo "Sleeping ${DELAY}s (~$((DELAY/60))min) for random spacing"
           sleep $DELAY
 
-      - name: "Generate text via Groq"
-        id: generate
+      - name: "Generate text and write to Supabase"
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          GROQ_KEY: ${{ secrets.GROQ_API_KEY }}
         run: |
-          # Generate a short AI fact/tip using Groq (free tier)
-          RESPONSE=$(curl -sf "https://api.groq.com/openai/v1/chat/completions" \
-            -H "Content-Type: application/json" \
-            -H "Authorization: Bearer ${{ secrets.GROQ_API_KEY }}" \
-            -d '{
-              "model": "llama-3.3-70b-versatile",
-              "messages": [{"role": "user", "content": "Write one interesting AI fact or tip in Hebrew, max 2 sentences. No markdown."}],
-              "max_tokens": 150,
-              "temperature": 1.0
-            }' 2>/dev/null || echo '{"choices":[{"message":{"content":"AI keepalive ping"}}]}')
+          python3 << 'PYEOF'
+          import json, os, time, urllib.request, urllib.error
 
-          TEXT=$(echo "$RESPONSE" | python3 -c "
-          import sys, json
+          SB_URL = os.environ["SUPABASE_URL"]
+          SB_KEY = os.environ["SUPABASE_KEY"]
+          GROQ_KEY = os.environ["GROQ_KEY"]
+          HEADERS = {
+              "Content-Type": "application/json",
+              "apikey": SB_KEY,
+              "Authorization": f"Bearer {SB_KEY}",
+              "Prefer": "return=minimal",
+          }
+
+          # --- Generate text via Groq ---
+          text = "keepalive-text-fallback"
           try:
-              data = json.load(sys.stdin)
-              print(data['choices'][0]['message']['content'][:200])
-          except:
-              print('keepalive-text-fallback')
-          ")
+              groq_body = json.dumps({
+                  "model": "llama-3.3-70b-versatile",
+                  "messages": [{"role": "user", "content": "Write one interesting AI fact or tip in Hebrew, max 2 sentences. No markdown."}],
+                  "max_tokens": 150,
+                  "temperature": 1.0,
+              }).encode()
+              req = urllib.request.Request("https://api.groq.com/openai/v1/chat/completions",
+                  data=groq_body, headers={"Content-Type": "application/json", "Authorization": f"Bearer {GROQ_KEY}"})
+              with urllib.request.urlopen(req, timeout=15) as res:
+                  data = json.loads(res.read())
+                  text = data["choices"][0]["message"]["content"][:200]
+              print(f"Groq OK: {text[:60]}...")
+          except Exception as e:
+              print(f"Groq failed ({e}), using fallback")
 
-          # Escape for JSON
-          TEXT_ESCAPED=$(echo "$TEXT" | python3 -c "import sys,json; print(json.dumps(sys.stdin.read().strip()))")
-          echo "text=$TEXT_ESCAPED" >> "$GITHUB_OUTPUT"
+          # --- Write 1: text event ---
+          body = json.dumps({"event_type": "keepalive_text", "event_target": text, "page_path": f"/keepalive/text/{int(time.time())}"}).encode()
+          req = urllib.request.Request(f"{SB_URL}/rest/v1/analytics_events", data=body, headers=HEADERS, method="POST")
+          with urllib.request.urlopen(req, timeout=10) as res:
+              print(f"Write 1: {res.status}")
 
-      - name: "Write 1: Insert generated text event"
-        run: |
-          curl -sf -X POST \
-            "${{ secrets.SUPABASE_URL }}/rest/v1/analytics_events" \
-            -H "Content-Type: application/json" \
-            -H "apikey: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" \
-            -H "Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" \
-            -H "Prefer: return=minimal" \
-            -d "{
-              \"event_type\": \"keepalive_text\",
-              \"event_target\": ${{ steps.generate.outputs.text }},
-              \"page_path\": \"/keepalive/text/$(date +%s)\"
-            }"
-          echo "Write 1 OK"
+          # --- Write 2: meta event ---
+          meta = f"github-actions|groq|{time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())}"
+          body = json.dumps({"event_type": "keepalive_text_meta", "event_target": meta, "page_path": "/keepalive/text/meta"}).encode()
+          req = urllib.request.Request(f"{SB_URL}/rest/v1/analytics_events", data=body, headers=HEADERS, method="POST")
+          with urllib.request.urlopen(req, timeout=10) as res:
+              print(f"Write 2: {res.status}")
 
-      - name: "Write 2: Insert text meta event"
-        run: |
-          curl -sf -X POST \
-            "${{ secrets.SUPABASE_URL }}/rest/v1/analytics_events" \
-            -H "Content-Type: application/json" \
-            -H "apikey: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" \
-            -H "Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" \
-            -H "Prefer: return=minimal" \
-            -d "{
-              \"event_type\": \"keepalive_text_meta\",
-              \"event_target\": \"github-actions|groq|$(date -u +%Y-%m-%dT%H:%M:%SZ)\",
-              \"page_path\": \"/keepalive/text/meta\"
-            }"
-          echo "Write 2 OK"
+          # --- Search: query links ---
+          req = urllib.request.Request(f"{SB_URL}/rest/v1/links?select=id,title&is_visible=eq.true&limit=10",
+              headers={"apikey": SB_KEY, "Authorization": f"Bearer {SB_KEY}"})
+          with urllib.request.urlopen(req, timeout=10) as res:
+              links = json.loads(res.read())
+              print(f"Search: {len(links)} links found")
 
-      - name: "Search: Full-text query on links"
-        run: |
-          # Search for links containing "AI" in title
-          RESULT=$(curl -sf \
-            "${{ secrets.SUPABASE_URL }}/rest/v1/links?select=id,title&title=ilike.*ai*&limit=10" \
-            -H "apikey: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" \
-            -H "Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}")
-          echo "Search OK — AI links: $RESULT"
+          print("All done!")
+          PYEOF
