@@ -16,6 +16,8 @@ const TAG_CONFIG: Record<string, {label: string;bg: string;text: string;border: 
   premium: { label: 'פרמיום', bg: 'rgba(212,165,116,0.12)', text: '#d4a574', border: 'rgba(212,165,116,0.25)' },
   'open-source': { label: 'קוד פתוח', bg: 'rgba(16,185,129,0.12)', text: '#34d399', border: 'rgba(16,185,129,0.25)' },
   israeli: { label: '🇮🇱 ישראלי', bg: 'rgba(59,130,246,0.12)', text: '#60a5fa', border: 'rgba(59,130,246,0.25)' },
+  'news-channel': { label: '📡 חדשות ועדכונים 24/7', bg: 'rgba(251,191,36,0.10)', text: '#fbbf24', border: 'rgba(251,191,36,0.20)' },
+  'quiet-news': { label: '🔕 קבוצה שקטה של חדשות', bg: 'rgba(148,163,184,0.10)', text: '#94a3b8', border: 'rgba(148,163,184,0.20)' },
 };
 
 /** Props for a single link card item. */

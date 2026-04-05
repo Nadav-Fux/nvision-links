@@ -77,7 +77,9 @@ export type LinkTag =
   | 'beta'
   | 'premium'
   | 'open-source'
-  | 'israeli';
+  | 'israeli'
+  | 'news-channel'
+  | 'quiet-news';
 
 /**
  * A single link entry as consumed by view components.

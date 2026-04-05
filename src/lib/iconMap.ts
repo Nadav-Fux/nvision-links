@@ -1,11 +1,11 @@
 import {
-  MessageCircle, Radio, Send, Users, BookOpen, GraduationCap, Bot, Wand2,
+  MessageCircle, MessageSquare, Radio, Send, Users, BookOpen, GraduationCap, Bot, Wand2,
   Image, Video, Mic, Code, PenTool, Globe, BrainCircuit, Facebook, Linkedin,
   Link as LinkIcon, ExternalLink, Star, Heart, Zap, Shield, Eye, Music,
   Camera, FileText, Newspaper, Headphones, Gamepad2, Rocket, Sparkles,
   Lightbulb, Target, Award, TrendingUp, DollarSign, ShoppingCart, MapPin,
   Phone, Mail, Instagram, Twitter, Youtube, Github, Twitch, Hash,
-  Clapperboard, Tv, Palette, Cpu, Database, Terminal, Smartphone,
+  Clapperboard, Tv, Palette, Cpu, Database, Terminal, Smartphone, Clock,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
@@ -14,13 +14,13 @@ import type { LucideIcon } from 'lucide-react';
  * This is the single source of truth so DB icon_name values resolve consistently.
  */
 export const ICON_MAP: Record<string, LucideIcon> = {
-  MessageCircle, Radio, Send, Users, BookOpen, GraduationCap, Bot, Wand2,
+  MessageCircle, MessageSquare, Radio, Send, Users, BookOpen, GraduationCap, Bot, Wand2,
   Image, Video, Mic, Code, PenTool, Globe, BrainCircuit, Facebook, Linkedin,
   Link: LinkIcon, ExternalLink, Star, Heart, Zap, Shield, Eye, Music,
   Camera, FileText, Newspaper, Headphones, Gamepad2, Rocket, Sparkles,
   Lightbulb, Target, Award, TrendingUp, DollarSign, ShoppingCart, MapPin,
   Phone, Mail, Instagram, Twitter, Youtube, Github, Twitch, Hash,
-  Clapperboard, Tv, Palette, Cpu, Database, Terminal, Smartphone,
+  Clapperboard, Tv, Palette, Cpu, Database, Terminal, Smartphone, Clock,
 };
 
 /** All available icon name strings, used to populate icon pickers in the admin UI. */
